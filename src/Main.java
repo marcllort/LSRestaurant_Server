@@ -14,12 +14,13 @@ public class Main {
 
         System.out.println("Connecting database...");
 
+
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
             System.out.println("Database connected!");
-            DatabaseMetaData m = connection.getMetaData();
-            ResultSet tables = m.getTables(connection.getCatalog(), null, "TAB_%", null);
-            for (int i = 1; i < tables.getMetaData().getColumnCount(); i++) {
-                System.out.println("table = " + tables.getMetaData().getTableName(i));
+            DatabaseMetaData md = connection.getMetaData();
+            ResultSet rs = md.getTables(null, null, "%", null);
+            while (rs.next()) {
+                System.out.println(rs.getString(3));
             }
         } catch (SQLException e) {
             throw new IllegalStateException("Cannot connect the database!", e);

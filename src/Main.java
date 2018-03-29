@@ -8,6 +8,7 @@ public class Main {
     public static void main(String[] args) {
 
         String url = "jdbc:mysql://localhost:3306/LSRestaurant";
+
         String username = "root";
         String password = "alex";
 

@@ -15,6 +15,7 @@ public class Main {
             String s = "ALL";
             //bdd.insereixPlat(s,3,10,0);
             bdd.updatePlat(7);
+            bdd.createTable(2);
             String a = "SELECT * FROM Plat ";
 
             bdd.queriePlat(a);

@@ -30,6 +30,10 @@ public class BDD {
          }
         */
     }
+    public void createTable(int i) throws SQLException {
+        st.executeUpdate("INSERT INTO Taula(num_cadires) " +
+                "VALUES ("+i +")");
+    }
     public void insereixPlat(String nom_plat, int preu, int unitats_disponibles, int  unitats_gastades) throws SQLException {
 
         st.executeUpdate("INSERT INTO Plat(nom_plat, preu, unitats_disponibles, unitats_gastades) " +

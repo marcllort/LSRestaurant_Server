@@ -14,7 +14,9 @@ public class Main {
             BDD bdd = new BDD();
             String s = "ALL";
             //bdd.insereixPlat(s,3,10,0);
-            String a = "SELECT * FROM Plat WHERE preu = 1";
+            bdd.updatePlat(7);
+            String a = "SELECT * FROM Plat ";
+
             bdd.queriePlat(a);
         }catch (Exception e){
             System.out.println("ERROOR");

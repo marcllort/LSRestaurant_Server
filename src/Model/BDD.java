@@ -8,7 +8,7 @@ public class BDD {
 
     public BDD() throws SQLException {
 
-        String url = "jdbc:mysql://localhost:3306/LSRestaurant";
+        String url = "jdbc:mysql://localhost:3306/LSRestaurant?useSSL=false";
 
         String username = "root";
         String password = "alex";
@@ -51,6 +51,32 @@ public class BDD {
         }catch (Exception e){
 
         }
+    }
+    public void updatePlat(int id){
+
+        try {
+            String str ="Update Plat set unitats_gastades = ?, unitats_disponibles= ? where id_plat = "+id;
+            PreparedStatement ps = con.prepareStatement(str);
+
+            ResultSet rss = null;
+            ResultSet rs = null;
+            rs = st.executeQuery("SELECT unitats_gastades FROM Plat WHERE id_plat = "+id);
+            if (rs.next() ){
+                //System.out.println(rss.getString("unitats_gastades"));
+                ps.setInt(1, rs.getInt("unitats_gastades") + 1);
+
+            }
+            rss = st.executeQuery("SELECT unitats_disponibles FROM Plat WHERE id_plat = "+id);
+            if (rss.next() ) {
+
+                ps.setInt(2, rss.getInt("unitats_disponibles") - 1);
+            }
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("ERROORR");
+            e.printStackTrace();
+        }
+
     }
 
 }

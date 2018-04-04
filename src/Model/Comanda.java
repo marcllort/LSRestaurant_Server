@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class Comanda implements Serializable {
 
+
     private static final long serialVersionUID = 12345L;
     private String usuari;
     private String comanda;

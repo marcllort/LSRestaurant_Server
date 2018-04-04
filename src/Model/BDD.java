@@ -11,7 +11,7 @@ public class BDD {
         String url = "jdbc:mysql://localhost:3306/LSRestaurant?useSSL=false";
 
         String username = "root";
-        String password = "marcmarc12";
+        String password = "alex";
 
         System.out.println("Connecting database...");
 
@@ -56,22 +56,22 @@ public class BDD {
 
         }
     }
-    public void updatePlat(int id, int unitats){
+    public void updatePlat(String nom, int unitats){
 
         try {
-            String str ="Update Plat set unitats_gastades = ?, unitats_disponibles= ? where id_plat = "+id;
+            String str ="Update Plat set unitats_gastades = ?, unitats_disponibles= ? where nom_plat = '"+nom+"'";
             PreparedStatement ps = con.prepareStatement(str);
 
             ResultSet rss = null;
             ResultSet rs = null;
-            rs = st.executeQuery("SELECT  unitats_gastades  FROM Plat WHERE id_plat = "+id);
+            rs = st.executeQuery("SELECT  unitats_gastades  FROM Plat where nom_plat = '"+nom+"';");
             if (rs.next() ){
 
                     ps.setInt(1, rs.getInt("unitats_gastades") + unitats);
 
 
             }
-            rss = st.executeQuery("SELECT unitats_disponibles FROM Plat WHERE id_plat = "+id);
+            rss = st.executeQuery("SELECT unitats_disponibles FROM Plat where nom_plat = '"+nom+"';");
             if (rss.next() ) {
 
                     ps.setInt(2, rss.getInt("unitats_disponibles") - unitats);

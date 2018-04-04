@@ -11,10 +11,9 @@ public class Main {
 
     public static void main(String[] args) {
 
-
         Serverbbdd();
 
-        ServidorVista vista = new ServidorVista();          //Creo vista del server
+       /* ServidorVista vista = new ServidorVista();          //Creo vista del server
         vista.setVisible(true);                             //La fem visible
 
         Comandador comandador = new Comandador();           //Creo el model del servidor
@@ -25,7 +24,7 @@ public class Main {
 
         vista.registraControlador(controlador);             //Registro els elements de la vista al controlador
 
-        servidor.startServer();                             //Inicio servidor
+        servidor.startServer();    */                         //Inicio servidor
 
     }
 
@@ -33,10 +32,10 @@ public class Main {
     public static void Serverbbdd(){
         try {
             BDD bdd = new BDD();
-            String s = "ALL";
-            bdd.insereixPlat(s,3,10,0);
-            //bdd.updatePlat(2);
-            bdd.createTable(2);
+
+            //bdd.insereixPlat("c",3,10,0);
+            bdd.updatePlat("c", 2);
+            //bdd.createTable(2);
             String a = "SELECT * FROM Plat ";
 
             bdd.queriePlat(a);

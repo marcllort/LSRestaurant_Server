@@ -1,29 +1,25 @@
-import Model.BDD;
-
-import java.sql.*;
+import Controlador.Controlador;
+import Model.Comandador;
+import Network.Server;
+import Vista.ServidorVista;
 
 public class Main {
 
-
-    //prova
-
     public static void main(String[] args) {
 
+        ServidorVista vista = new ServidorVista();          //Creo vista del server
+        vista.setVisible(true);                             //La fem visible
 
-        try {
-            BDD bdd = new BDD();
-            String s = "ALL";
-            //bdd.insereixPlat(s,3,10,0);
-            bdd.updatePlat(7);
-            bdd.createTable(2);
-            String a = "SELECT * FROM Plat ";
+        Comandador comandador = new Comandador();           //Creo el model del servidor
 
-            bdd.queriePlat(a);
-        }catch (Exception e){
-            System.out.println("ERROOR");
-            e.printStackTrace();
-        }
+        Server servidor = new Server(comandador);           //Creo servidor que conte el model, per poder enviar i guardar dades
 
-        //funciona
+        Controlador controlador = new Controlador(vista, comandador, servidor);             //Creo controlador que conte el model, vista i servidor per poder controlarlos quan toqui
+
+        vista.registraControlador(controlador);             //Registro els elements de la vista al controlador
+
+        servidor.startServer();                             //Inicio servidor
+
     }
+
 }

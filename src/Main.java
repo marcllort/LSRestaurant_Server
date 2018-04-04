@@ -13,8 +13,8 @@ public class Main {
         try {
             BDD bdd = new BDD();
             String s = "ALL";
-            bdd.insereixPlat(s,3,10,0);
-            //bdd.updatePlat(2);
+            //bdd.insereixPlat(s,3,10,0);
+            bdd.updatePlat(6,7);
             bdd.createTable(2);
             String a = "SELECT * FROM Plat ";
 

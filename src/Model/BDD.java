@@ -56,7 +56,7 @@ public class BDD {
 
         }
     }
-    public void updatePlat(int id){
+    public void updatePlat(int id, int unitats){
 
         try {
             String str ="Update Plat set unitats_gastades = ?, unitats_disponibles= ? where id_plat = "+id;
@@ -64,16 +64,18 @@ public class BDD {
 
             ResultSet rss = null;
             ResultSet rs = null;
-            rs = st.executeQuery("SELECT unitats_gastades FROM Plat WHERE id_plat = "+id);
+            rs = st.executeQuery("SELECT  unitats_gastades  FROM Plat WHERE id_plat = "+id);
             if (rs.next() ){
-                //System.out.println(rss.getString("unitats_gastades"));
-                ps.setInt(1, rs.getInt("unitats_gastades") + 1);
+
+                    ps.setInt(1, rs.getInt("unitats_gastades") + unitats);
+
 
             }
             rss = st.executeQuery("SELECT unitats_disponibles FROM Plat WHERE id_plat = "+id);
             if (rss.next() ) {
 
-                ps.setInt(2, rss.getInt("unitats_disponibles") - 1);
+                    ps.setInt(2, rss.getInt("unitats_disponibles") - unitats);
+
             }
             ps.executeUpdate();
         } catch (SQLException e) {

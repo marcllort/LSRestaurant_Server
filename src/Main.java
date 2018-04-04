@@ -11,6 +11,7 @@ public class Main {
 
     public static void main(String[] args) {
 
+
         Serverbbdd();
 
         ServidorVista vista = new ServidorVista();          //Creo vista del server

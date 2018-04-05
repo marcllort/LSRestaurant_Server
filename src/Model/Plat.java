@@ -14,6 +14,7 @@ public class Plat implements Serializable {
     public Plat(String nom, float preu) {                          //Creo la classe de preu amb el elemet de nomPlat i preu
         this.nomPlat = nom;
         this.preu = preu;
+        servit = false;
     }
 
     public String getNomPlat() {

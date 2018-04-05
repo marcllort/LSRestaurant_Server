@@ -1,9 +1,7 @@
-import Model.BDD;
+import Model.*;
 
 import java.sql.*;
-
-import Model.Gestionador;
-import Model.Reserva;
+import java.util.ArrayList;
 
 
 public class Main {
@@ -34,16 +32,22 @@ public class Main {
             BDD bdd = new BDD();
             Gestionador gestionador = new Gestionador(bdd);
 
-            // bdd.insereixPlat("c",3,10,0);
+            //bdd.insereixPlat("caca",3,10,0);
+            // bdd.eliminaPlat("caca");
             // bdd.updatePlat("c", 1);
 
-            /*for (int i = 1 ;i<3; i++){
+            for (int i = 1 ;i<3; i++){
                 bdd.createTable(2);
-            }*/
+            }
 
-            Reserva reserva1 = new Reserva("Alexalgsmaassssd", 1, gestionador.newData(6, 2, 2222), new Time(15, 00, 00));
-            gestionador.creaReserva(reserva1);
-
+            Reserva reserva1 = new Reserva("Alex", 1, gestionador.newData(6, 2, 2222), new Time(15, 00, 00));
+           // gestionador.creaReserva(reserva1);
+           ArrayList<Plat> arr= new ArrayList<Plat>();
+           arr.add(new Plat("caca",12));
+            Comanda comanda=new Comanda(arr,gestionador.newData(12,1,2001), new Time(12,00,00),"Alex");
+            //bdd.creaComanda(comanda);
+           ArrayList<InfoComandes> prova = bdd.LlistatComandes();
+            System.out.println(prova.get(0).getPlatsPendents());
         } catch (Exception e) {
             System.out.println("ERROOR");
             e.printStackTrace();

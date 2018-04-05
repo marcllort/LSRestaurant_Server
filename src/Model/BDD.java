@@ -7,7 +7,7 @@ public class BDD {
     private Connection con;
     private Statement st;
     private static String username = "root";
-    private static String password = "marc";
+    private static String password = "alex";
     private static String url = "jdbc:mysql://localhost:3306/LSRestaurant?useSSL=false";
 
 
@@ -93,12 +93,27 @@ public class BDD {
         }
 
     }
+    public void eliminaPlat(String nom) {
+        try {
+            PreparedStatement ps = con.prepareStatement("DELETE FROM Plat WHERE Nom_plat = '"+nom+"'");
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void creaReserva(String usuari, String password, int comencals, Date data, Time hora, int id_taula) throws SQLException {
 
         st.executeUpdate("INSERT INTO Reserva(usuari, password, n_comensals, data, hora, id_taula) " +
                 "VALUES ('" + usuari + "','" + password + "'," + comencals + ",'" + data + "','" + hora + "'," + id_taula + ")");
 
+    }
+    public void creaComanda(Comanda comanda) throws SQLException {
+
+        for(Plat plat : comanda.getPlats()) {
+            st.executeUpdate("INSERT INTO Comanda(usuari, nom_plat, data, hora,servit) " +
+                    "VALUES ('" + comanda.getUsuari() + "','" +plat.getNomPlat()+ "', '"+comanda.getData()+"','"+comanda.getHora()+"',"+plat.isServit()+")");
+        }
     }
 
     public int reservaTaula(int comensals, java.sql.Date data, Time hora) {
@@ -127,6 +142,25 @@ public class BDD {
         }
 
     }
+    public ArrayList<InfoComandes> LlistatComandes() throws SQLException {
+        ArrayList<InfoComandes> array = new ArrayList<InfoComandes>();
+        ResultSet rs = st.executeQuery("SELECT usuari, COUNT(nom_plat) AS num, SUM(!servit) AS sum, hora, data FROM Comanda\n" +
+                "GROUP BY usuari \n" +
+                "ORDER BY data, hora ASC; ");       //Mirar si l'ordre va be
+
+        while (rs.next()) {
+           InfoComandes comanda = new InfoComandes();
+            comanda.setUsuari(rs.getString("usuari"));
+            comanda.setTotal_plats(rs.getInt("num"));
+            comanda.setPlatsPendents(rs.getInt("sum"));
+            comanda.setHora(rs.getTime("hora"));
+            comanda.setDate(rs.getDate("data"));
+            array.add(comanda);
+
+        }
+    return array;
+    }
+
 
     public ArrayList<Integer> getMinusArray(ArrayList array1, ArrayList array2) {
 

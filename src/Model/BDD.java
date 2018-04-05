@@ -13,7 +13,7 @@ public class BDD {
         String url = "jdbc:mysql://localhost:3306/LSRestaurant?useSSL=false";
 
         String username = "root";
-        String password = "marc";
+        String password = "alex";
 
         System.out.println("Connecting database...");
 
@@ -101,24 +101,31 @@ public class BDD {
 
             st.executeUpdate("INSERT INTO Reserva(usuari, password, n_comensals, data, hora, id_taula) " +
                     "VALUES ('"+ usuari + "','"+password +"',"+ comanesls+",'"+data+"','"+hora+"',"+id_taula+")");
-
     }
-    public void reservaTaula(int comensals, java.sql.Date data, Time hora){
+
+    public int reservaTaula(int comensals, java.sql.Date data, Time hora){
+
         ArrayList taules = new ArrayList();
         ArrayList reserves = new ArrayList();
         try {
            ResultSet rs= st.executeQuery("SELECT id_taula FROM Taula WHERE num_cadires = "+ comensals);
-           if (rs.next() ) {
+           while (rs.next() ) {
                taules.add(rs.getInt("id_taula"));
+
            }
             ResultSet rss= st.executeQuery("SELECT id_taula FROM Reserva NATURAL JOIN Taula WHERE data = '"+ data + "'AND hora ='"+hora + "'AND num_cadires = " + comensals );
-            if (rs.next() ) {
-                reserves.add(rs.getInt("id_taula"));
+            while (rss.next() ) {
+                reserves.add(rss.getInt("id_taula"));
+
             }
+
+
             ArrayList lliures = getMinusArray(taules, reserves);
-            System.out.println(lliures.get(1));
-        } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("ID TAULA LLIURE: "+lliures.get(0));
+            return (int)lliures.get(0);
+        } catch (Exception e) {
+
+            return -1;
         }
 
     }

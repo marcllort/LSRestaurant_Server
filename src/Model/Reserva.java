@@ -8,10 +8,9 @@ public class Reserva {
 
     private static final long serialVersionUID = 12345L;
     private String usuari;
-    private int nComencals;
+    private Integer nComencals;
     private Date data;
     private Time hora;
-
 
 
     public Reserva(String nom, int nComencals, Date data, Time hora) {
@@ -29,12 +28,12 @@ public class Reserva {
         return usuari;
     }
 
-    public int getnComencals() {
+    public Integer getnComencals() {
         return nComencals;
     }
 
-    public String getData() {
-        return data.toString();
+    public Date getData() {
+        return data;
     }
 
     public Time getHora() {

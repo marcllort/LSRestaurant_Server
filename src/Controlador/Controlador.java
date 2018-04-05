@@ -45,8 +45,8 @@ public class Controlador implements ActionListener {
 
     public void updateVista(String comandes) {
         vista.setJtaComandes(comandes);
-        vista.setJlUser(model.getComandaAt(0).getUsuari());
-        vista.setJlProductes(model.getComandaAt(0).getComanda());
+        vista.setJlUser(model.getComandaAt(0).getNom());
+        vista.setJlProductes(model.getComandaAt(0).getPreu());
         vista.setJlOrders(model.sizeComanda());
     }
 

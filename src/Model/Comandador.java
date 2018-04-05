@@ -2,7 +2,7 @@ package Model;
 
 import java.util.ArrayList;
 
-public class Comandador {
+/*public class Comandador {
 
     private ArrayList<Comanda> comandes;
 
@@ -37,4 +37,4 @@ public class Comandador {
         return comandes.size();                                                                 //Retorna tamany del arraylist
     }
 
-}
+}*/

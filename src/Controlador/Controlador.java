@@ -1,4 +1,4 @@
-package Controlador;
+/*package Controlador;
 
 import Model.Comandador;
 import Network.Server;
@@ -58,4 +58,4 @@ public class Controlador implements ActionListener {
         vista.enableButton(bool);
     }
 
-}
+}*/

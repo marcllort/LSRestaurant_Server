@@ -64,19 +64,22 @@ public class BDD {
 
             ResultSet rss = null;
             ResultSet rs = null;
-            rs = st.executeQuery("SELECT  unitats_gastades  FROM Plat where nom_plat = '"+nom+"';");
-            if (rs.next() ){
 
-                    ps.setInt(1, rs.getInt("unitats_gastades") + unitats);
-
-
-            }
             rss = st.executeQuery("SELECT unitats_disponibles FROM Plat where nom_plat = '"+nom+"';");
             if (rss.next() ) {
 
+                if (rss.getInt("unitats_disponibles") - unitats > 0) {
                     ps.setInt(2, rss.getInt("unitats_disponibles") - unitats);
 
-            }
+
+
+                rs = st.executeQuery("SELECT  unitats_gastades  FROM Plat where nom_plat = '" + nom + "';");
+                if (rs.next()) {
+
+                    ps.setInt(1, rs.getInt("unitats_gastades") + unitats);
+
+                }
+            }}
             ps.executeUpdate();
         } catch (SQLException e) {
             System.out.println("ERROORR");

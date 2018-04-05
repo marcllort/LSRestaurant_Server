@@ -1,8 +1,7 @@
 package Network;
 
 import Controlador.Controlador;
-import Model.Comanda;
-import Model.Comandador;
+/*import Model.Comandador;
 
 import java.io.ObjectInputStream;
 import java.io.DataOutputStream;
@@ -68,4 +67,4 @@ public class ServidorDedicat extends Thread {
     }
 
 
-}
+}*/

@@ -2,9 +2,9 @@ import Model.BDD;
 
 import java.sql.*;
 
-import Controlador.Controlador;
-import Model.Comandador;
-import Network.Server;
+//import Controlador.Controlador;
+//import Model.Comandador;
+//import Network.Server;
 import Vista.ServidorVista;
 
 public class Main {
@@ -33,7 +33,7 @@ public class Main {
         try {
             BDD bdd = new BDD();
 
-            //bdd.insereixPlat("c",3,10,0);
+            bdd.insereixPlat("c",3,10,0);
             bdd.updatePlat("c", 2);
             //bdd.createTable(2);
             String a = "SELECT * FROM Plat ";

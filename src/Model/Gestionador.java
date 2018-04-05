@@ -1,11 +1,14 @@
 package Model;
 
+import java.security.SecureRandom;
+import java.sql.Date;
+import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 public class Gestionador {
 
-    private static boolean isValidDate(String input) {                                          //COPMPROVAR SI LA DATA ES CORRECTA
+    public static boolean isValidDate(String input) {                                          //COPMPROVAR SI LA DATA ES CORRECTA
         String formatString = "MM/dd/yyyy";
 
         try {
@@ -21,9 +24,26 @@ public class Gestionador {
         return true;
     }
 
-    /*public static void main(String[] args){
-        System.out.println(isValidDate("45/23/234")); // false
-        System.out.println(isValidDate("12/12/2111")); // true
-    }*/
+
+    public static String generatePass() {
+
+        String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        SecureRandom rnd = new SecureRandom();
+
+        StringBuilder pass = new StringBuilder(6);
+        for (int i = 0; i < 6; i++) {
+            pass.append(AB.charAt(rnd.nextInt(AB.length())));
+        }
+        return pass.toString();
+
+    }
+
+
+
+
+
+    public static void main(String[] args) {
+        Reserva reserva1 = new Reserva("marca", 4,new Date(12,02,2019),new Time(15,00,12));
+    }
 
 }

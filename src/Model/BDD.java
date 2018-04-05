@@ -1,6 +1,7 @@
 package Model;
 
 import java.sql.*;
+import java.util.Date;
 
 public class BDD {
     private Connection con;
@@ -56,8 +57,8 @@ public class BDD {
 
         }
     }
-    public void updatePlat(String nom, int unitats){
-
+    public boolean updatePlat(String nom, int unitats){
+        boolean ok =true;
         try {
             String str ="Update Plat set unitats_gastades = ?, unitats_disponibles= ? where nom_plat = '"+nom+"'";
             PreparedStatement ps = con.prepareStatement(str);
@@ -68,23 +69,37 @@ public class BDD {
             rss = st.executeQuery("SELECT unitats_disponibles FROM Plat where nom_plat = '"+nom+"';");
             if (rss.next() ) {
 
-                if (rss.getInt("unitats_disponibles") - unitats > 0) {
+                if(rss.getInt("unitats_disponibles") - unitats  >= 0) {
                     ps.setInt(2, rss.getInt("unitats_disponibles") - unitats);
-
-
-
-                rs = st.executeQuery("SELECT  unitats_gastades  FROM Plat where nom_plat = '" + nom + "';");
-                if (rs.next()) {
-
-                    ps.setInt(1, rs.getInt("unitats_gastades") + unitats);
-
+                }else{
+                    ok = false;
+                    ps.setInt(2, rss.getInt("unitats_disponibles"));
                 }
-            }}
+
+            }
+
+            rs = st.executeQuery("SELECT  unitats_gastades  FROM Plat where nom_plat = '"+nom+"';");
+            if (rs.next() ){
+                if (ok == true) {
+                    ps.setInt(1, rs.getInt("unitats_gastades") + unitats);
+                }else{
+                    ps.setInt(1, rs.getInt("unitats_gastades"));
+                }
+            }
             ps.executeUpdate();
+            return ok;
+
         } catch (SQLException e) {
             System.out.println("ERROORR");
             e.printStackTrace();
+            return false;
         }
+
+    }
+    public void creaReserva(String usuari, String password, int comanesls, java.sql.Date data, Time hora, int id_taula) throws SQLException {
+
+            st.executeUpdate("INSERT INTO Reserva(usuari, password, n_comensals, data, hora, id_taula) " +
+                    "VALUES ('"+ usuari + "','"+password +"',"+ comanesls+",'"+data+"','"+hora+"',"+id_taula+")");
 
     }
 

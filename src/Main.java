@@ -1,6 +1,9 @@
 import Model.BDD;
 
 import java.sql.*;
+import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.Date;
 
 //import Controlador.Controlador;
 //import Model.Comandador;
@@ -33,10 +36,17 @@ public class Main {
         try {
             BDD bdd = new BDD();
 
-            bdd.insereixPlat("c",3,10,0);
-            bdd.updatePlat("c", 2);
-            //bdd.createTable(2);
+           // bdd.insereixPlat("c",3,10,0);
+           // bdd.updatePlat("c", 1);
+            bdd.createTable(2);
             String a = "SELECT * FROM Plat ";
+
+            Calendar cal = Calendar.getInstance();
+            cal.set(Calendar.YEAR, 2019);
+            cal.set(Calendar.MONTH, Calendar.JANUARY);
+            cal.set(Calendar.DAY_OF_MONTH, 1);
+
+            bdd.creaReserva("F", "000",1,new java.sql.Date(cal.getTimeInMillis()), new Time(12,00,00),1 );
 
             bdd.queriePlat(a);
         }catch (Exception e){

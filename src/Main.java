@@ -8,6 +8,8 @@ import java.util.Date;
 //import Controlador.Controlador;
 //import Model.Comandador;
 //import Network.Server;
+import Model.Gestionador;
+import Model.Reserva;
 import Vista.ServidorVista;
 
 public class Main {
@@ -38,7 +40,7 @@ public class Main {
 
            // bdd.insereixPlat("c",3,10,0);
            // bdd.updatePlat("c", 1);
-            bdd.createTable(2);
+            /*bdd.createTable(2);
             String a = "SELECT * FROM Plat ";
 
             Calendar cal = Calendar.getInstance();
@@ -48,7 +50,14 @@ public class Main {
 
             bdd.creaReserva("F", "000",1,new java.sql.Date(cal.getTimeInMillis()), new Time(12,00,00),1 );
 
-            bdd.queriePlat(a);
+            bdd.queriePlat(a);*/
+
+
+            Gestionador gestionador = new Gestionador(bdd);
+            Reserva reserva1 = new Reserva("marca", 4, gestionador.newData(2, 2, 2222), new Time(15, 00, 00));
+            gestionador.creaReserva(reserva1);
+
+
         }catch (Exception e){
             System.out.println("ERROOR");
             e.printStackTrace();

@@ -102,7 +102,10 @@ public class BDD {
                     "VALUES ('"+ usuari + "','"+password +"',"+ comanesls+",'"+data+"','"+hora+"',"+id_taula+")");
 
     }
-    public void reservaTaula(){}
+    public boolean reservaTaula(String user, Integer nComencals, Date data, Time hora, String pass){
+
+        return true;
+    }
 
 }
 

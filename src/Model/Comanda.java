@@ -7,7 +7,6 @@ public class Comanda {
 
     private String usuari;              //cal enviar el usuari que ha fet la comanda
     private ArrayList<Plat> plats;      //cal que sigui el array dels plats que ha demanat la taula
-    //private boolean servit;
     private Date data;                  //  quan fem una comanda cal enviar a la hora que sha fet
 
     /**
@@ -15,15 +14,11 @@ public class Comanda {
      * Crea un llistat de plats buit.
      */
 
-    //public String getNomPlat(){return plat.getNomPlat();}
-    //public boolean esServit(){return servit;}
-    //public float getPreuPlat(){return plat.getPreu();}
-
-    public void addPlat(Plat plat){
+    public void addPlat(Plat plat) {
         plats.add(plat);
     }
 
-    public Plat getPlat(int i){
+    public Plat getPlat(int i) {
         return plats.get(i);
     }
 

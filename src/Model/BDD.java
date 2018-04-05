@@ -1,6 +1,7 @@
 package Model;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class BDD {
@@ -102,7 +103,54 @@ public class BDD {
                     "VALUES ('"+ usuari + "','"+password +"',"+ comanesls+",'"+data+"','"+hora+"',"+id_taula+")");
 
     }
-    public void reservaTaula(){}
+    public void reservaTaula(int comensals, java.sql.Date data, Time hora){
+        ArrayList taules = new ArrayList();
+        ArrayList reserves = new ArrayList();
+        try {
+           ResultSet rs= st.executeQuery("SELECT id_taula FROM Taula WHERE num_cadires = "+ comensals);
+           if (rs.next() ) {
+               taules.add(rs.getInt("id_taula"));
+           }
+            ResultSet rss= st.executeQuery("SELECT id_taula FROM Reserva NATURAL JOIN Taula WHERE data = '"+ data + "'AND hora ='"+hora + "'AND num_cadires = " + comensals );
+            if (rs.next() ) {
+                reserves.add(rs.getInt("id_taula"));
+            }
+            ArrayList lliures = getMinusArray(taules, reserves);
+            System.out.println(lliures.get(1));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public ArrayList<Integer> getMinusArray(ArrayList array1, ArrayList array2 ) {
+        ArrayList<Integer> minusArray = new ArrayList<Integer>();
+
+        minusArray.addAll(array1);
+
+        for(int i =0; i< minusArray.size(); i++){
+            for(int j = 0; j < array2.size(); j++){
+                if(minusArray.get(i).equals(array2.get(j))){
+                    minusArray.remove(i);
+                    if(i == 0){
+                        ;
+                    }
+                    else if(j == 0){
+                        ;
+                    }
+                    else{
+                        i = 0;
+                        j = 0;
+                    }
+                }
+                else{}
+            }
+        }
+
+        return minusArray;
+    }
+
+
 
 }
 

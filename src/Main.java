@@ -42,12 +42,12 @@ public class Main {
             String a = "SELECT * FROM Plat ";
 
             Calendar cal = Calendar.getInstance();
-            cal.set(Calendar.YEAR, 2019);
+            cal.set(Calendar.YEAR, 1006);
             cal.set(Calendar.MONTH, Calendar.JANUARY);
-            cal.set(Calendar.DAY_OF_MONTH, 1);
+            cal.set(Calendar.DAY_OF_MONTH, 18);
 
-            bdd.creaReserva("F", "000",1,new java.sql.Date(cal.getTimeInMillis()), new Time(12,00,00),1 );
-
+           // bdd.creaReserva("P", "000",2,new java.sql.Date(cal.getTimeInMillis()), new Time(12,00,00),1 );
+            bdd.reservaTaula(2,new  java.sql.Date(cal.getTimeInMillis()), new Time(12,00,00));
             bdd.queriePlat(a);
         }catch (Exception e){
             System.out.println("ERROOR");

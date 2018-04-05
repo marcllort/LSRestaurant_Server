@@ -8,6 +8,7 @@ public class Plat implements Serializable {
     private static final long serialVersionUID = 12345L;
     private String nomPlat;
     private float preu;
+    private boolean servit;
 
 
     public Plat(String nom, float preu) {                          //Creo la classe de preu amb el elemet de nomPlat i preu
@@ -23,6 +24,13 @@ public class Plat implements Serializable {
         return preu;
     }                        //Getter de preu
 
+    public boolean isServit() {
+        return servit;
+    }
+
+    public void setServit(boolean servit) {
+        this.servit = servit;
+    }
 
     @Override
     public String toString() {

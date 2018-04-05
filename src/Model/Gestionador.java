@@ -5,13 +5,13 @@ import java.text.SimpleDateFormat;
 
 public class Gestionador {
 
-    private static boolean isValidDate(String input) {
+    private static boolean isValidDate(String input) {                                          //COPMPROVAR SI LA DATA ES CORRECTA
         String formatString = "MM/dd/yyyy";
 
         try {
-            SimpleDateFormat format = new SimpleDateFormat(formatString);
-            format.setLenient(false);
-            format.parse(input);
+            SimpleDateFormat data = new SimpleDateFormat(formatString);
+            data.setLenient(false);
+            data.parse(input);
         } catch (ParseException e) {
             return false;
         } catch (IllegalArgumentException e) {
@@ -21,9 +21,9 @@ public class Gestionador {
         return true;
     }
 
-    public static void main(String[] args){
+    /*public static void main(String[] args){
         System.out.println(isValidDate("45/23/234")); // false
         System.out.println(isValidDate("12/12/2111")); // true
-    }
+    }*/
 
 }

@@ -21,7 +21,25 @@ public class Reserva {
         this.hora = hora;
     }
 
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
 
+    public String getUsuari() {
+        return usuari;
+    }
+
+    public int getnComencals() {
+        return nComencals;
+    }
+
+    public String getData() {
+        return data.toString();
+    }
+
+    public Time getHora() {
+        return hora;
+    }
 
     @Override
     public String toString() {

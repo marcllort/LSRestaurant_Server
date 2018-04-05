@@ -5,11 +5,13 @@ import java.sql.Date;
 import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Calendar;
 
 public class Gestionador {
 
     public static boolean isValidDate(String input) {                                          //COPMPROVAR SI LA DATA ES CORRECTA
-        String formatString = "MM/dd/yyyy";
+        String formatString = "yyyy-MM-dd";
 
         try {
             SimpleDateFormat data = new SimpleDateFormat(formatString);
@@ -38,12 +40,27 @@ public class Gestionador {
 
     }
 
+    public void creaReserva(Reserva reserva){
 
+        if (isValidDate(reserva.getData())){
+
+        }else{
+            //ennvia error
+        }
+
+    }
 
 
 
     public static void main(String[] args) {
-        Reserva reserva1 = new Reserva("marca", 4,new Date(12,02,2019),new Time(15,00,12));
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.YEAR, 1988);
+        cal.set(Calendar.MONTH, Calendar.JANUARY);
+        cal.set(Calendar.DAY_OF_MONTH, 1);
+
+        Reserva reserva1 = new Reserva("marca", 4,new Date(cal.getTimeInMillis()),new Time(15,00,12));
+        System.out.println(reserva1.getData());
+
     }
 
 }

@@ -54,7 +54,9 @@ public class Gestionador {
     private String buscaTaula(Reserva reserva) {
         try {
             for (int i = reserva.getnComencals(); i < reserva.getnComencals() + 3; i++) {
-                if (bbdd.reservaTaula(reserva.getUsuari(), reserva.getnComencals(), reserva.getData(), reserva.getHora(), generatePass())) {
+                int id_taula = bbdd.reservaTaula(i, reserva.getData(), reserva.getHora());
+                if (id_taula != -1) {
+                    bbdd.creaReserva(reserva.getUsuari(), generatePass(), i, reserva.getData(), reserva.getHora(), id_taula);
                     return "Reserva realitzada amb exit!";
                 }
             }

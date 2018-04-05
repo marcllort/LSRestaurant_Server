@@ -13,7 +13,7 @@ public class BDD {
         String url = "jdbc:mysql://localhost:3306/LSRestaurant?useSSL=false";
 
         String username = "root";
-        String password = "alex";
+        String password = "marc";
 
         System.out.println("Connecting database...");
 

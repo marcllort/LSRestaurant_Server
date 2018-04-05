@@ -50,15 +50,19 @@ public class Gestionador {
 
     }
 
+    public static Date newData(int dia, int mes, int any){
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.YEAR, any);
+        cal.set(Calendar.MONTH, mes - 1);
+        cal.set(Calendar.DAY_OF_MONTH, dia);
 
+        return new Date(cal.getTimeInMillis());
+    }
 
     public static void main(String[] args) {
-        Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.YEAR, 1988);
-        cal.set(Calendar.MONTH, Calendar.JANUARY);
-        cal.set(Calendar.DAY_OF_MONTH, 1);
 
-        Reserva reserva1 = new Reserva("marca", 4,new Date(cal.getTimeInMillis()),new Time(15,00,12));
+
+        Reserva reserva1 = new Reserva("marca", 4,newData(2,2,2222),new Time(15,00,12));
         System.out.println(reserva1.getData());
 
     }

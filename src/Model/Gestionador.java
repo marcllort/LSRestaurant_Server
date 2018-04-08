@@ -136,5 +136,13 @@ public class Gestionador {
         return bbdd.llistaPlats();                          //retorna plats diosponibles per fer la carta
     }
 
+    public ArrayList<Plat> topCincSemanal(){
+        return
+    }
+
+    public ArrayList<Plat> topCincTotal(){
+        return
+    }
+
 }
 

@@ -6,25 +6,24 @@ import Model.Comanda;
 import Model.Gestionador;
 
 import java.io.ObjectInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 
-public class ServidorDedicat extends Thread {
+public class ServidorReserva extends Thread {
 
 
     private String user;
     private final Gestionador gestionador;
     private Socket sClient;
-    private ArrayList<ServidorDedicat> servers;
+    private ArrayList<ServidorReserva> servers;
     private ObjectOutputStream doStream;
     private ObjectInputStream diStream;
     private Controlador controller;
 
 
-    public ServidorDedicat(Socket sClient, ArrayList<ServidorDedicat> servers, Gestionador gestionador, Controlador controller) {
+    public ServidorReserva(Socket sClient, ArrayList<ServidorReserva> servers, Gestionador gestionador, Controlador controller) {
         this.sClient = sClient;
         this.servers = servers;
         this.gestionador = gestionador;

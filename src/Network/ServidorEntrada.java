@@ -1,6 +1,5 @@
 package Network;
 
-import Model.Comanda;
 import Model.Gestionador;
 import Model.Reserva;
 
@@ -14,13 +13,13 @@ public class ServidorEntrada extends Thread {
 
     private final Gestionador gestionador;
     private Socket sClient;
-    private ArrayList<ServidorDedicat> servers;
+    private ArrayList<ServidorReserva> servers;
     private ObjectOutputStream doStream;
     private ObjectInputStream diStream;
     private Controlador controller;
 
 
-    public ServidorEntrada(Socket sClient, ArrayList<ServidorDedicat> servers, Gestionador gestionador, Controlador controller) {
+    public ServidorEntrada(Socket sClient, ArrayList<ServidorReserva> servers, Gestionador gestionador, Controlador controller) {
         this.sClient = sClient;
         this.servers = servers;
         this.gestionador = gestionador;

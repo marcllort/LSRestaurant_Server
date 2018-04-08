@@ -1,4 +1,4 @@
-/*package Network;
+package Network;
 
 import Controlador.Controlador;
 //import Model.Comandador;
@@ -14,7 +14,7 @@ public class Server {
 
     private static final int Port = 4444;                                               //Declarem els atributs
     private ServerSocket sServerReserva;
-    private final ArrayList<ServidorDedicat> serversReserva;
+    private final ArrayList<ServidorReserva> serversReserva;
 
     private ServerSocket sServerEntrada;
     //private final ServidorEntrada serverEntrada;
@@ -42,7 +42,7 @@ public class Server {
                 //cal detectar si ens esta acceptatn entrada o reservca i segons fagi, fer una cosa o una altra
                 Socket sClient = sServerReserva.accept();                                      //Esperem a la connexio del client
                 System.out.println("Client connectat");
-                ServidorDedicat servidordedicat = new ServidorDedicat(sClient, serversReserva, gestionador, controller);                //Creem un servidor dedicat
+                ServidorReserva servidordedicat = new ServidorReserva(sClient, serversReserva, gestionador, controller);                //Creem un servidor dedicat
                 serversReserva.add(servidordedicat);                                                                                   //Afegim el serverdedicat a un arraylist on els tenim tots
                 servidordedicat.start();                                                                                        //Iniciem server dedicat
             }
@@ -60,7 +60,7 @@ public class Server {
     }
 
     public void enviaC(String user) {                                                                           //Funcio que fem servir al controlador per enviar a tots els serversReserva dedicats la nova llista de comandes
-        for (ServidorDedicat servidor : serversReserva) {
+        for (ServidorReserva servidor : serversReserva) {
             if (servidor.getUser().equals(user)) {
                 servidor.enviaComanda();
             }
@@ -72,3 +72,4 @@ public class Server {
     }*/
 
 
+}

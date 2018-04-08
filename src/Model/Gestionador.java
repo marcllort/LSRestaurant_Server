@@ -4,6 +4,7 @@ import java.security.SecureRandom;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class Gestionador {
@@ -55,21 +56,21 @@ public class Gestionador {
         return null;
     }               //Cal pasar funcio a la app entrada
 
-    private synchronized void enviaMissatge(String missatge) {
-        //WRITEUTF?
-    }
-
-    public synchronized  void addComanda(Comanda comanda){
+    public synchronized void addComanda(Comanda comanda) {
         //funcio de la bbdd, tenir en compte si es la 1a comnada o cal actualizarla
     }
 
-    public synchronized boolean comprovaUserPass(String user, String pass){
+    public synchronized boolean comprovaUserPass(String user, String pass) {
         //funcio bbdd comprovar
 
         return true;
     }
 
-    private synchronized String buscaTaula(Reserva reserva) {
+    public synchronized Comanda retornaComanda() {
+        //retorna comanda actualitzada de la bbdd
+    }
+
+    private synchronized String buscaTaula(Reserva reserva, String password) {
 
         try {
             int id_taula = -1;
@@ -80,8 +81,8 @@ public class Gestionador {
                 //System.out.println("ID TAULA ASSIGNADA: " + id_taula);
                 if (id_taula != -1) {
                     System.out.println("ID TAULA ASSIGNADA: " + id_taula);
-                    bbdd.creaReserva(reserva.getUsuari(), generatePass(), reserva.getnComencals(), reserva.getData(), reserva.getHora(), id_taula);
-                    return "Reserva realitzada amb exit!";
+                    bbdd.creaReserva(reserva.getUsuari(), password, reserva.getnComencals(), reserva.getData(), reserva.getHora(), id_taula);
+                    return "true";
                 }
                 i++;
             }
@@ -95,24 +96,24 @@ public class Gestionador {
         }
     }
 
-    public synchronized void creaReserva(Reserva reserva) {
+    public synchronized String creaReserva(Reserva reserva, String password) {
         try {
 
             if ((reserva.getUsuari() != null) && (reserva.getnComencals() != null) && (reserva.getData() != null) && (reserva.getHora() != null)) {
                 if (reserva.getnComencals() > 0) {
-                    enviaMissatge(buscaTaula(reserva));
-                }else{
-                    System.out.println("Error! Nombre de començals impossible!");
+                    return buscaTaula(reserva, password);
+                } else {
+                    return ("Error! Nombre de començals impossible!");
                 }
 
             } else {
                 //missatge error de camp buit
                 System.out.println(reserva.getData().getHours());           //Per fer saltar la excepcio en cas de que nhi hagi
-                System.out.println("Error! Camps buits!");
+                return ("Error! Camps buits!");
             }
 
         } catch (NullPointerException w) {
-            System.out.println("Error! Data incorrecta!");
+            return ("Error! Data incorrecta!");
             //ennvia error
         }
     }
@@ -121,6 +122,8 @@ public class Gestionador {
         return "x";
     }
 
+    public ArrayList<Plat> retornaCarta() {
 
+    }
 }
 

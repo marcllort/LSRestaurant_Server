@@ -16,6 +16,7 @@ public class Plat implements Serializable {
         this.preu = preu;
         servit = false;
     }
+
     public Plat(String nom, float preu, boolean servit) {                          //Creo la classe de preu amb el elemet de nomPlat i preu
         this.nomPlat = nom;
         this.preu = preu;
@@ -37,6 +38,7 @@ public class Plat implements Serializable {
     public void setServit(boolean servit) {
         this.servit = servit;
     }
+
 
     @Override
     public String toString() {

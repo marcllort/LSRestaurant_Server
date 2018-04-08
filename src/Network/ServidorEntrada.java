@@ -1,4 +1,4 @@
-/*package Network;
+package Network;
 
 import Model.Gestionador;
 import Model.Reserva;
@@ -37,7 +37,6 @@ public class ServidorEntrada extends Thread {
             doStream = new ObjectOutputStream(sClient.getOutputStream());
 
             Reserva reserva = (Reserva) diStream.readObject();
-
             String estatReserva = gestionador.creaReserva(reserva, gestionador.generatePass());
 
             if (estatReserva.equals("true")) {
@@ -53,7 +52,10 @@ public class ServidorEntrada extends Thread {
         }
     }
 
-    public void enviaComanda() {
+
+    //Funcions
+
+    public void enviaCarta() {
         try {
             doStream.writeObject(gestionador.retornaCarta());
         } catch (IOException e) {
@@ -63,4 +65,3 @@ public class ServidorEntrada extends Thread {
 
 
 }
-*/

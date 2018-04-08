@@ -1,4 +1,4 @@
-/*package Network;
+package Network;
 
 //import Controlador.Controlador;
 
@@ -44,27 +44,25 @@ public class ServidorReserva extends Thread {
             String pass = diStream.readUTF();
 
             if (gestionador.comprovaUserPass(user, pass)) {
-                doStream.writeUTF("true");                                                  //enviem true en cas de haver entrat correctaemnt
 
+                doStream.writeUTF("true");                                                  //enviem true en cas de haver entrat correctaemnt
                 doStream.writeObject(gestionador.retornaCarta());                               //enviem lña carta amb plats disponibles
 
                 while (true) {
 
                     Comanda com = (Comanda) diStream.readObject();                          //Rebem la comanda enviada pel usuari
-                    String analisi = gestionador.analitzarComanda();
-                    if (analisi.equals("true")) {
+                    String analisi = gestionador.analitzarComanda(com);
 
+                    if (analisi.equals("true")) {
                         gestionador.addComanda(com);                                                //Guardo la comanda
                         doStream.writeUTF("Comanda realitzada amb exit!");
                         //actualitzar vista d egestionar comandes
-
                     } else {
                         doStream.writeUTF("No queden suficients unitats de:" + analisi);//enviar error
                     }
 
                     //controller.updateVista(comanda.getAllComandes());                       //Actualitzo vista de el server
                     //controller.enableBut(true);                                       //Activo el boto, per si estava desactivcat
-
                 }
             } else {
                 doStream.writeUTF("error");            //preparar networkReserva per rebre un string
@@ -75,6 +73,9 @@ public class ServidorReserva extends Thread {
             servers.remove(this);                                                   //En cas de que es desconnecti el client o hi hagi algun error tanco el server dedicat
         }
     }
+
+
+    //Funcions
 
     public void enviaComanda() {
         try {
@@ -88,4 +89,3 @@ public class ServidorReserva extends Thread {
         return user;
     }
 }
-*/

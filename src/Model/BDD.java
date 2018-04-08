@@ -29,16 +29,42 @@ public class BDD {
         */
     }
 
+
+    //Taula
+
     public void createTable(int i) throws SQLException {
         st.executeUpdate("INSERT INTO Taula(num_cadires) " + "VALUES (" + i + ")");
     }
 
-    public void insereixPlat(String nom_plat, int preu, int unitats_disponibles, int unitats_gastades) throws SQLException {
+    public int reservaTaula(int comensals, java.sql.Date data, Time hora) {
 
-        st.executeUpdate("INSERT INTO Plat(nom_plat, preu, unitats_disponibles, unitats_gastades) " +
-                "VALUES ('" + nom_plat + "'," + preu + "," + unitats_disponibles + "," + unitats_gastades + ")");
+        ArrayList taules = new ArrayList();
+        ArrayList reserves = new ArrayList();
+
+        try {
+            ResultSet rs = st.executeQuery("SELECT id_taula FROM Taula WHERE num_cadires = " + comensals);
+            while (rs.next()) {
+                taules.add(rs.getInt("id_taula"));
+            }
+
+            ResultSet rss = st.executeQuery("SELECT id_taula FROM Reserva NATURAL JOIN Taula WHERE data = '" + data + "'AND hora ='" + hora + "'AND num_cadires = " + comensals);
+
+            while (rss.next()) {
+                reserves.add(rss.getInt("id_taula"));
+            }
+
+            ArrayList lliures = getMinusArray(taules, reserves);
+            //System.out.println("ID TAULA LLIURE: " + lliures.get(0));
+
+            return (int) lliures.get(0);
+        } catch (Exception e) {
+            return -1;
+        }
 
     }
+
+
+    //Plat
 
     public void queriePlat(String querie) {
         try {
@@ -52,6 +78,22 @@ public class BDD {
             }
         } catch (Exception e) {
             //Posar algo! enviar error o el que sigui
+        }
+    }
+
+    public void insereixPlat(String nom_plat, int preu, int unitats_disponibles, int unitats_gastades) throws SQLException {
+
+        st.executeUpdate("INSERT INTO Plat(nom_plat, preu, unitats_disponibles, unitats_gastades) " +
+                "VALUES ('" + nom_plat + "'," + preu + "," + unitats_disponibles + "," + unitats_gastades + ")");
+
+    }
+
+    public void eliminaPlat(String nom) {
+        try {
+            PreparedStatement ps = con.prepareStatement("DELETE FROM Plat WHERE Nom_plat = '" + nom + "'");
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
@@ -95,16 +137,17 @@ public class BDD {
 
     }
 
-    public void eliminaPlat(String nom) {
+    public void serveixPlat(String plat, String usuari) {
+        String str = "Update Comanda set servit  = TRUE where nom_plat = '" + plat + "'" + " AND usuari = '" + usuari + "'";
         try {
-            PreparedStatement ps = con.prepareStatement("DELETE FROM Plat WHERE Nom_plat = '" + nom + "'");
+            PreparedStatement ps = con.prepareStatement(str);
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public ArrayList<Plat> llistaPlats() {
+    public ArrayList<Plat> llistaPlatsDisponibles() {
         try {
             ResultSet rs = st.executeQuery("SELECT nom_plat, preu, unitats_disponibles FROM Plat");
             ArrayList<Plat> plats = new ArrayList<>();
@@ -129,13 +172,39 @@ public class BDD {
         }
     }
 
-    public void serveixPlat(String plat, String usuari) {
-        String str = "Update Comanda set servit  = TRUE where nom_plat = '" + plat + "'" + " AND usuari = '" + usuari + "'";
+    public ArrayList<Plat> llistaPlatsNoDisponibles(Comanda comanda) {
         try {
-            PreparedStatement ps = con.prepareStatement(str);
-            ps.executeUpdate();
+            ResultSet rs = st.executeQuery("SELECT nom_plat FROM Plat WHERE unitats_disponibles = 0");
+            ArrayList<Plat> platscomanda = comanda.getPlats();
+            ArrayList<String> platsacabat = new ArrayList<>();
+            while (rs.next()) {
+                String nom = rs.getString("nom_plat");
+                platsacabat.add(nom);
+            }
+            ArrayList<Plat> acabat = new ArrayList<>();
+            for (Plat plat : platscomanda) {
+                for (String nom : platsacabat) {
+                    if (plat.getNomPlat().equals(nom)) {
+                        acabat.add(plat);
+                    }
+                }
+            }
+            return acabat;
         } catch (SQLException e) {
             e.printStackTrace();
+            return null;
+        }
+
+    }
+
+
+    //Comanda
+
+    public void creaComanda(Comanda comanda) throws SQLException {
+
+        for (Plat plat : comanda.getPlats()) {
+            st.executeUpdate("INSERT INTO Comanda(usuari, nom_plat, data, hora,servit) " +
+                    "VALUES ('" + comanda.getUsuari() + "','" + plat.getNomPlat() + "', '" + comanda.getData() + "','" + comanda.getHora() + "'," + plat.isServit() + ")");
         }
     }
 
@@ -176,49 +245,7 @@ public class BDD {
 
     }
 
-    public void creaReserva(String usuari, String password, int comencals, Date data, Time hora, int id_taula) throws SQLException {
-
-        st.executeUpdate("INSERT INTO Reserva(usuari, password, n_comensals, data, hora, id_taula) " +
-                "VALUES ('" + usuari + "','" + password + "'," + comencals + ",'" + data + "','" + hora + "'," + id_taula + ")");
-
-    }
-
-    public void creaComanda(Comanda comanda) throws SQLException {
-
-        for (Plat plat : comanda.getPlats()) {
-            st.executeUpdate("INSERT INTO Comanda(usuari, nom_plat, data, hora,servit) " +
-                    "VALUES ('" + comanda.getUsuari() + "','" + plat.getNomPlat() + "', '" + comanda.getData() + "','" + comanda.getHora() + "'," + plat.isServit() + ")");
-        }
-    }
-
-    public int reservaTaula(int comensals, java.sql.Date data, Time hora) {
-
-        ArrayList taules = new ArrayList();
-        ArrayList reserves = new ArrayList();
-
-        try {
-            ResultSet rs = st.executeQuery("SELECT id_taula FROM Taula WHERE num_cadires = " + comensals);
-            while (rs.next()) {
-                taules.add(rs.getInt("id_taula"));
-            }
-
-            ResultSet rss = st.executeQuery("SELECT id_taula FROM Reserva NATURAL JOIN Taula WHERE data = '" + data + "'AND hora ='" + hora + "'AND num_cadires = " + comensals);
-
-            while (rss.next()) {
-                reserves.add(rss.getInt("id_taula"));
-            }
-
-            ArrayList lliures = getMinusArray(taules, reserves);
-            //System.out.println("ID TAULA LLIURE: " + lliures.get(0));
-
-            return (int) lliures.get(0);
-        } catch (Exception e) {
-            return -1;
-        }
-
-    }
-
-    public ArrayList<InfoComandes> LlistatComandes() throws SQLException {
+    public ArrayList<InfoComandes> llistaComandes() throws SQLException {
         ArrayList<InfoComandes> array = new ArrayList<InfoComandes>();
         ResultSet rs = st.executeQuery("SELECT usuari, COUNT(nom_plat) AS num, SUM(!servit) AS sum, hora, data FROM Comanda\n" +
                 "GROUP BY usuari \n" +
@@ -237,9 +264,12 @@ public class BDD {
         return array;
     }
 
-    public Boolean comprovaPassword(String usuari, String password){
+
+    //Reserva
+
+    public Boolean comprovaPassword(String usuari, String password) {
         try {
-            ResultSet rs = st.executeQuery("SELECT usuari, password FROM Reserva WHERE usuari = '"+ usuari+"'");
+            ResultSet rs = st.executeQuery("SELECT usuari, password FROM Reserva WHERE usuari = '" + usuari + "'");
             String contrasenya = "";
             if (rs.next()) {
                 contrasenya = rs.getString("password");
@@ -252,31 +282,15 @@ public class BDD {
         }
     }
 
-    public ArrayList<Plat> platsNoDisponibles(Comanda comanda){
-        try {
-            ResultSet rs = st.executeQuery("SELECT nom_plat FROM Plat WHERE unitats_disponibles = 0");
-            ArrayList<Plat> platscomanda = comanda.getPlats();
-            ArrayList<String> platsacabat = new ArrayList<>();
-            while (rs.next()){
-                String nom = rs.getString("nom_plat");
-                platsacabat.add(nom);
-            }
-            ArrayList<Plat> acabat = new ArrayList<>();
-            for(Plat plat : platscomanda){
-                for(String nom: platsacabat){
-                    if(plat.getNomPlat().equals(nom)){
-                        acabat.add(plat);
-                    }
-                }
-            }
-            return acabat;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        }
+    public void creaReserva(String usuari, String password, int comencals, Date data, Time hora, int id_taula) throws SQLException {
+
+        st.executeUpdate("INSERT INTO Reserva(usuari, password, n_comensals, data, hora, id_taula) " +
+                "VALUES ('" + usuari + "','" + password + "'," + comencals + ",'" + data + "','" + hora + "'," + id_taula + ")");
 
     }
 
+
+    //Altres
 
     private ArrayList<Integer> getMinusArray(ArrayList array1, ArrayList array2) {
 
@@ -301,8 +315,6 @@ public class BDD {
 
         return minusArray;
     }
-
-
 
 
 }

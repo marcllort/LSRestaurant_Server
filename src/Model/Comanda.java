@@ -20,7 +20,7 @@ public class Comanda {
      * Constructor sense parametres.
      * Crea un llistat de plats buit.
      */
-    public Comanda(ArrayList<Plat> plats, Date data, Time hora, String usuari){
+    public Comanda(ArrayList<Plat> plats, Date data, Time hora, String usuari) {
         this.plats = plats;
         this.data = data;
         this.hora = hora;
@@ -34,6 +34,7 @@ public class Comanda {
     public String getUsuari() {
         return usuari;
     }
+
     public void addPlat(Plat plat) {
         plats.add(plat);
     }

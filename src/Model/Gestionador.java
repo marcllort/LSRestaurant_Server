@@ -17,6 +17,9 @@ public class Gestionador {
         this.bbdd = bbdd;
     }
 
+
+    //Funcions
+
     public synchronized boolean isValidDate(String input) {                                          //COPMPROVAR SI LA DATA ES CORRECTA
         String formatString = "yyyy-MM-dd";
 
@@ -32,18 +35,6 @@ public class Gestionador {
         return true;
     }
 
-    public synchronized String generatePass() {
-
-        String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-        SecureRandom rnd = new SecureRandom();
-
-        StringBuilder pass = new StringBuilder(6);
-        for (int i = 0; i < 6; i++) {
-            pass.append(AB.charAt(rnd.nextInt(AB.length())));
-        }
-        return pass.toString();
-    }
-
     public synchronized Date newData(int dia, int mes, int any) {
         if (isValidDate(any + "-" + mes + "-" + dia)) {
             Calendar cal = Calendar.getInstance();
@@ -57,6 +48,34 @@ public class Gestionador {
         return null;
     }               //Cal pasar funcio a la app entrada
 
+    public synchronized ArrayList<Plat> retornaCarta() {
+        return bbdd.llistaPlatsDisponibles();                          //retorna plats diosponibles per fer la carta
+    }
+
+
+    //Password
+
+    public synchronized String generatePass() {
+
+        String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        SecureRandom rnd = new SecureRandom();
+
+        StringBuilder pass = new StringBuilder(6);
+        for (int i = 0; i < 6; i++) {
+            pass.append(AB.charAt(rnd.nextInt(AB.length())));
+        }
+        return pass.toString();
+    }
+
+    public synchronized boolean comprovaUserPass(String user, String pass) {
+        //funcio bbdd comprovar
+        bbdd.comprovaPassword(user, pass);
+        return true;
+    }
+
+
+    //Comanda
+
     public synchronized void addComanda(Comanda comanda) {
         //funcio de la bbdd, tenir en compte si es la 1a comnada o cal actualizarla
 
@@ -69,16 +88,29 @@ public class Gestionador {
 
     }
 
-    public synchronized boolean comprovaUserPass(String user, String pass) {
-        //funcio bbdd comprovar
+    public synchronized String analitzarComanda(Comanda comanda) {      //mirem si hi ha unitatas de tos els prodfuctes
 
-        return true;
+        ArrayList<Plat> platsError = bbdd.llistaPlatsNoDisponibles(comanda);
+
+        String llistaPlats = new String();
+
+        if (platsError != null) {
+            for (Plat plats : platsError) {
+                llistaPlats = llistaPlats + plats.getNomPlat();
+            }
+            return llistaPlats;
+        } else {
+            return "true";
+        }
     }
 
     public synchronized Comanda retornaComanda(String user) {
         //retorna comanda actualitzada de la bbdd
         return bbdd.mostraPlatsComanda(user);
     }
+
+
+    //Reserva
 
     private synchronized String buscaTaula(Reserva reserva, String password) {
 
@@ -128,31 +160,14 @@ public class Gestionador {
         }
     }
 
-    public String analitzarComanda() {      //mirem si hi ha unitatas de tos els prodfuctes
 
-        ArrayList<Plat> platsError = bbdd.platsNoDisponibles();
+    //Top 5
 
-        String llistaPlats = new String();
-
-        if (platsError != null){
-            for (Plat plats : platsError ){
-                llistaPlats = llistaPlats + plats.getNomPlat();
-            }
-            return llistaPlats;
-        }else{
-            return "true";
-        }
-    }
-
-    public ArrayList<Plat> retornaCarta() {
-        return bbdd.llistaPlats();                          //retorna plats diosponibles per fer la carta
-    }
-
-    public ArrayList<Plat> topCincSemanal(){
+    public synchronized ArrayList<Plat> topCincSemanal() {
         return
     }
 
-    public ArrayList<Plat> topCincTotal(){
+    public synchronized ArrayList<Plat> topCincTotal() {
         return
     }
 

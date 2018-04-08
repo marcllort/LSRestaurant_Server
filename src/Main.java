@@ -53,10 +53,10 @@ public class Main {
             ArrayList<Plat> arr1= new ArrayList<Plat>();
            arr.add(new Plat("caca",12));
             Comanda comanda=new Comanda(arr,gestionador.newData(12,1,2001), new Time(12,40,00),"Alex");
-            arr1 = bdd.platsNoDisponibles(comanda);
+            arr1 = bdd.llistaPlatsNoDisponibles(comanda);
             System.out.println(arr1.get(0).getNomPlat());
             //bdd.creaComanda(comanda);
-           ArrayList<InfoComandes> prova = bdd.LlistatComandes();
+           ArrayList<InfoComandes> prova = bdd.llistaComandes();
             System.out.println("PLATSPENDENTS"+prova.get(0).getPlatsPendents());
         } catch (Exception e) {
             System.out.println("ERROOR");

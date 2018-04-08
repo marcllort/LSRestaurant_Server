@@ -15,7 +15,7 @@ public class Gestionador {
         this.bbdd = bbdd;
     }
 
-    public boolean isValidDate(String input) {                                          //COPMPROVAR SI LA DATA ES CORRECTA
+    public synchronized boolean isValidDate(String input) {                                          //COPMPROVAR SI LA DATA ES CORRECTA
         String formatString = "yyyy-MM-dd";
 
         try {
@@ -30,7 +30,7 @@ public class Gestionador {
         return true;
     }
 
-    public String generatePass() {
+    public synchronized String generatePass() {
 
         String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
         SecureRandom rnd = new SecureRandom();
@@ -42,7 +42,7 @@ public class Gestionador {
         return pass.toString();
     }
 
-    public Date newData(int dia, int mes, int any) {
+    public synchronized Date newData(int dia, int mes, int any) {
         if (isValidDate(any + "-" + mes + "-" + dia)) {
             Calendar cal = Calendar.getInstance();
             cal.set(Calendar.YEAR, any);
@@ -55,11 +55,21 @@ public class Gestionador {
         return null;
     }               //Cal pasar funcio a la app entrada
 
-    private void enviaMissatge(String missatge) {
+    private synchronized void enviaMissatge(String missatge) {
         //WRITEUTF?
     }
 
-    private String buscaTaula(Reserva reserva) {
+    public synchronized  void addComanda(Comanda comanda){
+        //funcio de la bbdd, tenir en compte si es la 1a comnada o cal actualizarla
+    }
+
+    public synchronized boolean comprovaUserPass(String user, String pass){
+        //funcio bbdd comprovar
+
+        return true;
+    }
+
+    private synchronized String buscaTaula(Reserva reserva) {
 
         try {
             int id_taula = -1;
@@ -85,7 +95,7 @@ public class Gestionador {
         }
     }
 
-    public void creaReserva(Reserva reserva) {
+    public synchronized void creaReserva(Reserva reserva) {
         try {
 
             if ((reserva.getUsuari() != null) && (reserva.getnComencals() != null) && (reserva.getData() != null) && (reserva.getHora() != null)) {
@@ -106,6 +116,11 @@ public class Gestionador {
             //ennvia error
         }
     }
+
+    public String analitzarComanda() {      //mirem si hi ha unitatas de tos els prodfuctes
+        return "x";
+    }
+
 
 }
 

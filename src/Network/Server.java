@@ -1,7 +1,9 @@
-/*package Network;
+package Network;
 
-import Controlador.Controlador;
-import Model.Comandador;
+//import Controlador.Controlador;
+//import Model.Comandador;
+
+import Model.Gestionador;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -11,40 +13,44 @@ import java.util.ArrayList;
 public class Server {
 
     private static final int Port = 4444;                                               //Declarem els atributs
-    private ServerSocket sServer;
-    private final ArrayList<ServidorDedicat> servers;
-    private final Comandador comandador;
-    private Controlador controller;
+    private ServerSocket sServerReserva;
+    private final ArrayList<ServidorDedicat> serversReserva;
+
+    private ServerSocket sServerEntrada;
+    //private final ServidorEntrada serverEntrada;
+
+    private final Gestionador gestionador;
+    //private Controlador controller;
     private boolean funciona;
 
 
-    public Server(Comandador comandador) {
-        servers = new ArrayList<>();
-        sServer = null;
-        this.comandador = comandador;
+    public Server(Gestionador gestionador) {
+        serversReserva = new ArrayList<>();
+        sServerReserva = null;
+        this.gestionador = gestionador;
     }
 
 
     public void startServer() {
         try {
-            sServer = new ServerSocket(Port);                                           //Iniciem socket al port corespoenent
+            sServerReserva = new ServerSocket(Port);                                           //Iniciem socket al port corespoenent
             funciona = true;
             System.out.println("Socket obert");
 
             while (funciona) {
                 System.out.println("Esperant client...");
-                Socket sClient = sServer.accept();                                      //Esperem a la connexio del client
+                Socket sClient = sServerReserva.accept();                                      //Esperem a la connexio del client
                 System.out.println("Client connectat");
-                ServidorDedicat servidordedicat = new ServidorDedicat(sClient, servers, comandador, controller);                //Creem un servidor dedicat
-                servers.add(servidordedicat);                                                                                   //Afegim el serverdedicat a un arraylist on els tenim tots
+                ServidorDedicat servidordedicat = new ServidorDedicat(sClient, serversReserva, gestionador, controller);                //Creem un servidor dedicat
+                serversReserva.add(servidordedicat);                                                                                   //Afegim el serverdedicat a un arraylist on els tenim tots
                 servidordedicat.start();                                                                                        //Iniciem server dedicat
             }
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            if (sServer != null && !sServer.isClosed()) {
+            if (sServerReserva != null && !sServerReserva.isClosed()) {
                 try {
-                    sServer.close();                                                                                            //Tanquem servidor
+                    sServerReserva.close();                                                                                            //Tanquem servidor
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -52,15 +58,16 @@ public class Server {
         }
     }
 
-    public void enviaC() {                                                                           //Funcio que fem servir al controlador per enviar a tots els servers dedicats la nova llista de comandes
-        for (ServidorDedicat servidor : servers) {
-            servidor.enviaMissatge();
+    public void enviaC(String user) {                                                                           //Funcio que fem servir al controlador per enviar a tots els serversReserva dedicats la nova llista de comandes
+        for (ServidorDedicat servidor : serversReserva) {
+            if (servidor.getUser().equals(user)) {
+                servidor.enviaMissatge();
+            }
         }
     }
 
-    public void setController(Controlador controller) {                                             //Serveix per donar el controlador al server, la usem al controlador
+    /*public void setController(Controlador controller) {                                             //Serveix per donar el controlador al server, la usem al controlador
         this.controller = controller;
-    }
+    }*/
 
 }
-*/

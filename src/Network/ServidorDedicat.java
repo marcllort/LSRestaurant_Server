@@ -1,28 +1,33 @@
 package Network;
 
-import Controlador.Controlador;
-/*import Model.Comandador;
+//import Controlador.Controlador;
+
+import Model.Comanda;
+import Model.Gestionador;
 
 import java.io.ObjectInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 
 public class ServidorDedicat extends Thread {
 
-    private final Comandador comanda;
+
+    private String user;
+    private final Gestionador gestionador;
     private Socket sClient;
     private ArrayList<ServidorDedicat> servers;
-    private DataOutputStream doStream;
+    private ObjectOutputStream doStream;
     private ObjectInputStream diStream;
     private Controlador controller;
 
 
-    public ServidorDedicat(Socket sClient, ArrayList<ServidorDedicat> servers, Comandador comanda, Controlador controller) {
+    public ServidorDedicat(Socket sClient, ArrayList<ServidorDedicat> servers, Gestionador gestionador, Controlador controller) {
         this.sClient = sClient;
         this.servers = servers;
-        this.comanda = comanda;
+        this.gestionador = gestionador;
         this.controller = controller;
     }
 
@@ -34,19 +39,36 @@ public class ServidorDedicat extends Thread {
         try {
 
             diStream = new ObjectInputStream(sClient.getInputStream());
-            doStream = new DataOutputStream(sClient.getOutputStream());
+            doStream = new ObjectOutputStream(sClient.getOutputStream());
 
-            while (true) {
+            user = diStream.readUTF();
+            String pass = diStream.readUTF();
 
-                for (ServidorDedicat servidor : servers) {                              //Enviem missatges tal i com es connecta el client per si ja hi ha missatges
-                    servidor.enviaMissatge();
+            if (gestionador.comprovaUserPass(user, pass)) {
+                doStream.writeUTF("true");                                                  //enviem true en cas de haver entrat correctaemnt
+
+                doStream.writeObject(gestionador.);
+
+                while (true) {
+
+                    Comanda com = (Comanda) diStream.readObject();                          //Rebem la comanda enviada pel usuari
+                    String analisi = gestionador.analitzarComanda();
+                    if (analisi.equals("true")) {
+
+                        gestionador.addComanda(com);                                                //Guardo la comanda
+                        doStream.writeUTF("Comanda realitzada amb exit!");
+                        //actualitzar vista d egestionar comandes
+
+                    } else {
+                        doStream.writeUTF("No queden suficients unitats de:" + analisi);//enviar error
+                    }
+
+                    //controller.updateVista(comanda.getAllComandes());                       //Actualitzo vista de el server
+                    //controller.enableBut(true);                                       //Activo el boto, per si estava desactivcat
+
                 }
-
-                Comanda com = (Comanda) diStream.readObject();                          //Rebem la comanda enviada pel usuari
-                comanda.addComanda(com);                                                //Guardo la comanda
-                controller.updateVista(comanda.getAllComandes());                       //Actualitzo vista de el server
-                controller.enableBut(true);                                       //Activo el boto, per si estava desactivcat
-
+            } else {
+                doStream.writeUTF("Usuari o password incorrectes!");            //preparar networkReserva per rebre un string
             }
 
         } catch (IOException | ClassNotFoundException e) {
@@ -66,5 +88,7 @@ public class ServidorDedicat extends Thread {
         }
     }
 
-
-}*/
+    public String getUser() {
+        return user;
+    }
+}

@@ -129,7 +129,19 @@ public class Gestionador {
     }
 
     public String analitzarComanda() {      //mirem si hi ha unitatas de tos els prodfuctes
-        return "x";
+
+        ArrayList<Plat> platsError = bbdd.platsNoDisponibles();
+
+        String llistaPlats = new String();
+
+        if (platsError != null){
+            for (Plat plats : platsError ){
+                llistaPlats = llistaPlats + plats.getNomPlat();
+            }
+            return llistaPlats;
+        }else{
+            return "true";
+        }
     }
 
     public ArrayList<Plat> retornaCarta() {

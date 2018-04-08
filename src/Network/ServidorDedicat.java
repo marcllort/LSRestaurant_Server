@@ -47,7 +47,7 @@ public class ServidorDedicat extends Thread {
             if (gestionador.comprovaUserPass(user, pass)) {
                 doStream.writeUTF("true");                                                  //enviem true en cas de haver entrat correctaemnt
 
-                doStream.writeObject(gestionador.);
+                doStream.writeObject(gestionador.retornaCarta());                               //enviem lña carta amb plats disponibles
 
                 while (true) {
 
@@ -68,7 +68,8 @@ public class ServidorDedicat extends Thread {
 
                 }
             } else {
-                doStream.writeUTF("Usuari o password incorrectes!");            //preparar networkReserva per rebre un string
+                doStream.writeUTF("error");            //preparar networkReserva per rebre un string
+                servers.remove(this);
             }
 
         } catch (IOException | ClassNotFoundException e) {
@@ -76,13 +77,9 @@ public class ServidorDedicat extends Thread {
         }
     }
 
-    public void enviaMissatge() {
+    public void enviaComanda() {
         try {
-            if (comanda.getAllComandes().equals("")) {
-                doStream.writeUTF("No hi ha cua!");                                 //Si no hi ha cap comanda al missatge indico que no hi ha cua
-            } else {
-                doStream.writeUTF(comanda.getAllComandes());                            //Si hi ha cua, envio la llista de totes les comandes
-            }
+            doStream.writeObject(gestionador.retornaCarta());
         } catch (IOException e) {
             e.printStackTrace();
         }

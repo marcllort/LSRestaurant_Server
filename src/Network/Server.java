@@ -1,6 +1,6 @@
 /*package Network;
 
-//import Controlador.Controlador;
+import Controlador.Controlador;
 //import Model.Comandador;
 
 import Model.Gestionador;
@@ -20,7 +20,7 @@ public class Server {
     //private final ServidorEntrada serverEntrada;
 
     private final Gestionador gestionador;
-    //private Controlador controller;
+    private Controlador controller;
     private boolean funciona;
 
 
@@ -39,6 +39,7 @@ public class Server {
 
             while (funciona) {
                 System.out.println("Esperant client...");
+                //cal detectar si ens esta acceptatn entrada o reservca i segons fagi, fer una cosa o una altra
                 Socket sClient = sServerReserva.accept();                                      //Esperem a la connexio del client
                 System.out.println("Client connectat");
                 ServidorDedicat servidordedicat = new ServidorDedicat(sClient, serversReserva, gestionador, controller);                //Creem un servidor dedicat
@@ -61,7 +62,7 @@ public class Server {
     public void enviaC(String user) {                                                                           //Funcio que fem servir al controlador per enviar a tots els serversReserva dedicats la nova llista de comandes
         for (ServidorDedicat servidor : serversReserva) {
             if (servidor.getUser().equals(user)) {
-                servidor.enviaMissatge();
+                servidor.enviaComanda();
             }
         }
     }

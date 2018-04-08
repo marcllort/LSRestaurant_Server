@@ -5,11 +5,11 @@ import java.util.ArrayList;
 
 public class BDD {
 
-    private Connection con;
-    private Statement st;
     private static String username = "root";
     private static String password = "alex";
     private static String url = "jdbc:mysql://localhost:3306/LSRestaurant?useSSL=false";
+    private Connection con;
+    private Statement st;
 
 
     public BDD() throws SQLException {
@@ -237,10 +237,48 @@ public class BDD {
         return array;
     }
 
+    public Boolean comprovaPassword(String usuari, String password){
+        try {
+            ResultSet rs = st.executeQuery("SELECT usuari, password FROM Reserva WHERE usuari = '"+ usuari+"'");
+            String contrasenya = "";
+            if (rs.next()) {
+                contrasenya = rs.getString("password");
+            }
+
+            return contrasenya.equals(password);
+        } catch (Exception e) {
+            System.out.println("ERROR");
+            return false;
+        }
+    }
+
+    public ArrayList<Plat> platsNoDisponibles(Comanda comanda){
+        try {
+            ResultSet rs = st.executeQuery("SELECT nom_plat FROM Plat WHERE unitats_disponibles = 0");
+            ArrayList<Plat> platscomanda = comanda.getPlats();
+            ArrayList<String> platsacabat = new ArrayList<>();
+            while (rs.next()){
+                String nom = rs.getString("nom_plat");
+                platsacabat.add(nom);
+            }
+            ArrayList<Plat> acabat = new ArrayList<>();
+            for(Plat plat : platscomanda){
+                for(String nom: platsacabat){
+                    if(plat.getNomPlat().equals(nom)){
+                        acabat.add(plat);
+                    }
+                }
+            }
+            return acabat;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
 
 
-
-    public ArrayList<Integer> getMinusArray(ArrayList array1, ArrayList array2) {
+    private ArrayList<Integer> getMinusArray(ArrayList array1, ArrayList array2) {
 
         ArrayList<Integer> minusArray = new ArrayList<Integer>();
 
@@ -263,6 +301,8 @@ public class BDD {
 
         return minusArray;
     }
+
+
 
 
 }

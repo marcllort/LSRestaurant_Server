@@ -1,4 +1,4 @@
-package Network;
+/*package Network;
 
 import Model.Gestionador;
 import Model.Reserva;
@@ -63,3 +63,4 @@ public class ServidorEntrada extends Thread {
 
 
 }
+*/

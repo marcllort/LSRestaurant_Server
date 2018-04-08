@@ -102,6 +102,76 @@ public class BDD {
             e.printStackTrace();
         }
     }
+    public ArrayList<Plat> llistaPlats(){
+        try {
+            ResultSet rs = st.executeQuery("SELECT nom_plat, preu, unitats_disponibles FROM Plat"  );
+            ArrayList<Plat> plats = new ArrayList<>();
+
+            while (rs.next()) {
+               String nom = rs.getString("nom_plat");
+               int preu = rs.getInt("preu");
+               int unitats = rs.getInt("unitats_disponibles");
+               if (unitats > 0) {
+                   Plat plat = new Plat(nom, preu);
+                   plats.add(plat);
+
+               }
+            }
+
+            return plats;
+
+
+
+        }catch (SQLException s){
+            s.printStackTrace();
+            return null;
+        }
+    }
+    public void serveixPlat(String plat, String usuari){
+        String str = "Update Comanda set servit  = TRUE where nom_plat = '" + plat+ "'"+" AND usuari = '"+usuari+"'";
+        try {
+            PreparedStatement ps = con.prepareStatement(str);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public Comanda mostraPlatsComanda(String usuari){
+
+        ArrayList<Plat> array = new ArrayList<Plat>();
+        ResultSet rs = null;       //Mirar si l'ordre va be
+        ResultSet rss = null;
+        try {
+            rs = st.executeQuery("SELECT MAX(hora) AS hour, MAX(data) AS Date FROM Comanda WHERE usuari = '"+usuari+"'" +
+                    "GROUP BY usuari ");
+            Date data;
+            Time hora;
+            if (rs.next()) {
+                 data = rs.getDate("Date");
+                 hora = rs.getTime("hour");
+            }else {
+                 data = new Date(12,12,12);
+                 hora = new Time(12,12,12);
+
+            }
+            rss = st.executeQuery("SELECT nom_plat, servit, preu  FROM Comanda NATURAL JOIN Plat WHERE usuari = '"+usuari+"'");
+
+            while (rss.next()) {
+                String nom = rss.getString("nom_plat");
+                Boolean servit = rss.getBoolean("servit");
+                int preu = rss.getInt("preu");
+                Plat plat = new Plat(nom,preu,servit );
+                array.add(plat);
+            }
+            Comanda comanda = new Comanda(array,data,hora,usuari );
+            return comanda;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+
+    }
 
     public void creaReserva(String usuari, String password, int comencals, Date data, Time hora, int id_taula) throws SQLException {
 

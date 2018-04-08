@@ -32,22 +32,29 @@ public class Main {
             BDD bdd = new BDD();
             Gestionador gestionador = new Gestionador(bdd);
 
-            //bdd.insereixPlat("caca",3,10,0);
-            // bdd.eliminaPlat("caca");
-            // bdd.updatePlat("c", 1);
+            //bdd.insereixPlat("gamba",3,10,0);
+            //bdd.updatePlat("caca", 10);
+            //bdd.serveixPlat("caca", "Alex");
 
-            for (int i = 1 ;i<3; i++){
+            Comanda comand = bdd.mostraPlatsComanda("Alex");
+            System.out.println(comand.getData());
+            System.out.println(comand.getHora());
+            System.out.println(comand.getPlat(0));
+            // bdd.eliminaPlat("caca");
+
+
+            /*for (int i = 1 ;i<3; i++){
                 bdd.createTable(2);
             }
 
             Reserva reserva1 = new Reserva("Alex", 1, gestionador.newData(6, 2, 2222), new Time(15, 00, 00));
-           // gestionador.creaReserva(reserva1);
+            gestionador.creaReserva(reserva1);
            ArrayList<Plat> arr= new ArrayList<Plat>();
            arr.add(new Plat("caca",12));
-            Comanda comanda=new Comanda(arr,gestionador.newData(12,1,2001), new Time(12,00,00),"Alex");
-            //bdd.creaComanda(comanda);
+            Comanda comanda=new Comanda(arr,gestionador.newData(12,1,2001), new Time(12,40,00),"Alex");
+            bdd.creaComanda(comanda);
            ArrayList<InfoComandes> prova = bdd.LlistatComandes();
-            System.out.println(prova.get(0).getPlatsPendents());
+            System.out.println(prova.get(0).getPlatsPendents());*/
         } catch (Exception e) {
             System.out.println("ERROOR");
             e.printStackTrace();

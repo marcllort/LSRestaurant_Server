@@ -2,6 +2,7 @@ package Model;
 
 import java.security.SecureRandom;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -58,6 +59,14 @@ public class Gestionador {
 
     public synchronized void addComanda(Comanda comanda) {
         //funcio de la bbdd, tenir en compte si es la 1a comnada o cal actualizarla
+
+        try {
+            bbdd.creaComanda(comanda);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Error comanda!");
+        }
+
     }
 
     public synchronized boolean comprovaUserPass(String user, String pass) {
@@ -66,8 +75,9 @@ public class Gestionador {
         return true;
     }
 
-    public synchronized Comanda retornaComanda() {
+    public synchronized Comanda retornaComanda(String user) {
         //retorna comanda actualitzada de la bbdd
+        return bbdd.mostraPlatsComanda(user);
     }
 
     private synchronized String buscaTaula(Reserva reserva, String password) {
@@ -123,7 +133,7 @@ public class Gestionador {
     }
 
     public ArrayList<Plat> retornaCarta() {
-
+        return bbdd.llistaPlats();                          //retorna plats diosponibles per fer la carta
     }
 }
 

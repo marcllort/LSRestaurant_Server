@@ -135,5 +135,6 @@ public class Gestionador {
     public ArrayList<Plat> retornaCarta() {
         return bbdd.llistaPlats();                          //retorna plats diosponibles per fer la carta
     }
+
 }
 

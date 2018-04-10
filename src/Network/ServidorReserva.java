@@ -20,14 +20,14 @@ public class ServidorReserva extends Thread {
     private ArrayList<ServidorReserva> servers;
     private ObjectOutputStream doStream;
     private ObjectInputStream diStream;
-    private Controlador controller;
+    //private Controlador controller;
 
 
-    public ServidorReserva(Socket sClient, ArrayList<ServidorReserva> servers, Gestionador gestionador, Controlador controller) {
+    public ServidorReserva(Socket sClient, ArrayList<ServidorReserva> servers, Gestionador gestionador) {
         this.sClient = sClient;
         this.servers = servers;
         this.gestionador = gestionador;
-        this.controller = controller;
+        //this.controller = controller;
     }
 
 

@@ -1,4 +1,5 @@
 import Model.*;
+import Network.Server;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -49,7 +50,7 @@ public class Main {
 
             Reserva reserva1 = new Reserva("Alex", 1, gestionador.newData(6, 2, 2222), new Time(15, 00, 00));
             gestionador.creaReserva(reserva1);
-           */ArrayList<Plat> arr= new ArrayList<Plat>();
+           ArrayList<Plat> arr= new ArrayList<Plat>();
             ArrayList<Plat> arr1= new ArrayList<Plat>();
            arr.add(new Plat("caca",12));
             Comanda comanda=new Comanda(arr,gestionador.newData(12,1,2001), new Time(12,40,00),"Alex");
@@ -57,7 +58,12 @@ public class Main {
             System.out.println(arr1.get(0).getNomPlat());
             //bdd.creaComanda(comanda);
            ArrayList<InfoComandes> prova = bdd.llistaComandes();
-            System.out.println("PLATSPENDENTS"+prova.get(0).getPlatsPendents());
+            System.out.println("PLATSPENDENTS"+prova.get(0).getPlatsPendents());*/
+
+
+            Server server = new Server(new Gestionador(bdd));
+            server.startServer();
+
         } catch (Exception e) {
             System.out.println("ERROOR");
             e.printStackTrace();

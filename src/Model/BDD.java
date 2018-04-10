@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class BDD {
 
     private static String username = "root";
-    private static String password = "alex";
+    private static String password = "marc";
     private static String url = "jdbc:mysql://localhost:3306/LSRestaurant?useSSL=false";
     private Connection con;
     private Statement st;

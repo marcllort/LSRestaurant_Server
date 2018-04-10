@@ -13,17 +13,16 @@ public class ServidorEntrada extends Thread {
 
     private final Gestionador gestionador;
     private Socket sClient;
-    private ArrayList<ServidorReserva> servers;
     private ObjectOutputStream doStream;
     private ObjectInputStream diStream;
-    private Controlador controller;
+    private ServidorEntrada servidorEntrada;
+    //private Controlador controller;
 
 
-    public ServidorEntrada(Socket sClient, ArrayList<ServidorReserva> servers, Gestionador gestionador, Controlador controller) {
+    public ServidorEntrada(Socket sClient, Gestionador gestionador) {
         this.sClient = sClient;
-        this.servers = servers;
         this.gestionador = gestionador;
-        this.controller = controller;
+        //this.controller = controller;
     }
 
 
@@ -41,14 +40,14 @@ public class ServidorEntrada extends Thread {
 
             if (estatReserva.equals("true")) {
                 doStream.writeUTF(gestionador.generatePass());
-                servers.remove(this);
+                //servers.remove(this);
             } else {
                 doStream.writeUTF(estatReserva);            //preparar networkReserva per rebre un string
-                servers.remove(this);
+                //servers.remove(this);
             }
 
         } catch (IOException | ClassNotFoundException e) {
-            servers.remove(this);                                                   //En cas de que es desconnecti el client o hi hagi algun error tanco el server dedicat
+            //servers.remove(this);                                                   //En cas de que es desconnecti el client o hi hagi algun error tanco el server dedicat
         }
     }
 

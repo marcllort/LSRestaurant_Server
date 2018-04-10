@@ -1,6 +1,6 @@
 package Network;
 
-import Controlador.Controlador;
+//import Controlador.Controlador;
 //import Model.Comandador;
 
 import Model.Gestionador;
@@ -20,7 +20,7 @@ public class Server {
     //private final ServidorEntrada serverEntrada;
 
     private final Gestionador gestionador;
-    private Controlador controller;
+    //private Controlador controller;
     private boolean funciona;
 
 
@@ -32,31 +32,12 @@ public class Server {
 
 
     public void startServer() {
-        try {
-            sServerReserva = new ServerSocket(Port);                                           //Iniciem socket al port corespoenent
-            funciona = true;
-            System.out.println("Socket obert");
-
-            while (funciona) {
-                System.out.println("Esperant client...");
-                //cal detectar si ens esta acceptatn entrada o reservca i segons fagi, fer una cosa o una altra
-                Socket sClient = sServerReserva.accept();                                      //Esperem a la connexio del client
-                System.out.println("Client connectat");
-                ServidorReserva servidordedicat = new ServidorReserva(sClient, serversReserva, gestionador, controller);                //Creem un servidor dedicat
-                serversReserva.add(servidordedicat);                                                                                   //Afegim el serverdedicat a un arraylist on els tenim tots
-                servidordedicat.start();                                                                                        //Iniciem server dedicat
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (sServerReserva != null && !sServerReserva.isClosed()) {
-                try {
-                    sServerReserva.close();                                                                                            //Tanquem servidor
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
+       ServerSocketReserva sReserva = new ServerSocketReserva(gestionador, Port);
+       ServerSocketEntrada sEntrada = new ServerSocketEntrada(gestionador, 5555);
+       Thread t1 = new Thread(sReserva);
+       Thread t2 = new Thread(sEntrada);
+       t1.start();
+       t2.start();
     }
 
     public void enviaC(String user) {                                                                           //Funcio que fem servir al controlador per enviar a tots els serversReserva dedicats la nova llista de comandes

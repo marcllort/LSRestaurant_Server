@@ -20,14 +20,14 @@ public class ServidorReserva extends Thread {
     private ArrayList<ServidorReserva> servers;
     private ObjectOutputStream doStream;
     private ObjectInputStream diStream;
-    private Controlador controller;
+    //private Controlador controller;
 
 
-    public ServidorReserva(Socket sClient, ArrayList<ServidorReserva> servers, Gestionador gestionador, Controlador controller) {
+    public ServidorReserva(Socket sClient, ArrayList<ServidorReserva> servers, Gestionador gestionador) {
         this.sClient = sClient;
         this.servers = servers;
         this.gestionador = gestionador;
-        this.controller = controller;
+        //this.controller = controller;
     }
 
 
@@ -36,11 +36,12 @@ public class ServidorReserva extends Thread {
     public void run() {
 
         try {
-
+            System.out.println("entrem server");
             diStream = new ObjectInputStream(sClient.getInputStream());
             doStream = new ObjectOutputStream(sClient.getOutputStream());
 
             user = diStream.readUTF();
+            System.out.println(user);
             String pass = diStream.readUTF();
 
             if (gestionador.comprovaUserPass(user, pass)) {
@@ -65,6 +66,7 @@ public class ServidorReserva extends Thread {
                     //controller.enableBut(true);                                       //Activo el boto, per si estava desactivcat
                 }
             } else {
+                System.out.println("error");
                 doStream.writeUTF("error");            //preparar networkReserva per rebre un string
                 servers.remove(this);
             }

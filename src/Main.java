@@ -1,4 +1,5 @@
 import Model.*;
+import Network.Server;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -33,7 +34,7 @@ public class Main {
             Gestionador gestionador = new Gestionador(bdd);
             //System.out.println(bdd.comprovaPassword("Alex", "yBxcpR"));
 
-           // bdd.insereixPlat("rok",3,10,0);
+            //bdd.insereixPlat("gamba",3,10,0);
             //bdd.updatePlat("caca", 10);
             //bdd.serveixPlat("caca", "Alex");
 
@@ -47,22 +48,22 @@ public class Main {
                 bdd.createTable(2);
             }
 
-            Reserva reserva1 = new Reserva("Alexx", 1, gestionador.newData(9, 4, 2018), new Time(15, 00, 00));
-            gestionador.creaReserva(reserva1, gestionador.generatePass());
-            */
+            Reserva reserva1 = new Reserva("Alex", 1, gestionador.newData(6, 2, 2222), new Time(15, 00, 00));
+            gestionador.creaReserva(reserva1);
            ArrayList<Plat> arr= new ArrayList<Plat>();
             ArrayList<Plat> arr1= new ArrayList<Plat>();
-           arr.add(new Plat("fotmatge",12));
-            Comanda comanda=new Comanda(arr,gestionador.newData(9,4,2018), new Time(12,40,00),"Alexx");
-            ArrayList<InfoComandes> info = bdd.top5PlatsSemanals();
-            for(InfoComandes f : info){
-                System.out.printf(f.getUsuari()+" UNITATS"+ f.getTotal_plats()+'\n');
-            }
-            //arr1 = bdd.llistaPlatsNoDisponibles(comanda);
-           // System.out.println(arr1.get(0).getNomPlat());
-            bdd.creaComanda(comanda);
+           arr.add(new Plat("caca",12));
+            Comanda comanda=new Comanda(arr,gestionador.newData(12,1,2001), new Time(12,40,00),"Alex");
+            arr1 = bdd.llistaPlatsNoDisponibles(comanda);
+            System.out.println(arr1.get(0).getNomPlat());
+            //bdd.creaComanda(comanda);
            ArrayList<InfoComandes> prova = bdd.llistaComandes();
-            System.out.println("PLATSPENDENTS"+prova.get(0).getPlatsPendents());
+            System.out.println("PLATSPENDENTS"+prova.get(0).getPlatsPendents());*/
+
+
+            Server server = new Server(new Gestionador(bdd));
+            server.startServer();
+
         } catch (Exception e) {
             System.out.println("ERROOR");
             e.printStackTrace();

@@ -1,10 +1,11 @@
 package Model;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Time;
 
 
-public class Reserva {
+public class Reserva implements Serializable {
 
     private static final long serialVersionUID = 12345L;
     private String usuari;

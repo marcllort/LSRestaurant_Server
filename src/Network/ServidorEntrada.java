@@ -34,8 +34,9 @@ public class ServidorEntrada extends Thread {
 
             diStream = new ObjectInputStream(sClient.getInputStream());
             doStream = new ObjectOutputStream(sClient.getOutputStream());
-
+            System.out.println("provca");
             Reserva reserva = (Reserva) diStream.readObject();
+            System.out.println(reserva.getnComencals()+"funciona");
             String estatReserva = gestionador.creaReserva(reserva, gestionador.generatePass());
 
             if (estatReserva.equals("true")) {

@@ -197,6 +197,24 @@ public class BDD {
 
     }
 
+    public ArrayList<InfoComandes> top5Plats(){
+        try {
+            ResultSet rs = st.executeQuery("SELECT nom_plat, unitats_gastades FROM Plat ORDER BY unitats_gastades DESC");
+            ArrayList<InfoComandes> comandes = new ArrayList<>();
+            while (rs.next() && comandes.size()<5){
+                InfoComandes info = new InfoComandes();
+                info.setUsuari(rs.getString("nom_plat"));
+                info.setTotal_plats(rs.getInt("unitats_gastades"));
+                comandes.add(info);
+            }
+            return comandes;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+
 
     //Comanda
 

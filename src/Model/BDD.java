@@ -1,7 +1,8 @@
 package Model;
 
 import java.sql.*;
-import java.util.ArrayList;
+import java.sql.Date;
+import java.util.*;
 
 public class BDD {
 
@@ -214,6 +215,45 @@ public class BDD {
         }
 
     }
+    public ArrayList<InfoComandes> top5PlatsSemanals(){
+        try {
+            java.util.Date date = Calendar.getInstance().getTime();
+            ResultSet rs = st.executeQuery("SELECT * FROM   Comanda WHERE  YEARWEEK(`data`, 1) = YEARWEEK(CURDATE(), 1)");
+            ArrayList<InfoComandes> comandes = new ArrayList<>();
+            while (rs.next() ){
+                InfoComandes info = new InfoComandes();
+                info.setUsuari(rs.getString("nom_plat"));
+                info.setTotal_plats(1);
+                int p = 0;
+                for (InfoComandes a : comandes){
+                    if(info.getUsuari().equals(a.getUsuari())){
+                         p = a.getTotal_plats()+1;
+                        a.setTotal_plats(p);
+                    }
+                }
+                if(p==0){
+                    comandes.add(info);
+                }
+                // Sorting
+                Collections.sort(comandes, new Comparator<InfoComandes>() {
+                    @Override
+                    public int compare(InfoComandes com1, InfoComandes com2)
+                    {
+                        Integer a = com1.getTotal_plats();
+                     Integer b = com2.getTotal_plats();
+                        return  b.compareTo(a);
+                    }
+                });
+            }
+
+
+            return comandes;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
 
 
     //Comanda
@@ -333,7 +373,6 @@ public class BDD {
 
         return minusArray;
     }
-
 
 }
 

@@ -163,13 +163,13 @@ public class Gestionador {
 
     //Top 5
 
-    public synchronized ArrayList<Plat> topCincSemanal() {
+   /* public synchronized ArrayList<Plat> topCincSemanal() {
         return
     }
 
     public synchronized ArrayList<Plat> topCincTotal() {
         return
     }
-
+*/
 }
 

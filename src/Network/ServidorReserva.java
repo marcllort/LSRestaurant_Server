@@ -1,7 +1,7 @@
 package Network;
 
 //import Controlador.Controlador;
-
+/*
 import Model.Comanda;
 import Model.Gestionador;
 
@@ -89,3 +89,4 @@ public class ServidorReserva extends Thread {
         return user;
     }
 }
+*/

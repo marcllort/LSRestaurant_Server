@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class ServerSocketReserva implements Runnable {
 
-    private static int Port;
+    private int port;
     private ServerSocket sServerReserva;
     private final Gestionador gestionador;
     private boolean funciona;
@@ -17,7 +17,7 @@ public class ServerSocketReserva implements Runnable {
 
 
     public ServerSocketReserva(Gestionador gestionador, int port) {
-        this.Port = port;
+        this.port = port;
         serversReserva = new ArrayList<>();
         sServerReserva = null;
         this.gestionador = gestionador;
@@ -26,7 +26,7 @@ public class ServerSocketReserva implements Runnable {
     @Override
     public void run() {
         try {
-            sServerReserva = new ServerSocket(Port);
+            sServerReserva = new ServerSocket(port);
             funciona = true;
             System.out.println("Socket obert");
 

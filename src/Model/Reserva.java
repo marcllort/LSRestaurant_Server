@@ -7,7 +7,6 @@ import java.sql.Time;
 
 public class Reserva implements Serializable {
 
-    private static final long serialVersionUID = 12345L;
     private String usuari;
     private Integer nComencals;
     private Date data;
@@ -21,9 +20,6 @@ public class Reserva implements Serializable {
         this.hora = hora;
     }
 
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
 
     public String getUsuari() {
         return usuari;

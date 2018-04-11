@@ -7,7 +7,7 @@ import java.net.Socket;
 
 public class ServerSocketEntrada implements Runnable {
 
-    private static int Port;
+    private  int port;
     private ServerSocket sServerEntrada;
     private ServidorEntrada servidorEntrada;
     private final Gestionador gestionador;
@@ -15,7 +15,7 @@ public class ServerSocketEntrada implements Runnable {
 
     public ServerSocketEntrada(Gestionador gestionador, int port) {
 
-        this.Port = port;
+        this.port = port;
         this.gestionador = gestionador;
 
     }
@@ -24,7 +24,7 @@ public class ServerSocketEntrada implements Runnable {
     @Override
     public void run() {
         try {
-            ServerSocket sServerEntrada = new ServerSocket(Port);
+            ServerSocket sServerEntrada = new ServerSocket(port);
             while (true) {
                 System.out.println("Esperant entrades...");
                 Socket sClient = sServerEntrada.accept();

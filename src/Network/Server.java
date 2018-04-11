@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class Server {
 
-    private static final int Port = 4444;                                               //Declarem els atributs
+    private static final int port = 4444;                                               //Declarem els atributs
     private ServerSocket sServerReserva;
     private final ArrayList<ServidorReserva> serversReserva;
 
@@ -32,7 +32,7 @@ public class Server {
 
 
     public void startServer() {
-        ServerSocketReserva sReserva = new ServerSocketReserva(gestionador, Port);
+        ServerSocketReserva sReserva = new ServerSocketReserva(gestionador, port);
         ServerSocketEntrada sEntrada = new ServerSocketEntrada(gestionador, 5555);
         Thread t1 = new Thread(sReserva);
         Thread t2 = new Thread(sEntrada);

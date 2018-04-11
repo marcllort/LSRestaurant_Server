@@ -48,6 +48,7 @@ public class ServidorEntrada extends Thread {
             }
 
         } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
             //servers.remove(this);                                                   //En cas de que es desconnecti el client o hi hagi algun error tanco el server dedicat
         }
     }

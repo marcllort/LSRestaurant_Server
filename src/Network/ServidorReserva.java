@@ -5,6 +5,7 @@ package Network;
 import Model.Comanda;
 import Model.Gestionador;
 
+import java.io.DataInputStream;
 import java.io.ObjectInputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -19,7 +20,7 @@ public class ServidorReserva extends Thread {
     private Socket sClient;
     private ArrayList<ServidorReserva> servers;
     private ObjectOutputStream doStream;
-    private ObjectInputStream diStream;
+    private DataInputStream diStream;
     //private Controlador controller;
 
 
@@ -37,9 +38,9 @@ public class ServidorReserva extends Thread {
 
         try {
             System.out.println("entrem server");
-            diStream = new ObjectInputStream(sClient.getInputStream());
+            diStream = new DataInputStream(sClient.getInputStream());
             doStream = new ObjectOutputStream(sClient.getOutputStream());
-
+            System.out.println("read");
             user = diStream.readUTF();
             System.out.println(user);
             String pass = diStream.readUTF();
@@ -51,7 +52,7 @@ public class ServidorReserva extends Thread {
 
                 while (true) {
 
-                    Comanda com = (Comanda) diStream.readObject();                          //Rebem la comanda enviada pel usuari
+                    /*Comanda com = (Comanda) diStream.readObject();                          //Rebem la comanda enviada pel usuari
                     String analisi = gestionador.analitzarComanda(com);
 
                     if (analisi.equals("true")) {
@@ -63,7 +64,7 @@ public class ServidorReserva extends Thread {
                     }
 
                     //controller.updateVista(comanda.getAllComandes());                       //Actualitzo vista de el server
-                    //controller.enableBut(true);                                       //Activo el boto, per si estava desactivcat
+                    //controller.enableBut(true); */                                      //Activo el boto, per si estava desactivcat
                 }
             } else {
                 System.out.println("error");
@@ -71,8 +72,9 @@ public class ServidorReserva extends Thread {
                 servers.remove(this);
             }
 
-        } catch (IOException | ClassNotFoundException e) {
+        } catch (IOException e ){ //| ClassNotFoundException e) {
             servers.remove(this);                                                   //En cas de que es desconnecti el client o hi hagi algun error tanco el server dedicat
+            e.printStackTrace();
         }
     }
 

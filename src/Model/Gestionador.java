@@ -81,6 +81,10 @@ public class Gestionador {
 
         try {
             bbdd.creaComanda(comanda);
+            for(Plat plat: comanda.getPlats()){
+                bbdd.updatePlat(plat.getNomPlat(),1);
+            }
+
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Error comanda!");
@@ -93,11 +97,13 @@ public class Gestionador {
         ArrayList<Plat> platsError = bbdd.llistaPlatsNoDisponibles(comanda);
 
         String llistaPlats = new String();
+        System.out.println(platsError.size());
 
-        if (platsError != null) {
+        if (platsError.size() != 0) {
             for (Plat plats : platsError) {
                 llistaPlats = llistaPlats + plats.getNomPlat();
             }
+
             return llistaPlats;
         } else {
             return "true";

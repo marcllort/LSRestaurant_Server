@@ -7,7 +7,7 @@ import java.util.*;
 public class BDD {
 
     private static String username = "root";
-    private static String password = "marc";
+    private static String password = "alex";
     private static String url = "jdbc:mysql://localhost:3306/LSRestaurant?useSSL=false";
     private Connection con;
     private Statement st;
@@ -261,6 +261,7 @@ public class BDD {
     public void creaComanda(Comanda comanda) throws SQLException {
 
         for (Plat plat : comanda.getPlats()) {
+            System.out.println(comanda.getUsuari()+plat.getNomPlat());
             st.executeUpdate("INSERT INTO Comanda(usuari, nom_plat, data, hora,servit) " +
                     "VALUES ('" + comanda.getUsuari() + "','" + plat.getNomPlat() + "', '" + comanda.getData() + "','" + comanda.getHora() + "'," + plat.isServit() + ")");
         }

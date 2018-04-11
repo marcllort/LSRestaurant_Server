@@ -39,7 +39,7 @@ public class ServerSocketReserva implements Runnable {
                 servidordedicat.start();                                                                                        //Iniciem server dedicat
             }
         } catch (Exception e) {
-            System.out.println("Error");
+            System.out.println("Errors");
         } finally {
             if (sServerReserva != null && !sServerReserva.isClosed()) {
                 try {

@@ -59,7 +59,7 @@ public class ServidorReserva extends Thread {
 
                     if (analisi.equals("true")) {
                         gestionador.addComanda(com);                                                //Guardo la comanda
-                        doStream.writeUTF("Comanda realitzada amb exit!");
+                        doStream.writeUTF("true");
                         //actualitzar vista d egestionar comandes
                     } else {
                         doStream.writeUTF("No queden suficients unitats de:" + analisi);//enviar error

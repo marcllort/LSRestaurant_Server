@@ -35,6 +35,7 @@ public class Main {
             //System.out.println(bdd.comprovaPassword("Alex", "yBxcpR"));
 
             //bdd.insereixPlat("gamba",3,10,0);
+
             //bdd.updatePlat("caca", 10);
             //bdd.serveixPlat("caca", "Alex");
 
@@ -65,6 +66,7 @@ public class Main {
 
             Server server = new Server(new Gestionador(bdd));
             server.startServer();
+
 
         } catch (Exception e) {
             System.out.println("ERROOR");

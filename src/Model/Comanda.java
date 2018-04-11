@@ -1,10 +1,11 @@
 package Model;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
 
-public class Comanda {
+public class Comanda implements Serializable {
 
     private String usuari;              //cal enviar el usuari que ha fet la comanda
 

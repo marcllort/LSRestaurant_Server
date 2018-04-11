@@ -42,7 +42,9 @@ public class Main {
 
 
             // bdd.eliminaPlat("caca");
-
+            for (int i = 1 ;i<3; i++){
+                bdd.createTable(2);
+            }
 
             /*for (int i = 1 ;i<3; i++){
                 bdd.createTable(2);

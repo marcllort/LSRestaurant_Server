@@ -3,17 +3,21 @@ package Network;
 import Model.Gestionador;
 import Model.Reserva;
 
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.sql.Date;
+import java.sql.Time;
 import java.util.ArrayList;
 
 public class ServidorEntrada extends Thread {
 
     private final Gestionador gestionador;
     private Socket sClient;
-    private ObjectOutputStream doStream;
+    private ObjectOutputStream ooStream;
+    private DataOutputStream doStream;
     private ObjectInputStream diStream;
     private ServidorEntrada servidorEntrada;
     //private Controlador controller;
@@ -31,25 +35,24 @@ public class ServidorEntrada extends Thread {
     public void run() {
 
         try {
-
+            doStream = new DataOutputStream(sClient.getOutputStream());
             diStream = new ObjectInputStream(sClient.getInputStream());
-            doStream = new ObjectOutputStream(sClient.getOutputStream());
-            System.out.println("provca");
+            ooStream = new ObjectOutputStream(sClient.getOutputStream());
+
             Reserva reserva = (Reserva) diStream.readObject();
-            System.out.println(reserva.getnComencals()+"funciona");
-            String estatReserva = gestionador.creaReserva(reserva, gestionador.generatePass());
+
+            String password = gestionador.generatePass();
+
+            String estatReserva = gestionador.creaReserva(reserva, password);
 
             if (estatReserva.equals("true")) {
-                doStream.writeUTF(gestionador.generatePass());
-                //servers.remove(this);
+                doStream.writeUTF(password);
             } else {
                 doStream.writeUTF(estatReserva);            //preparar networkReserva per rebre un string
-                //servers.remove(this);
             }
 
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
-            //servers.remove(this);                                                   //En cas de que es desconnecti el client o hi hagi algun error tanco el server dedicat
         }
     }
 
@@ -58,7 +61,7 @@ public class ServidorEntrada extends Thread {
 
     public void enviaCarta() {
         try {
-            doStream.writeObject(gestionador.retornaCarta());
+            ooStream.writeObject(gestionador.retornaCarta());
         } catch (IOException e) {
             e.printStackTrace();
         }

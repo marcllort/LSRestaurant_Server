@@ -4,23 +4,24 @@ package Network;
 
 import Model.Comanda;
 import Model.Gestionador;
+import Model.Usuari;
 
-import java.io.DataInputStream;
-import java.io.ObjectInputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
 
 public class ServidorReserva extends Thread {
 
 
-    private String user;
+    private Usuari user;
     private final Gestionador gestionador;
     private Socket sClient;
     private ArrayList<ServidorReserva> servers;
-    private ObjectOutputStream doStream;
+    private ObjectOutputStream ooStream;
+    private DataOutputStream doStream;
     private DataInputStream diStream;
+    private ObjectInputStream oiStream;
+
     //private Controlador controller;
 
 
@@ -37,22 +38,23 @@ public class ServidorReserva extends Thread {
     public void run() {
 
         try {
-            System.out.println("entrem server");
             diStream = new DataInputStream(sClient.getInputStream());
-            doStream = new ObjectOutputStream(sClient.getOutputStream());
-            System.out.println("read");
-            user = diStream.readUTF();
-            System.out.println(user);
-            String pass = diStream.readUTF();
+            doStream = new DataOutputStream(sClient.getOutputStream());
+            ooStream = new ObjectOutputStream(sClient.getOutputStream());
+            oiStream = new ObjectInputStream(sClient.getInputStream());
 
-            if (gestionador.comprovaUserPass(user, pass)) {
+            user = (Usuari) oiStream.readObject();
+            System.out.println(user.getUser() + " - " + user.getPassword());
+
+
+            if (gestionador.comprovaUserPass(user.getUser(), user.getPassword())) {
 
                 doStream.writeUTF("true");                                                  //enviem true en cas de haver entrat correctaemnt
-                doStream.writeObject(gestionador.retornaCarta());                               //enviem lña carta amb plats disponibles
+                ooStream.writeObject(gestionador.retornaCarta());                               //enviem lña carta amb plats disponibles
 
                 while (true) {
 
-                    /*Comanda com = (Comanda) diStream.readObject();                          //Rebem la comanda enviada pel usuari
+                    Comanda com = (Comanda) oiStream.readObject();                          //Rebem la comanda enviada pel usuari
                     String analisi = gestionador.analitzarComanda(com);
 
                     if (analisi.equals("true")) {
@@ -64,16 +66,17 @@ public class ServidorReserva extends Thread {
                     }
 
                     //controller.updateVista(comanda.getAllComandes());                       //Actualitzo vista de el server
-                    //controller.enableBut(true); */                                      //Activo el boto, per si estava desactivcat
+                    //controller.enableBut(true);                                      //Activo el boto, per si estava desactivcat
                 }
             } else {
-                System.out.println("error");
-                doStream.writeUTF("error");            //preparar networkReserva per rebre un string
+                doStream.writeUTF("Usuari o Password incorrectes!");            //preparar networkReserva per rebre un string
                 servers.remove(this);
             }
 
-        } catch (IOException e ){ //| ClassNotFoundException e) {
+        } catch (IOException e) { //| ClassNotFoundException e) {
             servers.remove(this);                                                   //En cas de que es desconnecti el client o hi hagi algun error tanco el server dedicat
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
@@ -83,13 +86,13 @@ public class ServidorReserva extends Thread {
 
     public void enviaComanda() {
         try {
-            doStream.writeObject(gestionador.retornaCarta());
+            ooStream.writeObject(gestionador.retornaCarta());
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     public String getUser() {
-        return user;
+        return user.getUser();
     }
 }

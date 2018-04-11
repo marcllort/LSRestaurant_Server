@@ -69,8 +69,8 @@ public class Gestionador {
 
     public synchronized boolean comprovaUserPass(String user, String pass) {
         //funcio bbdd comprovar
-        bbdd.comprovaPassword(user, pass);
-        return true;
+
+        return bbdd.comprovaPassword(user, pass);
     }
 
 
@@ -132,7 +132,7 @@ public class Gestionador {
             return "No hi ha taula disponible en el dia i hora seleccionats";
 
         } catch (Exception e) {
-            //e.printStackTrace();
+            e.printStackTrace();
             System.out.println("Nom d'usuari ja registrat, escull-ne un altre!");
             return "Nom d'usuari ja registrat, escull-ne un altre!";
         }

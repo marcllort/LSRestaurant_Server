@@ -7,27 +7,17 @@ import java.util.*;
 public class BDD {
 
     private static String username = "root";
-    private static String password = "alex";
+    private static String password = "marc";
     private static String url = "jdbc:mysql://localhost:3306/LSRestaurant?useSSL=false";
     private Connection con;
     private Statement st;
 
 
     public BDD() throws SQLException {
-        System.out.println("Connecting database...");
         Connection connection = DriverManager.getConnection(url, username, password);
-        System.out.println("Database connected!");
+        System.out.println("BBDD: Base de dades connectada");
         con = connection;
         st = con.createStatement();
-
-        /* MOSTRA EL NOM DE TOTES LES TAULES
-
-         DatabaseMetaData md = connection.getMetaData();
-         ResultSet rs = md.getTables(null, null, "%", null);
-         while (rs.next()) {
-                System.out.println(rs.getString(3));
-         }
-        */
     }
 
 
@@ -78,15 +68,14 @@ public class BDD {
                 System.out.println(lastName);
             }
         } catch (Exception e) {
+            e.printStackTrace();
             //Posar algo! enviar error o el que sigui
         }
     }
 
     public void insereixPlat(String nom_plat, int preu, int unitats_disponibles, int unitats_gastades) throws SQLException {
-
         st.executeUpdate("INSERT INTO Plat(nom_plat, preu, unitats_disponibles, unitats_gastades) " +
                 "VALUES ('" + nom_plat + "'," + preu + "," + unitats_disponibles + "," + unitats_gastades + ")");
-
     }
 
     public void eliminaPlat(String nom) {
@@ -99,6 +88,7 @@ public class BDD {
     }
 
     public boolean updatePlat(String nom, int unitats) {
+
         boolean ok = true;
         try {
             String str = "Update Plat set unitats_gastades = ?, unitats_disponibles= ? where nom_plat = '" + nom + "'";
@@ -135,7 +125,6 @@ public class BDD {
             e.printStackTrace();
             return false;
         }
-
     }
 
     public void serveixPlat(String plat, String usuari) {
@@ -163,9 +152,7 @@ public class BDD {
 
                 }
             }
-
             return plats;
-
 
         } catch (SQLException s) {
             s.printStackTrace();
@@ -198,11 +185,11 @@ public class BDD {
 
     }
 
-    public ArrayList<InfoComandes> top5Plats(){
+    public ArrayList<InfoComandes> top5Plats() {
         try {
             ResultSet rs = st.executeQuery("SELECT nom_plat, unitats_gastades FROM Plat ORDER BY unitats_gastades DESC");
             ArrayList<InfoComandes> comandes = new ArrayList<>();
-            while (rs.next() && comandes.size()<5){
+            while (rs.next() && comandes.size() < 5) {
                 InfoComandes info = new InfoComandes();
                 info.setUsuari(rs.getString("nom_plat"));
                 info.setTotal_plats(rs.getInt("unitats_gastades"));
@@ -215,39 +202,38 @@ public class BDD {
         }
 
     }
-    public ArrayList<InfoComandes> top5PlatsSemanals(){
+
+    public ArrayList<InfoComandes> top5PlatsSemanals() {
         try {
             java.util.Date date = Calendar.getInstance().getTime();
             ResultSet rs = st.executeQuery("SELECT * FROM   Comanda WHERE  YEARWEEK(`data`, 1) = YEARWEEK(CURDATE(), 1)");
             ArrayList<InfoComandes> comandes = new ArrayList<>();
-            while (rs.next() ){
+            while (rs.next()) {
                 InfoComandes info = new InfoComandes();
                 info.setUsuari(rs.getString("nom_plat"));
                 info.setTotal_plats(1);
                 int p = 0;
-                for (InfoComandes a : comandes){
-                    if(info.getUsuari().equals(a.getUsuari())){
-                         p = a.getTotal_plats()+1;
+                for (InfoComandes a : comandes) {
+                    if (info.getUsuari().equals(a.getUsuari())) {
+                        p = a.getTotal_plats() + 1;
                         a.setTotal_plats(p);
                     }
                 }
-                if(p==0){
+                if (p == 0) {
                     comandes.add(info);
                 }
                 // Sorting
                 Collections.sort(comandes, new Comparator<InfoComandes>() {
                     @Override
-                    public int compare(InfoComandes com1, InfoComandes com2)
-                    {
+                    public int compare(InfoComandes com1, InfoComandes com2) {
                         Integer a = com1.getTotal_plats();
-                     Integer b = com2.getTotal_plats();
-                        return  b.compareTo(a);
+                        Integer b = com2.getTotal_plats();
+                        return b.compareTo(a);
                     }
                 });
             }
-
-
             return comandes;
+
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
@@ -259,9 +245,8 @@ public class BDD {
     //Comanda
 
     public void creaComanda(Comanda comanda) throws SQLException {
-
         for (Plat plat : comanda.getPlats()) {
-            System.out.println(comanda.getUsuari()+plat.getNomPlat());
+            System.out.println(comanda.getUsuari() + plat.getNomPlat());
             st.executeUpdate("INSERT INTO Comanda(usuari, nom_plat, data, hora,servit) " +
                     "VALUES ('" + comanda.getUsuari() + "','" + plat.getNomPlat() + "', '" + comanda.getData() + "','" + comanda.getHora() + "'," + plat.isServit() + ")");
         }
@@ -296,15 +281,15 @@ public class BDD {
             }
             Comanda comanda = new Comanda(array, data, hora, usuari);
             return comanda;
+
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
         }
-
-
     }
 
     public ArrayList<InfoComandes> llistaComandes() throws SQLException {
+
         ArrayList<InfoComandes> array = new ArrayList<InfoComandes>();
         ResultSet rs = st.executeQuery("SELECT usuari, COUNT(nom_plat) AS num, SUM(!servit) AS sum, hora, data FROM Comanda\n" +
                 "GROUP BY usuari \n" +
@@ -342,7 +327,6 @@ public class BDD {
     }
 
     public void creaReserva(String usuari, String password, int comencals, Date data, Time hora, int id_taula) throws SQLException {
-
         st.executeUpdate("INSERT INTO Reserva(usuari, password, n_comensals, data, hora, id_taula) " +
                 "VALUES ('" + usuari + "','" + password + "'," + comencals + ",'" + data + "','" + hora + "'," + id_taula + ")");
 
@@ -371,9 +355,9 @@ public class BDD {
                 }
             }
         }
-
         return minusArray;
     }
+
 
 }
 

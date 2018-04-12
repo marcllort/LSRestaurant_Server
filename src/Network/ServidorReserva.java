@@ -1,6 +1,5 @@
 package Network;
 
-//import Controlador.Controlador;
 
 import Model.Comanda;
 import Model.Gestionador;
@@ -12,10 +11,9 @@ import java.util.ArrayList;
 
 public class ServidorReserva extends Thread {
 
-
-    private Usuari user;
     private final Gestionador gestionador;
     private Socket sClient;
+    private Usuari user;
     private ArrayList<ServidorReserva> servers;
     private ObjectOutputStream ooStream;
     private DataOutputStream doStream;
@@ -44,8 +42,7 @@ public class ServidorReserva extends Thread {
             oiStream = new ObjectInputStream(sClient.getInputStream());
 
             user = (Usuari) oiStream.readObject();
-            System.out.println(user.getUser() + " - " + user.getPassword());
-
+            System.out.println("Reserva:" + user.getUser() + " - " + user.getPassword());
 
             if (gestionador.comprovaUserPass(user.getUser(), user.getPassword())) {
 
@@ -60,23 +57,17 @@ public class ServidorReserva extends Thread {
                     if (analisi.equals("true")) {
                         gestionador.addComanda(com);                                                //Guardo la comanda
                         doStream.writeUTF("true");
-                        //actualitzar vista d egestionar comandes
+                        //actualitzar vista de gestionar comandes
                     } else {
                         doStream.writeUTF("No queden suficients unitats de:" + analisi);//enviar error
                     }
-
-                    //controller.updateVista(comanda.getAllComandes());                       //Actualitzo vista de el server
-                    //controller.enableBut(true);                                      //Activo el boto, per si estava desactivcat
                 }
             } else {
                 doStream.writeUTF("Usuari o Password incorrectes!");            //preparar networkReserva per rebre un string
                 servers.remove(this);
             }
-
-        } catch (IOException e) { //| ClassNotFoundException e) {
+        } catch (IOException | ClassNotFoundException e) {
             servers.remove(this);                                                   //En cas de que es desconnecti el client o hi hagi algun error tanco el server dedicat
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
     }

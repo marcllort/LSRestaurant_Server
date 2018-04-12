@@ -8,14 +8,9 @@ import java.util.ArrayList;
 public class Comanda implements Serializable {
 
     private String usuari;              //cal enviar el usuari que ha fet la comanda
-
     private ArrayList<Plat> plats;      //cal que sigui el array dels plats que ha demanat la taula
     private Date data;                  //  quan fem una comanda cal enviar a la hora que sha fet
     private Time hora;
-
-    public Time getHora() {
-        return hora;
-    }
 
     /**
      * Constructor sense parametres.
@@ -52,4 +47,7 @@ public class Comanda implements Serializable {
         this.data = data;
     }
 
+    public Time getHora() {
+        return hora;
+    }
 }

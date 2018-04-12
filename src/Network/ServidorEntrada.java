@@ -19,7 +19,6 @@ public class ServidorEntrada extends Thread {
     private ObjectOutputStream ooStream;
     private DataOutputStream doStream;
     private ObjectInputStream diStream;
-    private ServidorEntrada servidorEntrada;
     //private Controlador controller;
 
 

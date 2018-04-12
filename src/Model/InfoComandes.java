@@ -4,11 +4,13 @@ import java.sql.Time;
 import java.util.Date;
 
 public class InfoComandes {
+
     private String usuari;
     private int total_plats;
     private int platsPendents;
     private Date date;
     private Time hora;
+
 
     public void setUsuari(String usuari) {
         this.usuari = usuari;
@@ -31,7 +33,6 @@ public class InfoComandes {
     }
 
     public String getUsuari() {
-
         return usuari;
     }
 

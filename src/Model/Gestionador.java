@@ -21,6 +21,7 @@ public class Gestionador {
     //Funcions
 
     public synchronized boolean isValidDate(String input) {                                          //COPMPROVAR SI LA DATA ES CORRECTA
+
         String formatString = "yyyy-MM-dd";
 
         try {
@@ -36,6 +37,7 @@ public class Gestionador {
     }
 
     public synchronized Date newData(int dia, int mes, int any) {
+
         if (isValidDate(any + "-" + mes + "-" + dia)) {
             Calendar cal = Calendar.getInstance();
             cal.set(Calendar.YEAR, any);
@@ -68,8 +70,6 @@ public class Gestionador {
     }
 
     public synchronized boolean comprovaUserPass(String user, String pass) {
-        //funcio bbdd comprovar
-
         return bbdd.comprovaPassword(user, pass);
     }
 
@@ -78,18 +78,16 @@ public class Gestionador {
 
     public synchronized void addComanda(Comanda comanda) {
         //funcio de la bbdd, tenir en compte si es la 1a comnada o cal actualizarla
-
         try {
             bbdd.creaComanda(comanda);
-            for(Plat plat: comanda.getPlats()){
-                bbdd.updatePlat(plat.getNomPlat(),1);
+            for (Plat plat : comanda.getPlats()) {
+                bbdd.updatePlat(plat.getNomPlat(), 1);
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Error comanda!");
         }
-
     }
 
     public synchronized String analitzarComanda(Comanda comanda) {      //mirem si hi ha unitatas de tos els prodfuctes
@@ -146,7 +144,6 @@ public class Gestionador {
 
     public synchronized String creaReserva(Reserva reserva, String password) {
         try {
-
             if ((reserva.getUsuari() != null) && (reserva.getnComencals() != null) && (reserva.getData() != null) && (reserva.getHora() != null)) {
                 if (reserva.getnComencals() > 0) {
                     return buscaTaula(reserva, password);
@@ -169,13 +166,13 @@ public class Gestionador {
 
     //Top 5
 
-    /*public synchronized ArrayList<Plat> topCincSemanal() {
-        return
+    public synchronized ArrayList<InfoComandes> topCincSemanal() {
+        return bbdd.top5PlatsSemanals();
     }
 
-    public synchronized ArrayList<Plat> topCincTotal() {
-        return
-    }*/
+    public synchronized ArrayList<InfoComandes> topCincTotal() {
+        return bbdd.top5Plats();
+    }
 
 }
 

@@ -7,11 +7,9 @@ public class Usuari implements Serializable {
     private String user;
     private String password;
 
-    public Usuari (String user, String password){
-
+    public Usuari(String user, String password) {
         this.user = user;
         this.password = password;
-
     }
 
     public String getUser() {
@@ -29,4 +27,5 @@ public class Usuari implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
+
 }

@@ -24,18 +24,20 @@ public class ServerSocketEntrada implements Runnable {
     @Override
     public void run() {
         try {
+
             ServerSocket sServerEntrada = new ServerSocket(port);
+            System.out.println("Entrada: Server Obert");
+
             while (true) {
-                System.out.println("Esperant entrades...");
                 Socket sClient = sServerEntrada.accept();
-                System.out.println("Entrada connectat");
+                System.out.println("Entrada: Client connectat");
                 ServidorEntrada servidorEntrada = new ServidorEntrada(sClient, gestionador);
                 servidorEntrada.start();
 
             }
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("Error");
+            System.out.println("Entrada: Error");
         }
     }
 }

@@ -37,7 +37,9 @@ public class Reserva implements Serializable {
         return hora;
     }
 
+
     @Override
+
     public String toString() {
         return usuari + " - " + nComencals + " - " + data + " - " + hora;
     }

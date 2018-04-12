@@ -7,9 +7,7 @@ import java.net.Socket;
 
 public class ServerSocketEntrada implements Runnable {
 
-    private  int port;
-    private ServerSocket sServerEntrada;
-    private ServidorEntrada servidorEntrada;
+    private int port;
     private final Gestionador gestionador;
 
 

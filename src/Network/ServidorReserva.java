@@ -42,7 +42,7 @@ public class ServidorReserva extends Thread {
             oiStream = new ObjectInputStream(sClient.getInputStream());
 
             user = (Usuari) oiStream.readObject();
-            System.out.println("Reserva:" + user.getUser() + " - " + user.getPassword());
+            System.out.println("Reserva: " + user.getUser() + " - " + user.getPassword());
 
             if (gestionador.comprovaUserPass(user.getUser(), user.getPassword())) {
 
@@ -64,6 +64,7 @@ public class ServidorReserva extends Thread {
                 }
             } else {
                 doStream.writeUTF("Usuari o Password incorrectes!");            //preparar networkReserva per rebre un string
+                System.out.println("Reserva: Usuari o Password incorrectes!");
                 servers.remove(this);
             }
         } catch (IOException | ClassNotFoundException e) {

@@ -33,10 +33,10 @@ public class Main {
             BDD bdd = new BDD();
             Gestionador gestionador = new Gestionador(bdd);
 
-            /*bdd.insereixPlat("gamba",3,10,0);
+            //bdd.insereixPlat("gamba",3,10,0);
             for (int i = 1; i < 3; i++) {
                 bdd.createTable(2);
-            }*/
+            }
 
             /*
             Reserva reserva1 = new Reserva("Alex", 1, gestionador.newData(6, 2, 2222), new Time(15, 00, 00));

@@ -329,7 +329,6 @@ public class BDD {
     public void creaReserva(String usuari, String password, int comencals, Date data, Time hora, int id_taula) throws SQLException {
         st.executeUpdate("INSERT INTO Reserva(usuari, password, n_comensals, data, hora, id_taula) " +
                 "VALUES ('" + usuari + "','" + password + "'," + comencals + ",'" + data + "','" + hora + "'," + id_taula + ")");
-
     }
 
 

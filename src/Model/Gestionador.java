@@ -124,20 +124,19 @@ public class Gestionador {
 
             while ((i < (reserva.getnComencals() + 3)) && (id_taula == -1)) {
                 id_taula = bbdd.reservaTaula(i, reserva.getData(), reserva.getHora());
-                //System.out.println("ID TAULA ASSIGNADA: " + id_taula);
                 if (id_taula != -1) {
-                    System.out.println("ID TAULA ASSIGNADA: " + id_taula);
                     bbdd.creaReserva(reserva.getUsuari(), password, reserva.getnComencals(), reserva.getData(), reserva.getHora(), id_taula);
+                    System.out.println("Entrada: ID taula: " + id_taula);
                     return "true";
                 }
                 i++;
             }
-            System.out.println("No hi ha taula disponible en el dia i hora seleccionats");
+            System.out.println("Entrada: No hi ha taula disponible en el dia i hora seleccionats");
             return "No hi ha taula disponible en el dia i hora seleccionats";
 
         } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("Nom d'usuari ja registrat, escull-ne un altre!");
+            //e.printStackTrace();
+            System.out.println("Entrada: Nom d'usuari ja registrat, escull-ne un altre!");
             return "Nom d'usuari ja registrat, escull-ne un altre!";
         }
     }

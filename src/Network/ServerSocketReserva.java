@@ -51,4 +51,15 @@ public class ServerSocketReserva implements Runnable {
             }
         }
     }
+
+
+    public void enviaC(String user) {                                                                           //Funcio que fem servir al controlador per enviar a tots els serversReserva dedicats la nova llista de comandes amb estat actualitzat
+        for (ServidorReserva servidor : serversReserva) {                                                       //cal arreglar, segurament no va
+            if (servidor.getUser().equals(user)) {
+                servidor.enviaComanda();
+            }
+        }
+    }
+
+
 }

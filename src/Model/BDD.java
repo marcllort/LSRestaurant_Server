@@ -8,12 +8,25 @@ public class BDD {
 
     private static String username = "root";
     private static String password = "marc";
+    private static String ipBBDD;
+    private static String portBBDD;
+    private static String nomBBDD;
     private static String url = "jdbc:mysql://localhost:3306/LSRestaurant?useSSL=false";
     private Connection con;
     private Statement st;
-
+    //private LectorJSON lectorJSON;
 
     public BDD() throws SQLException {
+        /*
+        this.lectorJSON = new LectorJSON();
+        ipBBDD = lectorJSON.lectorIpBBDD();
+        portBBDD = lectorJSON.lectorPortBBDD();
+        nomBBDD = lectorJSON.lectorNomBBDD();
+        username = lectorJSON.lectorUsername();
+        password = lectorJSON.lectorPassword();
+        url= "jdbc:mysql://" + ipBBDD + ":" + portBBDD + "/" + nomBBDD + "?useSSL=false";
+        */
+
         Connection connection = DriverManager.getConnection(url, username, password);
         System.out.println("BBDD: Base de dades connectada");
         con = connection;

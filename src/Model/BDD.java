@@ -1,5 +1,8 @@
 package Model;
 
+import Model.Json.ConfiguracioServer;
+import Model.Json.LectorJson;
+
 import java.sql.*;
 import java.sql.Date;
 import java.util.*;
@@ -7,25 +10,26 @@ import java.util.*;
 public class BDD {
 
     private static String username = "root";
-    private static String password = "marc";
+    private static String password = "alex";
     private static String ipBBDD;
     private static String portBBDD;
     private static String nomBBDD;
     private static String url = "jdbc:mysql://localhost:3306/LSRestaurant?useSSL=false";
     private Connection con;
     private Statement st;
-    //private LectorJSON lectorJSON;
+    private LectorJson lectorJSON;
 
     public BDD() throws SQLException {
-        /*
-        this.lectorJSON = new LectorJSON();
-        ipBBDD = lectorJSON.lectorIpBBDD();
-        portBBDD = lectorJSON.lectorPortBBDD();
-        nomBBDD = lectorJSON.lectorNomBBDD();
-        username = lectorJSON.lectorUsername();
-        password = lectorJSON.lectorPassword();
+        lectorJSON = new LectorJson();
+        ConfiguracioServer config = lectorJSON.llegeixConfiguracioServer();
+
+        ipBBDD = config.lectorIpBBDD();
+        portBBDD = config.lectorPortBBDD();
+        nomBBDD = config.lectorNomBBDD();
+        username = config.lectorUsernameBBDD();
+        password = config.lectorPasswordBBDD();
         url= "jdbc:mysql://" + ipBBDD + ":" + portBBDD + "/" + nomBBDD + "?useSSL=false";
-        */
+
 
         Connection connection = DriverManager.getConnection(url, username, password);
         System.out.println("BBDD: Base de dades connectada");

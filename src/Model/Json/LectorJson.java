@@ -7,9 +7,11 @@ import com.google.gson.stream.JsonReader;
 
 
 public class LectorJson {
-    private static final String FILE_NAME = "data/config.json"; //Nom de l'arxiu a obrir
 
-    public static ConfiguracioServer llegeixConfiguracioServer(String[] args) {             //Els args son useless
+    private static final String FILE_NAME = System.getProperty("user.dir") + "/data/config.json"; //Nom de l'arxiu a obrir
+
+
+    public static ConfiguracioServer llegeixConfiguracioServer() {             //Els args son useless
         Configuracio data = new Configuracio();          // Dades a carregar
         Gson        gson = new Gson();                   // Entitat Gson
         JsonReader  reader;                              // Reader de JSON
@@ -26,7 +28,7 @@ public class LectorJson {
         }
     }
 
-    public static ConfiguracioReserva llegeixConfiguracioReserva(String[] args) {             //Els args son useless
+    public static ConfiguracioReserva llegeixConfiguracioReserva() {             //Els args son useless
         Configuracio data = new Configuracio();          // Dades a carregar
         Gson        gson = new Gson();                   // Entitat Gson
         JsonReader  reader;                              // Reader de JSON
@@ -43,7 +45,7 @@ public class LectorJson {
         }
     }
 
-    public static ConfiguracioEntrada llegeixConfiguracioEntrada(String[] args) {             //Els args son useless
+    public static ConfiguracioEntrada llegeixConfiguracioEntrada() {             //Els args son useless
         Configuracio data = new Configuracio();          // Dades a carregar
         Gson        gson = new Gson();                   // Entitat Gson
         JsonReader  reader;                              // Reader de JSON

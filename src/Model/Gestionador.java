@@ -1,5 +1,7 @@
 package Model;
 
+import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
+
 import java.security.SecureRandom;
 import java.sql.Date;
 import java.sql.SQLException;
@@ -76,18 +78,15 @@ public class Gestionador {
 
     //Comanda
 
-    public synchronized void addComanda(Comanda comanda) {
+    public synchronized void addComanda(Comanda comanda) throws SQLException{
         //funcio de la bbdd, tenir en compte si es la 1a comnada o cal actualizarla
-        try {
+
             bbdd.creaComanda(comanda);
             for (Plat plat : comanda.getPlats()) {
                 bbdd.updatePlat(plat.getNomPlat(), 1);
             }
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println("Error comanda!");
-        }
+
     }
 
     public synchronized String analitzarComanda(Comanda comanda) {      //mirem si hi ha unitatas de tos els prodfuctes

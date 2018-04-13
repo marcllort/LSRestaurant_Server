@@ -40,7 +40,7 @@ public class ConfiguracioServer {
         return usernameBBDD;
     }
 
-    public String lectorgetPasswordBBDD() {
+    public String lectorPasswordBBDD() {
         return passwordBBDD;
     }
 

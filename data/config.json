@@ -1,0 +1,28 @@
+{
+	"configuracioServer":
+	[
+		{
+			"portBBDD": "1.2.3.4.5.6.7.8.9",
+			"ipBBDD": "543.54.4.3.42.4",
+			"nomBBDD": "13.6546.6456.45",
+			"usernameBBDD": "root",
+			"passwordBBDD": "admin",
+			"portEntrada": "6.5.4.3.8.2.2.3.5",
+			"portReserva": "42.32.2.3.6.4.4.3"
+		}
+	],
+	"configuracioEntrada":
+	[	
+		{
+			"ipServer": "5555",
+			"portServer": "42.32.2.3.6.8"
+		}
+	],
+	"configuracioReserva":
+	[
+		{
+			"ipServer": "4444",
+			"portServer": "42.32.2.3.6.3"
+		}
+	]
+}

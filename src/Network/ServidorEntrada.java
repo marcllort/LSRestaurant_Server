@@ -32,21 +32,22 @@ public class ServidorEntrada extends Thread {
             DataOutputStream doStream = new DataOutputStream(sClient.getOutputStream());
             ObjectInputStream diStream = new ObjectInputStream(sClient.getInputStream());
             ooStream = new ObjectOutputStream(sClient.getOutputStream());
+            while (true) {
+                Reserva reserva = (Reserva) diStream.readObject();
 
-            Reserva reserva = (Reserva) diStream.readObject();
+                String password = gestionador.generatePass();
 
-            String password = gestionador.generatePass();
+                String estatReserva = gestionador.creaReserva(reserva, password);
 
-            String estatReserva = gestionador.creaReserva(reserva, password);
-
-            if (estatReserva.equals("true")) {
-                doStream.writeUTF(password);
-            } else {
-                doStream.writeUTF(estatReserva);            //preparar networkReserva per rebre un string
+                if (estatReserva.equals("true")) {
+                    doStream.writeUTF(password);
+                } else {
+                    doStream.writeUTF(estatReserva);            //preparar networkReserva per rebre un string
+                }
             }
-
         } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
+            System.out.println("Entrada: Client desconnectat");
         }
     }
 

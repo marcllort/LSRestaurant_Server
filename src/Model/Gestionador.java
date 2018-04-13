@@ -36,19 +36,23 @@ public class Gestionador {
         return true;
     }
 
-    public synchronized Date newData(int dia, int mes, int any) {
-
+    public synchronized java.sql.Date newData(Integer dia, Integer mes, Integer any) {
         if (isValidDate(any + "-" + mes + "-" + dia)) {
             Calendar cal = Calendar.getInstance();
             cal.set(Calendar.YEAR, any);
             cal.set(Calendar.MONTH, mes - 1);
             cal.set(Calendar.DAY_OF_MONTH, dia);
 
+            java.sql.Date data = new java.sql.Date(cal.getTimeInMillis());
+            java.util.Date dataNow = new java.util.Date();
+            if (data.before(dataNow)){
+                return null;
+            }
 
-            return new Date(cal.getTimeInMillis());
+            return new java.sql.Date(cal.getTimeInMillis());
         }
         return null;
-    }               //Cal pasar funcio a la app entrada
+    }
 
     public synchronized ArrayList<Plat> retornaCarta() {
         return bbdd.llistaPlatsDisponibles();                          //retorna plats diosponibles per fer la carta

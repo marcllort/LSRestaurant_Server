@@ -31,7 +31,6 @@ public class BDD {
 
         url= "jdbc:mysql://" + ipBBDD + ":" + portBBDD + "/" + nomBBDD + "?useSSL=false";
 
-
         Connection connection = DriverManager.getConnection(url, username, password);
         System.out.println("BBDD: Base de dades connectada");
         con = connection;

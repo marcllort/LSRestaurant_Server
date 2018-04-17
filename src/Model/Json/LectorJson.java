@@ -12,15 +12,16 @@ public class LectorJson {
 
 
     public static ConfiguracioServer llegeixConfiguracioServer() {             //Els args son useless
-        Configuracio data = new Configuracio();          // Dades a carregar
+        ConfiguracioServer data ;          // Dades a carregar
         Gson        gson = new Gson();                   // Entitat Gson
         JsonReader  reader;                              // Reader de JSON
 
         try {               //Intentem carregar el fitxer json
 
             reader = new JsonReader(new FileReader(FILE_NAME));
-            data = gson.fromJson(reader, Configuracio.class);
-            return data.configuracioServer;
+            data = gson.fromJson(reader, ConfiguracioServer.class);
+
+            return data;
 
         } catch (FileNotFoundException e) {
             System.err.println("No s'ha pogut trobar el fitxer.");
@@ -28,39 +29,6 @@ public class LectorJson {
         }
     }
 
-    public static ConfiguracioReserva llegeixConfiguracioReserva() {             //Els args son useless
-        Configuracio data = new Configuracio();          // Dades a carregar
-        Gson        gson = new Gson();                   // Entitat Gson
-        JsonReader  reader;                              // Reader de JSON
-
-        try {               //Intentem carregar el fitxer json
-
-            reader = new JsonReader(new FileReader(FILE_NAME));
-            data = gson.fromJson(reader, Configuracio.class);
-            return data.configuracioReserva;
-
-        } catch (FileNotFoundException e) {
-            System.err.println("No s'ha pogut trobar el fitxer.");
-            return null;
-        }
-    }
-
-    public static ConfiguracioEntrada llegeixConfiguracioEntrada() {             //Els args son useless
-        Configuracio data = new Configuracio();          // Dades a carregar
-        Gson        gson = new Gson();                   // Entitat Gson
-        JsonReader  reader;                              // Reader de JSON
-
-        try {               //Intentem carregar el fitxer json
-
-            reader = new JsonReader(new FileReader(FILE_NAME));
-            data = gson.fromJson(reader, Configuracio.class);
-            return data.configuracioEntrada;
-
-        } catch (FileNotFoundException e) {
-            System.err.println("No s'ha pogut trobar el fitxer.");
-            return null;
-        }
-    }
 }
 
 

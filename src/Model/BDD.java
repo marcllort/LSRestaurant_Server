@@ -9,25 +9,26 @@ import java.util.*;
 
 public class BDD {
 
-    private static String username = "root";
-    private static String password = "alex";
+    private static String username ;
+    private static String password ;
     private static String ipBBDD;
     private static String portBBDD;
     private static String nomBBDD;
-    private static String url = "jdbc:mysql://localhost:3306/LSRestaurant?useSSL=false";
+    private static String url;
     private Connection con;
     private Statement st;
     private LectorJson lectorJSON;
 
     public BDD() throws SQLException {
         lectorJSON = new LectorJson();
-        ConfiguracioServer config = lectorJSON.llegeixConfiguracioServer();
+       ConfiguracioServer config = lectorJSON.llegeixConfiguracioServer();
 
         ipBBDD = config.lectorIpBBDD();
         portBBDD = config.lectorPortBBDD();
         nomBBDD = config.lectorNomBBDD();
         username = config.lectorUsernameBBDD();
         password = config.lectorPasswordBBDD();
+
         url= "jdbc:mysql://" + ipBBDD + ":" + portBBDD + "/" + nomBBDD + "?useSSL=false";
 
 

@@ -1,4 +1,4 @@
-/*package Model.Json;
+package Model.Json;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -64,4 +64,4 @@ public class LectorJson {
 }
 
 
-*/
+

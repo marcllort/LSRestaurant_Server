@@ -1,28 +1,28 @@
 {
 	"configuracioServer":
-	[
+
 		{
-			"portBBDD": "1.2.3.4.5.6.7.8.9",
-			"ipBBDD": "543.54.4.3.42.4",
-			"nomBBDD": "13.6546.6456.45",
+			"portBBDD": "3306",
+			"ipBBDD": "127.0.0.1",
+			"nomBBDD": "LSRestaurant",
 			"usernameBBDD": "root",
-			"passwordBBDD": "admin",
-			"portEntrada": "6.5.4.3.8.2.2.3.5",
-			"portReserva": "42.32.2.3.6.4.4.3"
+			"passwordBBDD": "alex",
+			"portEntrada": "4444",
+			"portReserva": "5555"
 		}
-	],
+	,
 	"configuracioEntrada":
-	[	
+
 		{
-			"ipServer": "5555",
-			"portServer": "42.32.2.3.6.8"
+			"ipServer": "5.5.5.5",
+			"portServer": "5555"
 		}
-	],
+	,
 	"configuracioReserva":
-	[
+
 		{
-			"ipServer": "4444",
-			"portServer": "42.32.2.3.6.3"
+			"ipServer": "4.4.4.4",
+			"portServer": "4444"
 		}
-	]
+
 }

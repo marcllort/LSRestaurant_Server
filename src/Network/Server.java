@@ -2,16 +2,13 @@ package Network;
 
 
 import Model.Gestionador;
-import Model.Json.Configuracio;
-import Model.Json.ConfiguracioEntrada;
-import Model.Json.ConfiguracioReserva;
-import Model.Json.LectorJson;
+import Model.Json.*;
 
 
 public class Server {
 
-    private static int portReserva = 4444;                                               //Declarem els atributs
-    private static int portEntrada = 5555;
+    private static int portReserva ;                                               //Declarem els atributs
+    private static int portEntrada ;
     private final Gestionador gestionador;
     private LectorJson lectorJSON;
     //private Controlador controller;
@@ -20,10 +17,10 @@ public class Server {
     public Server(Gestionador gestionador) {
         this.gestionador = gestionador;
         this.lectorJSON = new LectorJson();
-        ConfiguracioReserva conf = LectorJson.llegeixConfiguracioReserva();
-        portReserva = Integer.parseInt(conf.lectorPortServer());
-        ConfiguracioEntrada conf1 = LectorJson.llegeixConfiguracioEntrada();
-        portEntrada = Integer.parseInt(conf1.lectorPortServer());
+        ConfiguracioServer conf = LectorJson.llegeixConfiguracioServer();
+        portReserva = Integer.parseInt(conf.lectorPortReserva());
+
+        portEntrada = Integer.parseInt(conf.lectorPortEntrada());
     }
 
 

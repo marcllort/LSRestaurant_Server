@@ -12,7 +12,7 @@ public class BDD {
     private static String username ;
     private static String password ;
     private static String ipBBDD;
-    private static String portBBDD;
+    private static int portBBDD;
     private static String nomBBDD;
     private static String url;
     private Connection con;

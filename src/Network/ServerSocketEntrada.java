@@ -1,6 +1,8 @@
 package Network;
 
 import Model.Gestionador;
+import Model.Json.ConfiguracioServer;
+import Model.Json.LectorJson;
 
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -13,7 +15,8 @@ public class ServerSocketEntrada implements Runnable {
 
     public ServerSocketEntrada(Gestionador gestionador, int port) {
 
-        this.port = 5566;
+        ConfiguracioServer config = LectorJson.llegeixConfiguracioServer();
+        this.port = config.lectorPortEntrada() ;
         this.gestionador = gestionador;
 
     }

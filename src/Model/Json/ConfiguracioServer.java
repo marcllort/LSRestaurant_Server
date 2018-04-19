@@ -3,7 +3,7 @@ package Model.Json;
 
 public class ConfiguracioServer {
 
-    private String portBBDD;            //  Port de connexio amb la base de dades
+    private int portBBDD;            //  Port de connexio amb la base de dades
 
     private String ipBBDD;        // IP del servidor on es troba la base de dades
 
@@ -13,9 +13,9 @@ public class ConfiguracioServer {
 
     private String passwordBBDD;            // Nom de la contrassenya de l'usuari d'acces a la BBDD
 
-    private String portEntrada;        // Port de communicacio amb el client Recepcio
+    private int portEntrada;        // Port de communicacio amb el client Recepcio
 
-    private String portReserva;         // Port de communicacio amb el client Reserva
+    private int portReserva;         // Port de communicacio amb el client Reserva
 
     private StringBuilder sb;           // StringBuilder
 
@@ -28,7 +28,7 @@ public class ConfiguracioServer {
         return ipBBDD;
     }
 
-    public String lectorPortBBDD() {
+    public int lectorPortBBDD() {
         return portBBDD;
     }
 
@@ -44,11 +44,11 @@ public class ConfiguracioServer {
         return passwordBBDD;
     }
 
-    public String lectorPortEntrada() {
+    public int lectorPortEntrada() {
         return portEntrada;
     }
 
-    public String lectorPortReserva() {
+    public int lectorPortReserva() {
         return portReserva ;
     }
 

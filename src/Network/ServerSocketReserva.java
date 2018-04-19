@@ -1,6 +1,8 @@
 package Network;
 
 import Model.Gestionador;
+import Model.Json.ConfiguracioServer;
+import Model.Json.LectorJson;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -16,7 +18,8 @@ public class ServerSocketReserva implements Runnable {
 
 
     public ServerSocketReserva(Gestionador gestionador, int port) {
-        this.port = 6655;
+        ConfiguracioServer config = LectorJson.llegeixConfiguracioServer();
+        this.port = config.lectorPortReserva() ;
         serversReserva = new ArrayList<>();
         sServerReserva = null;
         this.gestionador = gestionador;

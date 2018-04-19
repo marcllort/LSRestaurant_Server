@@ -17,9 +17,9 @@ public class Server {
     public Server(Gestionador gestionador) {
         this.gestionador = gestionador;
         ConfiguracioServer conf = LectorJson.llegeixConfiguracioServer();
-        portReserva = Integer.parseInt(conf.lectorPortReserva());
+        portReserva = conf.lectorPortReserva();
 
-        portEntrada = Integer.parseInt(conf.lectorPortEntrada());
+        portEntrada = conf.lectorPortEntrada();
     }
 
 

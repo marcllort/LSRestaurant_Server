@@ -13,7 +13,7 @@ public class ServerSocketEntrada implements Runnable {
 
     public ServerSocketEntrada(Gestionador gestionador, int port) {
 
-        this.port = port;
+        this.port = 5566;
         this.gestionador = gestionador;
 
     }

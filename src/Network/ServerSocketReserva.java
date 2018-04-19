@@ -16,7 +16,7 @@ public class ServerSocketReserva implements Runnable {
 
 
     public ServerSocketReserva(Gestionador gestionador, int port) {
-        this.port = port;
+        this.port = 6655;
         serversReserva = new ArrayList<>();
         sServerReserva = null;
         this.gestionador = gestionador;

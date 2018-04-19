@@ -49,9 +49,10 @@ public class ServidorReserva extends Thread {
             if (gestionador.comprovaUserPass(user.getUser(), user.getPassword())) {
 
                 doStream.writeUTF("true");                                                  //enviem true en cas de haver entrat correctaemnt
-                ooStream.writeObject(gestionador.retornaCarta());                               //enviem lña carta amb plats disponibles
+                ooStream.writeObject(gestionador.retornaCarta());                               //enviem la carta amb plats disponibles
 
                 while (true) {
+                    ooStream.reset();
                     ooStream.writeObject(gestionador.retornaComanda(user.getUser()));
                     Comanda com = (Comanda) oiStream.readObject();                          //Rebem la comanda enviada pel usuari
                     String analisi = gestionador.analitzarComanda(com);
@@ -73,7 +74,7 @@ public class ServidorReserva extends Thread {
 
             try {
                 doStream.writeUTF("El plat no existeix");
-                System.out.println("EEEEEE");
+                System.out.println("Error mysql");
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -81,8 +82,8 @@ public class ServidorReserva extends Thread {
 
         } catch (IOException | ClassNotFoundException  | SQLException e) {
             servers.remove(this);                                                   //En cas de que es desconnecti el client o hi hagi algun error tanco el server dedicat
-            e.printStackTrace();
-            System.out.println("WWWW");
+            //e.printStackTrace();
+            System.out.println("Client Desonnectat");
         }
     }
 

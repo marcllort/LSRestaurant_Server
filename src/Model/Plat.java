@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class Plat implements Serializable {
 
+
     private static final long serialVersionUID = 12345L;
     private String nomPlat;
     private float preu;
@@ -40,10 +41,8 @@ public class Plat implements Serializable {
 
 
     @Override
-
     public String toString() {
         return nomPlat + " - " + preu;                                //Un override del tosting perque hem dongui la preu composada com la vui
     }
 
 }
-

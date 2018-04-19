@@ -45,7 +45,7 @@ public class Gestionador {
 
             java.sql.Date data = new java.sql.Date(cal.getTimeInMillis());
             java.util.Date dataNow = new java.util.Date();
-            if (data.before(dataNow)){
+            if (data.before(dataNow)) {
                 return null;
             }
 
@@ -54,8 +54,8 @@ public class Gestionador {
         return null;
     }
 
-    public synchronized ArrayList<Plat> retornaCarta() {
-        return bbdd.llistaPlatsDisponibles();                          //retorna plats diosponibles per fer la carta
+    public synchronized Carta retornaCarta() {
+        return new Carta(bbdd.llistaPlatsDisponibles());                           //retorna plats diosponibles per fer la carta
     }
 
 
@@ -80,12 +80,12 @@ public class Gestionador {
 
     //Comanda
 
-    public synchronized void addComanda(Comanda comanda) throws SQLException{
+    public synchronized void addComanda(Comanda comanda) throws SQLException {
         //funcio de la bbdd, tenir en compte si es la 1a comnada o cal actualizarla
-            bbdd.creaComanda(comanda);
-            for (Plat plat : comanda.getPlats()) {
-                bbdd.updatePlat(plat.getNomPlat(), 1);
-            }
+        bbdd.creaComanda(comanda);
+        for (Plat plat : comanda.getPlats()) {
+            bbdd.updatePlat(plat.getNomPlat(), 1);
+        }
 
 
     }

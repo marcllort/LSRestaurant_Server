@@ -82,7 +82,6 @@ public class Gestionador {
 
     public synchronized void addComanda(Comanda comanda) throws SQLException{
         //funcio de la bbdd, tenir en compte si es la 1a comnada o cal actualizarla
-
             bbdd.creaComanda(comanda);
             for (Plat plat : comanda.getPlats()) {
                 bbdd.updatePlat(plat.getNomPlat(), 1);

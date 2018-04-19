@@ -2,7 +2,6 @@ import Model.*;
 import Network.Server;
 
 import java.sql.*;
-import java.util.ArrayList;
 
 
 public class Main {
@@ -33,7 +32,6 @@ public class Main {
             System.out.println(hora);
 
             BDD bdd = new BDD();
-            Gestionador gestionador = new Gestionador(bdd);
 
             //bdd.insereixPlat("gamba",3,10,0);
             for (int i = 1; i < 3; i++) {
@@ -48,8 +46,7 @@ public class Main {
             ArrayList<Plat> arr1= new ArrayList<Plat>();
             arr.add(new Plat("caca",12));
             Comanda comanda=new Comanda(arr,gestionador.newData(12,1,2001), new Time(12,40,00),"Alex");
-
-           */
+            */
 
             Server server = new Server(new Gestionador(bdd));
             server.startServer();

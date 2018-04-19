@@ -11,13 +11,11 @@ public class Server {
     private static int portReserva ;                                               //Declarem els atributs
     private static int portEntrada ;
     private final Gestionador gestionador;
-    private LectorJson lectorJSON;
     //private Controlador controller;
 
 
     public Server(Gestionador gestionador) {
         this.gestionador = gestionador;
-        this.lectorJSON = new LectorJson();
         ConfiguracioServer conf = LectorJson.llegeixConfiguracioServer();
         portReserva = Integer.parseInt(conf.lectorPortReserva());
 

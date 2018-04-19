@@ -5,6 +5,7 @@ import Model.Gestionador;
 import Model.Json.*;
 
 
+
 public class Server {
 
     private static int portReserva ;                                               //Declarem els atributs

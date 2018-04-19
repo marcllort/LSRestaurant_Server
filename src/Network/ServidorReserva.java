@@ -52,7 +52,7 @@ public class ServidorReserva extends Thread {
                 ooStream.writeObject(gestionador.retornaCarta());                               //enviem lña carta amb plats disponibles
 
                 while (true) {
-
+                    ooStream.writeObject(gestionador.retornaComanda(user.getUser()));
                     Comanda com = (Comanda) oiStream.readObject();                          //Rebem la comanda enviada pel usuari
                     String analisi = gestionador.analitzarComanda(com);
 

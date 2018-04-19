@@ -29,6 +29,8 @@ public class Main {
 
     public static void Serverbbdd() {
         try {
+            Time hora = new Time(System.currentTimeMillis());
+            System.out.println(hora);
 
             BDD bdd = new BDD();
             Gestionador gestionador = new Gestionador(bdd);

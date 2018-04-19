@@ -30,9 +30,7 @@ public class Gestionador {
             SimpleDateFormat data = new SimpleDateFormat(formatString);
             data.setLenient(false);
             data.parse(input);
-        } catch (ParseException e) {
-            return false;
-        } catch (IllegalArgumentException e) {
+        } catch (ParseException | IllegalArgumentException e) {
             return false;
         }
         return true;

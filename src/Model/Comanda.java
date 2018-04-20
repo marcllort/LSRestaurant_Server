@@ -16,11 +16,17 @@ public class Comanda implements Serializable {
      * Constructor sense parametres.
      * Crea un llistat de plats buit.
      */
+
     public Comanda(ArrayList<Plat> plats, Date data, Time hora, String usuari) {
         this.plats = plats;
         this.data = data;
         this.hora = hora;
         this.usuari = usuari;
+    }
+
+    public  Comanda(){
+        this.plats = new ArrayList<Plat>();
+
     }
 
     public ArrayList<Plat> getPlats() {
@@ -54,4 +60,5 @@ public class Comanda implements Serializable {
     public void setHora(Time hora) {
         this.hora = hora;
     }
+
 }

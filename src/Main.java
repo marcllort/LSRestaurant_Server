@@ -1,6 +1,5 @@
 import Model.*;
 import Network.Server;
-import Vista.ServidorVista;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -11,8 +10,6 @@ public class Main {
     public static void main(String[] args) {
 
         Serverbbdd();
-        ServidorVista vista = new ServidorVista();
-        vista.setVisible(true);
 
        /* ServidorVista vista = new ServidorVista();          //Creo vista del server
         vista.setVisible(true);                             //La fem visible
@@ -38,18 +35,13 @@ public class Main {
             BDD bdd = new BDD();
             Gestionador gestionador = new Gestionador(bdd);
 
-            /*bdd.insereixPlat("gamba",3,10,0);
+        /*    bdd.insereixPlat("gamba",3,10,0);
             bdd.insereixPlat("Filet",30,10,0);
             bdd.insereixPlat("Llenguado",20,10,0);
             bdd.insereixPlat("Croquetes",3,10,0);
-<<<<<<< Updated upstream
             bdd.insereixPlat("Patatas",3,10,0);
-            */
-=======
-            bdd.insereixPlat("",3,10,0);
-*/
->>>>>>> Stashed changes
 
+*/
 
             for (int i = 1; i < 3; i++) {
                 bdd.createTable(2);
@@ -65,10 +57,6 @@ public class Main {
             Comanda comanda=new Comanda(arr,gestionador.newData(12,1,2001), new Time(12,40,00),"Alex");
 
            */
-            System.out.println(gestionador.retornaComanda("marsssdcS").getData());
-            System.out.println(gestionador.retornaComanda("marsssdcS").getHora());
-
-            System.out.println(gestionador.retornaComanda("marsssdcS").getPlats());
 
             Server server = new Server(new Gestionador(bdd));
             server.startServer();

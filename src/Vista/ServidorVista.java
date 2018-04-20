@@ -29,6 +29,8 @@ public class ServidorVista extends JFrame {
         JSplitPane jspCentre = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, jpLeft, jspRight);           //Creo un JSplitPane que hem serveix per poder moure el separador. Incloc els dos panels
 
         getContentPane().add(jspCentre);                                      //Afegeixo tot al contentPane
+
+
     }
 
     private JPanel Left() {

@@ -277,14 +277,23 @@ public class BDD {
         try {
             rs = st.executeQuery("SELECT MAX(hora) AS hour, MAX(data) AS Date FROM Comanda WHERE usuari = '" + usuari + "'" +
                     "GROUP BY usuari ");
-            Date data;
-            Time hora;
+            Date data = new Date(12,12,12);
+            Time hora = new Time(12,12,12);
             if (rs.next()) {
                 data = rs.getDate("Date");
                 hora = rs.getTime("hour");
             } else {
-                data = new Date(12, 12, 12);
-                hora = new Time(12, 12, 12);
+                Date dat = new Date(12,12,12);
+                if (data.equals(dat) ){
+                    rs = st.executeQuery("SELECT data, hora FROM Reserva WHERE usuari = '" + usuari + "'");
+
+                    if (rs.next()) {
+                        data = rs.getDate("data");
+                        hora = rs.getTime("hora");
+
+                    }
+                }
+
 
             }
             rss = st.executeQuery("SELECT nom_plat, servit, preu  FROM Comanda NATURAL JOIN Plat WHERE usuari = '" + usuari + "'");

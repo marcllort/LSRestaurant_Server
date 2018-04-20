@@ -52,9 +52,7 @@ public class ServidorReserva extends Thread {
                 ooStream.writeObject(gestionador.retornaCarta());                               //enviem la carta amb plats disponibles
 
                 while (true) {
-
                     ooStream.writeObject(gestionador.retornaComanda(user.getUser()));
-                    System.out.println(gestionador.retornaComanda(user.getUser()).getData());
                     Comanda com = (Comanda) oiStream.readObject();                          //Rebem la comanda enviada pel usuari
                     String analisi = gestionador.analitzarComanda(com);
 
@@ -77,7 +75,7 @@ public class ServidorReserva extends Thread {
                 doStream.writeUTF("El plat no existeix");
                 System.out.println("Error mysql");
             } catch (IOException e) {
-                e.printStackTrace();
+                r.printStackTrace();
             }
 
 

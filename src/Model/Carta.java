@@ -35,5 +35,4 @@ public class Carta implements Serializable {
 
     public void setCarta(Carta carta){this.plats = carta.getPlats();}
 
-
 }

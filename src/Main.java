@@ -38,13 +38,13 @@ public class Main {
             BDD bdd = new BDD();
             Gestionador gestionador = new Gestionador(bdd);
 
-            /*bdd.insereixPlat("gamba",3,10,0);
+            bdd.insereixPlat("gambka",3,10,0);
             bdd.insereixPlat("Filet",30,10,0);
             bdd.insereixPlat("Llenguado",20,10,0);
             bdd.insereixPlat("Croquetes",3,10,0);
 
             bdd.insereixPlat("Patatas",3,10,0);
-            */
+
 
 
 

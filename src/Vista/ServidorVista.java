@@ -1,5 +1,7 @@
 package Vista;
 
+import Model.Grafic;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -29,7 +31,9 @@ public class ServidorVista extends JFrame {
         JSplitPane jspCentre = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, jpLeft, jspRight);           //Creo un JSplitPane que hem serveix per poder moure el separador. Incloc els dos panels
 
         getContentPane().add(jspCentre);                                      //Afegeixo tot al contentPane
-
+        Grafic gr = new Grafic();
+        gr.grafic();
+        getContentPane().add(gr);
 
     }
 

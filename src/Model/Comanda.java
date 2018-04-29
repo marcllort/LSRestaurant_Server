@@ -5,6 +5,10 @@ import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
 
+/**
+ * Classe qur conte els plats de la comanda, el usuari, la data i hora
+ * Implementa Serializable per poder enviar-la per el servidor
+ */
 public class Comanda implements Serializable {
 
     private String usuari;              //cal enviar el usuari que ha fet la comanda
@@ -16,7 +20,18 @@ public class Comanda implements Serializable {
      * Constructor sense parametres.
      * Crea un llistat de plats buit.
      */
+    public Comanda() {
+        this.plats = new ArrayList<Plat>();
+    }
 
+    /**
+     * Construcor amb tots els parametres per crear una comanda ja inicialitzada
+     *
+     * @param plats
+     * @param data
+     * @param hora
+     * @param usuari
+     */
     public Comanda(ArrayList<Plat> plats, Date data, Time hora, String usuari) {
         this.plats = plats;
         this.data = data;
@@ -24,39 +39,75 @@ public class Comanda implements Serializable {
         this.usuari = usuari;
     }
 
-    public  Comanda(){
-        this.plats = new ArrayList<Plat>();
-
-    }
-
+    /**
+     * Getter de plats de la comanda
+     *
+     * @return
+     */
     public ArrayList<Plat> getPlats() {
         return plats;
     }
 
+    /**
+     * Getter de usuai de la comanda
+     *
+     * @return
+     */
     public String getUsuari() {
         return usuari;
     }
 
+    /**
+     * Afegir plat a la comanda
+     *
+     * @param plat
+     */
     public void addPlat(Plat plat) {
         plats.add(plat);
     }
 
+    /**
+     * Getter de un plat especific
+     *
+     * @param i
+     * @return
+     */
     public Plat getPlat(int i) {
         return plats.get(i);
     }
 
+    /**
+     * Getter de la data de la comanda
+     *
+     * @return
+     */
     public Date getData() {
         return data;
     }
 
+    /**
+     * Setter de la data de la comanda
+     *
+     * @param data
+     */
     public void setData(Date data) {
         this.data = data;
     }
 
+    /**
+     * Getter de la hora de la comanda
+     *
+     * @return
+     */
     public Time getHora() {
         return hora;
     }
 
+    /**
+     * Setter de la hora de la comanda
+     *
+     * @param hora
+     */
     public void setHora(Time hora) {
         this.hora = hora;
     }

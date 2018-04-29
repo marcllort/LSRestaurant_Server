@@ -3,7 +3,10 @@ package Model;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-
+/**
+ * Classe qur conte els plats de la carta amb els sus getters i setters
+ * Implementa Serializable per poder enviar-la per el servidor
+ */
 public class Carta implements Serializable {
 
     private ArrayList<Plat> plats;
@@ -11,28 +14,64 @@ public class Carta implements Serializable {
     /**
      * Constructor que crea la carta
      */
-
-    public Carta(){
+    public Carta() {
         this.plats = new ArrayList<Plat>();
     }
 
-    public Carta(ArrayList<Plat> plats){
+    /**
+     * Costructor amb parametre de arraylist per poder crear la carta ja inicialitzada
+     *
+     * @param plats
+     */
+    public Carta(ArrayList<Plat> plats) {
         this.plats = new ArrayList<Plat>();
         this.plats = plats;
     }
 
-    public int getNumPlats(){ return plats.size();}
+    /**
+     * Getter de nombre de plats
+     *
+     * @return
+     */
+    public int getNumPlats() {
+        return plats.size();
+    }
 
-    public Plat getPlat(int i){
+    /**
+     * Getter de un plat especific
+     *
+     * @param i
+     * @return
+     */
+    public Plat getPlat(int i) {
         return plats.get(i);
     }
 
+    /**
+     * Getter de tots els plats
+     *
+     * @return
+     */
     public ArrayList<Plat> getPlats() {
         return plats;
     }
 
-    public void afageixPlat(Plat plat){plats.add(plat);}
+    /**
+     * Funció per afegir plat al arraylist de la carta
+     *
+     * @param plat
+     */
+    public void afageixPlat(Plat plat) {
+        plats.add(plat);
+    }
 
-    public void setCarta(Carta carta){this.plats = carta.getPlats();}
+    /**
+     * Setter de una carta
+     *
+     * @param carta
+     */
+    public void setCarta(Carta carta) {
+        this.plats = carta.getPlats();
+    }
 
 }

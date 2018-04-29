@@ -209,7 +209,7 @@ public class BDD {
             while (rs.next() && comandes.size() < 5) {
                 InfoComandes info = new InfoComandes();
                 info.setUsuari(rs.getString("nom_plat"));
-                info.setTotal_plats(rs.getInt("unitats_gastades"));
+                info.setTotalPlats(rs.getInt("unitats_gastades"));
                 comandes.add(info);
             }
             return comandes;
@@ -228,12 +228,12 @@ public class BDD {
             while (rs.next()) {
                 InfoComandes info = new InfoComandes();
                 info.setUsuari(rs.getString("nom_plat"));
-                info.setTotal_plats(1);
+                info.setTotalPlats(1);
                 int p = 0;
                 for (InfoComandes a : comandes) {
                     if (info.getUsuari().equals(a.getUsuari())) {
-                        p = a.getTotal_plats() + 1;
-                        a.setTotal_plats(p);
+                        p = a.getTotalPlats() + 1;
+                        a.setTotalPlats(p);
                     }
                 }
                 if (p == 0) {
@@ -243,8 +243,8 @@ public class BDD {
                 Collections.sort(comandes, new Comparator<InfoComandes>() {
                     @Override
                     public int compare(InfoComandes com1, InfoComandes com2) {
-                        Integer a = com1.getTotal_plats();
-                        Integer b = com2.getTotal_plats();
+                        Integer a = com1.getTotalPlats();
+                        Integer b = com2.getTotalPlats();
                         return b.compareTo(a);
                     }
                 });
@@ -324,7 +324,7 @@ public class BDD {
         while (rs.next()) {
             InfoComandes comanda = new InfoComandes();
             comanda.setUsuari(rs.getString("usuari"));
-            comanda.setTotal_plats(rs.getInt("num"));
+            comanda.setTotalPlats(rs.getInt("num"));
             comanda.setPlatsPendents(rs.getInt("sum"));
             comanda.setHora(rs.getTime("hora"));
             comanda.setDate(rs.getDate("data"));

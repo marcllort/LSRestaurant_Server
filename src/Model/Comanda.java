@@ -42,16 +42,16 @@ public class Comanda implements Serializable {
     /**
      * Getter de plats de la comanda
      *
-     * @return
+     * @return tots els plats
      */
     public ArrayList<Plat> getPlats() {
         return plats;
     }
 
     /**
-     * Getter de usuai de la comanda
+     * Getter de usuari de la comanda
      *
-     * @return
+     * @return usuari de la comanda
      */
     public String getUsuari() {
         return usuari;
@@ -70,7 +70,7 @@ public class Comanda implements Serializable {
      * Getter de un plat especific
      *
      * @param i
-     * @return
+     * @return plat seleccionat
      */
     public Plat getPlat(int i) {
         return plats.get(i);
@@ -79,7 +79,7 @@ public class Comanda implements Serializable {
     /**
      * Getter de la data de la comanda
      *
-     * @return
+     * @return data
      */
     public Date getData() {
         return data;
@@ -97,7 +97,7 @@ public class Comanda implements Serializable {
     /**
      * Getter de la hora de la comanda
      *
-     * @return
+     * @return hora
      */
     public Time getHora() {
         return hora;

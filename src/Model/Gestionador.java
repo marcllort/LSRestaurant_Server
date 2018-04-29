@@ -28,7 +28,7 @@ public class Gestionador {
      * Funcio per comprovar si la data introduida per el usuari existeix
      *
      * @param input
-     * @return
+     * @return boolea de lsi la data es correcta
      */
     public synchronized boolean isValidDate(String input) {
         String formatString = "yyyy-MM-dd";
@@ -43,13 +43,13 @@ public class Gestionador {
     }
 
     /**
-     * Funcio on apartir dels ints de dia mes i any creem un tipus date
-     * Abans de crearlo comprovem que el dia sigui correcte
+     * Funció on apartir dels ints de dia mes i any creem un tipus date
+     * Abans de crear-lo comprovem que el dia sigui correcte
      *
      * @param dia
      * @param mes
      * @param any
-     * @return
+     * @return tipus data de sql
      */
     public synchronized java.sql.Date newData(Integer dia, Integer mes, Integer any) {
         if (isValidDate(any + "-" + mes + "-" + dia)) {
@@ -69,18 +69,18 @@ public class Gestionador {
     }
 
     /**
-     * Funcio que rep la carta de la bbdd i la retorna
+     * Funcio que rep la carta de la bbdd de mysql i la retorna
      *
-     * @return
+     * @return carta
      */
     public synchronized Carta retornaCarta() {
         return new Carta(bbdd.llistaPlatsDisponibles());                           //retorna plats diosponibles per fer la carta
     }
-    
+
     /**
      * Funcio per generar un password aleatori
      *
-     * @return
+     * @return un password aleatori
      */
     public synchronized String generatePass() {
         String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
@@ -98,9 +98,12 @@ public class Gestionador {
      *
      * @param user
      * @param pass
-     * @return
+     * @return boolea de si usuari i contrasenya són correctes
      */
     public synchronized boolean comprovaUserPass(String user, String pass) {
+        if (user.equals("") || pass.equals("")) {
+            return false;
+        }
         return bbdd.comprovaPassword(user, pass);
     }
 
@@ -124,7 +127,7 @@ public class Gestionador {
      * Comprova que hi hagi unitats disponibles i que el plat existeixi
      *
      * @param comanda
-     * @return
+     * @return String de si la comanda es correcta amb els plats incorrectes, o un true si es correcta
      */
     public synchronized String analitzarComanda(Comanda comanda) {      //mirem si hi ha unitatas de tos els prodfuctes
 
@@ -148,7 +151,7 @@ public class Gestionador {
      * Funció que ens retorna la comanda guardada a la bbdd de de el usuari que volguem
      *
      * @param user
-     * @return
+     * @return la comanda guardada al mysql del usuari
      */
     public synchronized Comanda retornaComanda(String user) {
         //retorna comanda actualitzada de la bbdd
@@ -161,9 +164,8 @@ public class Gestionador {
      *
      * @param reserva
      * @param password
-     * @return
+     * @return missatge d'error, o true si ha trobat una taula
      */
-
     private synchronized String buscaTaula(Reserva reserva, String password) {
 
         try {
@@ -195,7 +197,7 @@ public class Gestionador {
      *
      * @param reserva
      * @param password
-     * @return
+     * @return missatge d'error, o true si ha trobat una taula
      */
     public synchronized String creaReserva(Reserva reserva, String password) {
         try {
@@ -219,18 +221,18 @@ public class Gestionador {
     }
 
     /**
-     * Retorna el valor del top5 de plats mes demanats de la semana
+     * Retorna el valor del top5 de plats més demanats de la semana
      *
-     * @return
+     * @return array de plats més demanats de la semana
      */
     public synchronized ArrayList<InfoComandes> topCincSemanal() {
         return bbdd.top5PlatsSemanals();
     }
 
     /**
-     * Retorna el valor del top5 de plats mes demanats de la sempre
+     * Retorna el valor del top5 de plats més demanats de la sempre
      *
-     * @return
+     * @return array de plats més demanats de la sempre
      */
     public synchronized ArrayList<InfoComandes> topCincTotal() {
         return bbdd.top5Plats();

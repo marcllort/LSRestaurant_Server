@@ -31,7 +31,7 @@ public class Carta implements Serializable {
     /**
      * Getter de nombre de plats
      *
-     * @return
+     * @return nombre de plats
      */
     public int getNumPlats() {
         return plats.size();
@@ -41,7 +41,7 @@ public class Carta implements Serializable {
      * Getter de un plat especific
      *
      * @param i
-     * @return
+     * @return el plat
      */
     public Plat getPlat(int i) {
         return plats.get(i);
@@ -50,7 +50,7 @@ public class Carta implements Serializable {
     /**
      * Getter de tots els plats
      *
-     * @return
+     * @return tots els plats
      */
     public ArrayList<Plat> getPlats() {
         return plats;

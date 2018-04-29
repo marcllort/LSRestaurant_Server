@@ -42,31 +42,33 @@ public class ServidorReserva extends Thread {
             ooStream = new ObjectOutputStream(sClient.getOutputStream());
             oiStream = new ObjectInputStream(sClient.getInputStream());
 
-            user = (Usuari) oiStream.readObject();
-            System.out.println("Reserva: " + user.getUser() + " - " + user.getPassword());
+            while(true) {
 
-            if (gestionador.comprovaUserPass(user.getUser(), user.getPassword())) {
+                user = (Usuari) oiStream.readObject();
+                System.out.println("Reserva: " + user.getUser() + " - " + user.getPassword());
 
-                doStream.writeUTF("true");                                                  //enviem true en cas de haver entrat correctaemnt
-                ooStream.writeObject(gestionador.retornaCarta());                               //enviem la carta amb plats disponibles
+                if (gestionador.comprovaUserPass(user.getUser(), user.getPassword())) {
+                    doStream.writeUTF("true");                                                  //enviem true en cas de haver entrat correctaemnt
+                    ooStream.writeObject(gestionador.retornaCarta());                               //enviem la carta amb plats disponibles
+                    System.out.println("enviacarta");
+                    while (true) {
+                        System.out.println("entrawhile");
+                        ooStream.writeObject(gestionador.retornaComanda(user.getUser()));
+                        Comanda com = (Comanda) oiStream.readObject();                          //Rebem la comanda enviada pel usuari
+                        String analisi = gestionador.analitzarComanda(com);
 
-                while (true) {
-                    ooStream.writeObject(gestionador.retornaComanda(user.getUser()));
-                    Comanda com = (Comanda) oiStream.readObject();                          //Rebem la comanda enviada pel usuari
-                    String analisi = gestionador.analitzarComanda(com);
-
-                    if (analisi.equals("true")) {
-                        gestionador.addComanda(com);                                                //Guardo la comanda
-                        doStream.writeUTF("true");
-                        //actualitzar vista de gestionar comandes
-                    } else {
-                        doStream.writeUTF("No queden suficients unitats de:" + analisi);//enviar error
+                        if (analisi.equals("true")) {
+                            gestionador.addComanda(com);                                                //Guardo la comanda
+                            doStream.writeUTF("true");
+                            //actualitzar vista de gestionar comandes
+                        } else {
+                            doStream.writeUTF("No queden suficients unitats de:" + analisi);//enviar error
+                        }
                     }
+                } else {
+                    doStream.writeUTF("Usuari o Password incorrectes!");            //preparar networkReserva per rebre un string
+                    System.out.println("Reserva: Usuari o Password incorrectes!");
                 }
-            } else {
-                doStream.writeUTF("Usuari o Password incorrectes!");            //preparar networkReserva per rebre un string
-                System.out.println("Reserva: Usuari o Password incorrectes!");
-                servers.remove(this);
             }
         } catch (MySQLIntegrityConstraintViolationException r) {
 

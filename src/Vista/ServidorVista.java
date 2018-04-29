@@ -5,6 +5,7 @@ import Model.Grafic;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 
 public class ServidorVista extends JFrame {
@@ -31,11 +32,21 @@ public class ServidorVista extends JFrame {
         JSplitPane jspCentre = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, jpLeft, jspRight);           //Creo un JSplitPane que hem serveix per poder moure el separador. Incloc els dos panels
 
         getContentPane().add(jspCentre);                                      //Afegeixo tot al contentPane
+
+        //Creacio de grafic uy
         Grafic gr = new Grafic();
-        gr.grafic();
+        int[] a = {1,2,3,4,5};
+        ArrayList<String> arr = new ArrayList<>();
+        arr.add("gamba");
+        arr.add("gambas");
+        arr.add("gambad");
+        arr.add("gambaf");
+        arr.add("gambaa");
+        gr.grafic(a,arr);
         getContentPane().add(gr);
 
     }
+
 
     private JPanel Left() {
 

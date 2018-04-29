@@ -1,14 +1,15 @@
 package Network;
 
 import Model.Gestionador;
-import Model.Json.ConfiguracioServer;
-import Model.Json.LectorJson;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
+/**
+ * Classe del socket de reserva que implementa runnable per poder correl en el thread
+ */
 public class ServerSocketReserva implements Runnable {
 
     private int port;
@@ -16,15 +17,35 @@ public class ServerSocketReserva implements Runnable {
     private final Gestionador gestionador;
     private final ArrayList<ServidorReserva> serversReserva;
 
-
+    /**
+     * Constructor de el socket de reserva que rep el seu port i el gestionador i inicialitza el array de servers
+     *
+     * @param gestionador
+     * @param port
+     */
     public ServerSocketReserva(Gestionador gestionador, int port) {
-        ConfiguracioServer config = LectorJson.llegeixConfiguracioServer();
-        this.port = config.lectorPortReserva() ;
-        serversReserva = new ArrayList<>();
-        sServerReserva = null;
+        this.port = port;
         this.gestionador = gestionador;
+        this.serversReserva = new ArrayList<>();
     }
 
+    /**
+     * Envia la comanda actualitzada al usuari del que li volem actualitzar la comanda
+     *
+     * @param user
+     */
+    public void enviaC(String user) {                                                                           //Funcio que fem servir al controlador per enviar a tots els serversReserva dedicats la nova llista de comandes amb estat actualitzat
+        for (ServidorReserva servidor : serversReserva) {                                                       //cal arreglar, segurament no va
+            if (servidor.getUser().equals(user)) {
+                servidor.enviaComanda();
+            }
+        }
+    }
+
+    /**
+     * Override de run per crear el serversocket i posteriorment estar esperant clients
+     * Un cop rebem client creem el servidor dedicat de reserva per cada client i fem start
+     */
     @Override
     public void run() {
         try {
@@ -54,15 +75,5 @@ public class ServerSocketReserva implements Runnable {
             }
         }
     }
-
-
-    public void enviaC(String user) {                                                                           //Funcio que fem servir al controlador per enviar a tots els serversReserva dedicats la nova llista de comandes amb estat actualitzat
-        for (ServidorReserva servidor : serversReserva) {                                                       //cal arreglar, segurament no va
-            if (servidor.getUser().equals(user)) {
-                servidor.enviaComanda();
-            }
-        }
-    }
-
 
 }

@@ -1,6 +1,5 @@
 package Network;
 
-
 import Model.Comanda;
 import Model.Gestionador;
 import Model.Usuari;
@@ -69,7 +68,7 @@ public class ServidorReserva extends Thread {
                 System.out.println("Reserva: Usuari o Password incorrectes!");
                 servers.remove(this);
             }
-        }catch(MySQLIntegrityConstraintViolationException r){
+        } catch (MySQLIntegrityConstraintViolationException r) {
 
             try {
                 doStream.writeUTF("El plat no existeix");
@@ -79,7 +78,7 @@ public class ServidorReserva extends Thread {
             }
 
 
-        } catch (IOException | ClassNotFoundException  | SQLException e) {
+        } catch (IOException | ClassNotFoundException | SQLException e) {
             servers.remove(this);                                                   //En cas de que es desconnecti el client o hi hagi algun error tanco el server dedicat
             //e.printStackTrace();
             System.out.println("Client Desonnectat");

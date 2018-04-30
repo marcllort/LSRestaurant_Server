@@ -9,13 +9,13 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 
-
 public class ServidorVista extends JFrame {
 
     private VistaTaules vistaTaules;
     private VistaComandes vistaComandes;
     private VistaPlats vistaPlats;
     private VistaTop5 vistaTop5;
+    private DialogUpdatePlat dialogUpdatePlat;
 
     private CardLayout layout;
 
@@ -36,13 +36,14 @@ public class ServidorVista extends JFrame {
 
         layout = new CardLayout();
         this.vistaTaules = new VistaTaules();
-        this.vistaComandes = new VistaComandes();
+        //this.vistaComandes = new VistaComandes();
+        //this.dialogServirComandes = new DialogServirComandes();
+        this.dialogUpdatePlat = new DialogUpdatePlat();
         this.getContentPane().setLayout(layout);
-        this.getContentPane().add("TAULES", vistaComandes);
+        this.getContentPane().add("TAULES", dialogUpdatePlat);
         creaMenu(new Controlador());
 
     }
-
 
 
     public void registraControlador(ActionListener controller) {                            //Registro el boto serve amb un action comand de send, declarat en una constant

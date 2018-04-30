@@ -65,6 +65,7 @@ public class VistaTaules extends JPanel {
         jpTaula.add(jlReserves);
 
 
+
         jtTaula = new JTable();
         jpTaula.add(jtTaula);
 

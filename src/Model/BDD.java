@@ -21,7 +21,7 @@ public class BDD {
 
     public BDD() throws SQLException {
         lectorJSON = new LectorJson();
-       ConfiguracioServer config = lectorJSON.llegeixConfiguracioServer();
+        ConfiguracioServer config = LectorJson.llegeixConfiguracioServer();
 
         ipBBDD = config.lectorIpBBDD();
         portBBDD = config.lectorPortBBDD();
@@ -70,6 +70,10 @@ public class BDD {
         }
 
     }
+
+
+    //FALTA UNA FUNCIO QUE BORRI TAULA I LES RESERVES QUE HAVIA PER AQUELL TAULA
+    //
 
 
     //Plat

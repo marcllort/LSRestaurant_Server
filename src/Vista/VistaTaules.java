@@ -1,6 +1,7 @@
 package Vista;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
 public class VistaTaules extends JPanel {
@@ -50,15 +51,20 @@ public class VistaTaules extends JPanel {
         JPanel jpTaula = new JPanel();
         jpReserva.add(jpTaula);
 
+        DefaultTableModel modelTaula = new DefaultTableModel() {
+            public boolean isCellEditable(int rowIndex, int mColIndex) {
+                return false;
+            }
+        };
+        modelTaula.addColumn("Reserva");
+        modelTaula.addColumn("N persones");
+        modelTaula.addColumn("Data/Hora");
+
+        Object rowData[] = {"Row1-Column1", "Row1-Column2", "Row1-Column3"};
 
 
-        Object rowData[][] = {{"Row1-Column1", "Row1-Column2", "Row1-Column3"},
-                {"Row2-Column1", "Row2-Column2", "Row2-Column3"}};
+        JTable jTable = new JTable(modelTaula);
 
-        Object columnNames[] = {"Reserva", "N persones", "Data/Hora"};
-
-
-        JTable jTable = new JTable(rowData, columnNames);
         jpReserva.add(new JScrollPane(jTable));
 
         JLabel jlReserves = new JLabel("Reserves:");

@@ -1,6 +1,8 @@
 package Vista;
 
 
+import Controlador.Controlador;
+
 import javax.swing.*;
 
 import java.awt.*;
@@ -17,6 +19,14 @@ public class ServidorVista extends JFrame {
 
     private CardLayout layout;
 
+    //menu
+    private JMenuBar jmbBarra;
+    private JMenuItem jmiPlats;
+    private JMenuItem jmiComandes;
+    private JMenuItem jmiTop5;
+    private JMenuItem jmiTaula;
+
+
     public ServidorVista() {
 
         setSize(600, 400);                                      //Dono les propietats inicials al JFrame
@@ -26,9 +36,10 @@ public class ServidorVista extends JFrame {
 
         layout = new CardLayout();
         this.vistaTaules = new VistaTaules();
+        this.vistaComandes = new VistaComandes();
         this.getContentPane().setLayout(layout);
-        this.getContentPane().add("TAULES", vistaTaules);
-
+        this.getContentPane().add("TAULES", vistaComandes);
+        creaMenu(new Controlador());
 
     }
 
@@ -40,6 +51,36 @@ public class ServidorVista extends JFrame {
 
     public void showError(String message) {
         JOptionPane.showMessageDialog(this, message);                               //JDialog per quan tinguem algun error el mostri
+    }
+
+    public void creaMenu(Controlador c) {
+
+        jmiTaula = new JMenuItem("Taules");
+        jmiPlats = new JMenuItem("Carta");
+        jmiComandes = new JMenuItem("Comandes");
+        jmiTop5 = new JMenuItem("TOP 5");
+
+        jmbBarra = new JMenuBar();
+        jmbBarra.setBackground(Color.LIGHT_GRAY);
+        jmbBarra.setBorderPainted(true);
+        jmbBarra.add(jmiTaula);
+        jmbBarra.add(jmiPlats);
+        jmbBarra.add(jmiComandes);
+        jmbBarra.add(jmiTop5);
+
+
+        this.setJMenuBar(jmbBarra);
+
+        // Registrem controlador a les diferents opcions del menu
+        jmiPlats.addActionListener(c);
+        jmiPlats.setActionCommand("ACCES CARTA");
+        jmiTop5.addActionListener(c);
+        jmiTop5.setActionCommand("ACCES TOP5");
+        jmiComandes.setActionCommand("ACCES COMANDA");
+        jmiComandes.addActionListener(c);
+        jmiTaula.addActionListener(c);
+        jmiTaula.setActionCommand("ACCES TAULA");
+
     }
 
 }

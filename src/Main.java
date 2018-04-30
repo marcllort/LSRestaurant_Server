@@ -87,6 +87,7 @@ public class Main {
         System.out.println(gestionador.retornaComanda("marsssdcS").getData());
         System.out.println(gestionador.retornaComanda("marsssdcS").getHora());
         System.out.println(gestionador.retornaComanda("marsssdcS").getPlats());
+
     }
 
 }

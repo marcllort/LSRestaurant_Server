@@ -46,15 +46,17 @@ public class Grafic extends JPanel {
             int hmax =  (max * (((this.getHeight()) / max))) / 2;
             Integer a = max/5 * (i+1);
 
-            Integer b = i;
+
             maingrafic.setColor(new Color(red, green, blue));
             maingrafic.fill(new Rectangle(x, y, width, height));
             maingrafic.drawString(nomPlat.get(i), x + width / 2 - nomPlat.get(i).length() * 3, this.getHeight() - 30);
             maingrafic.drawString(a.toString(), 20, ymax +(ymax+hmax)/7*(4-i));
-            maingrafic.drawString(b.toString(), 40, ymax +ymax/6*(5-i));
+
 
 
         }
+        maingrafic.setColor(Color.GRAY);
+        maingrafic.fill(new Rectangle(40,20,10,300));
 
     }
 

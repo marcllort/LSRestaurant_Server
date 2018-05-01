@@ -32,25 +32,25 @@ public class Controlador implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        vista.creaMenu(this);
+        //vista.creaMenu(this);
         if (e.getSource() instanceof JMenuItem) {
             handleMenu(e);
         } else {
             switch (card) {
                 case "TAULES":
-                    vista.creaMenu(this);
+                    //vista.creaMenu(this);
                     handleTaules(e);
                     break;
                 case "CARTA":
-                    vista.creaMenu(this);
+                    //vista.creaMenu(this);
 
                     break;
                 case "COMANDES":
-                    vista.creaMenu(this);
+                    //vista.creaMenu(this);
 
                     break;
                 case "TOP5":
-                    vista.creaMenu(this);
+                    //vista.creaMenu(this);
 
                     break;
             }

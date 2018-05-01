@@ -9,7 +9,6 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Controlador implements ActionListener {
@@ -20,12 +19,13 @@ public class Controlador implements ActionListener {
     private int index;
 
 
+
     public Controlador(ServidorVista vista, Gestionador gestionador) {
 
         this.gestionador = gestionador;
         this.vista = vista;
         card = "TAULES";
-        index = 1;
+        index =1;
         handleLlista();
         vista.creaMenu(this);
         vista.getVistaTaules().actualitzaTaula(creaModel(gestionador.mostraReseves(1)));
@@ -34,7 +34,7 @@ public class Controlador implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        //vista.creaMenu(this);
         if (e.getSource() instanceof JMenuItem) {
             handleMenu(e);
         } else {
@@ -52,8 +52,6 @@ public class Controlador implements ActionListener {
 
                     break;
                 case "TOP5":
-
-                    handleTop5(e);
                     //vista.creaMenu(this);
 
                     break;
@@ -87,14 +85,14 @@ public class Controlador implements ActionListener {
     }
 
     private void handleTaules(ActionEvent e) {
-        vista.getVistaTaules().actualitzaTaula(creaModel(gestionador.mostraReseves(1)));
-        index = vista.getVistaTaules().getJlstLlista() + 1;
         switch (e.getActionCommand()) {
             case "AFEGIR":
                 try {
                     int n = Integer.parseInt(vista.getVistaTaules().getJtfText());
                     System.out.println("AFEGIR" + n);
                     gestionador.creaTaula(n);
+                    handleLlista();
+
                 } catch (Exception e1) {
                     vista.showError("Introdueixi un nombre!");
                 }
@@ -102,17 +100,25 @@ public class Controlador implements ActionListener {
 
             case "DELETE":
 
-                if (index != -1) {
-
-                    System.out.println("DELETE");
-                } else {
-                    vista.showError("No hi ha taules ha borrar!");
+                try {
+                    gestionador.eliminaTaula(Integer.parseInt(vista.getVistaTaules().getJlstLlista()));
+                    handleLlista();
+                } catch (NullPointerException e2) {
+                    vista.showError("Cap taula seleccionada!");
+                }catch (Exception e1) {
+                    vista.showError(e1.getMessage());
                 }
                 break;
 
             case "ACTUALITZA":
+                try {
+                    index = Integer.parseInt(vista.getVistaTaules().getJlstLlista());
+                    handleLlista();
 
-                handleLlista();
+                } catch (Exception e1) {
+                    vista.showError("Cap taula seleccionada!");
+                }
+
                 //System.out.println(gestionador.mostraReseves(1));
 
                 break;
@@ -131,7 +137,6 @@ public class Controlador implements ActionListener {
         vista.getVistaTaules().actualitzaLlista(modelLlista);
         //System.out.println("sdds: "+vista.getVistaTaules().getJlstLlista());
         //index = Integer.parseInt(vista.getVistaTaules().getJlstLlista());
-        System.out.println(index);
 
     }
 

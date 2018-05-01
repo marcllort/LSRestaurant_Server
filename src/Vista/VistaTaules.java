@@ -113,7 +113,6 @@ public class VistaTaules extends JPanel {
     }
 
     public String getJlstLlista() throws Exception{
-        //return jlstLlista.getSelectedIndex();
         return jlstLlista.getSelectedValue().toString();
     }
 

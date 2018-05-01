@@ -36,6 +36,14 @@ public class Main {
             Gestionador gestionador = new Gestionador(bdd);
             Server server = new Server(new Gestionador(bdd));
             Time hora = new Time(System.currentTimeMillis());
+            ArrayList<Reserva> as= new ArrayList<>();
+            as = bdd.mostraReservesTaula(3);
+           try {
+               bdd.eliminaTaula(3);
+           }catch (Exception e){
+               System.out.println(e.getMessage());
+           }
+
 
             //System.out.println(hora);
             //afegeixPlatsBdd(bdd);

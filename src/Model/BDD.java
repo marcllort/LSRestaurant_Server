@@ -44,6 +44,10 @@ public class BDD {
         st.executeUpdate("INSERT INTO Taula(num_cadires) " + "VALUES (" + i + ")");
     }
 
+    public void mostraTaules(){
+        //ResultSet rs = st.executeQuery("SELECT ")
+    }
+
     public int reservaTaula(int comensals, java.sql.Date data, Time hora) {
 
         ArrayList taules = new ArrayList();
@@ -67,6 +71,42 @@ public class BDD {
             return (int) lliures.get(0);
         } catch (Exception e) {
             return -1;
+        }
+
+    }
+
+    public ArrayList<Reserva> mostraReservesTaula(int idTaula){
+        ArrayList<Reserva> result = new ArrayList<>();
+        try {
+            ResultSet rs = st.executeQuery("SELECT usuari, n_comensals, data, hora FROM Reserva WHERE id_taula = "+idTaula);
+            while (rs.next()){
+                String usr = rs.getString("usuari");
+                int com = rs.getInt("n_comensals");
+                Date data = rs.getDate("data");
+                Time hora = rs.getTime("hora");
+                Reserva res = new Reserva(usr,com,data,hora);
+                result.add(res);
+
+
+            }
+            return result;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return result;
+        }
+
+
+    }
+    public void eliminaTaula(int idTaula)throws Exception{
+        ArrayList<Reserva> result = new ArrayList<>();
+        result = mostraReservesTaula(idTaula);
+        if(result.size() == 0){
+            PreparedStatement ps = con.prepareStatement("DELETE FROM Taula WHERE id_taula = "+idTaula);
+            ps.executeUpdate();
+        }
+        else {
+          Exception e =  new Exception("La taula no es pot eliminar perque te reserves");
+            throw e;
         }
 
     }

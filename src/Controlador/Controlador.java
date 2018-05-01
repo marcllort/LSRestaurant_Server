@@ -38,20 +38,22 @@ public class Controlador implements ActionListener {
         } else {
             switch (card) {
                 case "TAULES":
-                    vista.creaMenu(this);
+                    //vista.creaMenu(this);
                     handleTaules(e);
                     break;
                 case "CARTA":
-                    vista.creaMenu(this);
+                    //vista.creaMenu(this);
 
                     break;
                 case "COMANDES":
-                    vista.creaMenu(this);
+                    //vista.creaMenu(this);
 
                     break;
                 case "TOP5":
-                    vista.creaMenu(this);
+
                     handleTop5(e);
+                    //vista.creaMenu(this);
+
                     break;
             }
 
@@ -99,6 +101,7 @@ public class Controlador implements ActionListener {
             case "DELETE":
 
                 if (index != -1) {
+
                     System.out.println("DELETE");
                 } else {
                     vista.showError("No hi ha taules ha borrar!");

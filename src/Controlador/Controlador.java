@@ -51,7 +51,7 @@ public class Controlador implements ActionListener {
                     break;
                 case "TOP5":
                     vista.creaMenu(this);
-
+                    handleTop5(e);
                     break;
             }
 
@@ -130,7 +130,23 @@ public class Controlador implements ActionListener {
 
     }
 
+    private void handleTop5(ActionEvent e){
 
+            switch (e.getActionCommand()){
+                case "Semanal":
+                    System.out.println("Semanal");
+                    int[] a = {1,2,3,4,5};
+                    vista.getVistaTop5().grSemanal(a);
+                    break;
+
+                case "Total":
+                    System.out.println("Total");
+                    int[] b = {5,4,3,2,1};
+                    vista.getVistaTop5().grSemanal(b);
+                    break;
+            }
+
+    }
 
     private DefaultTableModel creaModel(ArrayList<Reserva> reserves){
         DefaultTableModel modelTaula = new DefaultTableModel() {

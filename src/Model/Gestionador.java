@@ -253,5 +253,9 @@ public class Gestionador {
        return result;
     }
 
+    public ArrayList<Reserva> mostraReseves(int i){
+        return bbdd.mostraReservesTaula(i);
+    }
+
 }
 

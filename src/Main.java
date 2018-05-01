@@ -16,11 +16,17 @@ public class Main {
      * @param args
      */
     public static void main(String[] args) {
-        Serverbbdd();
-        ServidorVista vista = new ServidorVista();
-        Controlador controlador = new Controlador(vista);
-        vista.registraControlador(controlador);
-        vista.setVisible(true);
+        try {
+            BDD bdd = new BDD();
+            Serverbbdd(bdd);
+            ServidorVista vista = new ServidorVista();
+            Controlador controlador = new Controlador(vista, bdd);
+            vista.registraControlador(controlador);
+            vista.setVisible(true);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 
 
@@ -29,22 +35,16 @@ public class Main {
      * El gestionador sera l'encarregat de dur a terme totes les funcions que relacionen el servidor amb la bbdd
      * Posteriorment creem el server amb el gesataionador que conte la bbdd i li fem start
      */
-    public static void Serverbbdd() {
+    public static void Serverbbdd(BDD bdd) {
         try {
 
-            BDD bdd = new BDD();
+
             Gestionador gestionador = new Gestionador(bdd);
             Server server = new Server(new Gestionador(bdd));
             Time hora = new Time(System.currentTimeMillis());
-            ArrayList<Integer> as= new ArrayList<>();
-            as = bdd.mostraTaules();
-            System.out.println("TAULESS "+ as.size());
+            ArrayList<Reserva> as= new ArrayList<>();
+            as = bdd.mostraReservesTaula(3);
 
-           try {
-               bdd.eliminaTaula(3);
-           }catch (Exception e){
-               System.out.println(e.getMessage());
-           }
 
 
             //System.out.println(hora);

@@ -13,6 +13,7 @@ public class VistaTaules extends JPanel {
     private JList jlstLlista;
     private JButton jbDeleteTable;
     private JButton jbAfegir;
+    private JButton jbActualitza;
 
     public VistaTaules() {
 
@@ -39,8 +40,15 @@ public class VistaTaules extends JPanel {
 
         jpLlista.add(jlstLlista);
 
+        JPanel jpButons = new JPanel();
+        jpLlista.add(jpButons);
+
+        jbActualitza = new JButton("Actualitza");
+        jpButons.add(jbActualitza);
+
         jbDeleteTable = new JButton("Eliminar Taula");
-        jpLlista.add(jbDeleteTable);
+        jpButons.add(jbDeleteTable);
+
 
     }
 
@@ -53,7 +61,7 @@ public class VistaTaules extends JPanel {
         JPanel jpTaula = new JPanel();
         jpReserva.add(jpTaula);
 
-        DefaultTableModel modelTaula = new DefaultTableModel() {
+        /*DefaultTableModel modelTaula = new DefaultTableModel() {
             public boolean isCellEditable(int rowIndex, int mColIndex) {
                 return false;
             }
@@ -63,14 +71,16 @@ public class VistaTaules extends JPanel {
         modelTaula.addColumn("Data/Hora");
 
         Object rowData[] = {"Row1-Column1", "Row1-Column2", "Row1-Column3"};
+        */
 
-
-        JTable jTable = new JTable(modelTaula);
+        JTable jTable = new JTable();
 
         jpReserva.add(new JScrollPane(jTable));
 
+        JPanel jpReservaL = new JPanel(new BorderLayout());
         JLabel jlReserves = new JLabel("Reserves:");
-        jpTaula.add(jlReserves);
+        jpReservaL.add(jlReserves);
+        jpTaula.add(jpReservaL);
 
 
 
@@ -101,6 +111,8 @@ public class VistaTaules extends JPanel {
         jbDeleteTable.addActionListener(controller);
         jbDeleteTable.setActionCommand("DELETE");
 
+        jbActualitza.addActionListener(controller);
+        jbActualitza.setActionCommand("ACTUALITZA");
 
 
     }
@@ -109,8 +121,8 @@ public class VistaTaules extends JPanel {
         return jtfNcomencals.getText();
     }
 
-    public String getJlstLlista() {
-        return jlstLlista.getSelectedValue().toString();
+    public int getJlstLlista() {
+        return (int) jlstLlista.getSelectedValue();
     }
 
     public void actualitzaLlista(DefaultListModel model1) {

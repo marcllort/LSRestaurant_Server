@@ -36,8 +36,10 @@ public class Main {
             Gestionador gestionador = new Gestionador(bdd);
             Server server = new Server(new Gestionador(bdd));
             Time hora = new Time(System.currentTimeMillis());
-            ArrayList<Reserva> as= new ArrayList<>();
-            as = bdd.mostraReservesTaula(3);
+            ArrayList<Integer> as= new ArrayList<>();
+            as = bdd.mostraTaules();
+            System.out.println("TAULESS "+ as.size());
+
            try {
                bdd.eliminaTaula(3);
            }catch (Exception e){

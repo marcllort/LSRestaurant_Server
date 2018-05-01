@@ -44,8 +44,13 @@ public class BDD {
         st.executeUpdate("INSERT INTO Taula(num_cadires) " + "VALUES (" + i + ")");
     }
 
-    public void mostraTaules(){
-        //ResultSet rs = st.executeQuery("SELECT ")
+    public ArrayList<Integer> mostraTaules() throws SQLException {
+        ArrayList<Integer> result = new ArrayList<>();
+        ResultSet rs = st.executeQuery("SELECT id_taula FROM Taula");
+        while (rs.next()){
+           result.add(rs.getInt("id_taula"));
+        }
+        return result;
     }
 
     public int reservaTaula(int comensals, java.sql.Date data, Time hora) {

@@ -243,5 +243,15 @@ public class Gestionador {
         bbdd.createTable(i);
     }
 
+    public ArrayList<Integer> llistaTaules(){
+        ArrayList<Integer> result = new ArrayList<>();
+        try {
+            result = bbdd.mostraTaules();
+        }catch (Exception e){
+            System.out.println("No hi ha taules");
+        }
+       return result;
+    }
+
 }
 

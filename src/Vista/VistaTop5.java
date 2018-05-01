@@ -3,6 +3,7 @@ package Vista;
 import javax.swing.*;
 import javax.xml.bind.JAXBPermission;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -54,4 +55,11 @@ public class VistaTop5 extends JPanel {
     private void setupPanel() {
         this.setBackground(Color.WHITE);
     }
+
+
+    public void registraControlador(ActionListener controller) {                            //Registro el boto serve amb un action comand de send, declarat en una constant
+
+
+    }
+
 }

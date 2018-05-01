@@ -3,14 +3,16 @@ package Vista;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class VistaTaules extends JPanel {
 
 
     private JTable jtTaula;
-    private JTextField jtaNcomencals;
+    private JTextField jtfNcomencals;
     private JList jlstLlista;
     private JButton jbDeleteTable;
+    private JButton jbAfegir;
 
     public VistaTaules() {
 
@@ -82,13 +84,41 @@ public class VistaTaules extends JPanel {
         JLabel jlNcomencals = new JLabel("Afegir taula de N començals: ");
         jpAddTaula.add(jlNcomencals);
 
-        jtaNcomencals = new JTextField();
-        jpAddTaula.add(jtaNcomencals);
-        jtaNcomencals.setColumns(5);
+        jtfNcomencals = new JTextField();
+        jpAddTaula.add(jtfNcomencals);
+        jtfNcomencals.setColumns(5);
 
-        JButton jbAfegir = new JButton("Afegir");
+        jbAfegir = new JButton("Afegir");
         jpAddTaula.add(jbAfegir);
 
+    }
+
+    public void registraControlador(ActionListener controller) {                            //Registro el boto serve amb un action comand de send, declarat en una constant
+
+        jbAfegir.addActionListener(controller);
+        jbAfegir.setActionCommand("AFEGIR");
+
+        jbDeleteTable.addActionListener(controller);
+        jbDeleteTable.setActionCommand("DELETE");
+
+
+
+    }
+
+    public String getJtfText(){
+        return jtfNcomencals.getText();
+    }
+
+    public String getJlstLlista() {
+        return jlstLlista.getSelectedValue().toString();
+    }
+
+    public void actualitzaLlista(DefaultListModel model1) {
+        jlstLlista.setModel(model1);
+    }
+
+    public void actualitzaTaula (DefaultTableModel model){
+        jtTaula.setModel(model);
     }
 
 }

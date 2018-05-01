@@ -15,9 +15,9 @@ public class ServidorVista extends JFrame {
     private VistaComandes vistaComandes;
     private VistaPlats vistaPlats;
     private VistaTop5 vistaTop5;
-    private DialogUpdatePlat dialogUpdatePlat;
+    //private DialogUpdatePlat dialogUpdatePlat;
 
-    private CardLayout layout;
+    private JPanel layout;
 
     //menu
     private JMenuBar jmbBarra;
@@ -34,20 +34,88 @@ public class ServidorVista extends JFrame {
         setTitle("DPO2-1718-PCS2-Server");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        layout = new CardLayout();
+
         this.vistaTaules = new VistaTaules();
-        //this.vistaComandes = new VistaComandes();
-        //this.dialogServirComandes = new DialogServirComandes();
-        this.dialogUpdatePlat = new DialogUpdatePlat();
-        this.getContentPane().setLayout(layout);
-        this.getContentPane().add("TAULES", dialogUpdatePlat);
-        creaMenu(new Controlador());
+        this.vistaComandes = new VistaComandes();
+        this.vistaPlats = new VistaPlats();
+        this.vistaTop5 = new VistaTop5();
+
+        layout = new JPanel(new CardLayout());
+
+        layout.add(vistaTaules, "TAULES");
+        layout.add(vistaPlats, "CARTA");
+        layout.add(vistaComandes, "COMANDES");
+        layout.add(vistaTop5, "TOP5");
+
+        getContentPane().add(layout);
+
+        //CardLayout cardLayout = (CardLayout) layout.getLayout();
+        //cardLayout.show(layout, "COMANDES");
+
+        creaMenu(new Controlador(this));
 
     }
 
 
     public void registraControlador(ActionListener controller) {                            //Registro el boto serve amb un action comand de send, declarat en una constant
 
+        jmiTaula.addActionListener(controller);
+        jmiTaula.setActionCommand("TAULES");
+        jmiPlats.addActionListener(controller);
+        jmiPlats.setActionCommand("CARTA");
+        jmiComandes.addActionListener(controller);
+        jmiComandes.setActionCommand("COMANDES");
+        jmiTop5.addActionListener(controller);
+        jmiTop5.setActionCommand("TOP5");
+
+        vistaTaules.registraControlador(controller);
+
+    }
+
+
+    public void activaTaula(Controlador controller){
+        this.vistaTaules = new VistaTaules();
+        CardLayout cardLayout = (CardLayout) layout.getLayout();
+        cardLayout.show(layout, "TAULES");
+        vistaTaules.registraControlador(controller);
+    }
+
+    public void activaCarta(Controlador controller){
+        this.vistaPlats = new VistaPlats();
+        CardLayout cardLayout = (CardLayout) layout.getLayout();
+        cardLayout.show(layout, "CARTA");
+        vistaPlats.registraControlador(controller);
+    }
+
+    public void activaComanda(Controlador controller){
+        this.vistaComandes = new VistaComandes();
+        CardLayout cardLayout = (CardLayout) layout.getLayout();
+        cardLayout.show(layout, "COMANDES");
+        vistaComandes.registraControlador(controller);
+    }
+
+    public void activaTop5(Controlador controller){
+        this.vistaTop5 = new VistaTop5();
+        CardLayout cardLayout = (CardLayout) layout.getLayout();
+        cardLayout.show(layout, "TOP5");
+        vistaTop5.registraControlador(controller);
+    }
+
+
+    public VistaTaules getVistaTaules() {
+        return vistaTaules;
+    }
+
+    public VistaComandes getVistaComandes() {
+        return vistaComandes;
+    }
+
+    public VistaPlats getVistaPlats() {
+        return vistaPlats;
+    }
+
+    public VistaTop5 getVistaTop5() {
+        return vistaTop5;
     }
 
     public void showError(String message) {
@@ -82,6 +150,14 @@ public class ServidorVista extends JFrame {
         jmiTaula.addActionListener(c);
         jmiTaula.setActionCommand("ACCES TAULA");
 
+    }
+
+    public JPanel getJpanelLayout() {
+        return layout;
+    }
+
+    public LayoutManager getLayout() {
+        return layout.getLayout();
     }
 
 }

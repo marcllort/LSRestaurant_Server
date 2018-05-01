@@ -3,6 +3,7 @@ package Vista;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class VistaComandes extends JPanel{
 
@@ -35,4 +36,10 @@ public class VistaComandes extends JPanel{
 
     }
 
+
+    public void registraControlador(ActionListener controller) {                            //Registro el boto serve amb un action comand de send, declarat en una constant
+
+
+
+    }
 }

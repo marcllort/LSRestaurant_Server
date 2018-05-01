@@ -1,3 +1,4 @@
+import Controlador.Controlador;
 import Model.*;
 import Network.Server;
 import Vista.ServidorVista;
@@ -17,6 +18,8 @@ public class Main {
     public static void main(String[] args) {
         Serverbbdd();
         ServidorVista vista = new ServidorVista();
+        Controlador controlador = new Controlador(vista);
+        vista.registraControlador(controlador);
         vista.setVisible(true);
     }
 

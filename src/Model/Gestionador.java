@@ -238,5 +238,10 @@ public class Gestionador {
         return bbdd.top5Plats();
     }
 
+
+    public void creaTaula(int i) throws java.sql.SQLException{
+        bbdd.createTable(i);
+    }
+
 }
 

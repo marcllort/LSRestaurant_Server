@@ -1,7 +1,6 @@
 package Controlador;
 
 
-import Model.BDD;
 import Model.Gestionador;
 import Model.Reserva;
 import Vista.*;
@@ -11,14 +10,13 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Controlador implements ActionListener {
 
     private ServidorVista vista;
     private String card;
     private Gestionador gestionador;
-    private int i;
+    private int index;
 
 
 
@@ -27,7 +25,7 @@ public class Controlador implements ActionListener {
         this.gestionador = gestionador;
         this.vista = vista;
         card = "TAULES";
-        i=0;
+        index =1;
         handleLlista();
         vista.creaMenu(this);
     }
@@ -85,9 +83,8 @@ public class Controlador implements ActionListener {
     }
 
     private void handleTaules(ActionEvent e) {
-        handleLlista();
         vista.getVistaTaules().actualitzaTaula(creaModel(gestionador.mostraReseves(1)));
-        int index = Integer.parseInt(vista.getVistaTaules().getJlstLlista());
+        index = vista.getVistaTaules().getJlstLlista() + 1;
         switch (e.getActionCommand()) {
             case "AFEGIR":
                 try {
@@ -109,10 +106,7 @@ public class Controlador implements ActionListener {
                 break;
 
             case "ACTUALITZA":
-                System.out.println("sdds: "+vista.getVistaTaules().getJlstLlista());
-                index = Integer.parseInt(vista.getVistaTaules().getJlstLlista());
-                System.out.println(index);
-                vista.getVistaTaules().actualitzaTaula(creaModel(gestionador.mostraReseves(index)));
+
                 handleLlista();
                 //System.out.println(gestionador.mostraReseves(1));
 
@@ -122,12 +116,18 @@ public class Controlador implements ActionListener {
     }
 
     private void handleLlista(){
+
+        vista.getVistaTaules().actualitzaTaula(creaModel(gestionador.mostraReseves(index)));
         int[] llista = convertIntegers(gestionador.llistaTaules());
         DefaultListModel modelLlista = new DefaultListModel();
         for (int f : llista){
             modelLlista.addElement(f);
         }
         vista.getVistaTaules().actualitzaLlista(modelLlista);
+        //System.out.println("sdds: "+vista.getVistaTaules().getJlstLlista());
+        //index = Integer.parseInt(vista.getVistaTaules().getJlstLlista());
+        System.out.println(index);
+
     }
 
 

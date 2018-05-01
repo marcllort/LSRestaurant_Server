@@ -33,7 +33,7 @@ public class VistaTaules extends JPanel {
 
         JPanel jpLlista = new JPanel();
         jspSplit.setLeftComponent(jpLlista);
-        jpLlista.setLayout(new BorderLayout());
+        //jpLlista.setLayout();
 
         jlstLlista = new JList();
 
@@ -48,7 +48,7 @@ public class VistaTaules extends JPanel {
         jpButons.add(jbActualitza, BorderLayout.SOUTH);
 
         jbDeleteTable = new JButton("Eliminar Taula");
-        jpButons.add(jbDeleteTable, BorderLayout.SOUTH);
+        jpButons.add(jbDeleteTable);
 
 
     }
@@ -112,8 +112,8 @@ public class VistaTaules extends JPanel {
         return jtfNcomencals.getText();
     }
 
-    public String getJlstLlista() {
-        return jlstLlista.getSelectedValue().toString();
+    public int getJlstLlista() {
+        return jlstLlista.getSelectedIndex();
     }
 
     public void actualitzaLlista(DefaultListModel model1) {

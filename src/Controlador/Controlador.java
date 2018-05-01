@@ -9,6 +9,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Controlador implements ActionListener {
@@ -19,15 +20,16 @@ public class Controlador implements ActionListener {
     private int index;
 
 
-
     public Controlador(ServidorVista vista, Gestionador gestionador) {
 
         this.gestionador = gestionador;
         this.vista = vista;
         card = "TAULES";
-        index =1;
+        index = 1;
         handleLlista();
         vista.creaMenu(this);
+        vista.getVistaTaules().actualitzaTaula(creaModel(gestionador.mostraReseves(1)));
+
     }
 
     @Override
@@ -38,19 +40,15 @@ public class Controlador implements ActionListener {
         } else {
             switch (card) {
                 case "TAULES":
-                    //vista.creaMenu(this);
                     handleTaules(e);
                     break;
                 case "CARTA":
-                    //vista.creaMenu(this);
 
                     break;
                 case "COMANDES":
-                    //vista.creaMenu(this);
 
                     break;
                 case "TOP5":
-                    //vista.creaMenu(this);
 
                     break;
             }
@@ -83,13 +81,11 @@ public class Controlador implements ActionListener {
     }
 
     private void handleTaules(ActionEvent e) {
-        vista.getVistaTaules().actualitzaTaula(creaModel(gestionador.mostraReseves(1)));
-        index = vista.getVistaTaules().getJlstLlista() + 1;
+
         switch (e.getActionCommand()) {
             case "AFEGIR":
                 try {
                     int n = Integer.parseInt(vista.getVistaTaules().getJtfText());
-                    System.out.println("AFEGIR" + n);
                     gestionador.creaTaula(n);
                 } catch (Exception e1) {
                     vista.showError("Introdueixi un nombre!");
@@ -98,16 +94,23 @@ public class Controlador implements ActionListener {
 
             case "DELETE":
 
-                if (index != -1) {
+                try {
+                    gestionador.eliminaTaula(Integer.parseInt(vista.getVistaTaules().getJlstLlista()));
+                    handleLlista();
 
-                    System.out.println("DELETE");
-                } else {
-                    vista.showError("No hi ha taules ha borrar!");
+                } catch (NullPointerException e2) {
+                    vista.showError("Cap taula seleccionada!");
+                } catch (Exception e1) {
+                    vista.showError(e1.getMessage());
                 }
                 break;
 
             case "ACTUALITZA":
-
+                try {
+                    index = Integer.parseInt(vista.getVistaTaules().getJlstLlista());
+                } catch (Exception e1) {
+                    vista.showError("Cap taula seleccionada!");
+                }
                 handleLlista();
                 //System.out.println(gestionador.mostraReseves(1));
 
@@ -116,12 +119,12 @@ public class Controlador implements ActionListener {
 
     }
 
-    private void handleLlista(){
+    private void handleLlista() {
 
         vista.getVistaTaules().actualitzaTaula(creaModel(gestionador.mostraReseves(index)));
         int[] llista = convertIntegers(gestionador.llistaTaules());
         DefaultListModel modelLlista = new DefaultListModel();
-        for (int f : llista){
+        for (int f : llista) {
             modelLlista.addElement(f);
         }
         vista.getVistaTaules().actualitzaLlista(modelLlista);
@@ -132,8 +135,7 @@ public class Controlador implements ActionListener {
     }
 
 
-
-    private DefaultTableModel creaModel(ArrayList<Reserva> reserves){
+    private DefaultTableModel creaModel(ArrayList<Reserva> reserves) {
         DefaultTableModel modelTaula = new DefaultTableModel() {
             public boolean isCellEditable(int rowIndex, int mColIndex) {
                 return false;
@@ -144,19 +146,17 @@ public class Controlador implements ActionListener {
         modelTaula.addColumn("Data/Hora");
 
 
-        for (Reserva r : reserves){
-            String[] reservesArr = new String[]{r.getUsuari(),r.getnComencals().toString(), r.getHora().toString()+"//"+r.getData().toString()};
+        for (Reserva r : reserves) {
+            String[] reservesArr = new String[]{r.getUsuari(), r.getnComencals().toString(), r.getHora().toString() + "//" + r.getData().toString()};
             modelTaula.addRow(reservesArr);
         }
 
         return modelTaula;
     }
 
-    public static int[] convertIntegers(ArrayList<Integer> integers)
-    {
+    public static int[] convertIntegers(ArrayList<Integer> integers) {
         int[] ret = new int[integers.size()];
-        for (int i=0; i < ret.length; i++)
-        {
+        for (int i = 0; i < ret.length; i++) {
             ret[i] = integers.get(i).intValue();
         }
         return ret;

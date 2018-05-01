@@ -112,8 +112,9 @@ public class VistaTaules extends JPanel {
         return jtfNcomencals.getText();
     }
 
-    public int getJlstLlista() {
-        return jlstLlista.getSelectedIndex();
+    public String getJlstLlista() throws Exception{
+        //return jlstLlista.getSelectedIndex();
+        return jlstLlista.getSelectedValue().toString();
     }
 
     public void actualitzaLlista(DefaultListModel model1) {

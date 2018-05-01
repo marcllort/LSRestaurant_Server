@@ -107,18 +107,17 @@ public class BDD {
         ArrayList<Reserva> result = new ArrayList<>();
         result = mostraReservesTaula(idTaula);
         if (result.size() == 0) {
-            PreparedStatement ps = con.prepareStatement("DELETE FROM Taula WHERE id_taula = " + idTaula);
-            ps.executeUpdate();
+
+               PreparedStatement ps = con.prepareStatement("DELETE FROM Taula WHERE id_taula = " + idTaula);
+               ps.executeUpdate();
+
         } else {
-            Exception e = new Exception("La taula no es pot eliminar perque te reserves");
+            SQLException e = new SQLException("La taula no es pot eliminar perque té reserves!");
             throw e;
         }
 
     }
 
-
-    //FALTA UNA FUNCIO QUE BORRI TAULA I LES RESERVES QUE HAVIA PER AQUELL TAULA
-    //
 
 
     //Plat

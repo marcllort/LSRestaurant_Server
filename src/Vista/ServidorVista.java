@@ -62,7 +62,7 @@ public class ServidorVista extends JFrame {
 
 
         vistaTaules.registraControlador(controller);
-
+        vistaTop5.registraControlador(controller);
     }
 
 

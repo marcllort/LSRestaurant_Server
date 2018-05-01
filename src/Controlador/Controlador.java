@@ -18,23 +18,18 @@ public class Controlador implements ActionListener {
     private ServidorVista vista;
     private String card;
     private Gestionador gestionador;
-    private BDD bdd;
+    private int i;
 
-    public Controlador(ServidorVista vista) {
 
-        gestionador = new Gestionador(bdd);
+
+    public Controlador(ServidorVista vista, Gestionador gestionador) {
+
+        this.gestionador = gestionador;
         this.vista = vista;
         card = "TAULES";
-
-    }
-
-    public Controlador(ServidorVista vista, BDD bdd) {
-
-        this.bdd = bdd;
-        gestionador = new Gestionador(bdd);
-        this.vista = vista;
-        card = "TAULES";
-
+        i=0;
+        handleLlista();
+        vista.creaMenu(this);
     }
 
     @Override
@@ -45,15 +40,19 @@ public class Controlador implements ActionListener {
         } else {
             switch (card) {
                 case "TAULES":
+                    vista.creaMenu(this);
                     handleTaules(e);
                     break;
                 case "CARTA":
+                    vista.creaMenu(this);
 
                     break;
                 case "COMANDES":
+                    vista.creaMenu(this);
 
                     break;
                 case "TOP5":
+                    vista.creaMenu(this);
 
                     break;
             }
@@ -88,7 +87,7 @@ public class Controlador implements ActionListener {
     private void handleTaules(ActionEvent e) {
         handleLlista();
         vista.getVistaTaules().actualitzaTaula(creaModel(gestionador.mostraReseves(1)));
-        int index = vista.getVistaTaules().getJlstLlista();
+        int index = Integer.parseInt(vista.getVistaTaules().getJlstLlista());
         switch (e.getActionCommand()) {
             case "AFEGIR":
                 try {
@@ -110,7 +109,8 @@ public class Controlador implements ActionListener {
                 break;
 
             case "ACTUALITZA":
-                index = vista.getVistaTaules().getJlstLlista();
+                System.out.println("sdds: "+vista.getVistaTaules().getJlstLlista());
+                index = Integer.parseInt(vista.getVistaTaules().getJlstLlista());
                 System.out.println(index);
                 vista.getVistaTaules().actualitzaTaula(creaModel(gestionador.mostraReseves(index)));
                 handleLlista();
@@ -124,8 +124,8 @@ public class Controlador implements ActionListener {
     private void handleLlista(){
         int[] llista = convertIntegers(gestionador.llistaTaules());
         DefaultListModel modelLlista = new DefaultListModel();
-        for (int i : llista){
-            modelLlista.addElement(i);
+        for (int f : llista){
+            modelLlista.addElement(f);
         }
         vista.getVistaTaules().actualitzaLlista(modelLlista);
     }

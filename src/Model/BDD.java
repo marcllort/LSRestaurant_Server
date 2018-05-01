@@ -9,8 +9,8 @@ import java.util.*;
 
 public class BDD {
 
-    private static String username ;
-    private static String password ;
+    private static String username;
+    private static String password;
     private static String ipBBDD;
     private static int portBBDD;
     private static String nomBBDD;
@@ -29,7 +29,7 @@ public class BDD {
         username = config.lectorUsernameBBDD();
         password = config.lectorPasswordBBDD();
 
-        url= "jdbc:mysql://" + ipBBDD + ":" + portBBDD + "/" + nomBBDD + "?useSSL=false";
+        url = "jdbc:mysql://" + ipBBDD + ":" + portBBDD + "/" + nomBBDD + "?useSSL=false";
 
         Connection connection = DriverManager.getConnection(url, username, password);
         System.out.println("BBDD: Base de dades connectada");
@@ -47,8 +47,8 @@ public class BDD {
     public ArrayList<Integer> mostraTaules() throws SQLException {
         ArrayList<Integer> result = new ArrayList<>();
         ResultSet rs = st.executeQuery("SELECT id_taula FROM Taula");
-        while (rs.next()){
-           result.add(rs.getInt("id_taula"));
+        while (rs.next()) {
+            result.add(rs.getInt("id_taula"));
         }
         return result;
     }
@@ -80,16 +80,16 @@ public class BDD {
 
     }
 
-    public ArrayList<Reserva> mostraReservesTaula(int idTaula){
+    public ArrayList<Reserva> mostraReservesTaula(int idTaula) {
         ArrayList<Reserva> result = new ArrayList<>();
         try {
-            ResultSet rs = st.executeQuery("SELECT usuari, n_comensals, data, hora FROM Reserva WHERE id_taula = "+idTaula);
-            while (rs.next()){
+            ResultSet rs = st.executeQuery("SELECT usuari, n_comensals, data, hora FROM Reserva WHERE id_taula = " + idTaula);
+            while (rs.next()) {
                 String usr = rs.getString("usuari");
                 int com = rs.getInt("n_comensals");
                 Date data = rs.getDate("data");
                 Time hora = rs.getTime("hora");
-                Reserva res = new Reserva(usr,com,data,hora);
+                Reserva res = new Reserva(usr, com, data, hora);
                 result.add(res);
 
 
@@ -102,15 +102,15 @@ public class BDD {
 
 
     }
-    public void eliminaTaula(int idTaula)throws Exception{
+
+    public void eliminaTaula(int idTaula) throws Exception {
         ArrayList<Reserva> result = new ArrayList<>();
         result = mostraReservesTaula(idTaula);
-        if(result.size() == 0){
-            PreparedStatement ps = con.prepareStatement("DELETE FROM Taula WHERE id_taula = "+idTaula);
+        if (result.size() == 0) {
+            PreparedStatement ps = con.prepareStatement("DELETE FROM Taula WHERE id_taula = " + idTaula);
             ps.executeUpdate();
-        }
-        else {
-          Exception e =  new Exception("La taula no es pot eliminar perque te reserves");
+        } else {
+            Exception e = new Exception("La taula no es pot eliminar perque te reserves");
             throw e;
         }
 
@@ -326,14 +326,14 @@ public class BDD {
         try {
             rs = st.executeQuery("SELECT MAX(hora) AS hour, MAX(data) AS Date FROM Comanda WHERE usuari = '" + usuari + "'" +
                     "GROUP BY usuari ");
-            Date data = new Date(12,12,12);
-            Time hora = new Time(12,12,12);
+            Date data = new Date(12, 12, 12);
+            Time hora = new Time(12, 12, 12);
             if (rs.next()) {
                 data = rs.getDate("Date");
                 hora = rs.getTime("hour");
             } else {
-                Date dat = new Date(12,12,12);
-                if (data.equals(dat) ){
+                Date dat = new Date(12, 12, 12);
+                if (data.equals(dat)) {
                     rs = st.executeQuery("SELECT data, hora FROM Reserva WHERE usuari = '" + usuari + "'");
 
                     if (rs.next()) {

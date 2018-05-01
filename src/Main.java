@@ -18,11 +18,17 @@ public class Main {
     public static void main(String[] args) {
         try {
             BDD bdd = new BDD();
-            Serverbbdd(bdd);
+            Gestionador gestionador = new Gestionador(bdd);
+            Server server = new Server(new Gestionador(bdd));
+            server.startServer();
+
             ServidorVista vista = new ServidorVista();
-            Controlador controlador = new Controlador(vista, bdd);
+
+            Controlador controlador = new Controlador(vista, gestionador);
+
             vista.registraControlador(controlador);
             vista.setVisible(true);
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -39,19 +45,10 @@ public class Main {
         try {
 
 
-            Gestionador gestionador = new Gestionador(bdd);
-            Server server = new Server(new Gestionador(bdd));
-            Time hora = new Time(System.currentTimeMillis());
-            ArrayList<Reserva> as= new ArrayList<>();
-            as = bdd.mostraReservesTaula(3);
 
 
 
-            //System.out.println(hora);
-            //afegeixPlatsBdd(bdd);
-            //afegeixReservaBdd(gestionador);
 
-            server.startServer();
 
         } catch (Exception e) {
             System.out.println("ERROR MAIN");

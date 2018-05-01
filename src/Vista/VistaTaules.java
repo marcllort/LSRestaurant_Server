@@ -33,21 +33,22 @@ public class VistaTaules extends JPanel {
 
         JPanel jpLlista = new JPanel();
         jspSplit.setLeftComponent(jpLlista);
-        jpLlista.setLayout(new GridLayout(0, 1, 0, 0));
+        jpLlista.setLayout(new BorderLayout());
 
         jlstLlista = new JList();
 
 
-        jpLlista.add(jlstLlista);
+
+        jpLlista.add(new JScrollPane(jlstLlista));
 
         JPanel jpButons = new JPanel();
         jpLlista.add(jpButons);
 
         jbActualitza = new JButton("Actualitza");
-        jpButons.add(jbActualitza);
+        jpButons.add(jbActualitza, BorderLayout.SOUTH);
 
         jbDeleteTable = new JButton("Eliminar Taula");
-        jpButons.add(jbDeleteTable);
+        jpButons.add(jbDeleteTable, BorderLayout.SOUTH);
 
 
     }
@@ -58,35 +59,23 @@ public class VistaTaules extends JPanel {
         jspSplit.setRightComponent(jpReserva);
         jpReserva.setLayout(new GridLayout(0, 1, 0, 0));
 
+        //taula
         JPanel jpTaula = new JPanel();
-        jpReserva.add(jpTaula);
+        JLabel jlReserves = new JLabel("Reserves:");
+        jpTaula.add(jlReserves);
 
-        /*DefaultTableModel modelTaula = new DefaultTableModel() {
-            public boolean isCellEditable(int rowIndex, int mColIndex) {
-                return false;
+        jtTaula = new JTable(){
+            @Override
+            public Dimension getPreferredScrollableViewportSize() {
+                return new Dimension(350, jtTaula.getRowHeight() * 14);
             }
         };
-        modelTaula.addColumn("Reserva");
-        modelTaula.addColumn("N persones");
-        modelTaula.addColumn("Data/Hora");
 
-        Object rowData[] = {"Row1-Column1", "Row1-Column2", "Row1-Column3"};
-        */
-
-        JTable jTable = new JTable();
-
-        jpReserva.add(new JScrollPane(jTable));
-
-        JPanel jpReservaL = new JPanel(new BorderLayout());
-        JLabel jlReserves = new JLabel("Reserves:");
-        jpReservaL.add(jlReserves);
-        jpTaula.add(jpReservaL);
+        jpTaula.add(new JScrollPane(jtTaula));
+        jpReserva.add(jpTaula);
 
 
-
-        jtTaula = new JTable();
-        jpTaula.add(jtTaula);
-
+        //ADD
         JPanel jpAddTaula = new JPanel();
         jpReserva.add(jpAddTaula);
         jpAddTaula.setLayout(new BoxLayout(jpAddTaula, BoxLayout.X_AXIS));
@@ -95,11 +84,13 @@ public class VistaTaules extends JPanel {
         jpAddTaula.add(jlNcomencals);
 
         jtfNcomencals = new JTextField();
+        jtfNcomencals.setMaximumSize(new Dimension(Integer.MAX_VALUE, jtfNcomencals.getMinimumSize().height));
         jpAddTaula.add(jtfNcomencals);
         jtfNcomencals.setColumns(5);
 
         jbAfegir = new JButton("Afegir");
         jpAddTaula.add(jbAfegir);
+
 
     }
 
@@ -121,8 +112,8 @@ public class VistaTaules extends JPanel {
         return jtfNcomencals.getText();
     }
 
-    public int getJlstLlista() {
-        return (int) jlstLlista.getSelectedValue();
+    public String getJlstLlista() {
+        return jlstLlista.getSelectedValue().toString();
     }
 
     public void actualitzaLlista(DefaultListModel model1) {

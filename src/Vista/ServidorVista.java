@@ -52,21 +52,14 @@ public class ServidorVista extends JFrame {
         //CardLayout cardLayout = (CardLayout) layout.getLayout();
         //cardLayout.show(layout, "COMANDES");
 
-        creaMenu(new Controlador(this));
+
 
     }
 
 
     public void registraControlador(ActionListener controller) {                            //Registro el boto serve amb un action comand de send, declarat en una constant
 
-        jmiTaula.addActionListener(controller);
-        jmiTaula.setActionCommand("TAULES");
-        jmiPlats.addActionListener(controller);
-        jmiPlats.setActionCommand("CARTA");
-        jmiComandes.addActionListener(controller);
-        jmiComandes.setActionCommand("COMANDES");
-        jmiTop5.addActionListener(controller);
-        jmiTop5.setActionCommand("TOP5");
+
 
         vistaTaules.registraControlador(controller);
 
@@ -122,7 +115,7 @@ public class ServidorVista extends JFrame {
         JOptionPane.showMessageDialog(this, message);                               //JDialog per quan tinguem algun error el mostri
     }
 
-    public void creaMenu(Controlador c) {
+    public void creaMenu(Controlador controller) {
 
         jmiTaula = new JMenuItem("Taules");
         jmiPlats = new JMenuItem("Carta");
@@ -141,14 +134,16 @@ public class ServidorVista extends JFrame {
         this.setJMenuBar(jmbBarra);
 
         // Registrem controlador a les diferents opcions del menu
-        jmiPlats.addActionListener(c);
-        jmiPlats.setActionCommand("ACCES CARTA");
-        jmiTop5.addActionListener(c);
-        jmiTop5.setActionCommand("ACCES TOP5");
-        jmiComandes.setActionCommand("ACCES COMANDA");
-        jmiComandes.addActionListener(c);
-        jmiTaula.addActionListener(c);
-        jmiTaula.setActionCommand("ACCES TAULA");
+
+        jmiTaula.addActionListener(controller);
+        jmiTaula.setActionCommand("TAULES");
+        jmiPlats.addActionListener(controller);
+        jmiPlats.setActionCommand("CARTA");
+        jmiComandes.addActionListener(controller);
+        jmiComandes.setActionCommand("COMANDES");
+        jmiTop5.addActionListener(controller);
+        jmiTop5.setActionCommand("TOP5");
+
 
     }
 

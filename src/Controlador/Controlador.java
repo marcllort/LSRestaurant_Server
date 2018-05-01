@@ -32,7 +32,7 @@ public class Controlador implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        vista.creaMenu(this);
         if (e.getSource() instanceof JMenuItem) {
             handleMenu(e);
         } else {
@@ -99,6 +99,7 @@ public class Controlador implements ActionListener {
             case "DELETE":
 
                 if (index != -1) {
+
                     System.out.println("DELETE");
                 } else {
                     vista.showError("No hi ha taules ha borrar!");

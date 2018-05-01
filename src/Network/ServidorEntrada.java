@@ -14,16 +14,22 @@ public class ServidorEntrada extends Thread {
     private final Gestionador gestionador;
     private Socket sClient;
     private ObjectOutputStream ooStream;
-    //private Controlador controller;
 
-
+    /**
+     * Construcor amb parametres del servidor per el client d'entrada
+     *
+     * @param sClient
+     * @param gestionador
+     */
     public ServidorEntrada(Socket sClient, Gestionador gestionador) {
         this.sClient = sClient;
         this.gestionador = gestionador;
-        //this.controller = controller;
     }
 
 
+    /**
+     * Override de run encarregat de generar reserves amb el usuari escrit, i genera un password aleatori
+     */
     @Override
 
     public void run() {
@@ -32,6 +38,7 @@ public class ServidorEntrada extends Thread {
             DataOutputStream doStream = new DataOutputStream(sClient.getOutputStream());
             ObjectInputStream diStream = new ObjectInputStream(sClient.getInputStream());
             ooStream = new ObjectOutputStream(sClient.getOutputStream());
+
             while (true) {
                 Reserva reserva = (Reserva) diStream.readObject();
 
@@ -46,21 +53,8 @@ public class ServidorEntrada extends Thread {
                 }
             }
         } catch (IOException | ClassNotFoundException e) {
-            //e.printStackTrace();
             System.out.println("Entrada: Client desconnectat");
         }
     }
-
-
-    //Funcions
-
-    public void enviaCarta() {
-        try {
-            ooStream.writeObject(gestionador.retornaCarta());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
 
 }

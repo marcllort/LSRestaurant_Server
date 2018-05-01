@@ -9,6 +9,9 @@ public class VistaComandes extends JPanel{
 
     private JTable jtTaula;
 
+    /**
+     * Constructor de la vista del panel que mostra la taula de comandes
+     */
     public VistaComandes() {
 
         this.setLayout(new BorderLayout(0, 0));
@@ -31,12 +34,15 @@ public class VistaComandes extends JPanel{
         //Acabada
         jtTaula = new JTable(modelTaula);
 
-
         this.add(new JScrollPane(jtTaula), BorderLayout.CENTER);
-
     }
 
 
+
+    /**
+     * Funcio per registrar el controlador de aquest panel
+     * @param controller
+     */
     public void registraControlador(ActionListener controller) {                            //Registro el boto serve amb un action comand de send, declarat en una constant
 
 

@@ -120,6 +120,10 @@ public class BDD {
 
 
 
+    //FALTA UNA FUNCIO QUE BORRI TAULA I LES RESERVES QUE HAVIA PER AQUELL TAULA
+    //
+
+
     //Plat
 
     public void queriePlat(String querie) {

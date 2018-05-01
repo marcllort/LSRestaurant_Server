@@ -21,17 +21,25 @@ public class ServidorReserva extends Thread {
     private DataInputStream diStream;
     private ObjectInputStream oiStream;
 
-    //private Controlador controller;
 
-
+    /**
+     * Constructor amb parametres per crear el servidor dedicat
+     *
+     * @param sClient
+     * @param servers
+     * @param gestionador
+     */
     public ServidorReserva(Socket sClient, ArrayList<ServidorReserva> servers, Gestionador gestionador) {
         this.sClient = sClient;
         this.servers = servers;
         this.gestionador = gestionador;
-        //this.controller = controller;
     }
 
-
+    /**
+     * Override de run del server que s'encarrega d'interactuar amb el client
+     * Comprova que el usuari password siguin correctes
+     * Comprova les comandes que envien i retorna al usuari si sha realizat correctament
+     */
     @Override
 
     public void run() {
@@ -42,7 +50,7 @@ public class ServidorReserva extends Thread {
             ooStream = new ObjectOutputStream(sClient.getOutputStream());
             oiStream = new ObjectInputStream(sClient.getInputStream());
 
-            while(true) {
+            while (true) {
 
                 user = (Usuari) oiStream.readObject();
                 System.out.println("Reserva: " + user.getUser() + " - " + user.getPassword());
@@ -70,19 +78,16 @@ public class ServidorReserva extends Thread {
                     System.out.println("Reserva: Usuari o Password incorrectes!");
                 }
             }
-        } catch (MySQLIntegrityConstraintViolationException r) {
 
+        } catch (MySQLIntegrityConstraintViolationException r) {
             try {
                 doStream.writeUTF("El plat no existeix");
                 System.out.println("Error mysql");
             } catch (IOException e) {
                 r.printStackTrace();
             }
-
-
         } catch (IOException | ClassNotFoundException | SQLException e) {
             servers.remove(this);                                                   //En cas de que es desconnecti el client o hi hagi algun error tanco el server dedicat
-            //e.printStackTrace();
             System.out.println("Client Desonnectat");
         }
     }
@@ -90,6 +95,9 @@ public class ServidorReserva extends Thread {
 
     //Funcions
 
+    /**
+     * Funció per enviar comanda al client del servidor dedicat
+     */
     public void enviaComanda() {
         try {
             ooStream.writeObject(gestionador.retornaCarta());
@@ -98,6 +106,22 @@ public class ServidorReserva extends Thread {
         }
     }
 
+    /**
+     * Funció per enviar la carta al client del servidor dedicat
+     */
+    public void enviaCarta() {
+        try {
+            ooStream.writeObject(gestionador.retornaCarta());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Getter de user del servidor dedicat
+     *
+     * @return string de usuari
+     */
     public String getUser() {
         return user.getUser();
     }

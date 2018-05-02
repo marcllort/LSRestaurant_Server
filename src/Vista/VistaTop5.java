@@ -11,10 +11,11 @@ import java.util.Collections;
 public class VistaTop5 extends JPanel {
     private JButton jbSemanal;
     private JButton jbTotal;
+    private Grafic gr;
 
 
     public  VistaTop5(){
-        Grafic gr = new Grafic();
+         gr = new Grafic();
         jbTotal = new JButton("Ranking Total");
         jbSemanal = new JButton("Ranking Semanal");
         ArrayList<String> plats = new ArrayList<>();
@@ -52,10 +53,14 @@ public class VistaTop5 extends JPanel {
         plats.add("ASdawe");
         plats.add("ASddass");
 
-        Grafic gr = new Grafic();
+        this.remove(gr);
+        gr = new Grafic();
         gr.grafic(indexes,plats);
+
+        //this.add(new JLabel("HOLA"), BorderLayout.CENTER);
         this.add(gr, BorderLayout.CENTER);
         this.repaint();
+        this.revalidate();
 
     }
 

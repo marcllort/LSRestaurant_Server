@@ -39,9 +39,11 @@ public class Controlador implements ActionListener {
 
             switch (card) {
                 case "TAULES":
+                    //vista.creaMenu(this);
                     handleTaules(e);
                     break;
                 case "CARTA":
+                    //vista.creaMenu(this);
 
                     break;
                 case "COMANDES":
@@ -56,6 +58,7 @@ public class Controlador implements ActionListener {
 
                     break;
                 case "TOP5":
+                    //vista.creaMenu(this);
 
                     break;
             }
@@ -115,7 +118,6 @@ public class Controlador implements ActionListener {
 
             case "ACTUALITZA":
                 try {
-                    System.out.println("prova");
                     index = Integer.parseInt(vista.getVistaTaules().getJlstLlista());
                     handleLlista();
 
@@ -123,6 +125,7 @@ public class Controlador implements ActionListener {
                     vista.showError("Cap taula seleccionada!");
                 }
 
+                //System.out.println(gestionador.mostraReseves(1));
 
                 break;
         }
@@ -171,6 +174,23 @@ public class Controlador implements ActionListener {
             ret[i] = integers.get(i).intValue();
         }
         return ret;
+    }
+    private void handleTop5(ActionEvent e){
+
+        switch (e.getActionCommand()){
+            case "Semanal":
+                System.out.println("Semanal");
+                int[] a = {1,2,3,4,5};
+                vista.getVistaTop5().grSemanal(a);
+                break;
+
+            case "Total":
+                System.out.println("Total");
+                int[] b = {5,4,3,2,2};
+                vista.getVistaTop5().grSemanal(b);
+                break;
+        }
+
     }
 
 }

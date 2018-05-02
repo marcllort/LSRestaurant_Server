@@ -261,5 +261,9 @@ public class Gestionador {
         bbdd.eliminaTaula(i);
     }
 
+    public ArrayList<InfoComandes> llistaComandes()throws Exception{
+        return bbdd.llistaComandes();
+    }
+
 }
 

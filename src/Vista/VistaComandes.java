@@ -1,13 +1,18 @@
 package Vista;
 
+import Model.InfoComandes;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class VistaComandes extends JPanel{
 
     private JTable jtTaula;
+    private DefaultTableModel modelTaula;
+    private JScrollPane scroll;
 
     /**
      * Constructor de la vista del panel que mostra la taula de comandes
@@ -17,7 +22,7 @@ public class VistaComandes extends JPanel{
         this.setLayout(new BorderLayout(0, 0));
 
         //Creem taula
-        DefaultTableModel modelTaula = new DefaultTableModel() {
+        modelTaula = new DefaultTableModel() {
             public boolean isCellEditable(int rowIndex, int mColIndex) {
                 return false;
             }
@@ -34,7 +39,9 @@ public class VistaComandes extends JPanel{
         //Acabada
         jtTaula = new JTable(modelTaula);
 
-        this.add(new JScrollPane(jtTaula), BorderLayout.CENTER);
+        scroll = new JScrollPane(jtTaula);
+
+        this.add(scroll, BorderLayout.CENTER);
     }
 
 
@@ -48,4 +55,21 @@ public class VistaComandes extends JPanel{
 
 
     }
+
+    public void setModelTaula(ArrayList<InfoComandes> modelTaulas){
+
+        for (InfoComandes info : modelTaulas){
+            Object rowData[] = {info.getUsuari(), info.getTotalPlats(), info.getPlatsPendents(), info.getHora()+"//"+info.getHora()};
+            modelTaula.addRow(rowData);
+        }
+
+
+        scroll.repaint();
+        scroll.revalidate();
+
+
+    }
+
+
+
 }

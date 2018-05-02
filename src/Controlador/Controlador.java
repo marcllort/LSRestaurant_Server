@@ -34,30 +34,33 @@ public class Controlador implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        //vista.creaMenu(this);
-        if (e.getSource() instanceof JMenuItem) {
+
             handleMenu(e);
-        } else {
+
             switch (card) {
                 case "TAULES":
-                    //vista.creaMenu(this);
                     handleTaules(e);
                     break;
                 case "CARTA":
-                    //vista.creaMenu(this);
 
                     break;
                 case "COMANDES":
-                    //vista.creaMenu(this);
+                    try {
+                        JPanel vistaComanda = vista.getVistaComandes();
+                        ((VistaComandes) vistaComanda).setModelTaula(gestionador.llistaComandes());
+
+                    } catch (Exception e1) {
+                        e1.printStackTrace();
+                        vista.showError("No hi ha reserves!");
+                    }
 
                     break;
                 case "TOP5":
-                    //vista.creaMenu(this);
 
                     break;
             }
 
-        }
+
 
     }
 
@@ -70,15 +73,15 @@ public class Controlador implements ActionListener {
                 card = "TAULES";
                 break;
             case "CARTA":
-                vista.activaCarta(this);
+                vista.activaCarta();
                 card = "CARTA";
                 break;
             case "COMANDES":
-                vista.activaComanda(this);
+                vista.activaComanda();
                 card = "COMANDES";
                 break;
             case "TOP5":
-                vista.activaTop5(this);
+                vista.activaTop5();
                 card = "TOP5";
                 break;
         }
@@ -112,6 +115,7 @@ public class Controlador implements ActionListener {
 
             case "ACTUALITZA":
                 try {
+                    System.out.println("prova");
                     index = Integer.parseInt(vista.getVistaTaules().getJlstLlista());
                     handleLlista();
 
@@ -119,7 +123,6 @@ public class Controlador implements ActionListener {
                     vista.showError("Cap taula seleccionada!");
                 }
 
-                //System.out.println(gestionador.mostraReseves(1));
 
                 break;
         }
@@ -135,8 +138,7 @@ public class Controlador implements ActionListener {
             modelLlista.addElement(f);
         }
         vista.getVistaTaules().actualitzaLlista(modelLlista);
-        //System.out.println("sdds: "+vista.getVistaTaules().getJlstLlista());
-        //index = Integer.parseInt(vista.getVistaTaules().getJlstLlista());
+
 
     }
 

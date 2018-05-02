@@ -29,6 +29,13 @@ public class Main {
             vista.registraControlador(controlador);
             vista.setVisible(true);
 
+            ArrayList<Plat> arr = new ArrayList<Plat>();
+            ArrayList<Plat> arr1 = new ArrayList<Plat>();
+            arr.add(new Plat("gamba", 12));
+            Comanda comanda = new Comanda(arr, gestionador.newData(12, 1, 2019), new Time(12, 40, 00), "mam");
+
+            bdd.creaComanda(comanda);
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

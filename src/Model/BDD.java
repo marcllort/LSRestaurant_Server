@@ -315,7 +315,7 @@ public class BDD {
 
     public void creaComanda(Comanda comanda) throws SQLException {
         for (Plat plat : comanda.getPlats()) {
-            System.out.println(comanda.getUsuari() + plat.getNomPlat());
+            System.out.println(comanda.getUsuari() + comanda.getData()+ comanda.getHora());
             st.executeUpdate("INSERT INTO Comanda(usuari, nom_plat, data, hora,servit) " +
                     "VALUES ('" + comanda.getUsuari() + "','" + plat.getNomPlat() + "', '" + comanda.getData() + "','" + comanda.getHora() + "'," + plat.isServit() + ")");
         }
@@ -369,9 +369,9 @@ public class BDD {
     public ArrayList<InfoComandes> llistaComandes() throws SQLException {
 
         ArrayList<InfoComandes> array = new ArrayList<InfoComandes>();
-        ResultSet rs = st.executeQuery("SELECT usuari, COUNT(nom_plat) AS num, SUM(!servit) AS sum, hora, data FROM Comanda\n" +
+        ResultSet rs = st.executeQuery("SELECT usuari, COUNT(nom_plat) AS num, SUM(!servit) AS sum, MAX(hora)as hora, MAX(data) as data FROM Comanda\n" +
                 "GROUP BY usuari \n" +
-                "ORDER BY data, hora ASC; ");       //Mirar si l'ordre va be
+                "ORDER BY MAX(data), MAX(hora) ASC; ");       //Mirar si l'ordre va be
 
         while (rs.next()) {
             InfoComandes comanda = new InfoComandes();

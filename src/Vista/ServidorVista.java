@@ -49,8 +49,6 @@ public class ServidorVista extends JFrame {
 
         getContentPane().add(layout);
 
-        //CardLayout cardLayout = (CardLayout) layout.getLayout();
-        //cardLayout.show(layout, "COMANDES");
 
     }
 

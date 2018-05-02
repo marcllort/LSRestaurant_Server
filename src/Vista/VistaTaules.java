@@ -40,6 +40,7 @@ public class VistaTaules extends JPanel {
 
         JPanel jpLlista = new JPanel();
         jspSplit.setLeftComponent(jpLlista);
+        jpLlista.setLayout(new BorderLayout(0, 0));
 
         jlstLlista = new JList();
 
@@ -47,7 +48,7 @@ public class VistaTaules extends JPanel {
         jpLlista.add(new JScrollPane(jlstLlista));
 
         JPanel jpButons = new JPanel();
-        jpLlista.add(jpButons);
+        jpLlista.add(jpButons, BorderLayout.SOUTH);
 
         jbActualitza = new JButton("Actualitza");
         jpButons.add(jbActualitza, BorderLayout.SOUTH);
@@ -68,7 +69,7 @@ public class VistaTaules extends JPanel {
 
         JPanel jpReserva = new JPanel();
         jspSplit.setRightComponent(jpReserva);
-        jpReserva.setLayout(new GridLayout(0, 1, 0, 0));
+        jpReserva.setLayout(new BorderLayout(0, 0));
 
         //taula
         JPanel jpTaula = new JPanel();
@@ -83,12 +84,12 @@ public class VistaTaules extends JPanel {
         };
 
         jpTaula.add(new JScrollPane(jtTaula));
-        jpReserva.add(jpTaula);
+        jpReserva.add(jpTaula, BorderLayout.CENTER);
 
 
         //ADD
         JPanel jpAddTaula = new JPanel();
-        jpReserva.add(jpAddTaula);
+        jpReserva.add(jpAddTaula, BorderLayout.SOUTH);
         jpAddTaula.setLayout(new BoxLayout(jpAddTaula, BoxLayout.X_AXIS));
 
         JLabel jlNcomencals = new JLabel("Afegir taula de N començals: ");

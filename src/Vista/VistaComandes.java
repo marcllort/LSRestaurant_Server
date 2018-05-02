@@ -42,9 +42,9 @@ public class VistaComandes extends JPanel{
 
         scroll = new JScrollPane(jtTaula);
 
+        //Afegim taula i boto als seus llocs
         this.add(scroll, BorderLayout.CENTER);
         jbServir = new JButton("Mirar comandes");
-
         this.add(jbServir, BorderLayout.SOUTH);
 
     }
@@ -62,22 +62,31 @@ public class VistaComandes extends JPanel{
 
     }
 
+    /**
+     * Funció per donar valor a cada fila de la taula
+     * @param modelTaulas
+     */
     public void setModelTaula(ArrayList<InfoComandes> modelTaulas){
 
         for (InfoComandes info : modelTaulas){
             Object rowData[] = {info.getUsuari(), info.getTotalPlats(), info.getPlatsPendents(), info.getHora()+"//"+info.getHora()};
             modelTaula.addRow(rowData);
         }
-
-
         scroll.repaint();
         scroll.revalidate();
-
-
     }
 
-    public int filaSeleccionada(){
-        return jtTaula.getSelectedRow();
+    /**
+     * Getter per saber quina fila de la taula ha estat seleccionada
+     * @return usuari de la fila seleccionada
+     */
+    public String filaSeleccionada(){
+        try {
+            return (String) modelTaula.getValueAt(jtTaula.getSelectedRow(), 0);
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(this, "Cap comanda seleccionada!");
+            return "null";
+        }
     }
 
 

@@ -265,5 +265,10 @@ public class Gestionador {
         return bbdd.llistaComandes();
     }
 
+    public void serveixPlat (String plat, String user){
+
+        bbdd.serveixPlat(plat, user);
+    }
+
 }
 

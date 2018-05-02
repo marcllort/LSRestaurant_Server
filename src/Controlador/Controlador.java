@@ -58,6 +58,7 @@ public class Controlador implements ActionListener {
 
                     break;
                 case "TOP5":
+                    handleTop5(e);
                     //vista.creaMenu(this);
 
                     break;

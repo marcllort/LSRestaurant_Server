@@ -57,7 +57,7 @@ public class Grafic extends JPanel {
 
             maingrafic.drawString(nomPlat.get(i), x + width / 2 - nomPlat.get(i).length() * 3, this.getHeight() - 30);
             maingrafic.setColor(Color.BLACK);
-            maingrafic.drawString(a.toString(), eix/2, ymax +(ymax+hmax)/7*(4-i));
+            maingrafic.drawString(a.toString(), eix/2, ymax +(hmax)/5*(4-i));
 
 
 
@@ -66,7 +66,7 @@ public class Grafic extends JPanel {
         maingrafic.setColor(Color.BLACK);
         maingrafic.drawString("0",eix/2, ymax+hmax);
         maingrafic.setColor(Color.LIGHT_GRAY);
-        maingrafic.fill(new Rectangle(eix,20,5,this.getHeight()));
+        maingrafic.fill(new Rectangle(eix,20,5,ymax+hmax-20));
         maingrafic.fill(new Rectangle(eix,ymax+hmax,this.getWidth()-2,5));
 
 

@@ -48,8 +48,15 @@ public class Controlador implements ActionListener {
                     break;
                 case "COMANDES":
                     try {
-                        JPanel vistaComanda = vista.getVistaComandes();
-                        ((VistaComandes) vistaComanda).setModelTaula(gestionador.llistaComandes());
+
+                        if (e.getActionCommand().equals("SERVIR TAULA")){
+                            System.out.println("servir taula");
+                            DialogServirComandes panel = new DialogServirComandes();
+                            panel.setVisible(true);
+                        }else {
+                            JPanel vistaComanda = vista.getVistaComandes();
+                            ((VistaComandes) vistaComanda).setModelTaula(gestionador.llistaComandes());
+                        }
 
                     } catch (Exception e1) {
                         e1.printStackTrace();

@@ -13,6 +13,7 @@ public class VistaComandes extends JPanel{
     private JTable jtTaula;
     private DefaultTableModel modelTaula;
     private JScrollPane scroll;
+    private JButton jbServir;
 
     /**
      * Constructor de la vista del panel que mostra la taula de comandes
@@ -42,6 +43,10 @@ public class VistaComandes extends JPanel{
         scroll = new JScrollPane(jtTaula);
 
         this.add(scroll, BorderLayout.CENTER);
+        jbServir = new JButton("Mirar comandes");
+
+        this.add(jbServir, BorderLayout.SOUTH);
+
     }
 
 
@@ -52,7 +57,8 @@ public class VistaComandes extends JPanel{
      */
     public void registraControlador(ActionListener controller) {                            //Registro el boto serve amb un action comand de send, declarat en una constant
 
-
+        jbServir.addActionListener(controller);
+        jbServir.setActionCommand("SERVIR TAULA");
 
     }
 
@@ -68,6 +74,10 @@ public class VistaComandes extends JPanel{
         scroll.revalidate();
 
 
+    }
+
+    public int filaSeleccionada(){
+        return jtTaula.getSelectedRow();
     }
 
 

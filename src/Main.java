@@ -32,7 +32,7 @@ public class Main {
             ArrayList<Plat> arr = new ArrayList<Plat>();
             ArrayList<Plat> arr1 = new ArrayList<Plat>();
             arr.add(new Plat("gamba", 12));
-            Comanda comanda = new Comanda(arr, gestionador.newData(12, 1, 2019), new Time(12, 40, 00), "alex");
+            Comanda comanda = new Comanda(arr, gestionador.newData(12, 1, 2019), new Time(12, 40, 00), "mam");
 
             bdd.creaComanda(comanda);
 
@@ -43,25 +43,6 @@ public class Main {
     }
 
 
-    /**
-     * A Serverbbdd creem la bbdd que farem servir, connectada a mysql
-     * El gestionador sera l'encarregat de dur a terme totes les funcions que relacionen el servidor amb la bbdd
-     * Posteriorment creem el server amb el gesataionador que conte la bbdd i li fem start
-     */
-    public static void Serverbbdd(BDD bdd) {
-        try {
-
-
-
-
-
-
-
-        } catch (Exception e) {
-            System.out.println("ERROR MAIN");
-            e.printStackTrace();
-        }
-    }
 
 
     /**

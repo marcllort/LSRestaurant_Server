@@ -3,15 +3,14 @@ package Vista;
 import javax.swing.*;
 import java.awt.*;
 
-public class DialogServirComandes extends JPanel{
+public class DialogServirComandes extends JDialog{
 
     private JList jlLlistaSi;
     private JList jlLlistaNo;
     private JButton jbServir;
 
     public DialogServirComandes() {
-        this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-
+        setLayout(new BoxLayout(getContentPane(), BoxLayout.X_AXIS));
         JPanel jpBox1 = new JPanel();
         this.add(jpBox1);
         jpBox1.setLayout(new BoxLayout(jpBox1, BoxLayout.Y_AXIS));

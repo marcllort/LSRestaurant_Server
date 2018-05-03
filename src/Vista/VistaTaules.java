@@ -162,4 +162,11 @@ public class VistaTaules extends JPanel {
         jtTaula.setModel(model);
     }
 
+    /**
+     * Funció per poder netejar el jtf desde el controlador
+     */
+    public void netejaJtf() {
+        jtfNcomencals.setText("");
+    }
+
 }

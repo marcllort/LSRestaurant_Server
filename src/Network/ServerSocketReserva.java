@@ -79,4 +79,13 @@ public class ServerSocketReserva implements Runnable {
         }
     }
 
+
+    public ServidorReserva getServerReserva(String user) {
+        for (ServidorReserva s : serversReserva) {
+            if (s.getUser().equals(user)) {
+                return s;
+            }
+        }
+        return null;
+    }
 }

@@ -8,7 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-public class DialogServirComandes extends JFrame {
+public class VistaServirComandes extends JFrame {
 
     private JList jlLlistaSi;
     private JList jlLlistaNo;
@@ -17,7 +17,7 @@ public class DialogServirComandes extends JFrame {
     private DefaultListModel modelLlistaNoServits;
     private String user;
 
-    public DialogServirComandes(Gestionador gestionador, String usuari) {
+    public VistaServirComandes(Gestionador gestionador, String usuari) {
 
         setLayout(new BoxLayout(getContentPane(), BoxLayout.X_AXIS));
         JPanel jpBox1 = new JPanel();
@@ -91,13 +91,11 @@ public class DialogServirComandes extends JFrame {
     }
 
     public void registraControladorDialog(ActionListener controlador) {
-        System.out.println("registrat");
         jbServirPlat.addActionListener(controlador);
         jbServirPlat.setActionCommand("SERVIR");
     }
 
     public String platSeleccionat() {
-        System.out.println("SELECTED"+jlLlistaNo.getSelectedIndex());
         return (String) modelLlistaNoServits.getElementAt(jlLlistaNo.getSelectedIndex());
     }
 

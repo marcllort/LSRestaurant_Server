@@ -63,24 +63,24 @@ public class ServidorVista extends JFrame {
     }
 
 
-    public void activaTaula(Controlador controller){
+    public void activaTaula(Controlador controller) {
         CardLayout cardLayout = (CardLayout) layout.getLayout();
         cardLayout.show(layout, "TAULES");
 
     }
 
-    public void activaCarta(){
+    public void activaCarta() {
         CardLayout cardLayout = (CardLayout) layout.getLayout();
         cardLayout.show(layout, "CARTA");
 
     }
 
-    public void activaComanda(){
+    public void activaComanda() {
         CardLayout cardLayout = (CardLayout) layout.getLayout();
         cardLayout.show(layout, "COMANDES");
     }
 
-    public void activaTop5(){
+    public void activaTop5() {
         CardLayout cardLayout = (CardLayout) layout.getLayout();
         cardLayout.show(layout, "TOP5");
     }

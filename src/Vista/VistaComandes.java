@@ -8,7 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class VistaComandes extends JPanel{
+public class VistaComandes extends JPanel {
 
     private JTable jtTaula;
     private DefaultTableModel modelTaula;
@@ -36,7 +36,6 @@ public class VistaComandes extends JPanel{
         //Posem informacio
 
 
-
         //Acabada
         jtTaula = new JTable(modelTaula);
 
@@ -50,9 +49,9 @@ public class VistaComandes extends JPanel{
     }
 
 
-
     /**
      * Funcio per registrar el controlador de aquest panel
+     *
      * @param controller
      */
     public void registraControlador(ActionListener controller) {                            //Registro el boto serve amb un action comand de send, declarat en una constant
@@ -61,41 +60,40 @@ public class VistaComandes extends JPanel{
         jbServir.setActionCommand("SERVIR TAULA");
 
 
-
     }
 
     /**
      * Funció per donar valor a cada fila de la taula
+     *
      * @param modelTaulas
      */
-    public void setModelTaula(ArrayList<InfoComandes> modelTaulas){
-       int r =modelTaula.getRowCount();
-       for (int p = 0 ; p<r; p++){
-           modelTaula.removeRow(0);
-       }
-        for (InfoComandes info : modelTaulas){
-            Object rowData[] = {info.getUsuari(), info.getTotalPlats(), info.getPlatsPendents(), info.getDate()+"//"+info.getHora()};
+    public void setModelTaula(ArrayList<InfoComandes> modelTaulas) {
+        int r = modelTaula.getRowCount();
+        for (int p = 0; p < r; p++) {
+            modelTaula.removeRow(0);
+        }
+        for (InfoComandes info : modelTaulas) {
+            Object rowData[] = {info.getUsuari(), info.getTotalPlats(), info.getPlatsPendents(), info.getDate() + "//" + info.getHora()};
             modelTaula.addRow(rowData);
         }
 
         scroll.repaint();
         scroll.revalidate();
-        System.out.println(modelTaula.getRowCount());
     }
 
     /**
      * Getter per saber quina fila de la taula ha estat seleccionada
+     *
      * @return usuari de la fila seleccionada
      */
-    public String filaSeleccionada(){
+    public String filaSeleccionada() {
         try {
             return (String) modelTaula.getValueAt(jtTaula.getSelectedRow(), 0);
-        }catch (Exception e){
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Cap comanda seleccionada!");
             return "null";
         }
     }
-
 
 
 }

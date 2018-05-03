@@ -13,7 +13,7 @@ public class Server {
     private static int portEntrada;
     private final Gestionador gestionador;
     private VistaComandes vistaComanda;
-    //private Controlador controller;
+    private ServerSocketReserva sReserva;
 
     /**
      * Constructor de Server que rep gestionador per usarlo posteriorment
@@ -34,7 +34,7 @@ public class Server {
      * Posteriorment fem els threads per poder correr els dos "servers" de forma independent
      */
     public void startServer() {
-        ServerSocketReserva sReserva = new ServerSocketReserva(gestionador, portReserva, vistaComanda);
+        sReserva = new ServerSocketReserva(gestionador, portReserva, vistaComanda);
         ServerSocketEntrada sEntrada = new ServerSocketEntrada(gestionador, portEntrada);
         Thread t1 = new Thread(sReserva);
         Thread t2 = new Thread(sEntrada);
@@ -42,11 +42,14 @@ public class Server {
         t2.start();
     }
 
+    /**
+     * Getter de serversocket de reserva per que el controlador pugui fer-ne us
+     * @return
+     */
+    public ServerSocketReserva getsReserva() {
+        return sReserva;
+    }
 
-
-    /*public void setController(Controlador controller) {                                             //Serveix per donar el controlador al server, la usem al controlador
-        this.controller = controller;
-    }*/
 }
 
 

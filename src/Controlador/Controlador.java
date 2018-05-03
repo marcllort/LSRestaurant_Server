@@ -3,6 +3,8 @@ package Controlador;
 
 import Model.Gestionador;
 import Model.Reserva;
+import Network.ServerSocketReserva;
+import Network.ServidorReserva;
 import Vista.*;
 
 import javax.swing.*;
@@ -18,19 +20,17 @@ public class Controlador implements ActionListener {
     private String card;
     private Gestionador gestionador;
     private int index;
-    private DialogServirComandes panel;
+    private VistaServirComandes panel;
+    private ServerSocketReserva sReserva;
 
 
-    public Controlador(ServidorVista vista, Gestionador gestionador) {
+    public Controlador(ServidorVista vista, Gestionador gestionador, ServerSocketReserva sReserva) {
 
         this.gestionador = gestionador;
         this.vista = vista;
-        card = "TAULES";
-        index = 1;
-        handleLlista();
-        vista.creaMenu(this);
-        vista.getVistaTaules().actualitzaTaula(creaModel(gestionador.mostraReseves(1)));
-        panel = new DialogServirComandes(gestionador, null);
+        this.sReserva = sReserva;
+
+        inicialitzaVistes();
 
     }
 
@@ -38,7 +38,6 @@ public class Controlador implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         handleMenu(e);
-        System.out.println("prova");
         switch (card) {
             case "TAULES":
                 handleTaules(e);
@@ -81,18 +80,20 @@ public class Controlador implements ActionListener {
 
     private void handleTaules(ActionEvent e) {
         switch (e.getActionCommand()) {
+
             case "AFEGIR":
                 try {
                     int n = Integer.parseInt(vista.getVistaTaules().getJtfText());
                     gestionador.creaTaula(n);
                     handleLlista();
+                    vista.getVistaTaules().netejaJtf();
+                    vista.showError("Taula afegida correctament!");
                 } catch (Exception e1) {
                     vista.showError("Introdueixi un nombre!");
                 }
                 break;
 
             case "DELETE":
-
                 try {
                     gestionador.eliminaTaula(Integer.parseInt(vista.getVistaTaules().getJlstLlista()));
                     handleLlista();
@@ -131,19 +132,23 @@ public class Controlador implements ActionListener {
         try {
             VistaComandes vistaComanda = vista.getVistaComandes();
             if (e.getActionCommand().equals("SERVIR")) {
-                System.out.println("entra");
                 String plat = panel.platSeleccionat();
                 String user = panel.usuariComanda();
                 gestionador.serveixPlat(plat, user);
-                System.out.println(gestionador.retornaComanda(user).getPlats());
                 panel.ferLlistes(gestionador.retornaComanda(user));
+                ServidorReserva server = sReserva.getServerReserva(user);
+                try {
+                    server.enviaComanda();
+                } catch (Exception ee) {
+                    vista.showError("El client s'ha desconnectat!");
+                }
 
             }
             if (e.getActionCommand().equals("SERVIR TAULA")) {
                 //panel.registraControladorDialog(this);
                 String fila = vistaComanda.filaSeleccionada();
                 if (!fila.equals("null")) {
-                    panel = new DialogServirComandes(gestionador, fila);
+                    panel = new VistaServirComandes(gestionador, fila);
                     panel.registraControladorDialog(this);
                     panel.setVisible(true);
                 }
@@ -158,6 +163,15 @@ public class Controlador implements ActionListener {
 
 
     //Altres Funcions
+
+    private void inicialitzaVistes() {
+        card = "TAULES";
+        index = 1;
+        handleLlista();
+        vista.creaMenu(this);
+        vista.getVistaTaules().actualitzaTaula(creaModel(gestionador.mostraReseves(1)));
+        panel = new VistaServirComandes(gestionador, null);
+    }
 
     private DefaultTableModel creaModel(ArrayList<Reserva> reserves) {
 

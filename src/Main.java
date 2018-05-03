@@ -20,12 +20,11 @@ public class Main {
             BDD bdd = new BDD();
             Gestionador gestionador = new Gestionador(bdd);
             ServidorVista vista = new ServidorVista();
-            Server server = new Server(new Gestionador(bdd),vista.getVistaComandes());
+            Server server = new Server(new Gestionador(bdd), vista.getVistaComandes());
             server.startServer();
 
 
-
-            Controlador controlador = new Controlador(vista, gestionador);
+            Controlador controlador = new Controlador(vista, gestionador, server.getsReserva());
 
             vista.registraControlador(controlador);
             vista.setVisible(true);
@@ -35,14 +34,11 @@ public class Main {
             afegeixComanda(gestionador, bdd);
 
 
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
     }
-
-
 
 
     /**
@@ -69,7 +65,7 @@ public class Main {
 
 
     /**
-     * Serveix per durant la primera execucio del server afegir reserves i comandes
+     * Serveix per durant la primera execucio del server afegir reserves
      *
      * @param gestionador
      */
@@ -82,20 +78,21 @@ public class Main {
         arr.add(new Plat("provan", 12));
         Comanda comanda = new Comanda(arr, gestionador.newData(12, 1, 2001), new Time(12, 40, 00), "Alex");
 
-        System.out.println(gestionador.retornaComanda("marsssdcS").getData());
-        System.out.println(gestionador.retornaComanda("marsssdcS").getHora());
-        System.out.println(gestionador.retornaComanda("marsssdcS").getPlats());
 
     }
 
 
-    public static void afegeixComanda(Gestionador gestionador, BDD bdd){
+    /**
+     * Serveix per durant la primera execucio del server afegir comandes
+     *
+     * @param gestionador
+     */
+    public static void afegeixComanda(Gestionador gestionador, BDD bdd) {
 
         ArrayList<Plat> arr = new ArrayList<Plat>();
         ArrayList<Plat> arr1 = new ArrayList<Plat>();
         arr.add(new Plat("Croquetes", 12));
         Comanda comanda = new Comanda(arr, gestionador.newData(12, 1, 2019), new Time(12, 53, 00), "Alex");
-        System.out.println(gestionador.analitzarComanda(comanda));
         try {
             gestionador.addComanda(comanda);
         } catch (SQLException e) {

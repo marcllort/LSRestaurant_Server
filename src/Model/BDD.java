@@ -21,7 +21,8 @@ public class BDD {
 
     /**
      * Constructor de la bdd que fa la conexió amb bdd
-      * @throws SQLException error en cas de fallar la conexió amb la bdd
+     *
+     * @throws SQLException error en cas de fallar la conexió amb la bdd
      */
     public BDD() throws SQLException {
         lectorJSON = new LectorJson();
@@ -46,6 +47,7 @@ public class BDD {
 
     /**
      * Funció que crea una nova taula a la bdd
+     *
      * @param i numero de cadires amb que crearem la taula
      * @throws SQLException
      */
@@ -55,6 +57,7 @@ public class BDD {
 
     /**
      * Funcio que retorna un arraylist amb tots els id's de les taules que hi ha
+     *
      * @return arraylist de id ed les taules
      * @throws SQLException
      */
@@ -69,9 +72,10 @@ public class BDD {
 
     /**
      * Funcio que mostra el id de una taula lliure per un dia i una hora concretes
+     *
      * @param comensals numero de persones per les que es fara la reserva
-     * @param data data de la reserva
-     * @param hora hora de la reserva
+     * @param data      data de la reserva
+     * @param hora      hora de la reserva
      * @return retorna el id de la taula lliure i en cas que no s'haigi pogut trobar un -1
      */
     public int reservaTaula(int comensals, java.sql.Date data, Time hora) {
@@ -103,7 +107,8 @@ public class BDD {
 
     /**
      * funcio que mostra les reserves que te una taula concreta
-      * @param idTaula id de la taula ed la que es solicita la informació
+     *
+     * @param idTaula id de la taula ed la que es solicita la informació
      * @return retorna un arraylist de reserves
      */
     public ArrayList<Reserva> mostraReservesTaula(int idTaula) {
@@ -131,6 +136,7 @@ public class BDD {
 
     /**
      * funcio que elimina una taula
+     *
      * @param idTaula id de la taula a eliminar
      * @throws Exception en cas que no es trobi la taula o que tingui reserves pendents
      */
@@ -148,11 +154,11 @@ public class BDD {
     }
 
 
-
     //Plat
 
     /**
      * funció que realitza una cerca a la taula plat
+     *
      * @param querie querie a realitzar
      */
     public void queriePlat(String querie) {
@@ -173,10 +179,11 @@ public class BDD {
 
     /**
      * funcio que insereix un nou plat a la taula plat
-     * @param nom_plat nom del plat
-     * @param preu preu
+     *
+     * @param nom_plat            nom del plat
+     * @param preu                preu
      * @param unitats_disponibles unitats disponibles
-     * @param unitats_gastades unitats gastades
+     * @param unitats_gastades    unitats gastades
      * @throws SQLException
      */
     public void insereixPlat(String nom_plat, int preu, int unitats_disponibles, int unitats_gastades) throws SQLException {
@@ -186,6 +193,7 @@ public class BDD {
 
     /**
      * funcio que elimina un plat de la taula plat
+     *
      * @param nom nom del plat a eliminar
      */
     public void eliminaPlat(String nom) {
@@ -199,7 +207,8 @@ public class BDD {
 
     /**
      * funcio que gasta una unitta de les disponibles i la afegeix a les gastades
-     * @param nom plat que s'ha servit
+     *
+     * @param nom     plat que s'ha servit
      * @param unitats unitats que s'han gastat
      * @return
      */
@@ -245,22 +254,22 @@ public class BDD {
 
     /**
      * funcio que fa que una comanda pasi de estar per servir a servida
-     * @param plat nom del plat a servir
+     *
+     * @param plat   nom del plat a servir
      * @param usuari nom del usuari al que es serveix
      */
     public void serveixPlat(String plat, String usuari) {
         int id = 0;
         try {
-            ResultSet rs = st.executeQuery("SELECT id_comanda FROM Comanda where nom_plat = '" + plat + "' AND usuari = '" + usuari + "' AND servit = false" );
-            if(rs.next()){
+            ResultSet rs = st.executeQuery("SELECT id_comanda FROM Comanda where nom_plat = '" + plat + "' AND usuari = '" + usuari + "' AND servit = false");
+            if (rs.next()) {
                 id = rs.getInt("id_comanda");
-                System.out.println("INDDDDDDDDDD:"+id);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        String str = "Update Comanda set servit  = TRUE where nom_plat = '" + plat + "'" + " AND usuari = '" + usuari + "' AND id_comanda ="+id;
+        String str = "Update Comanda set servit  = TRUE where nom_plat = '" + plat + "'" + " AND usuari = '" + usuari + "' AND id_comanda =" + id;
         try {
             PreparedStatement ps = con.prepareStatement(str);
             ps.executeUpdate();
@@ -271,6 +280,7 @@ public class BDD {
 
     /**
      * funcio que retorna un array amb tots els plats que hi ha a la bdd
+     *
      * @return array de plats
      */
     public ArrayList<Plat> llistaPlatsDisponibles() {
@@ -298,6 +308,7 @@ public class BDD {
 
     /**
      * funcio a la que li passem una comanda i ens torna un array dels plats que s'han acabat de la comanda
+     *
      * @param comanda
      * @return retorna un array amb els plats que s'han acabat o null en cas que tots estiguin disponibles
      */
@@ -328,6 +339,7 @@ public class BDD {
 
     /**
      * funcio que retorna els 5 plats més demanats
+     *
      * @return arraylist dels plats
      */
     public ArrayList<InfoComandes> top5Plats() {
@@ -350,6 +362,7 @@ public class BDD {
 
     /**
      * funcio que retorna els plats més demanats de la ùltima setmana
+     *
      * @return array de top 5 de plats
      */
     public ArrayList<InfoComandes> top5PlatsSemanals() {
@@ -395,12 +408,12 @@ public class BDD {
 
     /**
      * funcio que afegeix una comanda a la bdd
+     *
      * @param comanda comanda a afegir a la bdd
      * @throws SQLException
      */
     public void creaComanda(Comanda comanda) throws SQLException {
         for (Plat plat : comanda.getPlats()) {
-            System.out.println(comanda.getUsuari() + plat.getNomPlat());
             st.executeUpdate("INSERT INTO Comanda(usuari, nom_plat, data, hora,servit) " +
                     "VALUES ('" + comanda.getUsuari() + "','" + plat.getNomPlat() + "', '" + comanda.getData() + "','" + comanda.getHora() + "'," + plat.isServit() + ")");
         }
@@ -408,6 +421,7 @@ public class BDD {
 
     /**
      * funcio que mostra els plats que hi ha a una comanda, si estan servits o no i la hora del ultim plat que ha demanat de la bdd
+     *
      * @param usuari usuari que ha realitzat la comanda
      * @return retorna
      */
@@ -459,6 +473,7 @@ public class BDD {
 
     /**
      * funcio que mostra quanta plate tenen cada una de les comandes i quants queden per servir a cada una ordenades per dia i hora
+     *
      * @return llista amb la informacio de les comandes
      * @throws SQLException
      */
@@ -487,7 +502,8 @@ public class BDD {
 
     /**
      * funcio que comprova que la contrasenya introduida sigui correcta
-     * @param usuari usuari
+     *
+     * @param usuari   usuari
      * @param password contrasenya
      * @return
      */
@@ -509,6 +525,7 @@ public class BDD {
 
     /**
      * funcio que crea una reserva a una taula per un usuari
+     *
      * @param usuari
      * @param password
      * @param comencals

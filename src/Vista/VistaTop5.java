@@ -14,8 +14,8 @@ public class VistaTop5 extends JPanel {
     private Grafic gr;
 
 
-    public  VistaTop5(){
-         gr = new Grafic();
+    public VistaTop5() {
+        gr = new Grafic();
         jbTotal = new JButton("Ranking Total");
         jbSemanal = new JButton("Ranking Semanal");
         ArrayList<String> plats = new ArrayList<>();
@@ -24,14 +24,14 @@ public class VistaTop5 extends JPanel {
         plats.add("ASdasd");
         plats.add("ASdawe");
         plats.add("ASddass");
-        int[] es = {1,2,3,10,20};
-        gr.grafic(es,plats);
+        int[] es = {1, 2, 3, 10, 20};
+        gr.grafic(es, plats);
         this.setLayout(new BorderLayout());
         this.add(gr, BorderLayout.CENTER);
         JPanel jpButton = new JPanel();
         jpButton.add(jbSemanal);
         jpButton.add(jbTotal);
-        this.add(jpButton,BorderLayout.NORTH);
+        this.add(jpButton, BorderLayout.NORTH);
 
     }
 
@@ -45,7 +45,7 @@ public class VistaTop5 extends JPanel {
 
     }
 
-    public void grSemanal(int[] indexes){
+    public void grSemanal(int[] indexes) {
         ArrayList<String> plats = new ArrayList<>();
         plats.add("ASd");
         plats.add("ASdas");
@@ -55,7 +55,7 @@ public class VistaTop5 extends JPanel {
 
         this.remove(gr);
         gr = new Grafic();
-        gr.grafic(indexes,plats);
+        gr.grafic(indexes, plats);
 
         //this.add(new JLabel("HOLA"), BorderLayout.CENTER);
         this.add(gr, BorderLayout.CENTER);

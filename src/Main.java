@@ -19,10 +19,11 @@ public class Main {
         try {
             BDD bdd = new BDD();
             Gestionador gestionador = new Gestionador(bdd);
-            Server server = new Server(new Gestionador(bdd));
+            ServidorVista vista = new ServidorVista();
+            Server server = new Server(new Gestionador(bdd),vista.getVistaComandes());
             server.startServer();
 
-            ServidorVista vista = new ServidorVista();
+
 
             Controlador controlador = new Controlador(vista, gestionador);
 
@@ -94,9 +95,9 @@ public class Main {
         ArrayList<Plat> arr1 = new ArrayList<Plat>();
         arr.add(new Plat("Croquetes", 12));
         Comanda comanda = new Comanda(arr, gestionador.newData(12, 1, 2019), new Time(12, 53, 00), "Alex");
-
+        System.out.println(gestionador.analitzarComanda(comanda));
         try {
-            bdd.creaComanda(comanda);
+            gestionador.addComanda(comanda);
         } catch (SQLException e) {
             e.printStackTrace();
         }

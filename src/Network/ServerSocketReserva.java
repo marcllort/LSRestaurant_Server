@@ -1,6 +1,7 @@
 package Network;
 
 import Model.Gestionador;
+import Vista.VistaComandes;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -16,6 +17,7 @@ public class ServerSocketReserva implements Runnable {
     private ServerSocket sServerReserva;
     private final Gestionador gestionador;
     private final ArrayList<ServidorReserva> serversReserva;
+    private VistaComandes vistaComanda;
 
     /**
      * Constructor de el socket de reserva que rep el seu port i el gestionador i inicialitza el array de servers
@@ -23,10 +25,11 @@ public class ServerSocketReserva implements Runnable {
      * @param gestionador
      * @param port
      */
-    public ServerSocketReserva(Gestionador gestionador, int port) {
+    public ServerSocketReserva(Gestionador gestionador, int port, VistaComandes vistaComanda) {
         this.port = port;
         this.gestionador = gestionador;
         this.serversReserva = new ArrayList<>();
+        this.vistaComanda = vistaComanda;
     }
 
     /**
@@ -57,7 +60,7 @@ public class ServerSocketReserva implements Runnable {
                 Socket sClient = sServerReserva.accept();                                      //Esperem a la connexio del client
                 System.out.println("Reserva: Client connectat");
 
-                ServidorReserva servidordedicat = new ServidorReserva(sClient, serversReserva, gestionador);                //Creem un servidor dedicat
+                ServidorReserva servidordedicat = new ServidorReserva(sClient, serversReserva, gestionador, vistaComanda);                //Creem un servidor dedicat
                 serversReserva.add(servidordedicat);                                                                        //Afegim el serverdedicat a un arraylist on els tenim tots
                 servidordedicat.start();                                                                                    //Iniciem server dedicat
             }

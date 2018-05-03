@@ -3,6 +3,7 @@ package Network;
 import Model.Comanda;
 import Model.Gestionador;
 import Model.Usuari;
+import Vista.VistaComandes;
 import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 
 import java.io.*;
@@ -20,6 +21,7 @@ public class ServidorReserva extends Thread {
     private DataOutputStream doStream;
     private DataInputStream diStream;
     private ObjectInputStream oiStream;
+    private VistaComandes vistaComandes;
 
 
     /**
@@ -29,7 +31,7 @@ public class ServidorReserva extends Thread {
      * @param servers
      * @param gestionador
      */
-    public ServidorReserva(Socket sClient, ArrayList<ServidorReserva> servers, Gestionador gestionador) {
+    public ServidorReserva(Socket sClient, ArrayList<ServidorReserva> servers, Gestionador gestionador, VistaComandes vistaComandes) {
         this.sClient = sClient;
         this.servers = servers;
         this.gestionador = gestionador;
@@ -67,6 +69,12 @@ public class ServidorReserva extends Thread {
 
                         if (analisi.equals("true")) {
                             gestionador.addComanda(com);                                                //Guardo la comanda
+                            try {
+                                vistaComandes.setModelTaula(gestionador.llistaComandes());
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                             doStream.writeUTF("true");
                             //actualitzar vista de gestionar comandes
                         } else {
@@ -100,7 +108,7 @@ public class ServidorReserva extends Thread {
      */
     public void enviaComanda() {
         try {
-            ooStream.writeObject(gestionador.retornaCarta());
+            ooStream.writeObject(gestionador.retornaComanda(user.getUser()));
         } catch (IOException e) {
             e.printStackTrace();
         }

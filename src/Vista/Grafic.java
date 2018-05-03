@@ -34,13 +34,13 @@ public class Grafic extends JPanel {
         super.paintComponent(grafic);
         int ymax = 0;
         int hmax = 0;
-        int eix =(this.getWidth()) / (graphSource.length + 1);
-
+        int eix =(this.getWidth()) / (graphSource.length + 2);
+        int width = (this.getWidth()) / (graphSource.length + 2);
 
         Graphics2D maingrafic = (Graphics2D) grafic;
         for (int i = 0; i < graphSource.length; i++) {
             int height = (graphSource[i] * (((this.getHeight()) / max))) / 2;
-            int width = (this.getWidth()) / (graphSource.length + 1);
+
             int x = (width) * (i + 1);
             int y = (this.getHeight() - (graphSource[i] * (this.getHeight() / max))) / 2 + this.getHeight() / 4;
 
@@ -67,7 +67,7 @@ public class Grafic extends JPanel {
         maingrafic.drawString("0",eix/2, ymax+hmax);
         maingrafic.setColor(Color.LIGHT_GRAY);
         maingrafic.fill(new Rectangle(eix,20,5,ymax+hmax-20));
-        maingrafic.fill(new Rectangle(eix,ymax+hmax,this.getWidth()-2,5));
+        maingrafic.fill(new Rectangle(eix,ymax+hmax,width*5,5));
 
 
     }

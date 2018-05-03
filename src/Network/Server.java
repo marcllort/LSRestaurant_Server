@@ -2,6 +2,7 @@ package Network;
 
 import Model.Gestionador;
 import Model.Json.*;
+import Vista.VistaComandes;
 
 /**
  * Classe servidor que es comunicarà amb els "dos" clients (reserva, entrada)
@@ -11,6 +12,7 @@ public class Server {
     private static int portReserva;                                               //Declarem els atributs
     private static int portEntrada;
     private final Gestionador gestionador;
+    private VistaComandes vistaComanda;
     //private Controlador controller;
 
     /**
@@ -19,9 +21,9 @@ public class Server {
      *
      * @param gestionador
      */
-    public Server(Gestionador gestionador) {
+    public Server(Gestionador gestionador, VistaComandes vistaComanda) {
         this.gestionador = gestionador;
-
+        this.vistaComanda = vistaComanda;
         ConfiguracioServer conf = LectorJson.llegeixConfiguracioServer();
         portReserva = conf.lectorPortReserva();
         portEntrada = conf.lectorPortEntrada();
@@ -32,7 +34,7 @@ public class Server {
      * Posteriorment fem els threads per poder correr els dos "servers" de forma independent
      */
     public void startServer() {
-        ServerSocketReserva sReserva = new ServerSocketReserva(gestionador, portReserva);
+        ServerSocketReserva sReserva = new ServerSocketReserva(gestionador, portReserva, vistaComanda);
         ServerSocketEntrada sEntrada = new ServerSocketEntrada(gestionador, portEntrada);
         Thread t1 = new Thread(sReserva);
         Thread t2 = new Thread(sEntrada);

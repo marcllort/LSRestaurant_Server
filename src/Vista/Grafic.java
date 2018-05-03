@@ -32,6 +32,11 @@ public class Grafic extends JPanel {
 
     public void paintComponent(Graphics grafic) {
         super.paintComponent(grafic);
+        int ymax = 0;
+        int hmax = 0;
+        int eix =(this.getWidth()) / (graphSource.length + 1);
+
+
         Graphics2D maingrafic = (Graphics2D) grafic;
         for (int i = 0; i < graphSource.length; i++) {
             int height = (graphSource[i] * (((this.getHeight()) / max))) / 2;
@@ -42,21 +47,28 @@ public class Grafic extends JPanel {
             int red = (int) (Math.random() * 256);
             int blue = (int) (Math.random() * 256);
             int green = (int) (Math.random() * 256);
-            int ymax = (this.getHeight() - (max * (this.getHeight() / max))) / 2 + this.getHeight() / 4;
-            int hmax =  (max * (((this.getHeight()) / max))) / 2;
+            ymax = (this.getHeight() - (max * (this.getHeight() / max))) / 2 + this.getHeight() / 4;
+            hmax =  (max * (((this.getHeight()) / max))) / 2;
             Integer a = max/5 * (i+1);
 
 
             maingrafic.setColor(new Color(red, green, blue));
             maingrafic.fill(new Rectangle(x, y, width, height));
+
             maingrafic.drawString(nomPlat.get(i), x + width / 2 - nomPlat.get(i).length() * 3, this.getHeight() - 30);
-            maingrafic.drawString(a.toString(), 20, ymax +(ymax+hmax)/7*(4-i));
+            maingrafic.setColor(Color.BLACK);
+            maingrafic.drawString(a.toString(), eix/2, ymax +(hmax)/5*(4-i));
+
 
 
 
         }
-        maingrafic.setColor(Color.GRAY);
-        maingrafic.fill(new Rectangle(40,20,10,300));
+        maingrafic.setColor(Color.BLACK);
+        maingrafic.drawString("0",eix/2, ymax+hmax);
+        maingrafic.setColor(Color.LIGHT_GRAY);
+        maingrafic.fill(new Rectangle(eix,20,5,ymax+hmax-20));
+        maingrafic.fill(new Rectangle(eix,ymax+hmax,this.getWidth()-2,5));
+
 
     }
 

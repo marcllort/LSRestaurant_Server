@@ -1,20 +1,29 @@
 package Vista;
 
+import Model.InfoComandes;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class VistaComandes extends JPanel{
 
     private JTable jtTaula;
+    private DefaultTableModel modelTaula;
+    private JScrollPane scroll;
+    private JButton jbServir;
 
+    /**
+     * Constructor de la vista del panel que mostra la taula de comandes
+     */
     public VistaComandes() {
 
         this.setLayout(new BorderLayout(0, 0));
 
         //Creem taula
-        DefaultTableModel modelTaula = new DefaultTableModel() {
+        modelTaula = new DefaultTableModel() {
             public boolean isCellEditable(int rowIndex, int mColIndex) {
                 return false;
             }
@@ -31,15 +40,57 @@ public class VistaComandes extends JPanel{
         //Acabada
         jtTaula = new JTable(modelTaula);
 
+        scroll = new JScrollPane(jtTaula);
 
-        this.add(new JScrollPane(jtTaula), BorderLayout.CENTER);
+        //Afegim taula i boto als seus llocs
+        this.add(scroll, BorderLayout.CENTER);
+        jbServir = new JButton("Mirar comandes");
+        this.add(jbServir, BorderLayout.SOUTH);
 
     }
 
 
+
+    /**
+     * Funcio per registrar el controlador de aquest panel
+     * @param controller
+     */
     public void registraControlador(ActionListener controller) {                            //Registro el boto serve amb un action comand de send, declarat en una constant
 
+        jbServir.addActionListener(controller);
+        jbServir.setActionCommand("SERVIR TAULA");
+
 
 
     }
+
+    /**
+     * Funció per donar valor a cada fila de la taula
+     * @param modelTaulas
+     */
+    public void setModelTaula(ArrayList<InfoComandes> modelTaulas){
+
+        for (InfoComandes info : modelTaulas){
+            Object rowData[] = {info.getUsuari(), info.getTotalPlats(), info.getPlatsPendents(), info.getHora()+"//"+info.getHora()};
+            modelTaula.addRow(rowData);
+        }
+        scroll.repaint();
+        scroll.revalidate();
+    }
+
+    /**
+     * Getter per saber quina fila de la taula ha estat seleccionada
+     * @return usuari de la fila seleccionada
+     */
+    public String filaSeleccionada(){
+        try {
+            return (String) modelTaula.getValueAt(jtTaula.getSelectedRow(), 0);
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(this, "Cap comanda seleccionada!");
+            return "null";
+        }
+    }
+
+
+
 }

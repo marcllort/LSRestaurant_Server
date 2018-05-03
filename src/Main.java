@@ -29,6 +29,12 @@ public class Main {
             vista.registraControlador(controlador);
             vista.setVisible(true);
 
+            //afegeixReservaBdd(gestionador);
+            //afegeixPlatsBdd(bdd);
+            //afegeixComanda(gestionador, bdd);
+
+
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -36,25 +42,6 @@ public class Main {
     }
 
 
-    /**
-     * A Serverbbdd creem la bbdd que farem servir, connectada a mysql
-     * El gestionador sera l'encarregat de dur a terme totes les funcions que relacionen el servidor amb la bbdd
-     * Posteriorment creem el server amb el gesataionador que conte la bbdd i li fem start
-     */
-    public static void Serverbbdd(BDD bdd) {
-        try {
-
-
-
-
-
-
-
-        } catch (Exception e) {
-            System.out.println("ERROR MAIN");
-            e.printStackTrace();
-        }
-    }
 
 
     /**
@@ -64,7 +51,7 @@ public class Main {
      */
     public static void afegeixPlatsBdd(BDD bdd) {
         try {
-            bdd.insereixPlat("gambka", 3, 10, 0);
+            bdd.insereixPlat("gamba", 3, 10, 0);
             bdd.insereixPlat("Filet", 30, 10, 0);
             bdd.insereixPlat("Llenguado", 20, 10, 0);
             bdd.insereixPlat("Croquetes", 3, 10, 0);
@@ -87,7 +74,7 @@ public class Main {
      */
     public static void afegeixReservaBdd(Gestionador gestionador) {
         Reserva reserva1 = new Reserva("Alex", 1, gestionador.newData(6, 2, 2222), new Time(15, 00, 00));
-        //gestionador.creaReserva(reserva1);
+        gestionador.creaReserva(reserva1, "pass");
 
         ArrayList<Plat> arr = new ArrayList<Plat>();
         ArrayList<Plat> arr1 = new ArrayList<Plat>();
@@ -97,6 +84,22 @@ public class Main {
         System.out.println(gestionador.retornaComanda("marsssdcS").getData());
         System.out.println(gestionador.retornaComanda("marsssdcS").getHora());
         System.out.println(gestionador.retornaComanda("marsssdcS").getPlats());
+
+    }
+
+
+    public static void afegeixComanda(Gestionador gestionador, BDD bdd){
+
+        ArrayList<Plat> arr = new ArrayList<Plat>();
+        ArrayList<Plat> arr1 = new ArrayList<Plat>();
+        arr.add(new Plat("gamba", 12));
+        Comanda comanda = new Comanda(arr, gestionador.newData(12, 1, 2019), new Time(12, 40, 00), "Alex");
+
+        try {
+            bdd.creaComanda(comanda);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
 

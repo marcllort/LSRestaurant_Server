@@ -11,13 +11,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+
 public class Controlador implements ActionListener {
 
     private ServidorVista vista;
     private String card;
     private Gestionador gestionador;
     private int index;
-
+    private DialogServirComandes panel;
 
 
     public Controlador(ServidorVista vista, Gestionador gestionador) {
@@ -25,38 +26,32 @@ public class Controlador implements ActionListener {
         this.gestionador = gestionador;
         this.vista = vista;
         card = "TAULES";
-        index =1;
+        index = 1;
         handleLlista();
         vista.creaMenu(this);
+        vista.getVistaTaules().actualitzaTaula(creaModel(gestionador.mostraReseves(1)));
+        panel = new DialogServirComandes(gestionador, null);
+
     }
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        handleMenu(e);
+        System.out.println("prova");
+        switch (card) {
+            case "TAULES":
+                handleTaules(e);
+                break;
+            case "CARTA":
 
-        if (e.getSource() instanceof JMenuItem) {
-            handleMenu(e);
-        } else {
-            switch (card) {
-                case "TAULES":
-                    //vista.creaMenu(this);
-                    handleTaules(e);
-                    break;
-                case "CARTA":
-                    //vista.creaMenu(this);
-
-                    break;
-                case "COMANDES":
-                    //vista.creaMenu(this);
-
-                    break;
-                case "TOP5":
-
-                    handleTop5(e);
-                    //vista.creaMenu(this);
-
-                    break;
-            }
-
+                break;
+            case "COMANDES":
+                handleComandes(e);
+                break;
+            case "TOP5":
+                handleTop5(e);
+                break;
         }
 
     }
@@ -70,29 +65,27 @@ public class Controlador implements ActionListener {
                 card = "TAULES";
                 break;
             case "CARTA":
-                vista.activaCarta(this);
+                vista.activaCarta();
                 card = "CARTA";
                 break;
             case "COMANDES":
-                vista.activaComanda(this);
+                vista.activaComanda();
                 card = "COMANDES";
                 break;
             case "TOP5":
-                vista.activaTop5(this);
+                vista.activaTop5();
                 card = "TOP5";
                 break;
         }
     }
 
     private void handleTaules(ActionEvent e) {
-        vista.getVistaTaules().actualitzaTaula(creaModel(gestionador.mostraReseves(1)));
-        index = vista.getVistaTaules().getJlstLlista() + 1;
         switch (e.getActionCommand()) {
             case "AFEGIR":
                 try {
                     int n = Integer.parseInt(vista.getVistaTaules().getJtfText());
-                    System.out.println("AFEGIR" + n);
                     gestionador.creaTaula(n);
+                    handleLlista();
                 } catch (Exception e1) {
                     vista.showError("Introdueixi un nombre!");
                 }
@@ -100,58 +93,74 @@ public class Controlador implements ActionListener {
 
             case "DELETE":
 
-                if (index != -1) {
-
-                    System.out.println("DELETE");
-                } else {
-                    vista.showError("No hi ha taules ha borrar!");
+                try {
+                    gestionador.eliminaTaula(Integer.parseInt(vista.getVistaTaules().getJlstLlista()));
+                    handleLlista();
+                } catch (NullPointerException e2) {
+                    vista.showError("Cap taula seleccionada!");
+                } catch (Exception e1) {
+                    vista.showError(e1.getMessage());
                 }
                 break;
 
             case "ACTUALITZA":
-
-                handleLlista();
-                //System.out.println(gestionador.mostraReseves(1));
-
+                try {
+                    index = Integer.parseInt(vista.getVistaTaules().getJlstLlista());
+                    handleLlista();
+                } catch (Exception e1) {
+                    vista.showError("Cap taula seleccionada!");
+                }
                 break;
         }
 
     }
 
-    private void handleLlista(){
+    private void handleLlista() {
 
         vista.getVistaTaules().actualitzaTaula(creaModel(gestionador.mostraReseves(index)));
         int[] llista = convertIntegers(gestionador.llistaTaules());
+
         DefaultListModel modelLlista = new DefaultListModel();
-        for (int f : llista){
+        for (int f : llista) {
             modelLlista.addElement(f);
         }
         vista.getVistaTaules().actualitzaLlista(modelLlista);
-        //System.out.println("sdds: "+vista.getVistaTaules().getJlstLlista());
-        //index = Integer.parseInt(vista.getVistaTaules().getJlstLlista());
-        System.out.println(index);
-
     }
 
-    private void handleTop5(ActionEvent e){
-
-            switch (e.getActionCommand()){
-                case "Semanal":
-                    System.out.println("Semanal");
-                    int[] a = {1,2,3,4,5};
-                    vista.getVistaTop5().grSemanal(a);
-                    break;
-
-                case "Total":
-                    System.out.println("Total");
-                    int[] b = {5,4,3,2,1};
-                    vista.getVistaTop5().grSemanal(b);
-                    break;
+    private void handleComandes(ActionEvent e) {
+        try {
+            VistaComandes vistaComanda = vista.getVistaComandes();
+            if (e.getActionCommand().equals("SERVIR")) {
+                System.out.println("entra");
+                String plat = panel.platSeleccionat();
+                String user = panel.usuariComanda();
+                gestionador.serveixPlat(plat, user);
+                System.out.println(gestionador.retornaComanda(user).getPlats());
+                panel.ferLlistes(gestionador.retornaComanda(user));
+                panel.repaint();
+                panel.revalidate();
             }
-
+            if (e.getActionCommand().equals("SERVIR TAULA")) {
+                panel.registraControladorDialog(this);
+                String fila = vistaComanda.filaSeleccionada();
+                if (!fila.equals("null")) {
+                    panel = new DialogServirComandes(gestionador, fila);
+                    panel.setVisible(true);
+                }
+            } else {
+                vistaComanda.setModelTaula(gestionador.llistaComandes());
+            }
+        } catch (Exception e1) {
+            e1.printStackTrace();
+            vista.showError("No hi ha reserves!");
+        }
     }
 
-    private DefaultTableModel creaModel(ArrayList<Reserva> reserves){
+
+    //Altres Funcions
+
+    private DefaultTableModel creaModel(ArrayList<Reserva> reserves) {
+
         DefaultTableModel modelTaula = new DefaultTableModel() {
             public boolean isCellEditable(int rowIndex, int mColIndex) {
                 return false;
@@ -161,23 +170,36 @@ public class Controlador implements ActionListener {
         modelTaula.addColumn("N persones");
         modelTaula.addColumn("Data/Hora");
 
-
-        for (Reserva r : reserves){
-            String[] reservesArr = new String[]{r.getUsuari(),r.getnComencals().toString(), r.getHora().toString()+"//"+r.getData().toString()};
+        for (Reserva r : reserves) {
+            String[] reservesArr = new String[]{r.getUsuari(), r.getnComencals().toString(), r.getHora().toString() + "//" + r.getData().toString()};
             modelTaula.addRow(reservesArr);
         }
 
         return modelTaula;
     }
 
-    public static int[] convertIntegers(ArrayList<Integer> integers)
-    {
+    public static int[] convertIntegers(ArrayList<Integer> integers) {
         int[] ret = new int[integers.size()];
-        for (int i=0; i < ret.length; i++)
-        {
+        for (int i = 0; i < ret.length; i++) {
             ret[i] = integers.get(i).intValue();
         }
         return ret;
+    }
+
+    private void handleTop5(ActionEvent e) {
+
+        switch (e.getActionCommand()) {
+            case "Semanal":
+                int[] a = {1, 2, 3, 4, 5};
+                vista.getVistaTop5().grSemanal(a);
+                break;
+
+            case "Total":
+                int[] b = {5, 4, 3, 2, 2};
+                vista.getVistaTop5().grSemanal(b);
+                break;
+        }
+
     }
 
 }

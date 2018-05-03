@@ -257,5 +257,18 @@ public class Gestionador {
         return bbdd.mostraReservesTaula(i);
     }
 
+    public void eliminaTaula(int i) throws Exception {
+        bbdd.eliminaTaula(i);
+    }
+
+    public ArrayList<InfoComandes> llistaComandes()throws Exception{
+        return bbdd.llistaComandes();
+    }
+
+    public void serveixPlat (String plat, String user){
+
+        bbdd.serveixPlat(plat, user);
+    }
+
 }
 

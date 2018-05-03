@@ -49,49 +49,40 @@ public class ServidorVista extends JFrame {
 
         getContentPane().add(layout);
 
-        //CardLayout cardLayout = (CardLayout) layout.getLayout();
-        //cardLayout.show(layout, "COMANDES");
-
-
 
     }
 
 
     public void registraControlador(ActionListener controller) {                            //Registro el boto serve amb un action comand de send, declarat en una constant
 
-
-
         vistaTaules.registraControlador(controller);
         vistaTop5.registraControlador(controller);
+        vistaPlats.registraControlador(controller);
+        vistaComandes.registraControlador(controller);
+
     }
 
 
     public void activaTaula(Controlador controller){
-        this.vistaTaules = new VistaTaules();
         CardLayout cardLayout = (CardLayout) layout.getLayout();
         cardLayout.show(layout, "TAULES");
-        vistaTaules.registraControlador(controller);
+
     }
 
-    public void activaCarta(Controlador controller){
-        this.vistaPlats = new VistaPlats();
+    public void activaCarta(){
         CardLayout cardLayout = (CardLayout) layout.getLayout();
         cardLayout.show(layout, "CARTA");
-        vistaPlats.registraControlador(controller);
+
     }
 
-    public void activaComanda(Controlador controller){
-        this.vistaComandes = new VistaComandes();
+    public void activaComanda(){
         CardLayout cardLayout = (CardLayout) layout.getLayout();
         cardLayout.show(layout, "COMANDES");
-        vistaComandes.registraControlador(controller);
     }
 
-    public void activaTop5(Controlador controller){
-        this.vistaTop5 = new VistaTop5();
+    public void activaTop5(){
         CardLayout cardLayout = (CardLayout) layout.getLayout();
         cardLayout.show(layout, "TOP5");
-        vistaTop5.registraControlador(controller);
     }
 
 

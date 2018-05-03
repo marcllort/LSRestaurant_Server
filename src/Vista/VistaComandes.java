@@ -60,6 +60,8 @@ public class VistaComandes extends JPanel{
         jbServir.addActionListener(controller);
         jbServir.setActionCommand("SERVIR TAULA");
 
+
+
     }
 
     /**

@@ -31,14 +31,14 @@ public class Controlador implements ActionListener {
         vista.creaMenu(this);
         vista.getVistaTaules().actualitzaTaula(creaModel(gestionador.mostraReseves(1)));
         panel = new DialogServirComandes(gestionador, null);
-        panel.registraControladorDialog(this);
+
     }
 
 
     @Override
     public void actionPerformed(ActionEvent e) {
         handleMenu(e);
-
+        System.out.println("prova");
         switch (card) {
             case "TAULES":
                 handleTaules(e);
@@ -141,6 +141,7 @@ public class Controlador implements ActionListener {
                 panel.revalidate();
             }
             if (e.getActionCommand().equals("SERVIR TAULA")) {
+                panel.registraControladorDialog(this);
                 String fila = vistaComanda.filaSeleccionada();
                 if (!fila.equals("null")) {
                     panel = new DialogServirComandes(gestionador, fila);

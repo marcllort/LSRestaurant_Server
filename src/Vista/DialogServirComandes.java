@@ -1,6 +1,5 @@
 package Vista;
 
-import Controlador.Controlador;
 import Model.Comanda;
 import Model.Gestionador;
 import Model.Plat;
@@ -9,11 +8,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-public class DialogServirComandes extends JDialog {
+public class DialogServirComandes extends JFrame {
 
     private JList jlLlistaSi;
     private JList jlLlistaNo;
-    private JButton jbServir;
+    private JButton jbServirPlat;
     private DefaultListModel modelLlistaServits;
     private DefaultListModel modelLlistaNoServits;
     private String user;
@@ -50,8 +49,8 @@ public class DialogServirComandes extends JDialog {
         this.add(jpCenter);
         jpCenter.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
-        jbServir = new JButton("Servir");
-        jpCenter.add(jbServir);
+        jbServirPlat = new JButton("Servir");
+        jpCenter.add(jbServirPlat);
 
         JPanel jpBox2 = new JPanel();
         this.add(jpBox2);
@@ -98,8 +97,8 @@ public class DialogServirComandes extends JDialog {
 
     public void registraControladorDialog(ActionListener controlador) {
         System.out.println("registrat");
-        jbServir.addActionListener(controlador);
-        jbServir.setActionCommand("SERVIR");
+        jbServirPlat.addActionListener(controlador);
+        jbServirPlat.setActionCommand("SERVIR");
     }
 
     public String platSeleccionat() {

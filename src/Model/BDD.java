@@ -479,6 +479,7 @@ public class BDD {
      * @param password contrasenya
      * @return
      */
+
     public Boolean comprovaPassword(String usuari, String password) {
         try {
             ResultSet rs = st.executeQuery("SELECT usuari, password FROM Reserva WHERE usuari = '" + usuari + "'");

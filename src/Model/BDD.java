@@ -249,7 +249,18 @@ public class BDD {
      * @param usuari nom del usuari al que es serveix
      */
     public void serveixPlat(String plat, String usuari) {
-        String str = "Update Comanda set servit  = TRUE where nom_plat = '" + plat + "'" + " AND usuari = '" + usuari + "'";
+        int id = 0;
+        try {
+            ResultSet rs = st.executeQuery("SELECT id_comanda FROM Comanda where nom_plat = '" + plat + "' AND usuari = '" + usuari + "' AND servit = false" );
+            if(rs.next()){
+                id = rs.getInt("id_comanda");
+                System.out.println("INDDDDDDDDDD:"+id);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        String str = "Update Comanda set servit  = TRUE where nom_plat = '" + plat + "'" + " AND usuari = '" + usuari + "' AND id_comanda ="+id;
         try {
             PreparedStatement ps = con.prepareStatement(str);
             ps.executeUpdate();
@@ -427,12 +438,13 @@ public class BDD {
 
 
             }
-            rss = st.executeQuery("SELECT nom_plat, servit, preu  FROM Comanda NATURAL JOIN Plat WHERE usuari = '" + usuari + "'");
+            rss = st.executeQuery("SELECT nom_plat, servit, preu, id_comanda  FROM Comanda NATURAL JOIN Plat WHERE usuari = '" + usuari + "'");
 
             while (rss.next()) {
                 String nom = rss.getString("nom_plat");
                 Boolean servit = rss.getBoolean("servit");
                 int preu = rss.getInt("preu");
+                int id_comanda = rss.getInt("id_comanda");
                 Plat plat = new Plat(nom, preu, servit);
                 array.add(plat);
             }
@@ -453,7 +465,7 @@ public class BDD {
     public ArrayList<InfoComandes> llistaComandes() throws SQLException {
 
         ArrayList<InfoComandes> array = new ArrayList<InfoComandes>();
-        ResultSet rs = st.executeQuery("SELECT usuari, COUNT(nom_plat) AS num, SUM(!servit) AS sum, hora, data FROM Comanda\n" +
+        ResultSet rs = st.executeQuery("SELECT usuari, COUNT(nom_plat) AS num, SUM(!servit) AS sum, MAX(hora) AS hora, MAX(data) AS data FROM Comanda\n" +
                 "GROUP BY usuari \n" +
                 "ORDER BY data, hora ASC; ");       //Mirar si l'ordre va be
 

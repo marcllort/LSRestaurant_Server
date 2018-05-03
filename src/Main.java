@@ -31,7 +31,7 @@ public class Main {
 
             //afegeixReservaBdd(gestionador);
             //afegeixPlatsBdd(bdd);
-            //afegeixComanda(gestionador, bdd);
+            afegeixComanda(gestionador, bdd);
 
 
 
@@ -92,8 +92,8 @@ public class Main {
 
         ArrayList<Plat> arr = new ArrayList<Plat>();
         ArrayList<Plat> arr1 = new ArrayList<Plat>();
-        arr.add(new Plat("gamba", 12));
-        Comanda comanda = new Comanda(arr, gestionador.newData(12, 1, 2019), new Time(12, 40, 00), "Alex");
+        arr.add(new Plat("Croquetes", 12));
+        Comanda comanda = new Comanda(arr, gestionador.newData(12, 1, 2019), new Time(12, 53, 00), "Alex");
 
         try {
             bdd.creaComanda(comanda);

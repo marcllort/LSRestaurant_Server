@@ -34,8 +34,8 @@ public class VistaComandes extends JPanel{
         modelTaula.addColumn("Data/Hora");
 
         //Posem informacio
-        Object rowData[] = {"Row1-Column1", "Row1-Column2", "Row1-Column3", "sdsad"};
-        modelTaula.addRow(rowData);
+
+
 
         //Acabada
         jtTaula = new JTable(modelTaula);
@@ -69,13 +69,18 @@ public class VistaComandes extends JPanel{
      * @param modelTaulas
      */
     public void setModelTaula(ArrayList<InfoComandes> modelTaulas){
-
+       int r =modelTaula.getRowCount();
+       for (int p = 0 ; p<r; p++){
+           modelTaula.removeRow(0);
+       }
         for (InfoComandes info : modelTaulas){
-            Object rowData[] = {info.getUsuari(), info.getTotalPlats(), info.getPlatsPendents(), info.getHora()+"//"+info.getHora()};
+            Object rowData[] = {info.getUsuari(), info.getTotalPlats(), info.getPlatsPendents(), info.getDate()+"//"+info.getHora()};
             modelTaula.addRow(rowData);
         }
+
         scroll.repaint();
         scroll.revalidate();
+        System.out.println(modelTaula.getRowCount());
     }
 
     /**

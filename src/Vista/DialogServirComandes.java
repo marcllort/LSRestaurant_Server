@@ -27,7 +27,8 @@ public class DialogServirComandes extends JFrame {
 
         user = usuari;
         Comanda comanda = gestionador.retornaComanda(usuari);
-
+        jlLlistaNo = new JList();
+        jlLlistaSi = new JList();
         ferLlistes(comanda);
 
 
@@ -42,7 +43,7 @@ public class DialogServirComandes extends JFrame {
         jpNoServit.setLayout(new BorderLayout(0, 0));
 
 
-        jpNoServit.add(jlLlistaNo);
+        jpNoServit.add(new JScrollPane(jlLlistaNo));
 
 
         JPanel jpCenter = new JPanel();
@@ -66,15 +67,13 @@ public class DialogServirComandes extends JFrame {
         jpBox2.add(jpServit);
         jpServit.setLayout(new BorderLayout(0, 0));
 
-        jpServit.add(jlLlistaSi);
+        jpServit.add(new JScrollPane(jlLlistaSi));
     }
 
     public void ferLlistes(Comanda comanda) {
         modelLlistaServits = new DefaultListModel();
         modelLlistaNoServits = new DefaultListModel();
 
-        modelLlistaNoServits.addElement("plat no0");
-        modelLlistaServits.addElement("plat si");
 
         for (Plat p : comanda.getPlats()) {
             if (p.isServit()) {
@@ -84,15 +83,11 @@ public class DialogServirComandes extends JFrame {
             }
         }
 
-        jlLlistaNo = new JList(modelLlistaNoServits);
-        jlLlistaSi = new JList(modelLlistaServits) {
-
-            @Override
-            public void setSelectionInterval(int index0, int index1) {
-                super.setSelectionInterval(-1, -1);
-            }
-        };
-
+        jlLlistaNo.setModel(modelLlistaNoServits);
+        jlLlistaNo.repaint();
+        jlLlistaNo.revalidate();
+        jlLlistaSi.setModel(modelLlistaServits);
+        jlLlistaSi.repaint();
     }
 
     public void registraControladorDialog(ActionListener controlador) {
@@ -102,7 +97,7 @@ public class DialogServirComandes extends JFrame {
     }
 
     public String platSeleccionat() {
-        System.out.println(modelLlistaNoServits.getElementAt(jlLlistaNo.getSelectedIndex()));
+        System.out.println("SELECTED"+jlLlistaNo.getSelectedIndex());
         return (String) modelLlistaNoServits.getElementAt(jlLlistaNo.getSelectedIndex());
     }
 

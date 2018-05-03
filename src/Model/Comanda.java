@@ -16,6 +16,7 @@ public class Comanda implements Serializable {
     private Date data;                  //  quan fem una comanda cal enviar a la hora que sha fet
     private Time hora;
 
+
     /**
      * Constructor sense parametres.
      * Crea un llistat de plats buit.
@@ -37,6 +38,7 @@ public class Comanda implements Serializable {
         this.data = data;
         this.hora = hora;
         this.usuari = usuari;
+
     }
 
     /**

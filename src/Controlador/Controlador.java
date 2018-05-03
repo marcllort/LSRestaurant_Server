@@ -137,14 +137,14 @@ public class Controlador implements ActionListener {
                 gestionador.serveixPlat(plat, user);
                 System.out.println(gestionador.retornaComanda(user).getPlats());
                 panel.ferLlistes(gestionador.retornaComanda(user));
-                panel.repaint();
-                panel.revalidate();
+
             }
             if (e.getActionCommand().equals("SERVIR TAULA")) {
-                panel.registraControladorDialog(this);
+                //panel.registraControladorDialog(this);
                 String fila = vistaComanda.filaSeleccionada();
                 if (!fila.equals("null")) {
                     panel = new DialogServirComandes(gestionador, fila);
+                    panel.registraControladorDialog(this);
                     panel.setVisible(true);
                 }
             } else {

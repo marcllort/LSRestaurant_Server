@@ -56,6 +56,7 @@ public class VistaTop5 extends JPanel {
         gr.grafic(indexes,plats);
         this.add(gr, BorderLayout.CENTER);
         this.repaint();
+        this.revalidate();
 
     }
 

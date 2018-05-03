@@ -89,6 +89,7 @@ public class Controlador implements ActionListener {
                     vista.getVistaTaules().netejaJtf();
                     vista.showError("Taula afegida correctament!");
                 } catch (Exception e1) {
+                    vista.getVistaTaules().netejaJtf();
                     vista.showError("Introdueixi un nombre!");
                 }
                 break;

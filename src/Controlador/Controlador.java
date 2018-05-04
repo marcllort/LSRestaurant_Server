@@ -119,10 +119,14 @@ public class Controlador implements ActionListener {
     }
 
     private void handleCarta(ActionEvent e){
+
         if (e.getActionCommand().equals("AFEGIR PLAT")){
 
         }
         if (e.getActionCommand().equals("ACTUALITZAR")){
+
+        }else{
+            String boto = e.getActionCommand();     //per saber de quin plat haurem de actualizar
 
         }
     }

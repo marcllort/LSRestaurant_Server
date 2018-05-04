@@ -1,5 +1,7 @@
 package Vista;
 
+import jdk.nashorn.internal.runtime.ECMAException;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -61,6 +63,24 @@ public class DialogAfegirPlat extends JFrame{
     public void registraControlador(ActionListener controlador){
         jbAfegir.addActionListener(controlador);
         jbAfegir.setActionCommand("AFEGIR PLAT");
+    }
+
+    public String getJtfNom() {
+        return jtfNom.getText();
+    }
+
+    public int getJtfPreu() throws NumberFormatException {
+        return Integer.parseInt(jtfPreu.getText());
+    }
+
+    public int getJtfUnitats() throws NumberFormatException{
+        return Integer.parseInt(jtfUnitats.getText());
+    }
+
+    public void netejaCamps(){
+        jtfNom.setText("");
+        jtfPreu.setText("");
+        jtfUnitats.setText("");
     }
 
 }

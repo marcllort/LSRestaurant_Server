@@ -212,44 +212,40 @@ public class BDD {
      * @param unitats unitats que s'han gastat
      * @return
      */
-    public boolean updatePlat(String nom, int unitats) {
+    public boolean updatePlat(String nom, int unitats) throws SQLException {
 
         boolean ok = true;
-        try {
-            String str = "Update Plat set unitats_gastades = ?, unitats_disponibles= ? where nom_plat = '" + nom + "'";
-            PreparedStatement ps = con.prepareStatement(str);
 
-            ResultSet rss = null;
-            ResultSet rs = null;
+        String str = "Update Plat set unitats_gastades = ?, unitats_disponibles= ? where nom_plat = '" + nom + "'";
+        PreparedStatement ps = con.prepareStatement(str);
 
-            rss = st.executeQuery("SELECT unitats_disponibles FROM Plat where nom_plat = '" + nom + "';");
-            if (rss.next()) {
+        ResultSet rss = null;
+        ResultSet rs = null;
 
-                if (rss.getInt("unitats_disponibles") - unitats >= 0) {
-                    ps.setInt(2, rss.getInt("unitats_disponibles") - unitats);
-                } else {
-                    ok = false;
-                    ps.setInt(2, rss.getInt("unitats_disponibles"));
-                }
+        rss = st.executeQuery("SELECT unitats_disponibles FROM Plat where nom_plat = '" + nom + "';");
+        if (rss.next()) {
 
+            if (rss.getInt("unitats_disponibles") - unitats >= 0) {
+                ps.setInt(2, rss.getInt("unitats_disponibles") - unitats);
+            } else {
+                ok = false;
+                ps.setInt(2, rss.getInt("unitats_disponibles"));
             }
 
-            rs = st.executeQuery("SELECT  unitats_gastades  FROM Plat where nom_plat = '" + nom + "';");
-            if (rs.next()) {
-                if (ok == true) {
-                    ps.setInt(1, rs.getInt("unitats_gastades") + unitats);
-                } else {
-                    ps.setInt(1, rs.getInt("unitats_gastades"));
-                }
-            }
-            ps.executeUpdate();
-            return ok;
-
-        } catch (SQLException e) {
-            System.out.println("ERROORR");
-            e.printStackTrace();
-            return false;
         }
+
+        rs = st.executeQuery("SELECT  unitats_gastades  FROM Plat where nom_plat = '" + nom + "';");
+        if (rs.next()) {
+            if (ok == true) {
+                ps.setInt(1, rs.getInt("unitats_gastades") + unitats);
+            } else {
+                ps.setInt(1, rs.getInt("unitats_gastades"));
+            }
+        }
+        ps.executeUpdate();
+        return ok;
+
+
     }
 
     /**

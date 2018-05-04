@@ -12,6 +12,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 
@@ -23,7 +24,7 @@ public class Controlador implements ActionListener {
     private int index;
     private VistaServirComandes panel;
     private ServerSocketReserva sReserva;
-
+    private String boto;
 
     public Controlador(ServidorVista vista, Gestionador gestionador, ServerSocketReserva sReserva) {
 
@@ -118,16 +119,45 @@ public class Controlador implements ActionListener {
 
     }
 
-    private void handleCarta(ActionEvent e){
+    private void handleCarta(ActionEvent e) {
+        DialogAfegirPlat dialogAfegirPlat = vista.getVistaPlats().getDialogAfegirPlat();
+        DialogUpdatePlat dialogUpdatePlat = vista.getVistaPlats().getDialogUpdatePlat();
 
-        if (e.getActionCommand().equals("AFEGIR PLAT")){
 
+        if (e.getActionCommand().equals("AFEGIR NOU PLAT")) {
+            dialogAfegirPlat.setVisible(true);
         }
-        if (e.getActionCommand().equals("ACTUALITZAR")){
+        if (e.getActionCommand().equals("AFEGIR PLAT")) {
+            try {
+                gestionador.insereixPlat(dialogAfegirPlat.getJtfNom(), dialogAfegirPlat.getJtfPreu(), dialogAfegirPlat.getJtfUnitats());
+                vista.showError("Plat afegit!");
+                dialogAfegirPlat.dispatchEvent(new WindowEvent(dialogAfegirPlat, WindowEvent.WINDOW_CLOSING));
+                dialogAfegirPlat.netejaCamps();
 
-        }else{
-            String boto = e.getActionCommand();     //per saber de quin plat haurem de actualizar
+            } catch (NumberFormatException ne) {
+                vista.showError("Error! Caracters no permesos a preu i unitats!");
+                dialogAfegirPlat.netejaCamps();
+            }
+        }
+        if (e.getActionCommand().equals("ACTUALITZAR")) {
+            System.out.println("actualizat " + boto);
+            try {
+                gestionador.updatePlat(boto, dialogUpdatePlat.getJtfUnitats());
+            } catch (NumberFormatException ne2) {
+                vista.showError("Error! Caracters no permesos a unitats!");
+                dialogUpdatePlat.netejaCamps();
+            } catch (SQLException sqe) {
+                vista.showError("Error al actualitzar el plat!");
+                dialogUpdatePlat.dispatchEvent(new WindowEvent(dialogUpdatePlat, WindowEvent.WINDOW_CLOSING));
+                dialogUpdatePlat.netejaCamps();
+            }
 
+        } else {
+            boto = e.getActionCommand();     //per saber de quin plat haurem de actualizar
+            System.out.println(boto);
+            dialogUpdatePlat.setVisible(true);
+            dialogUpdatePlat.setJlNom(boto);
+            dialogUpdatePlat.setJlPreu("5");
         }
     }
 

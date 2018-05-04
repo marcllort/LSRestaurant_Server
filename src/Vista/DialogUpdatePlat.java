@@ -10,9 +10,12 @@ public class DialogUpdatePlat extends JFrame {
     private JLabel jlNom;
     private JLabel jlPreu;
     private JButton jbActualizar;
+    private String platUpdate;
 
     public DialogUpdatePlat() {
         setLayout(new GridLayout(4, 0, 0, 0));
+        setSize(600, 330);                                      //Dono les propietats inicials al JFrame
+
 
         JPanel jpName = new JPanel();
         this.add(jpName);
@@ -50,21 +53,26 @@ public class DialogUpdatePlat extends JFrame {
 
     }
 
-    public void registraControlador(ActionListener controlador){
+    public void registraControlador(ActionListener controlador) {
         jbActualizar.addActionListener(controlador);
         jbActualizar.setActionCommand("ACTUALITZAR");
     }
 
-    public void setJlNom(String nom){
+    public void setJlNom(String nom) {
         this.jlNom.setText("Nom: " + nom);
     }
 
-    public void setJlPreu(String preu){
-        this.jlNom.setText("Preu: " + preu);
+    public void setJlPreu(String preu) {
+        this.jlPreu.setText("Preu: " + preu);
     }
 
-    public String getJtfUnitats() {
-        return jtfUnitats.getText();
+    public int getJtfUnitats() {
+        return Integer.parseInt(jtfUnitats.getText());
     }
+
+    public void netejaCamps(){
+        jtfUnitats.setText("");
+    }
+
 
 }

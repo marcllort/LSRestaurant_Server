@@ -270,5 +270,17 @@ public class Gestionador {
         bbdd.serveixPlat(plat, user);
     }
 
+    public void insereixPlat(String nom_plat, int preu, int unitats_disponibles){
+        try {
+            bbdd.insereixPlat(nom_plat, preu, unitats_disponibles, 0);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updatePlat(String nom, int unitats) throws SQLException{
+        bbdd.updatePlat(nom, unitats);
+    }
+
 }
 

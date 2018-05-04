@@ -11,6 +11,8 @@ import javax.swing.JButton;
 
 public class VistaPlats extends JPanel {
 
+    private DialogAfegirPlat dialogAfegirPlat;
+    private DialogUpdatePlat dialogUpdatePlat;
 
 
     public VistaPlats(){
@@ -333,7 +335,8 @@ public class VistaPlats extends JPanel {
         panel_22.add(btnPagar);
         btnPagar.setFont(new Font("Tahoma", Font.PLAIN, 20));
 
-
+        dialogAfegirPlat = new DialogAfegirPlat();
+        dialogUpdatePlat = new DialogUpdatePlat();
 
     }
 
@@ -347,7 +350,16 @@ public class VistaPlats extends JPanel {
 
     public void registraControlador(ActionListener controller) {                            //Registro el boto serve amb un action comand de send, declarat en una constant
 
+        dialogAfegirPlat.registraControlador(controller);
+        dialogUpdatePlat.registraControlador(controller);
 
+    }
 
+    public DialogAfegirPlat getDialogAfegirPlat() {
+        return dialogAfegirPlat;
+    }
+
+    public DialogUpdatePlat getDialogUpdatePlat() {
+        return dialogUpdatePlat;
     }
 }

@@ -29,7 +29,7 @@ public class ServidorVista extends JFrame {
 
     public ServidorVista() {
 
-        setSize(600, 400);                                      //Dono les propietats inicials al JFrame
+        setSize(600, 330);                                      //Dono les propietats inicials al JFrame
         setLocationRelativeTo(null);
         setTitle("DPO2-1718-PCS2-Server");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

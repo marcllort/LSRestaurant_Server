@@ -31,7 +31,7 @@ public class Main {
 
             //afegeixReservaBdd(gestionador);
             //afegeixPlatsBdd(bdd);
-            afegeixComanda(gestionador, bdd);
+            //afegeixComanda(gestionador, bdd);
 
 
         } catch (SQLException e) {

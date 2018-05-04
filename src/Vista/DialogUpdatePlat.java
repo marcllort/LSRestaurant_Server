@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-public class DialogUpdatePlat extends JPanel {
+public class DialogUpdatePlat extends JFrame {
 
     private JTextField jtfUnitats;
     private JLabel jlNom;

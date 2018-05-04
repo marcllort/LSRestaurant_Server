@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-public class DialogAfegirPlat extends JPanel{
+public class DialogAfegirPlat extends JFrame{
 
     private JTextField jtfNom;
     private JTextField jtfPreu;

@@ -15,7 +15,6 @@ public class ServidorVista extends JFrame {
     private VistaComandes vistaComandes;
     private VistaPlats vistaPlats;
     private VistaTop5 vistaTop5;
-    //private DialogUpdatePlat dialogUpdatePlat;
 
     private JPanel layout;
 

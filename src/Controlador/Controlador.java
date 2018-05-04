@@ -44,7 +44,7 @@ public class Controlador implements ActionListener {
                 handleTaules(e);
                 break;
             case "CARTA":
-
+                handleCarta(e);
                 break;
             case "COMANDES":
                 handleComandes(e);
@@ -116,6 +116,15 @@ public class Controlador implements ActionListener {
                 break;
         }
 
+    }
+
+    private void handleCarta(ActionEvent e){
+        if (e.getActionCommand().equals("AFEGIR PLAT")){
+
+        }
+        if (e.getActionCommand().equals("ACTUALITZAR")){
+
+        }
     }
 
     private void handleLlista() {

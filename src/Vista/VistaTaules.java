@@ -22,7 +22,7 @@ public class VistaTaules extends JPanel {
 
         this.setLayout(new BorderLayout());
         JSplitPane jspSplit = new JSplitPane();
-        jspSplit.setBounds(0, 0, 704, 535);
+        jspSplit.setBounds(0, 0, 600, 330);
         this.add(jspSplit);
 
         left(jspSplit);
@@ -79,7 +79,7 @@ public class VistaTaules extends JPanel {
         jtTaula = new JTable() {
             @Override
             public Dimension getPreferredScrollableViewportSize() {
-                return new Dimension(350, jtTaula.getRowHeight() * 14);
+                return new Dimension(310, jtTaula.getRowHeight() * 12);
             }
         };
 

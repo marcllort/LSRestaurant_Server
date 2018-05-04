@@ -2,12 +2,14 @@ package Vista;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class DialogAfegirPlat extends JPanel{
 
     private JTextField jtfNom;
     private JTextField jtfPreu;
     private JTextField jtfUnitats;
+    private JButton jbAfegir;
 
     public DialogAfegirPlat() {
         setLayout(new GridLayout(4, 0, 0, 0));
@@ -52,8 +54,13 @@ public class DialogAfegirPlat extends JPanel{
         JPanel jpBoto = new JPanel();
         add(jpBoto);
 
-        JButton jbAfegir = new JButton("Afegir");
+        jbAfegir = new JButton("Afegir");
         jpBoto.add(jbAfegir);
+    }
+
+    public void registraControlador(ActionListener controlador){
+        jbAfegir.addActionListener(controlador);
+        jbAfegir.setActionCommand("AFEGIR PLAT");
     }
 
 }

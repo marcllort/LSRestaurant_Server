@@ -60,9 +60,7 @@ public class ServidorReserva extends Thread {
                 if (gestionador.comprovaUserPass(user.getUser(), user.getPassword())) {
                     doStream.writeUTF("true");                                                  //enviem true en cas de haver entrat correctaemnt
                     ooStream.writeObject(gestionador.retornaCarta());                               //enviem la carta amb plats disponibles
-                    System.out.println("enviacarta");
                     while (true) {
-                        System.out.println("entrawhile");
                         ooStream.writeObject(gestionador.retornaComanda(user.getUser()));
                         Comanda com = (Comanda) oiStream.readObject();                          //Rebem la comanda enviada pel usuari
                         String analisi = gestionador.analitzarComanda(com);

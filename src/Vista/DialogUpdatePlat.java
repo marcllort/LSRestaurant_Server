@@ -2,12 +2,14 @@ package Vista;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class DialogUpdatePlat extends JPanel {
 
     private JTextField jtfUnitats;
     private JLabel jlNom;
     private JLabel jlPreu;
+    private JButton jbActualizar;
 
     public DialogUpdatePlat() {
         setLayout(new GridLayout(4, 0, 0, 0));
@@ -43,11 +45,15 @@ public class DialogUpdatePlat extends JPanel {
         JPanel jpBoto = new JPanel();
         add(jpBoto);
 
-        JButton jbActualizar = new JButton("Actualitzar");
+        jbActualizar = new JButton("Actualitzar");
         jpBoto.add(jbActualizar);
 
     }
 
+    public void registraControlador(ActionListener controlador){
+        jbActualizar.addActionListener(controlador);
+        jbActualizar.setActionCommand("ACTUALITZAR");
+    }
 
     public void setJlNom(String nom){
         this.jlNom.setText("Nom: " + nom);
@@ -55,6 +61,10 @@ public class DialogUpdatePlat extends JPanel {
 
     public void setJlPreu(String preu){
         this.jlNom.setText("Preu: " + preu);
+    }
+
+    public String getJtfUnitats() {
+        return jtfUnitats.getText();
     }
 
 }

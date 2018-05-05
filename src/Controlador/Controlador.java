@@ -147,7 +147,6 @@ public class Controlador implements ActionListener {
                 dialogUpdatePlat.dispatchEvent(new WindowEvent(dialogUpdatePlat, WindowEvent.WINDOW_CLOSING));
                 dialogUpdatePlat.netejaCamps();
 
-
             } catch (NumberFormatException ne2) {
                 vista.showError("Error! Caracters no permesos a unitats!");
                 dialogUpdatePlat.netejaCamps();
@@ -156,6 +155,15 @@ public class Controlador implements ActionListener {
                 dialogUpdatePlat.dispatchEvent(new WindowEvent(dialogUpdatePlat, WindowEvent.WINDOW_CLOSING));
                 dialogUpdatePlat.netejaCamps();
             }
+        }
+        if (e.getActionCommand().equals("SEGUENT")) {
+            System.out.println("PAGINA SEGUENT");
+            //Funcio canvi pagina
+        }
+        if (e.getActionCommand().equals("ANTERIOR")) {
+            System.out.println("PAGINA ANTERIOR");
+            //Funcio canvi pagina
+
 
         } else {
             boto = e.getActionCommand();     //per saber de quin plat haurem de actualizar

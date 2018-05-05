@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-public class DialogAfegirPlat extends JFrame{
+public class DialogAfegirPlat extends JFrame {
 
     private JTextField jtfNom;
     private JTextField jtfPreu;
@@ -60,7 +60,7 @@ public class DialogAfegirPlat extends JFrame{
         jpBoto.add(jbAfegir);
     }
 
-    public void registraControlador(ActionListener controlador){
+    public void registraControlador(ActionListener controlador) {
         jbAfegir.addActionListener(controlador);
         jbAfegir.setActionCommand("AFEGIR PLAT");
     }
@@ -73,11 +73,11 @@ public class DialogAfegirPlat extends JFrame{
         return Integer.parseInt(jtfPreu.getText());
     }
 
-    public int getJtfUnitats() throws NumberFormatException{
+    public int getJtfUnitats() throws NumberFormatException {
         return Integer.parseInt(jtfUnitats.getText());
     }
 
-    public void netejaCamps(){
+    public void netejaCamps() {
         jtfNom.setText("");
         jtfPreu.setText("");
         jtfUnitats.setText("");

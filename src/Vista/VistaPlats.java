@@ -15,7 +15,7 @@ public class VistaPlats extends JPanel {
     private DialogUpdatePlat dialogUpdatePlat;
 
 
-    public VistaPlats(){
+    public VistaPlats() {
 
         this.setLayout(null);
 
@@ -339,13 +339,6 @@ public class VistaPlats extends JPanel {
         dialogUpdatePlat = new DialogUpdatePlat();
 
     }
-
-
-
-
-
-
-
 
 
     public void registraControlador(ActionListener controller) {                            //Registro el boto serve amb un action comand de send, declarat en una constant

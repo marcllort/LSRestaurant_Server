@@ -14,6 +14,8 @@ public class Gestionador {
 
     private BDD bbdd;
 
+
+
     /**
      * Construncor del gestionador on donem valor a la bbdd
      *
@@ -22,6 +24,7 @@ public class Gestionador {
     public Gestionador(BDD bbdd) {
         this.bbdd = bbdd;
     }
+
 
 
     /**
@@ -169,10 +172,8 @@ public class Gestionador {
     private synchronized String buscaTaula(Reserva reserva, String password) {
 
         try {
-            //int id_taula = -1;
             int i = reserva.getnComencals();
 
-            // while ((i < (reserva.getnComencals() + 3)) && (id_taula == -1)) {
             while ((i < (reserva.getnComencals() + 3))) {
                 int id_taula = bbdd.reservaTaula(i, reserva.getData(), reserva.getHora());
                 if (id_taula != -1) {
@@ -186,7 +187,6 @@ public class Gestionador {
             return "No hi ha taula disponible en el dia i hora seleccionats";
 
         } catch (Exception e) {
-            //e.printStackTrace();
             System.out.println("Entrada: Nom d'usuari ja registrat, escull-ne un altre!");
             return "Nom d'usuari ja registrat, escull-ne un altre!";
         }
@@ -238,39 +238,79 @@ public class Gestionador {
         return bbdd.top5Plats();
     }
 
-
-    public void creaTaula(int i) throws java.sql.SQLException{
+    /**
+     * Funcio crear taula a la bbdd
+     *
+     * @param i el nombre de començals
+     * @throws java.sql.SQLException
+     */
+    public void creaTaula(int i) throws java.sql.SQLException {
         bbdd.createTable(i);
     }
 
-    public ArrayList<Integer> llistaTaules(){
+    /**
+     * Funció que retorna arraylist dels id de les taules que hi ha a la bbdd
+     *
+     * @return arraylis de ints amb els ide de cada taula
+     */
+    public ArrayList<Integer> llistaTaules() {
         ArrayList<Integer> result = new ArrayList<>();
         try {
             result = bbdd.mostraTaules();
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("No hi ha taules");
         }
-       return result;
+        return result;
     }
 
-    public ArrayList<Reserva> mostraReseves(int i){
+    /**
+     * Funció que mostra les reserves de la taula de le que passem el id
+     *
+     * @param i el id de la taula
+     * @return arraylist de reserves que té la taula
+     */
+    public ArrayList<Reserva> mostraReseves(int i) {
         return bbdd.mostraReservesTaula(i);
     }
 
+    /**
+     * Elimina la taula del id taula que li passem
+     *
+     * @param i el id de la taula
+     * @throws Exception
+     */
     public void eliminaTaula(int i) throws Exception {
         bbdd.eliminaTaula(i);
     }
 
-    public ArrayList<InfoComandes> llistaComandes()throws Exception{
+    /**
+     * Funció que retorna un arraylist de infocomandes de les comandes pendents per servir
+     *
+     * @return
+     * @throws Exception
+     */
+    public ArrayList<InfoComandes> llistaComandes() throws Exception {
         return bbdd.llistaComandes();
     }
 
-    public void serveixPlat (String plat, String user){
-
+    /**
+     * Funció per servir el plat del usuari pasat per parametres
+     *
+     * @param plat nom plat
+     * @param user nom usuari
+     */
+    public void serveixPlat(String plat, String user) {
         bbdd.serveixPlat(plat, user);
     }
 
-    public void insereixPlat(String nom_plat, int preu, int unitats_disponibles){
+    /**
+     * Funció per inserir un nou plat
+     *
+     * @param nom_plat
+     * @param preu
+     * @param unitats_disponibles
+     */
+    public void insereixPlat(String nom_plat, int preu, int unitats_disponibles) {
         try {
             bbdd.insereixPlat(nom_plat, preu, unitats_disponibles, 0);
         } catch (SQLException e) {
@@ -278,7 +318,14 @@ public class Gestionador {
         }
     }
 
-    public void updatePlat(String nom, int unitats) throws SQLException{
+    /**
+     * Funció per actualitzar les unitats del plat que passem per parametres
+     *
+     * @param nom
+     * @param unitats noves unitats disponibles
+     * @throws SQLException
+     */
+    public void updatePlat(String nom, int unitats) throws SQLException {
         bbdd.updatePlat(nom, unitats);
     }
 

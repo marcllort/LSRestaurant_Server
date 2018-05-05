@@ -10,7 +10,6 @@ public class DialogUpdatePlat extends JFrame {
     private JLabel jlNom;
     private JLabel jlPreu;
     private JButton jbActualizar;
-    private String platUpdate;
 
     public DialogUpdatePlat() {
         setLayout(new GridLayout(4, 0, 0, 0));
@@ -70,7 +69,7 @@ public class DialogUpdatePlat extends JFrame {
         return Integer.parseInt(jtfUnitats.getText());
     }
 
-    public void netejaCamps(){
+    public void netejaCamps() {
         jtfUnitats.setText("");
     }
 

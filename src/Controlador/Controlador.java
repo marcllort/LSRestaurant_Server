@@ -143,6 +143,11 @@ public class Controlador implements ActionListener {
             System.out.println("actualizat " + boto);
             try {
                 gestionador.updatePlat(boto, dialogUpdatePlat.getJtfUnitats());
+                vista.showError("Unitats de" + boto + "actualitzades!");
+                dialogUpdatePlat.dispatchEvent(new WindowEvent(dialogUpdatePlat, WindowEvent.WINDOW_CLOSING));
+                dialogUpdatePlat.netejaCamps();
+
+
             } catch (NumberFormatException ne2) {
                 vista.showError("Error! Caracters no permesos a unitats!");
                 dialogUpdatePlat.netejaCamps();

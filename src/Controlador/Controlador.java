@@ -196,6 +196,7 @@ public class Controlador implements ActionListener {
                 panel.ferLlistes(gestionador.retornaComanda(user));
                 ServidorReserva server = sReserva.getServerReserva(user);
                 try {
+                    System.out.println("Envai comanda");
                     server.enviaComanda();
                 } catch (Exception ee) {
                     vista.showError("El client s'ha desconnectat!");

@@ -26,6 +26,7 @@ public class Carta implements Serializable {
     public Carta(ArrayList<Plat> plats) {
         this.plats = new ArrayList<Plat>();
         this.plats = plats;
+
     }
 
     /**

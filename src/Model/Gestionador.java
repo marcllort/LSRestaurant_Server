@@ -15,7 +15,6 @@ public class Gestionador {
     private BDD bbdd;
 
 
-
     /**
      * Construncor del gestionador on donem valor a la bbdd
      *
@@ -24,7 +23,6 @@ public class Gestionador {
     public Gestionador(BDD bbdd) {
         this.bbdd = bbdd;
     }
-
 
 
     /**
@@ -137,7 +135,7 @@ public class Gestionador {
         ArrayList<Plat> platsError = bbdd.llistaPlatsNoDisponibles(comanda);
 
         String llistaPlats = new String();
-        System.out.println(platsError.size());
+        System.out.println("Numero plats amb error:" + platsError.size());
 
         if (platsError.size() != 0) {
             for (Plat plats : platsError) {

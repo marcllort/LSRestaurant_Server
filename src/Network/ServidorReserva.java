@@ -2,10 +2,12 @@ package Network;
 
 import Model.Comanda;
 import Model.Gestionador;
+import Model.InfoComandes;
 import Model.Usuari;
 import Vista.VistaComandes;
 import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 
+import javax.swing.table.DefaultTableModel;
 import java.io.*;
 import java.net.Socket;
 import java.sql.SQLException;
@@ -35,6 +37,7 @@ public class ServidorReserva extends Thread {
         this.sClient = sClient;
         this.servers = servers;
         this.gestionador = gestionador;
+        this.vistaComandes = vistaComandes;
     }
 
     /**
@@ -63,20 +66,25 @@ public class ServidorReserva extends Thread {
                     while (true) {
                         ooStream.writeObject(gestionador.retornaComanda(user.getUser()));
                         Comanda com = (Comanda) oiStream.readObject();                          //Rebem la comanda enviada pel usuari
+                        System.out.println(com.getUsuari()+com.getPlat(1).getNomPlat());
                         String analisi = gestionador.analitzarComanda(com);
-
                         if (analisi.equals("true")) {
                             gestionador.addComanda(com);                                                //Guardo la comanda
+
                             try {
-                                vistaComandes.setModelTaula(gestionador.llistaComandes());
+                                ArrayList<InfoComandes>  model= gestionador.llistaComandes();
+                                //vistaComandes = new VistaComandes();
+                                vistaComandes.setModelTaula(model);
 
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
-                            doStream.writeUTF("true");
+                            String missatge = "true";
+                            ooStream.writeObject(missatge);
                             //actualitzar vista de gestionar comandes
                         } else {
-                            doStream.writeUTF("No queden suficients unitats de:" + analisi);//enviar error
+                            String missatge = "No queden suficients unitats de:" + analisi;
+                            ooStream.writeObject(missatge);//enviar error
                         }
                     }
                 } else {
@@ -93,7 +101,8 @@ public class ServidorReserva extends Thread {
                 r.printStackTrace();
             }
         } catch (IOException | ClassNotFoundException | SQLException e) {
-            servers.remove(this);                                                   //En cas de que es desconnecti el client o hi hagi algun error tanco el server dedicat
+            servers.remove(this);
+            e.printStackTrace();//En cas de que es desconnecti el client o hi hagi algun error tanco el server dedicat
             System.out.println("Client Desonnectat");
         }
     }

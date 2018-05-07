@@ -16,9 +16,14 @@ public class Main {
      * @param args
      */
     public static void main(String[] args) {
+
+        BDD bdd = null;
         try {
-            BDD bdd = new BDD();
-            Gestionador gestionador = new Gestionador(bdd);
+            bdd = new BDD();
+        } catch (SQLException e) {
+            System.out.println("Fallo al conectar la bdd! Contrasenya Incorrecte");
+        }
+        Gestionador gestionador = new Gestionador(bdd);
             ServidorVista vista = new ServidorVista();
             Server server = new Server(new Gestionador(bdd), vista.getVistaComandes());
             server.startServer();
@@ -34,9 +39,7 @@ public class Main {
             //afegeixComanda(gestionador, bdd);
 
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+
 
     }
 

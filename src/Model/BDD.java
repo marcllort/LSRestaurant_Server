@@ -476,7 +476,7 @@ public class BDD {
     public ArrayList<InfoComandes> llistaComandes() throws SQLException {
 
         ArrayList<InfoComandes> array = new ArrayList<InfoComandes>();
-        ResultSet rs = st.executeQuery("SELECT usuari, COUNT(nom_plat) AS num, SUM(!servit) AS sum, MAX(hora) AS hora, MAX(data) AS data FROM Comanda\n" +
+        ResultSet rs = st.executeQuery("SELECT usuari, COUNT(nom_plat) AS num, SUM(!servit) AS sum, MAX(hora) AS hora, MAX(data) AS data FROM Comanda "+ //WHERE SUM(!servit) > 0 AND MAX(data) > CURRENT_DATE " +
                 "GROUP BY usuari \n" +
                 "ORDER BY data, hora ASC; ");       //Mirar si l'ordre va be
 

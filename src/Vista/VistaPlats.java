@@ -1,11 +1,14 @@
 package Vista;
 
+import Model.Plat;
+
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
-import java.awt.Font;
 import javax.swing.JSpinner;
 import javax.swing.JButton;
 
@@ -13,47 +16,53 @@ public class VistaPlats extends JPanel {
 
     private DialogAfegirPlat dialogAfegirPlat;
     private DialogUpdatePlat dialogUpdatePlat;
+    private JButton jbAnterior;
+    private JButton jbSeguent;
 
 
     public VistaPlats() {
 
-        this.setLayout(null);
+        //this.setLayout(null);
+
+this.setLayout(new BorderLayout());
 
 
 
-        JPanel panel_5 = new JPanel();
-        panel_5.setBounds(10, 11, 530, 80);
-        panel_5.setLayout(null);
 
-        JPanel panel_6 = new JPanel();
-        panel_6.setBounds(0, 0, 80, 80);
-        panel_5.add(panel_6);
+        JPanel panel_4 = new JPanel();
+        panel_4.setBounds(10, 206, 559, 46);
 
-        JLabel lblFoto = new JLabel("Foto");
-        panel_6.add(lblFoto);
+        //panel_4.setLayout(null);
 
-        JLabel lblNomDelPlat = new JLabel("Nom del plat");
-        lblNomDelPlat.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        lblNomDelPlat.setBounds(90, 11, 125, 22);
-        panel_5.add(lblNomDelPlat);
+        jbAnterior = new JButton("Anterior");
+        jbAnterior.setFont(new Font("Tahoma", Font.PLAIN, 20));
+        jbAnterior.setBounds(10, 6, 107, 35);
+        panel_4.add(jbAnterior);
 
-        JLabel lblPreuX = new JLabel("Preu: x \u20AC");
-        lblPreuX.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        lblPreuX.setBounds(90, 44, 149, 22);
-        panel_5.add(lblPreuX);
+        jbSeguent = new JButton("Seg\u00FCent");
+        jbSeguent.setFont(new Font("Tahoma", Font.PLAIN, 20));
+        jbSeguent.setBounds(442, 6, 107, 35);
+        panel_4.add(jbSeguent);
 
-        JLabel lblQuantitat = new JLabel("Quantitat:");
-        lblQuantitat.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        lblQuantitat.setBounds(202, 44, 85, 22);
-        panel_5.add(lblQuantitat);
+        JLabel lblPgina = new JLabel("P\u00E0gina 1");
+        lblPgina.setFont(new Font("Tahoma", Font.PLAIN, 17));
+        lblPgina.setBounds(244, 12, 77, 23);
+        panel_4.add(lblPgina);
+        ArrayList<Plat> plats = new ArrayList<>();
+        plats.add(new Plat("gamb",12));
+        plats.add(new Plat("gamb",12));
+        plats.add(new Plat("gamb",12)); plats.add(new Plat("gamb",12));
+        plats.add(new Plat("gamb",12)); plats.add(new Plat("gamb",12));
 
+        plats.add(new Plat("gambaaa",12));
 
-        JButton btnPagar = new JButton("Pagar");
-        btnPagar.setBounds(53, 71, 107, 35);
-        btnPagar.setFont(new Font("Tahoma", Font.PLAIN, 20));
+PaginaCarta pag = new PaginaCarta(plats,1);
 
+this.add(pag, BorderLayout.CENTER);
+this.add(panel_4, BorderLayout.SOUTH);
         dialogAfegirPlat = new DialogAfegirPlat();
         dialogUpdatePlat = new DialogUpdatePlat();
+
 
     }
 
@@ -62,6 +71,11 @@ public class VistaPlats extends JPanel {
 
         dialogAfegirPlat.registraControlador(controller);
         dialogUpdatePlat.registraControlador(controller);
+        jbAnterior.setActionCommand("ANTERIOR");
+        jbAnterior.addActionListener(controller);
+        jbSeguent.setActionCommand("SEGUENT");
+        jbSeguent.addActionListener(controller);
+
 
     }
 
@@ -71,5 +85,18 @@ public class VistaPlats extends JPanel {
 
     public DialogUpdatePlat getDialogUpdatePlat() {
         return dialogUpdatePlat;
+    }
+    public void paginaCarta(int pagina){
+        ArrayList<Plat> plats = new ArrayList<>();
+        plats.add(new Plat("gamb",12));
+        plats.add(new Plat("gamb",12));
+        plats.add(new Plat("gamb",12)); plats.add(new Plat("gamb",12));
+        plats.add(new Plat("gamb",12)); plats.add(new Plat("gamb",12));
+
+        plats.add(new Plat("gambaaa",12));
+        PaginaCarta pag = new PaginaCarta(plats, pagina);
+        this.add(pag, BorderLayout.CENTER);
+        this.repaint();
+        this.revalidate();
     }
 }

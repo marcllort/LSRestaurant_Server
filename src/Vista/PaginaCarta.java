@@ -3,10 +3,13 @@ package Vista;
 import Model.Plat;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.util.ArrayList;
 
 public class PaginaCarta extends JPanel{
+
     private ArrayList<BotoPlat> botons;
     private int numPagina;
     private ArrayList<Plat> plats;
@@ -15,19 +18,22 @@ public class PaginaCarta extends JPanel{
     public PaginaCarta(ArrayList<Plat> plats, int numPagina){
         this.plats = plats;
         this.numPagina= numPagina;
-        jbArrray = creaButtons();
+
+    this.setLayout(new BorderLayout());
         this.setLayout(new GridLayout(2, 3));
+
+        jbArrray = creaButtons();
+
         int i = 6*(numPagina-1);
 
-        while( i  < (6*numPagina) && i < jbArrray.size()){
+      while( i  < (6 *numPagina) && i < jbArrray.size()){
 
             this.add(jbArrray.get(i).getBoto());
             i++;
-            System.out.println("iiiii"+i);;
+
         }
         this.repaint();
         this.revalidate();
-
 
     }
 
@@ -35,13 +41,13 @@ public class PaginaCarta extends JPanel{
         ArrayList<BotoPlat> array = new ArrayList<BotoPlat>();
 
         for(Plat p: plats){
-            BotoPlat a = new BotoPlat(p.getNomPlat());
+            BotoPlat buton = new BotoPlat(p.getNomPlat());
 
-            array.add(a);
+            array.add(buton);
         }
         return array;
     }
-    public PaginaCarta getpaginaCarta(){
+    public JPanel getpaginaCarta(){
         return this;
     }
 }

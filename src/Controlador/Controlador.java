@@ -159,9 +159,11 @@ public class Controlador implements ActionListener {
         if (e.getActionCommand().equals("SEGUENT")) {
             System.out.println("PAGINA SEGUENT");
             //Funcio canvi pagina
+            vista.getVistaPlats().paginaCarta(2);
         }
         if (e.getActionCommand().equals("ANTERIOR")) {
             System.out.println("PAGINA ANTERIOR");
+
             //Funcio canvi pagina
 
 

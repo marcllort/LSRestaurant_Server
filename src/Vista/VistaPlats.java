@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JSpinner;
 import javax.swing.JButton;
+import javax.swing.border.Border;
 
 public class VistaPlats extends JPanel {
 
@@ -90,11 +91,14 @@ this.add(panel_4, BorderLayout.SOUTH);
         ArrayList<Plat> plats = new ArrayList<>();
         plats.add(new Plat("gamb",12));
         plats.add(new Plat("gamb",12));
-        plats.add(new Plat("gamb",12)); plats.add(new Plat("gamb",12));
-        plats.add(new Plat("gamb",12)); plats.add(new Plat("gamb",12));
+        plats.add(new Plat("gamb",12));
+        plats.add(new Plat("gamb",12));
+        plats.add(new Plat("gamb",12));
+        plats.add(new Plat("gamb",12));
 
         plats.add(new Plat("gambaaa",12));
         PaginaCarta pag = new PaginaCarta(plats, pagina);
+        this.remove(((BorderLayout)this.getLayout()).getLayoutComponent(BorderLayout.CENTER));
         this.add(pag, BorderLayout.CENTER);
         this.repaint();
         this.revalidate();

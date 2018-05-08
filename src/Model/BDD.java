@@ -275,7 +275,7 @@ public class BDD {
     }
 
     /**
-     * funcio que retorna un array amb tots els plats que hi ha a la bdd
+     * funcio que retorna un array amb tots els plats que hi ha disponibles
      *
      * @return array de plats
      */
@@ -293,6 +293,32 @@ public class BDD {
                     plats.add(plat);
 
                 }
+            }
+            return plats;
+
+        } catch (SQLException s) {
+            s.printStackTrace();
+            return null;
+        }
+    }
+    /**
+     * funcio que retorna un array amb tots els plats que hi ha a la bdd
+     *
+     * @return array de plats
+     */
+    public ArrayList<Plat> llistaPlats() {
+        try {
+            ResultSet rs = st.executeQuery("SELECT nom_plat, preu, unitats_disponibles FROM Plat");
+            ArrayList<Plat> plats = new ArrayList<>();
+
+            while (rs.next()) {
+                String nom = rs.getString("nom_plat");
+                int preu = rs.getInt("preu");
+                int unitats = rs.getInt("unitats_disponibles");
+                Plat plat = new Plat(nom, preu);
+                plats.add(plat);
+
+
             }
             return plats;
 

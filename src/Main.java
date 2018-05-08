@@ -34,7 +34,7 @@ public class Main {
             vista.registraControlador(controlador);
             vista.setVisible(true);
 
-            //afegeixReservaBdd(gestionador);
+        //afegeixReservaBdd(gestionador);
             //afegeixPlatsBdd(bdd);
             //afegeixComanda(gestionador, bdd);
 

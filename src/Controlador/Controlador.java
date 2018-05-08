@@ -120,8 +120,13 @@ public class Controlador implements ActionListener {
     }
 
     private void handleCarta(ActionEvent e) {
+
         DialogAfegirPlat dialogAfegirPlat = vista.getVistaPlats().getDialogAfegirPlat();
         DialogUpdatePlat dialogUpdatePlat = vista.getVistaPlats().getDialogUpdatePlat();
+        vista.getVistaPlats().paginaCarta(gestionador.retornaPlats().getPlats(), 1);
+
+
+
 
 
         if (e.getActionCommand().equals("AFEGIR NOU PLAT")) {
@@ -159,11 +164,15 @@ public class Controlador implements ActionListener {
         if (e.getActionCommand().equals("SEGUENT")) {
             System.out.println("PAGINA SEGUENT");
             //Funcio canvi pagina
-            vista.getVistaPlats().paginaCarta(2);
+           int p =  vista.getVistaPlats().getPaginaCarta();
+            vista.getVistaPlats().paginaCarta(gestionador.retornaPlats().getPlats(), p+1);
         }
         if (e.getActionCommand().equals("ANTERIOR")) {
             System.out.println("PAGINA ANTERIOR");
-
+            int p =  vista.getVistaPlats().getPaginaCarta();
+            if (p > 1) {
+                vista.getVistaPlats().paginaCarta(gestionador.retornaPlats().getPlats(), p - 1);
+            }
             //Funcio canvi pagina
 
 
@@ -232,6 +241,7 @@ public class Controlador implements ActionListener {
         vista.creaMenu(this);
         vista.getVistaTaules().actualitzaTaula(creaModel(gestionador.mostraReseves(1)));
         panel = new VistaServirComandes(gestionador, null);
+
     }
 
     private DefaultTableModel creaModel(ArrayList<Reserva> reserves) {

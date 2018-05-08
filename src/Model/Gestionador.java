@@ -77,6 +77,14 @@ public class Gestionador {
     public synchronized Carta retornaCarta() {
         return new Carta(bbdd.llistaPlatsDisponibles());                           //retorna plats diosponibles per fer la carta
     }
+    /**
+     * Funcio que rep la carta de la bbdd de mysql i la retorna
+     *
+     * @return carta
+     */
+    public synchronized Carta retornaPlats() {
+        return new Carta(bbdd.llistaPlats());                           //retorna plats diosponibles per fer la carta
+    }
 
     /**
      * Funcio per generar un password aleatori
@@ -326,6 +334,7 @@ public class Gestionador {
     public void updatePlat(String nom, int unitats) throws SQLException {
         bbdd.updatePlat(nom, unitats);
     }
+
 
 }
 

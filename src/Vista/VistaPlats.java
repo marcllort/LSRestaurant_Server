@@ -6,12 +6,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.JSpinner;
-import javax.swing.JButton;
-import javax.swing.border.Border;
 
 public class VistaPlats extends JPanel {
 
@@ -19,16 +13,18 @@ public class VistaPlats extends JPanel {
     private DialogUpdatePlat dialogUpdatePlat;
     private JButton jbAnterior;
     private JButton jbSeguent;
-
+    private int paginaCarta;
+    private JLabel jlPgina;
 
     public VistaPlats() {
 
         //this.setLayout(null);
 
-this.setLayout(new BorderLayout());
+        this.setLayout(new BorderLayout());
 
 
-
+        JPanel a = new JPanel();
+        this.add(a, BorderLayout.CENTER);
 
         JPanel panel_4 = new JPanel();
         panel_4.setBounds(10, 206, 559, 46);
@@ -45,22 +41,16 @@ this.setLayout(new BorderLayout());
         jbSeguent.setBounds(442, 6, 107, 35);
         panel_4.add(jbSeguent);
 
-        JLabel lblPgina = new JLabel("P\u00E0gina 1");
-        lblPgina.setFont(new Font("Tahoma", Font.PLAIN, 17));
-        lblPgina.setBounds(244, 12, 77, 23);
-        panel_4.add(lblPgina);
-        ArrayList<Plat> plats = new ArrayList<>();
-        plats.add(new Plat("gamb",12));
-        plats.add(new Plat("gamb",12));
-        plats.add(new Plat("gamb",12)); plats.add(new Plat("gamb",12));
-        plats.add(new Plat("gamb",12)); plats.add(new Plat("gamb",12));
+        jlPgina = new JLabel("P\u00E0gina 1");
+        jlPgina.setFont(new Font("Tahoma", Font.PLAIN, 17));
+        jlPgina.setBounds(244, 12, 77, 23);
+        panel_4.add(jlPgina);
 
-        plats.add(new Plat("gambaaa",12));
 
-PaginaCarta pag = new PaginaCarta(plats,1);
+        paginaCarta = 1;
 
-this.add(pag, BorderLayout.CENTER);
-this.add(panel_4, BorderLayout.SOUTH);
+
+        this.add(panel_4, BorderLayout.SOUTH);
         dialogAfegirPlat = new DialogAfegirPlat();
         dialogUpdatePlat = new DialogUpdatePlat();
 
@@ -87,20 +77,27 @@ this.add(panel_4, BorderLayout.SOUTH);
     public DialogUpdatePlat getDialogUpdatePlat() {
         return dialogUpdatePlat;
     }
-    public void paginaCarta(int pagina){
-        ArrayList<Plat> plats = new ArrayList<>();
-        plats.add(new Plat("gamb",12));
-        plats.add(new Plat("gamb",12));
-        plats.add(new Plat("gamb",12));
-        plats.add(new Plat("gamb",12));
-        plats.add(new Plat("gamb",12));
-        plats.add(new Plat("gamb",12));
 
-        plats.add(new Plat("gambaaa",12));
+    public void paginaCarta(ArrayList<Plat> plats, int pagina) {
+        paginaCarta = pagina;
+
         PaginaCarta pag = new PaginaCarta(plats, pagina);
-        this.remove(((BorderLayout)this.getLayout()).getLayoutComponent(BorderLayout.CENTER));
+
+        this.remove(((BorderLayout) this.getLayout()).getLayoutComponent(BorderLayout.CENTER));
         this.add(pag, BorderLayout.CENTER);
+        jlPgina.setText("P\u00E0gina " + paginaCarta);
+
+        //this.remove(((BorderLayout)this.getLayout()).getLayoutComponent(BorderLayout.SOUTH).getComponentAt(1,3));
+
         this.repaint();
         this.revalidate();
+    }
+
+    public int getPaginaCarta() {
+        return paginaCarta;
+    }
+
+    public void setCarta(ArrayList<Plat> carta) {
+
     }
 }

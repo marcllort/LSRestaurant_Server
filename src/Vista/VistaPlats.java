@@ -13,18 +13,19 @@ public class VistaPlats extends JPanel {
     private DialogUpdatePlat dialogUpdatePlat;
     private JButton jbAnterior;
     private JButton jbSeguent;
-    private int paginaCarta;
+    private int numPagina;
+
     private JLabel jlPgina;
+    private PaginaCarta pag;
 
     public VistaPlats() {
 
-        //this.setLayout(null);
+       pag = new PaginaCarta(1);
+
 
         this.setLayout(new BorderLayout());
 
-
-        JPanel a = new JPanel();
-        this.add(a, BorderLayout.CENTER);
+        this.add(pag, BorderLayout.CENTER);
 
         JPanel panel_4 = new JPanel();
         panel_4.setBounds(10, 206, 559, 46);
@@ -47,7 +48,7 @@ public class VistaPlats extends JPanel {
         panel_4.add(jlPgina);
 
 
-        paginaCarta = 1;
+        numPagina = 1;
 
 
         this.add(panel_4, BorderLayout.SOUTH);
@@ -79,13 +80,13 @@ public class VistaPlats extends JPanel {
     }
 
     public void paginaCarta(ArrayList<Plat> plats, int pagina) {
-        paginaCarta = pagina;
+        numPagina = pagina;
 
-        PaginaCarta pag = new PaginaCarta(plats, pagina);
+        pag.canviaPagina(pagina);
 
         this.remove(((BorderLayout) this.getLayout()).getLayoutComponent(BorderLayout.CENTER));
         this.add(pag, BorderLayout.CENTER);
-        jlPgina.setText("P\u00E0gina " + paginaCarta);
+        jlPgina.setText("P\u00E0gina " + numPagina);
 
         //this.remove(((BorderLayout)this.getLayout()).getLayoutComponent(BorderLayout.SOUTH).getComponentAt(1,3));
 
@@ -94,10 +95,13 @@ public class VistaPlats extends JPanel {
     }
 
     public int getPaginaCarta() {
-        return paginaCarta;
+        return numPagina;
+    }
+    public void registraBotons(ActionListener controller){
+
     }
 
-    public void setCarta(ArrayList<Plat> carta) {
-
+    public PaginaCarta getPag() {
+        return pag;
     }
 }

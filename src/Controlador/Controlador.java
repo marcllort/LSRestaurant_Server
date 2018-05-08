@@ -123,7 +123,7 @@ public class Controlador implements ActionListener {
 
         DialogAfegirPlat dialogAfegirPlat = vista.getVistaPlats().getDialogAfegirPlat();
         DialogUpdatePlat dialogUpdatePlat = vista.getVistaPlats().getDialogUpdatePlat();
-        vista.getVistaPlats().paginaCarta(gestionador.retornaPlats().getPlats(), 1);
+        //vista.getVistaPlats().paginaCarta(gestionador.retornaPlats().getPlats(), 1);
 
 
 
@@ -241,7 +241,7 @@ public class Controlador implements ActionListener {
         vista.creaMenu(this);
         vista.getVistaTaules().actualitzaTaula(creaModel(gestionador.mostraReseves(1)));
         panel = new VistaServirComandes(gestionador, null);
-
+        vista.getVistaPlats().getPag().setPlats(gestionador.retornaPlats().getPlats());
     }
 
     private DefaultTableModel creaModel(ArrayList<Reserva> reserves) {

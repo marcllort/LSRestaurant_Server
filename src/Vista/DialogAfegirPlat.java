@@ -43,10 +43,12 @@ public class DialogAfegirPlat extends JFrame {
         jbAfegir.setBounds(88, 144, 201, 34);
         panel.add(jbAfegir);
 
+
         jtfNom = new JTextField();
         jtfNom.setColumns(10);
-        jtfNom.setBounds(108, 111, 100, 24);
+        jtfNom.setBounds(108, 43, 181, 24);
         panel.add(jtfNom);
+
 
         jtfPreu = new JTextField();
         jtfPreu.setColumns(10);
@@ -55,8 +57,9 @@ public class DialogAfegirPlat extends JFrame {
 
         jtfUnitats = new JTextField();
         jtfUnitats.setColumns(10);
-        jtfUnitats.setBounds(108, 43, 181, 24);
+        jtfUnitats.setBounds(108, 111, 100, 24);
         panel.add(jtfUnitats);
+
 
         JLabel label_3 = new JLabel("\u20AC");
         label_3.setFont(new Font("Tahoma", Font.PLAIN, 18));

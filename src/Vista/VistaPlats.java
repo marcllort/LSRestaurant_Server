@@ -97,7 +97,6 @@ public class VistaPlats extends JPanel {
         this.add(pag, BorderLayout.CENTER);
         jlPgina.setText("P\u00E0gina " + numPagina);
 
-        //this.remove(((BorderLayout)this.getLayout()).getLayoutComponent(BorderLayout.SOUTH).getComponentAt(1,3));
 
         this.repaint();
         this.revalidate();
@@ -112,5 +111,8 @@ public class VistaPlats extends JPanel {
 
     public PaginaCarta getPag() {
         return pag;
+    }
+    public void afegeixBoto(ActionListener controlador, String nom){
+        pag.afegeixBoto(controlador, nom);
     }
 }

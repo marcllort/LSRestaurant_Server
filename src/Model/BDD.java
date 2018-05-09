@@ -248,6 +248,39 @@ public class BDD {
 
     }
 
+
+
+    /**
+     * funcio que gasta una unitta de les disponibles i la afegeix a les gastades
+     *
+     * @param nom     plat que s'ha servit
+     * @param unitats unitats que s'han gastat
+     * @return
+     */
+    public boolean afegeixUnitats(String nom, int unitats) throws SQLException {
+
+        boolean ok = true;
+
+        String str = "Update Plat set unitats_disponibles= ? where nom_plat = '" + nom + "'";
+        PreparedStatement ps = con.prepareStatement(str);
+
+        ResultSet rss = null;
+
+
+        rss = st.executeQuery("SELECT unitats_disponibles FROM Plat where nom_plat = '" + nom + "';");
+        if (rss.next()) {
+
+
+                ps.setInt(1, rss.getInt("unitats_disponibles") + unitats);
+                ps.executeUpdate();
+                return ok;
+
+        }else{
+            return false;
+        }
+
+    }
+
     /**
      * funcio que fa que una comanda pasi de estar per servir a servida
      *

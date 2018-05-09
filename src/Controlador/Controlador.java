@@ -130,23 +130,33 @@ public class Controlador implements ActionListener {
             dialogAfegirPlat.setVisible(true);
         }
         if (e.getActionCommand().equals("AFEGIR PLAT")) {
-            try {
+
                 dialogAfegirPlat.setVisible(false);
+        try {
+                System.out.println(dialogAfegirPlat.getJtfNom()+dialogAfegirPlat.getJtfPreu()+dialogAfegirPlat.getJtfUnitats());
                 gestionador.insereixPlat(dialogAfegirPlat.getJtfNom(), dialogAfegirPlat.getJtfPreu(), dialogAfegirPlat.getJtfUnitats());
                 vista.showError("Plat afegit!");
                 dialogAfegirPlat.dispatchEvent(new WindowEvent(dialogAfegirPlat, WindowEvent.WINDOW_CLOSING));
+
+                vista.getVistaPlats().afegeixBoto(this,dialogAfegirPlat.getJtfNom() );
+            dialogAfegirPlat.netejaCamps();
+            } catch (SQLException sq) {
+                vista.showError("Error! Aquest plat ja existeix!");
                 dialogAfegirPlat.netejaCamps();
 
             } catch (NumberFormatException ne) {
                 vista.showError("Error! Caracters no permesos a preu i unitats!");
                 dialogAfegirPlat.netejaCamps();
+                ne.printStackTrace();
             }
+
         }
         if (e.getActionCommand().equals("ACTUALITZAR")) {
             System.out.println("actualizat " + boto);
             try {
-                gestionador.updatePlat(boto, dialogUpdatePlat.getJtfUnitats());
-                vista.showError("Unitats de" + boto + "actualitzades!");
+                int i = dialogUpdatePlat.getJtfUnitats();
+                gestionador.afegeixUnitats(boto, dialogUpdatePlat.getJtfUnitats());
+                vista.showError("Unitats de " + boto +  " actualitzades!");
                 dialogUpdatePlat.dispatchEvent(new WindowEvent(dialogUpdatePlat, WindowEvent.WINDOW_CLOSING));
                 dialogUpdatePlat.netejaCamps();
 
@@ -154,19 +164,20 @@ public class Controlador implements ActionListener {
                 vista.showError("Error! Caracters no permesos a unitats!");
                 dialogUpdatePlat.netejaCamps();
             } catch (SQLException sqe) {
+                sqe.printStackTrace();
                 vista.showError("Error al actualitzar el plat!");
                 dialogUpdatePlat.dispatchEvent(new WindowEvent(dialogUpdatePlat, WindowEvent.WINDOW_CLOSING));
                 dialogUpdatePlat.netejaCamps();
             }
         }
         if (e.getActionCommand().equals("SEGUENT")) {
-            System.out.println("PAGINA SEGUENT");
             //Funcio canvi pagina
             int p = vista.getVistaPlats().getPaginaCarta();
-            vista.getVistaPlats().paginaCarta(gestionador.retornaPlats().getPlats(), p + 1);
+            if(p*6 < vista.getVistaPlats().getPag().getPlats().size()) {
+                vista.getVistaPlats().paginaCarta(gestionador.retornaPlats().getPlats(), p + 1);
+            }
         }
         if (e.getActionCommand().equals("ANTERIOR")) {
-            System.out.println("PAGINA ANTERIOR");
             int p = vista.getVistaPlats().getPaginaCarta();
             if (p > 1) {
                 vista.getVistaPlats().paginaCarta(gestionador.retornaPlats().getPlats(), p - 1);
@@ -175,7 +186,7 @@ public class Controlador implements ActionListener {
 
 
         } else {
-            if (e.getActionCommand().equals("CARTA" )|| e.getActionCommand().equals("AFEGIR NOU PLAT") || e.getActionCommand().equals("AFEGIR PLAT")||e.getActionCommand().equals("ACTUALITZAR")) {
+            if (e.getActionCommand().equals("CARTA") || e.getActionCommand().equals("AFEGIR NOU PLAT") || e.getActionCommand().equals("AFEGIR PLAT") || e.getActionCommand().equals("ACTUALITZAR") || e.getActionCommand().equals("ANTERIOR") || e.getActionCommand().equals("SEGUENT")) {
 
             } else {
                 boto = e.getActionCommand();     //per saber de quin plat haurem de actualizar
@@ -183,6 +194,7 @@ public class Controlador implements ActionListener {
                 dialogUpdatePlat.setVisible(true);
                 dialogUpdatePlat.setJlNom(boto);
                 dialogUpdatePlat.setJlPreu("5");
+
             }
         }
     }

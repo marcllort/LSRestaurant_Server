@@ -316,16 +316,14 @@ public class Gestionador {
      * @param preu
      * @param unitats_disponibles
      */
-    public void insereixPlat(String nom_plat, int preu, int unitats_disponibles) {
-        try {
+    public void insereixPlat(String nom_plat, int preu, int unitats_disponibles) throws SQLException{
+
             bbdd.insereixPlat(nom_plat, preu, unitats_disponibles, 0);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+
     }
 
     /**
-     * Funció per actualitzar les unitats del plat que passem per parametres
+     * Funció per gastar les unitats del plat que passem per parametres
      *
      * @param nom
      * @param unitats noves unitats disponibles
@@ -333,6 +331,16 @@ public class Gestionador {
      */
     public void updatePlat(String nom, int unitats) throws SQLException {
         bbdd.updatePlat(nom, unitats);
+    }
+    /**
+     * Funció per afegir les unitats del plat que passem per parametres
+     *
+     * @param nom
+     * @param unitats noves unitats disponibles
+     * @throws SQLException
+     */
+    public void afegeixUnitats(String nom, int unitats) throws SQLException {
+        bbdd.afegeixUnitats(nom, unitats);
     }
 
 

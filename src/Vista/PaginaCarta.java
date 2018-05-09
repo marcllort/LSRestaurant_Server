@@ -32,7 +32,6 @@ public class PaginaCarta extends JPanel {
         int i = 6 * (numPagina - 1);
 
         while (i < (6 * numPagina) && i < jbArrray.size()) {
-            System.out.println("AFEGEIX " + i);
             this.add(jbArrray.get(i).getBoto());
             i++;
 
@@ -47,8 +46,7 @@ public class PaginaCarta extends JPanel {
         for (Plat p : plats) {
             BotoPlat buton = new BotoPlat(p.getNomPlat());
             array.add(buton);
-            //buton.addActionListener(controler);
-            //buton.setActionCommand(p.getNomPlat());
+
 
         }
         return array;
@@ -71,7 +69,6 @@ public class PaginaCarta extends JPanel {
 
             this.add(jbArrray.get(i).getBoto());
             i++;
-            System.out.println(i);
 
         }
     }
@@ -91,6 +88,13 @@ public class PaginaCarta extends JPanel {
             p.getBoto().setActionCommand(p.getNomPlat());
 
         }
+
+    }
+    public void afegeixBoto(ActionListener controller, String nom){
+        BotoPlat butt = new BotoPlat(nom);
+        butt.registraController(controller, nom);
+        jbArrray.add(butt);
+        System.out.println("SIZEEEE"+jbArrray.size()+"NAMEEE :"+ nom);
 
     }
 }

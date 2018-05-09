@@ -343,6 +343,9 @@ public class Gestionador {
         bbdd.afegeixUnitats(nom, unitats);
     }
 
+    public void eliminaPlat(String nom)throws SQLException{
+        bbdd.eliminaPlat(nom);
+    }
 
 }
 

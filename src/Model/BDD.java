@@ -196,13 +196,9 @@ public class BDD {
      *
      * @param nom nom del plat a eliminar
      */
-    public void eliminaPlat(String nom) {
-        try {
+    public void eliminaPlat(String nom) throws SQLException{
             PreparedStatement ps = con.prepareStatement("DELETE FROM Plat WHERE Nom_plat = '" + nom + "'");
             ps.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 
     /**

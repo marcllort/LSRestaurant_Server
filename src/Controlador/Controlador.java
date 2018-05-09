@@ -123,23 +123,22 @@ public class Controlador implements ActionListener {
 
         DialogAfegirPlat dialogAfegirPlat = vista.getVistaPlats().getDialogAfegirPlat();
         DialogUpdatePlat dialogUpdatePlat = vista.getVistaPlats().getDialogUpdatePlat();
-        //vista.getVistaPlats().paginaCarta(gestionador.retornaPlats().getPlats(), 1);
-
 
         if (e.getActionCommand().equals("AFEGIR NOU PLAT")) {
             dialogAfegirPlat.setVisible(true);
         }
         if (e.getActionCommand().equals("AFEGIR PLAT")) {
 
-                dialogAfegirPlat.setVisible(false);
-        try {
-                System.out.println(dialogAfegirPlat.getJtfNom()+dialogAfegirPlat.getJtfPreu()+dialogAfegirPlat.getJtfUnitats());
+            dialogAfegirPlat.setVisible(false);
+            try {
+                System.out.println(dialogAfegirPlat.getJtfNom() + dialogAfegirPlat.getJtfPreu() + dialogAfegirPlat.getJtfUnitats());
                 gestionador.insereixPlat(dialogAfegirPlat.getJtfNom(), dialogAfegirPlat.getJtfPreu(), dialogAfegirPlat.getJtfUnitats());
+                sReserva.enviaCarta();
                 vista.showError("Plat afegit!");
                 dialogAfegirPlat.dispatchEvent(new WindowEvent(dialogAfegirPlat, WindowEvent.WINDOW_CLOSING));
 
-                vista.getVistaPlats().afegeixBoto(this,dialogAfegirPlat.getJtfNom() );
-            dialogAfegirPlat.netejaCamps();
+                vista.getVistaPlats().afegeixBoto(this, dialogAfegirPlat.getJtfNom());
+                dialogAfegirPlat.netejaCamps();
             } catch (SQLException sq) {
                 vista.showError("Error! Aquest plat ja existeix!");
                 dialogAfegirPlat.netejaCamps();
@@ -149,19 +148,17 @@ public class Controlador implements ActionListener {
                 dialogAfegirPlat.netejaCamps();
                 ne.printStackTrace();
             }
-
         }
         if (e.getActionCommand().equals("ACTUALITZAR")) {
             System.out.println("actualizat " + boto);
             try {
-                int i = dialogUpdatePlat.getJtfUnitats();
                 gestionador.afegeixUnitats(boto, dialogUpdatePlat.getJtfUnitats());
-                vista.showError("Unitats de " + boto +  " actualitzades!");
+                vista.showError("Unitats de " + boto + " actualitzades!");
                 dialogUpdatePlat.dispatchEvent(new WindowEvent(dialogUpdatePlat, WindowEvent.WINDOW_CLOSING));
                 dialogUpdatePlat.netejaCamps();
 
             } catch (NumberFormatException ne2) {
-                vista.showError("Error! Caracters no permesos a unitats!");
+                vista.showError("Error! Camp buit o caracters no permesos a unitats!");
                 dialogUpdatePlat.netejaCamps();
             } catch (SQLException sqe) {
                 sqe.printStackTrace();
@@ -170,10 +167,21 @@ public class Controlador implements ActionListener {
                 dialogUpdatePlat.netejaCamps();
             }
         }
+        if (e.getActionCommand().equals("ELIMINA")) {
+            try {
+                gestionador.eliminaPlat(boto);
+                sReserva.enviaCarta();
+                vista.showError("Plat eliminat amb exit!");
+                dialogUpdatePlat.dispatchEvent(new WindowEvent(dialogUpdatePlat, WindowEvent.WINDOW_CLOSING));
+            } catch (SQLException sqex) {
+                vista.showError("No s'ha pogut borrar, està sent utilitzat per una comanda!");
+                dialogUpdatePlat.dispatchEvent(new WindowEvent(dialogUpdatePlat, WindowEvent.WINDOW_CLOSING));
+            }
+        }
         if (e.getActionCommand().equals("SEGUENT")) {
             //Funcio canvi pagina
             int p = vista.getVistaPlats().getPaginaCarta();
-            if(p*6 < vista.getVistaPlats().getPag().getPlats().size()) {
+            if (p * 6 < vista.getVistaPlats().getPag().getPlats().size()) {
                 vista.getVistaPlats().paginaCarta(gestionador.retornaPlats().getPlats(), p + 1);
             }
         }
@@ -186,14 +194,16 @@ public class Controlador implements ActionListener {
 
 
         } else {
-            if (e.getActionCommand().equals("CARTA") || e.getActionCommand().equals("AFEGIR NOU PLAT") || e.getActionCommand().equals("AFEGIR PLAT") || e.getActionCommand().equals("ACTUALITZAR") || e.getActionCommand().equals("ANTERIOR") || e.getActionCommand().equals("SEGUENT")) {
+            if (e.getActionCommand().equals("CARTA") || e.getActionCommand().equals("AFEGIR NOU PLAT")
+                    || e.getActionCommand().equals("AFEGIR PLAT") || e.getActionCommand().equals("ACTUALITZAR")
+                    || e.getActionCommand().equals("ANTERIOR") || e.getActionCommand().equals("SEGUENT") || e.getActionCommand().equals("ELIMINA")) {
 
             } else {
                 boto = e.getActionCommand();     //per saber de quin plat haurem de actualizar
                 System.out.println(boto);
                 dialogUpdatePlat.setVisible(true);
                 dialogUpdatePlat.setJlNom(boto);
-                dialogUpdatePlat.setJlPreu("5");
+                dialogUpdatePlat.setJlPreu(gestionador.retornaPlats().getPlat(boto).getPreu());
 
             }
         }

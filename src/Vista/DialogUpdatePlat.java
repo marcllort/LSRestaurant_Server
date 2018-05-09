@@ -16,7 +16,7 @@ public class DialogUpdatePlat extends JFrame {
     public DialogUpdatePlat() {
         setLayout(new GridLayout(4, 0, 0, 0));
         setSize(400, 250);                                      //Dono les propietats inicials al JFrame
-
+        setResizable(false);
 
         getContentPane().setLayout(null);
 
@@ -66,13 +66,16 @@ public class DialogUpdatePlat extends JFrame {
     public void registraControlador(ActionListener controlador) {
         jbActualizar.addActionListener(controlador);
         jbActualizar.setActionCommand("ACTUALITZAR");
+
+        jbEliminar.addActionListener(controlador);
+        jbEliminar.setActionCommand("ELIMINA");
     }
 
     public void setJlNom(String nom) {
         this.jlNom.setText("Nom: " + nom);
     }
 
-    public void setJlPreu(String preu) {
+    public void setJlPreu(Float preu) {
         this.jlPreu.setText("Preu: " + preu);
     }
 

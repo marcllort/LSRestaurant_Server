@@ -88,4 +88,11 @@ public class ServerSocketReserva implements Runnable {
         }
         return null;
     }
+
+    public void enviaCarta(){
+        for (ServidorReserva servidor : serversReserva) {                                                       //cal arreglar, segurament no va
+            servidor.enviaCarta();
+        }
+    }
+
 }

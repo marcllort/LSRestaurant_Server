@@ -48,6 +48,15 @@ public class Carta implements Serializable {
         return plats.get(i);
     }
 
+    public Plat getPlat(String nom) {
+        for (Plat p : plats){
+            if (p.getNomPlat().equals(nom)){
+                return p;
+            }
+        }
+        return null;
+    }
+
     /**
      * Getter de tots els plats
      *

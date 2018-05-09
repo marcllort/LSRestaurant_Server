@@ -66,7 +66,7 @@ public class ServidorReserva extends Thread {
                     while (true) {
                         ooStream.writeObject(gestionador.retornaComanda(user.getUser()));
                         Comanda com = (Comanda) oiStream.readObject();                          //Rebem la comanda enviada pel usuari
-                        System.out.println(com.getUsuari()+com.getPlat(1).getNomPlat());
+                        //System.out.println(com.getUsuari()+com.getPlat(1).getNomPlat());
                         String analisi = gestionador.analitzarComanda(com);
                         if (analisi.equals("true")) {
                             gestionador.addComanda(com);                                                //Guardo la comanda

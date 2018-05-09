@@ -1,6 +1,5 @@
 package Vista;
 
-import jdk.nashorn.internal.runtime.ECMAException;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,53 +10,68 @@ public class DialogAfegirPlat extends JFrame {
     private JTextField jtfNom;
     private JTextField jtfPreu;
     private JTextField jtfUnitats;
-    private JButton jbAfegir;
+    private JButton jbAfegir = new JButton();
 
     public DialogAfegirPlat() {
-        setLayout(new GridLayout(4, 0, 0, 0));
-        setSize(new Dimension(400,300));
-        JPanel jpName = new JPanel();
-        add(jpName);
-        jpName.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
-        JLabel jlNom = new JLabel("Nom: ");
-        jpName.add(jlNom);
+        setSize(new Dimension(400,250));
+
+        getContentPane().setLayout(null);
+
+        JPanel panel = new JPanel();
+        panel.setBounds(10, 11, 364, 189);
+        getContentPane().add(panel);
+        panel.setLayout(null);
+
+        JLabel label = new JLabel("Nom:");
+        label.setFont(new Font("Tahoma", Font.PLAIN, 18));
+        label.setBounds(35, 45, 57, 22);
+        panel.add(label);
+
+        JLabel label_1 = new JLabel("Preu:");
+        label_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
+        label_1.setBounds(35, 78, 63, 22);
+        panel.add(label_1);
+
+        JLabel label_2 = new JLabel("Unitats:");
+        label_2.setFont(new Font("Tahoma", Font.PLAIN, 18));
+        label_2.setBounds(35, 111, 63, 22);
+        panel.add(label_2);
+
+        jbAfegir.setText("AFEGIR");
+        jbAfegir.setFont(new Font("Tahoma", Font.BOLD, 18));
+        jbAfegir.setBounds(88, 144, 201, 34);
+        panel.add(jbAfegir);
 
         jtfNom = new JTextField();
-        jpName.add(jtfNom);
         jtfNom.setColumns(10);
-
-        JPanel jpPreu = new JPanel();
-        add(jpPreu);
-
-        JLabel jlPreu = new JLabel("Preu: ");
-        jpPreu.add(jlPreu);
+        jtfNom.setBounds(108, 111, 100, 24);
+        panel.add(jtfNom);
 
         jtfPreu = new JTextField();
-        jpPreu.add(jtfPreu);
         jtfPreu.setColumns(10);
-
-        JLabel jlEuro = new JLabel("\u20AC");
-        jpPreu.add(jlEuro);
-
-        JPanel jpUnitats = new JPanel();
-        add(jpUnitats);
-
-        JLabel jlUnitats = new JLabel("Unitats: ");
-        jpUnitats.add(jlUnitats);
+        jtfPreu.setBounds(108, 78, 100, 24);
+        panel.add(jtfPreu);
 
         jtfUnitats = new JTextField();
-        jpUnitats.add(jtfUnitats);
         jtfUnitats.setColumns(10);
+        jtfUnitats.setBounds(108, 43, 181, 24);
+        panel.add(jtfUnitats);
 
-        JLabel jlUts = new JLabel("uts.");
-        jpUnitats.add(jlUts);
+        JLabel label_3 = new JLabel("\u20AC");
+        label_3.setFont(new Font("Tahoma", Font.PLAIN, 18));
+        label_3.setBounds(218, 78, 63, 22);
+        panel.add(label_3);
 
-        JPanel jpBoto = new JPanel();
-        add(jpBoto);
+        JLabel label_4 = new JLabel("uts.");
+        label_4.setFont(new Font("Tahoma", Font.PLAIN, 18));
+        label_4.setBounds(218, 111, 63, 22);
+        panel.add(label_4);
 
-        jbAfegir = new JButton("Afegir");
-        jpBoto.add(jbAfegir);
+        JLabel label_5 = new JLabel("Nou plat:");
+        label_5.setFont(new Font("Tahoma", Font.BOLD, 20));
+        label_5.setBounds(10, 0, 191, 44);
+        panel.add(label_5);
     }
 
     public void registraControlador(ActionListener controlador) {

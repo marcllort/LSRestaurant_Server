@@ -7,48 +7,59 @@ import java.awt.event.ActionListener;
 public class DialogUpdatePlat extends JFrame {
 
     private JTextField jtfUnitats;
-    private JLabel jlNom;
-    private JLabel jlPreu;
-    private JButton jbActualizar;
+    private JLabel jlNom = new JLabel();
+    private JLabel jlPreu = new JLabel();
+    private JButton jbActualizar = new JButton();
+    private JButton jbEliminar = new JButton();
+
 
     public DialogUpdatePlat() {
         setLayout(new GridLayout(4, 0, 0, 0));
-        setSize(600, 330);                                      //Dono les propietats inicials al JFrame
+        setSize(400, 250);                                      //Dono les propietats inicials al JFrame
 
 
-        JPanel jpName = new JPanel();
-        this.add(jpName);
-        jpName.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        getContentPane().setLayout(null);
 
-        jlNom = new JLabel("Nom: ");
-        jpName.add(jlNom);
+        JPanel panel = new JPanel();
+        panel.setLayout(null);
+        panel.setBounds(10, 11, 364, 189);
+        getContentPane().add(panel);
 
-        JPanel jpPreu = new JPanel();
-        add(jpPreu);
+        JPanel panel_1 = new JPanel();
+        panel_1.setLayout(null);
+        panel_1.setBounds(10, 11, 90, 90);
+        panel.add(panel_1);
 
-        jlPreu = new JLabel("Preu: ");
-        jpPreu.add(jlPreu);
+        jlNom.setText("Nom del plat");
+        jlNom.setFont(new Font("Tahoma", Font.BOLD, 20));
+        jlNom.setBounds(110, 11, 212, 33);
+        panel.add(jlNom);
 
-        JPanel jpUnitats = new JPanel();
-        FlowLayout flowLayout = (FlowLayout) jpUnitats.getLayout();
-        flowLayout.setAlignOnBaseline(true);
-        add(jpUnitats);
+        jlPreu.setText("Preu: x \u20AC");
+        jlPreu.setFont(new Font("Tahoma", Font.PLAIN, 18));
+        jlPreu.setBounds(110, 46, 149, 22);
+        panel.add(jlPreu);
 
-        JLabel jlUnitats = new JLabel("Unitats: ");
-        jpUnitats.add(jlUnitats);
+        JLabel lblUnitats = new JLabel("Unitats:");
+        lblUnitats.setFont(new Font("Tahoma", Font.PLAIN, 18));
+        lblUnitats.setBounds(110, 79, 85, 22);
+        panel.add(lblUnitats);
+
+        jbEliminar.setText("ELIMINAR");
+        jbEliminar.setFont(new Font("Tahoma", Font.BOLD, 18));
+        jbEliminar.setBounds(74, 132, 201, 34);
+        panel.add(jbEliminar);
 
         jtfUnitats = new JTextField();
-        jpUnitats.add(jtfUnitats);
+        jtfUnitats.setFont(new Font("Tahoma", Font.PLAIN, 20));
+        jtfUnitats.setBounds(181, 78, 43, 23);
+        panel.add(jtfUnitats);
         jtfUnitats.setColumns(10);
 
-        JLabel jlUts = new JLabel("uts.");
-        jpUnitats.add(jlUts);
-
-        JPanel jpBoto = new JPanel();
-        add(jpBoto);
-
-        jbActualizar = new JButton("Actualitzar");
-        jpBoto.add(jbActualizar);
+        jbActualizar.setText("Actualitza");
+        jbActualizar.setFont(new Font("Tahoma", Font.BOLD, 16));
+        jbActualizar.setBounds(233, 75, 121, 33);
+        panel.add(jbActualizar);
 
     }
 

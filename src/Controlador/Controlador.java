@@ -126,9 +126,6 @@ public class Controlador implements ActionListener {
         //vista.getVistaPlats().paginaCarta(gestionador.retornaPlats().getPlats(), 1);
 
 
-
-
-
         if (e.getActionCommand().equals("AFEGIR NOU PLAT")) {
             dialogAfegirPlat.setVisible(true);
         }
@@ -164,12 +161,12 @@ public class Controlador implements ActionListener {
         if (e.getActionCommand().equals("SEGUENT")) {
             System.out.println("PAGINA SEGUENT");
             //Funcio canvi pagina
-           int p =  vista.getVistaPlats().getPaginaCarta();
-            vista.getVistaPlats().paginaCarta(gestionador.retornaPlats().getPlats(), p+1);
+            int p = vista.getVistaPlats().getPaginaCarta();
+            vista.getVistaPlats().paginaCarta(gestionador.retornaPlats().getPlats(), p + 1);
         }
         if (e.getActionCommand().equals("ANTERIOR")) {
             System.out.println("PAGINA ANTERIOR");
-            int p =  vista.getVistaPlats().getPaginaCarta();
+            int p = vista.getVistaPlats().getPaginaCarta();
             if (p > 1) {
                 vista.getVistaPlats().paginaCarta(gestionador.retornaPlats().getPlats(), p - 1);
             }
@@ -177,11 +174,15 @@ public class Controlador implements ActionListener {
 
 
         } else {
-            boto = e.getActionCommand();     //per saber de quin plat haurem de actualizar
-            System.out.println(boto);
-            dialogUpdatePlat.setVisible(true);
-            dialogUpdatePlat.setJlNom(boto);
-            dialogUpdatePlat.setJlPreu("5");
+            if (e.getActionCommand().equals("CARTA" )|| e.getActionCommand().equals("AFEGIR NOU PLAT")) {
+
+            } else {
+                boto = e.getActionCommand();     //per saber de quin plat haurem de actualizar
+                System.out.println(boto);
+                dialogUpdatePlat.setVisible(true);
+                dialogUpdatePlat.setJlNom(boto);
+                dialogUpdatePlat.setJlPreu("5");
+            }
         }
     }
 

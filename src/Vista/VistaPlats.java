@@ -13,6 +13,7 @@ public class VistaPlats extends JPanel {
     private DialogUpdatePlat dialogUpdatePlat;
     private JButton jbAnterior;
     private JButton jbSeguent;
+    private JButton jbAfegir;
     private int numPagina;
 
     private JLabel jlPgina;
@@ -31,6 +32,11 @@ public class VistaPlats extends JPanel {
         panel_4.setBounds(10, 206, 559, 46);
 
         //panel_4.setLayout(null);
+
+        jbAfegir = new JButton("Afegir Plat");
+        jbAfegir.setFont(new Font("Tahoma", Font.PLAIN, 20));
+        jbAfegir.setBounds(10, 6, 107, 35);
+        panel_4.add(jbAfegir);
 
         jbAnterior = new JButton("Anterior");
         jbAnterior.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -67,6 +73,9 @@ public class VistaPlats extends JPanel {
         jbAnterior.addActionListener(controller);
         jbSeguent.setActionCommand("SEGUENT");
         jbSeguent.addActionListener(controller);
+        pag.registraControler(controller);
+        jbAfegir.addActionListener(controller);
+        jbAfegir.setActionCommand("AFEGIR NOU PLAT");
 
 
     }

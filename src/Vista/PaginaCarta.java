@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class PaginaCarta extends JPanel {
 
@@ -46,6 +47,7 @@ public class PaginaCarta extends JPanel {
         for (Plat p : plats) {
             BotoPlat buton = new BotoPlat(p.getNomPlat());
             array.add(buton);
+
 
         }
         return array;
@@ -89,12 +91,26 @@ public class PaginaCarta extends JPanel {
         }
 
     }
-
-    public void afegeixBoto(ActionListener controller, String nom) {
+    public void afegeixBoto(ActionListener controller, String nom){
         BotoPlat butt = new BotoPlat(nom);
         butt.registraController(controller, nom);
         jbArrray.add(butt);
-        System.out.println("SIZEEEE" + jbArrray.size() + "NAMEEE :" + nom);
+        System.out.println("SIZEEEE"+jbArrray.size()+"NAMEEE :"+ nom);
+        canviaPagina(numPagina);
 
     }
+    public void eliminaBoto(String boto){
+        int i = 0;
+        Iterator<BotoPlat> iter = jbArrray.iterator();
+
+        while (iter.hasNext()) {
+            BotoPlat a = iter.next();
+            if (a.getNomPlat().equals(boto))
+                iter.remove();
+
+        }
+
+        canviaPagina(numPagina);
+    }
+
 }

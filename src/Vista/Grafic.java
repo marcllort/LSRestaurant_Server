@@ -17,7 +17,7 @@ public class Grafic extends JPanel {
     private ArrayList<String> nomPlat;
 
 
-    public void grafic(int[] graphSource, ArrayList<String> nomPlat) {
+    public void grafic(int[] graphSource, ArrayList<String> nomPlat) throws Exception{
         this.graphSource = graphSource;
         this.nomPlat = nomPlat;
         for (int j = 0; j < graphSource.length; j++) {
@@ -25,6 +25,7 @@ public class Grafic extends JPanel {
                 max = graphSource[j];
             }
         }
+
         setupPanel();
         repaint();
     }

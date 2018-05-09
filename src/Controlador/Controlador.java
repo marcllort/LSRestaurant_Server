@@ -2,6 +2,8 @@ package Controlador;
 
 
 import Model.Gestionador;
+import Model.InfoComandes;
+import Model.Plat;
 import Model.Reserva;
 import Network.ServerSocketReserva;
 import Network.ServidorReserva;
@@ -173,6 +175,7 @@ public class Controlador implements ActionListener {
                 sReserva.enviaCarta();
                 vista.showError("Plat eliminat amb exit!");
                 dialogUpdatePlat.dispatchEvent(new WindowEvent(dialogUpdatePlat, WindowEvent.WINDOW_CLOSING));
+                vista.getVistaPlats().eliminaBoto(boto);
             } catch (SQLException sqex) {
                 vista.showError("No s'ha pogut borrar, està sent utilitzat per una comanda!");
                 dialogUpdatePlat.dispatchEvent(new WindowEvent(dialogUpdatePlat, WindowEvent.WINDOW_CLOSING));
@@ -181,7 +184,7 @@ public class Controlador implements ActionListener {
         if (e.getActionCommand().equals("SEGUENT")) {
             //Funcio canvi pagina
             int p = vista.getVistaPlats().getPaginaCarta();
-            if (p * 6 < vista.getVistaPlats().getPag().getPlats().size()) {
+            if (p * 6 < vista.getVistaPlats().getPag().getJbArrray().size()) {
                 vista.getVistaPlats().paginaCarta(gestionador.retornaPlats().getPlats(), p + 1);
             }
         }
@@ -296,16 +299,58 @@ public class Controlador implements ActionListener {
     }
 
     private void handleTop5(ActionEvent e) {
+        ArrayList<InfoComandes> arrt = gestionador.topCincTotal();
 
+        ArrayList<String> arrstt = new ArrayList<>();
+        int[] arrayt = new int[5];
+        int pt = 0;
+        for(InfoComandes i : arrt){
+            arrayt[pt] = i.getTotalPlats();
+            arrstt.add(i.getUsuari());
+            pt++;
+        }
+        try {
+            vista.getVistaTop5().grSemanal(arrayt,arrstt);
+        }catch (Exception se){
+            vista.showError("No s'ha consumit cap unitat per fer el gràfic");
+        }
         switch (e.getActionCommand()) {
             case "Semanal":
-                int[] a = {1, 2, 3, 4, 5};
-                vista.getVistaTop5().grSemanal(a);
+                ArrayList<InfoComandes> arr = gestionador.topCincSemanal();
+
+                ArrayList<String> arrst = new ArrayList<>();
+                int[] array = new int[5];
+                int p = 0;
+                for(InfoComandes i : arr){
+                    array[p] = i.getTotalPlats();
+                    arrst.add(i.getUsuari());
+                    p++;
+                }
+                try {
+                    vista.getVistaTop5().grSemanal(array,arrst);
+                }catch (Exception se){
+                    vista.showError("No s'ha consumit cap unitat per fer el gràfic");
+                }
+
                 break;
 
             case "Total":
-                int[] b = {5, 4, 3, 2, 2};
-                vista.getVistaTop5().grSemanal(b);
+                 arrt = gestionador.topCincTotal();
+
+                arrstt = new ArrayList<>();
+                 arrayt = new int[5];
+                pt = 0;
+                for(InfoComandes i : arrt){
+                    arrayt[pt] = i.getTotalPlats();
+                    arrstt.add(i.getUsuari());
+                    pt++;
+                }
+                try {
+                    vista.getVistaTop5().grSemanal(arrayt,arrstt);
+                }catch (Exception se){
+                    vista.showError("No s'ha consumit cap unitat per fer el gràfic");
+                 }
+
                 break;
         }
 

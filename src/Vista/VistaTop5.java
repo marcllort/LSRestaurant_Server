@@ -18,14 +18,7 @@ public class VistaTop5 extends JPanel {
         gr = new Grafic();
         jbTotal = new JButton("Ranking Total");
         jbSemanal = new JButton("Ranking Semanal");
-        ArrayList<String> plats = new ArrayList<>();
-        plats.add("ASd");
-        plats.add("ASdas");
-        plats.add("ASdasd");
-        plats.add("ASdawe");
-        plats.add("ASddass");
-        int[] es = {1, 2, 3, 10, 20};
-        gr.grafic(es, plats);
+
         this.setLayout(new BorderLayout());
         this.add(gr, BorderLayout.CENTER);
         JPanel jpButton = new JPanel();
@@ -45,13 +38,8 @@ public class VistaTop5 extends JPanel {
 
     }
 
-    public void grSemanal(int[] indexes) {
-        ArrayList<String> plats = new ArrayList<>();
-        plats.add("ASd");
-        plats.add("ASdas");
-        plats.add("ASdasd");
-        plats.add("ASdawe");
-        plats.add("ASddass");
+    public void grSemanal(int[] indexes, ArrayList<String> plats) throws Exception{
+
 
         this.remove(gr);
         gr = new Grafic();

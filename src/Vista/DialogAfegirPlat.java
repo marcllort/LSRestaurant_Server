@@ -15,7 +15,7 @@ public class DialogAfegirPlat extends JFrame {
 
     public DialogAfegirPlat() {
         setLayout(new GridLayout(4, 0, 0, 0));
-
+        setSize(new Dimension(400,300));
         JPanel jpName = new JPanel();
         add(jpName);
         jpName.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));

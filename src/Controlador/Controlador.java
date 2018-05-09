@@ -131,6 +131,7 @@ public class Controlador implements ActionListener {
         }
         if (e.getActionCommand().equals("AFEGIR PLAT")) {
             try {
+                dialogAfegirPlat.setVisible(false);
                 gestionador.insereixPlat(dialogAfegirPlat.getJtfNom(), dialogAfegirPlat.getJtfPreu(), dialogAfegirPlat.getJtfUnitats());
                 vista.showError("Plat afegit!");
                 dialogAfegirPlat.dispatchEvent(new WindowEvent(dialogAfegirPlat, WindowEvent.WINDOW_CLOSING));
@@ -174,7 +175,7 @@ public class Controlador implements ActionListener {
 
 
         } else {
-            if (e.getActionCommand().equals("CARTA" )|| e.getActionCommand().equals("AFEGIR NOU PLAT")) {
+            if (e.getActionCommand().equals("CARTA" )|| e.getActionCommand().equals("AFEGIR NOU PLAT") || e.getActionCommand().equals("AFEGIR PLAT")||e.getActionCommand().equals("ACTUALITZAR")) {
 
             } else {
                 boto = e.getActionCommand();     //per saber de quin plat haurem de actualizar

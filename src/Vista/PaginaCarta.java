@@ -47,7 +47,6 @@ public class PaginaCarta extends JPanel {
             BotoPlat buton = new BotoPlat(p.getNomPlat());
             array.add(buton);
 
-
         }
         return array;
     }
@@ -90,11 +89,12 @@ public class PaginaCarta extends JPanel {
         }
 
     }
-    public void afegeixBoto(ActionListener controller, String nom){
+
+    public void afegeixBoto(ActionListener controller, String nom) {
         BotoPlat butt = new BotoPlat(nom);
         butt.registraController(controller, nom);
         jbArrray.add(butt);
-        System.out.println("SIZEEEE"+jbArrray.size()+"NAMEEE :"+ nom);
+        System.out.println("SIZEEEE" + jbArrray.size() + "NAMEEE :" + nom);
 
     }
 }

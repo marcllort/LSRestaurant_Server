@@ -110,7 +110,7 @@ public class ServidorReserva extends Thread {
             }
         } catch (IOException | ClassNotFoundException | SQLException e) {
             servers.remove(this);
-            e.printStackTrace();//En cas de que es desconnecti el client o hi hagi algun error tanco el server dedicat
+            //En cas de que es desconnecti el client o hi hagi algun error tanco el server dedicat
             System.out.println("Client Desonnectat");
         }
     }

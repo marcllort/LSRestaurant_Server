@@ -140,6 +140,10 @@ public class Gestionador {
      */
     public synchronized String analitzarComanda(Comanda comanda) {      //mirem si hi ha unitatas de tos els prodfuctes
 
+        if (comanda.getPlats().size()== 0){
+            return "Pagat";
+        }
+
         ArrayList<Plat> platsError = bbdd.llistaPlatsNoDisponibles(comanda);
 
         String llistaPlats = new String();

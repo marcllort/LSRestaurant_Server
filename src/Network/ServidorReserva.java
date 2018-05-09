@@ -1,9 +1,6 @@
 package Network;
 
-import Model.Comanda;
-import Model.Gestionador;
-import Model.InfoComandes;
-import Model.Usuari;
+import Model.*;
 import Vista.VistaComandes;
 import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 
@@ -72,7 +69,7 @@ public class ServidorReserva extends Thread {
                             gestionador.addComanda(com);                                                //Guardo la comanda
 
                             try {
-                                ArrayList<InfoComandes>  model= gestionador.llistaComandes();
+                                ArrayList<InfoComandes> model = gestionador.llistaComandes();
                                 //vistaComandes = new VistaComandes();
                                 vistaComandes.setModelTaula(model);
 
@@ -82,6 +79,17 @@ public class ServidorReserva extends Thread {
                             String missatge = "true";
                             ooStream.writeObject(missatge);
                             //actualitzar vista de gestionar comandes
+                        }
+                        if (analisi.equals("Pagat")) {
+                            System.out.println("pagat");
+                            ArrayList<Plat> plats = gestionador.retornaComanda(user.getUser()).getPlats();
+                            for (Plat p : plats) {
+                                if (!p.isServit()) {
+                                    gestionador.updatePlat(p.getNomPlat(), 1);
+                                    p.setServit(true);
+                                }
+                            }
+
                         } else {
                             String missatge = "No queden suficients unitats de:" + analisi;
                             ooStream.writeObject(missatge);//enviar error

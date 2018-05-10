@@ -548,6 +548,22 @@ public class BDD {
         return array;
     }
 
+    public void serveixPlatsUsuari(String usuari){
+        String str = "Update Comanda set Servit= true where usuari = '" + usuari + "'";
+        PreparedStatement ps = null;
+
+        try {
+            ps = con.prepareStatement(str);
+            ResultSet rss = null;
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+
 
     //Reserva
 

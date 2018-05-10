@@ -186,6 +186,7 @@ public class Controlador implements ActionListener {
             int p = vista.getVistaPlats().getPaginaCarta();
             if (p * 6 < vista.getVistaPlats().getPag().getJbArrray().size()) {
                 vista.getVistaPlats().paginaCarta(gestionador.retornaPlats().getPlats(), p + 1);
+
             }
         }
         if (e.getActionCommand().equals("ANTERIOR")) {

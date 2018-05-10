@@ -83,6 +83,7 @@ public class ServidorReserva extends Thread {
                         if (analisi.equals("Pagat")) {
                             System.out.println("pagat");
                             ArrayList<Plat> plats = gestionador.retornaComanda(user.getUser()).getPlats();
+                            gestionador.serveixPlatsUsuari(user.getUser());
                             for (Plat p : plats) {
                                 if (!p.isServit()) {
                                     gestionador.updatePlat(p.getNomPlat(), 1);

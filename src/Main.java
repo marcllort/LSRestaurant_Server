@@ -34,10 +34,10 @@ public class Main {
             vista.registraControlador(controlador);
             vista.setVisible(true);
 
-        //afegeixReservaBdd(gestionador);
-            //afegeixPlatsBdd(bdd);
-            //afegeixComanda(gestionador, bdd);
 
+            //afegeixComanda(gestionador, bdd);
+        //afegeixReservaBdd(gestionador);
+        //afegeixPlatsBdd(bdd);
 
 
 
@@ -57,7 +57,7 @@ public class Main {
             bdd.insereixPlat("Bistec de vedella", 11, 30, 0);
             bdd.insereixPlat("Llenguado al forn", 18, 10, 0);
             bdd.insereixPlat("Croquetes de pollastre", 5, 23, 0);
-            bdd.insereixPlat("Croquetes de carn d'olla", 5, 21, 0);
+            bdd.insereixPlat("Croquetes de carn ", 5, 21, 0);
             bdd.insereixPlat("Patates braves", 5, 10, 0);
             bdd.insereixPlat("Espaguetis a la carbonara", 11, 20, 0);
             bdd.insereixPlat("Macarrons amb tomàquet", 11, 19, 0);
@@ -90,6 +90,15 @@ public class Main {
      * @param gestionador
      */
     public static void afegeixReservaBdd(Gestionador gestionador) {
+        try {
+            for(int i = 1;i<15; i++ ){
+                gestionador.creaTaula(i);
+            }
+        }catch (Exception e ){
+
+        }
+
+
         Reserva reserva1 = new Reserva("Alex", 1, gestionador.newData(20, 5, 2018), new Time(14, 30, 00));
         gestionador.creaReserva(reserva1, "pass");
 

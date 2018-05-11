@@ -87,8 +87,9 @@ public class DialogAfegirPlat extends JFrame {
         return jtfNom.getText();
     }
 
-    public int getJtfPreu() throws NumberFormatException {
-        return Integer.parseInt(jtfPreu.getText());
+    public Float getJtfPreu() throws NumberFormatException {
+
+        return Float.parseFloat(jtfPreu.getText());
     }
 
     public int getJtfUnitats() throws NumberFormatException {

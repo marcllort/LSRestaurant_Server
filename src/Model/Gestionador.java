@@ -6,6 +6,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Iterator;
 
 /**
  * Classe que conte totes les funcions per fer diferentes tasques referents a la base de dades
@@ -280,7 +282,26 @@ public class Gestionador {
      * @return arraylist de reserves que té la taula
      */
     public ArrayList<Reserva> mostraReseves(int i) {
-        return bbdd.mostraReservesTaula(i);
+        ArrayList<Reserva> res ;
+
+        res = bbdd.mostraReservesTaula(i);
+
+        Iterator<Reserva> iter = res.iterator();
+
+        while (iter.hasNext()) {
+            Reserva info = iter.next();
+
+            Calendar cal = Calendar.getInstance();
+            cal.add(Calendar.DATE, -1);
+            Date dataNow = cal.getTime();
+            System.out.println(dataNow);
+            //java.util.Date dataNow = new java.util.Date();
+            if(info.getData().before(dataNow)) {
+                iter.remove();
+            }
+
+        }
+        return res;
     }
 
     /**
@@ -300,7 +321,41 @@ public class Gestionador {
      * @throws Exception
      */
     public ArrayList<InfoComandes> llistaComandes() throws Exception {
-        return bbdd.llistaComandes();
+        ArrayList<InfoComandes> arr = new ArrayList<>();
+
+        arr = bbdd.llistaComandes();
+
+        Iterator<InfoComandes> iter = arr.iterator();
+
+        while (iter.hasNext()) {
+            InfoComandes info = iter.next();
+
+            if (info.getPlatsPendents() == 0) {
+                iter.remove();
+            }
+            java.util.Date dataNow = new java.util.Date();
+            if(info.getDate().before(dataNow)) {
+                iter.remove();
+            }
+
+        }
+
+
+            /*SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            Date date1 = sdf.parse(a.getDate().toString());
+            Date e = new Date();
+            System.out.println("DATAAA"+e.compareTo(date1));
+
+            Date date2 = new java.sql.Date();
+
+            System.out.println("date1 : " + sdf.format(date1));
+            System.out.println("date2 : " + sdf.format(date2));
+
+            if (date1.compareTo(date2) > 0) {
+                System.out.println("Date1 is after Date2");*/
+
+
+        return arr;
     }
 
     /**
@@ -320,7 +375,7 @@ public class Gestionador {
      * @param preu
      * @param unitats_disponibles
      */
-    public void insereixPlat(String nom_plat, int preu, int unitats_disponibles) throws SQLException{
+    public void insereixPlat(String nom_plat, float preu, int unitats_disponibles) throws SQLException{
 
             bbdd.insereixPlat(nom_plat, preu, unitats_disponibles, 0);
 
@@ -349,6 +404,10 @@ public class Gestionador {
 
     public void eliminaPlat(String nom)throws SQLException{
         bbdd.eliminaPlat(nom);
+    }
+
+    public void serveixPlatsUsuari(String usuari){
+        bbdd.serveixPlatsUsuari(usuari);
     }
 
 }

@@ -186,7 +186,7 @@ public class BDD {
      * @param unitats_gastades    unitats gastades
      * @throws SQLException
      */
-    public void insereixPlat(String nom_plat, int preu, int unitats_disponibles, int unitats_gastades) throws SQLException {
+    public void insereixPlat(String nom_plat, float preu, int unitats_disponibles, int unitats_gastades) throws SQLException {
         st.executeUpdate("INSERT INTO Plat(nom_plat, preu, unitats_disponibles, unitats_gastades) " +
                 "VALUES ('" + nom_plat + "'," + preu + "," + unitats_disponibles + "," + unitats_gastades + ")");
     }
@@ -547,6 +547,22 @@ public class BDD {
         }
         return array;
     }
+
+    public void serveixPlatsUsuari(String usuari){
+        String str = "Update Comanda set Servit= true where usuari = '" + usuari + "'";
+        PreparedStatement ps = null;
+
+        try {
+            ps = con.prepareStatement(str);
+            ResultSet rss = null;
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
 
 
     //Reserva

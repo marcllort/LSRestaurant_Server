@@ -371,7 +371,7 @@ public class Gestionador {
      * @param preu
      * @param unitats_disponibles
      */
-    public void insereixPlat(String nom_plat, int preu, int unitats_disponibles) throws SQLException{
+    public void insereixPlat(String nom_plat, float preu, int unitats_disponibles) throws SQLException{
 
             bbdd.insereixPlat(nom_plat, preu, unitats_disponibles, 0);
 

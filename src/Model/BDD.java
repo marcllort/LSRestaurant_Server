@@ -186,7 +186,7 @@ public class BDD {
      * @param unitats_gastades    unitats gastades
      * @throws SQLException
      */
-    public void insereixPlat(String nom_plat, int preu, int unitats_disponibles, int unitats_gastades) throws SQLException {
+    public void insereixPlat(String nom_plat, float preu, int unitats_disponibles, int unitats_gastades) throws SQLException {
         st.executeUpdate("INSERT INTO Plat(nom_plat, preu, unitats_disponibles, unitats_gastades) " +
                 "VALUES ('" + nom_plat + "'," + preu + "," + unitats_disponibles + "," + unitats_gastades + ")");
     }

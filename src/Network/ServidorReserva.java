@@ -79,8 +79,7 @@ public class ServidorReserva extends Thread {
                             String missatge = "true";
                             ooStream.writeObject(missatge);
                             //actualitzar vista de gestionar comandes
-                        }
-                        if (analisi.equals("Pagat")) {
+                        }else if (analisi.equals("Pagat")) {
                             System.out.println("pagat");
                             ArrayList<Plat> plats = gestionador.retornaComanda(user.getUser()).getPlats();
                             gestionador.serveixPlatsUsuari(user.getUser());
@@ -91,7 +90,7 @@ public class ServidorReserva extends Thread {
                                 }
                             }
 
-                        } else {
+                        } else if (!analisi.equals("Pagat")|| !analisi.equals("true")){
                             String missatge = "No queden suficients unitats de:" + analisi;
                             ooStream.writeObject(missatge);//enviar error
                         }

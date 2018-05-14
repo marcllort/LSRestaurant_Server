@@ -40,6 +40,7 @@ public class BDD {
         System.out.println("BBDD: Base de dades connectada");
         con = connection;
         st = con.createStatement();
+
     }
 
 
@@ -187,8 +188,9 @@ public class BDD {
      * @throws SQLException
      */
     public void insereixPlat(String nom_plat, float preu, int unitats_disponibles, int unitats_gastades) throws SQLException {
+        nom_plat = nom_plat.replace("'","\'");
         st.executeUpdate("INSERT INTO Plat(nom_plat, preu, unitats_disponibles, unitats_gastades) " +
-                "VALUES ('" + nom_plat + "'," + preu + "," + unitats_disponibles + "," + unitats_gastades + ")");
+                "VALUES ("+'"' + nom_plat +'"'+ "," + preu + "," + unitats_disponibles + "," + unitats_gastades + ")");
     }
 
     /**
@@ -197,7 +199,7 @@ public class BDD {
      * @param nom nom del plat a eliminar
      */
     public void eliminaPlat(String nom) throws SQLException{
-            PreparedStatement ps = con.prepareStatement("DELETE FROM Plat WHERE Nom_plat = '" + nom + "'");
+            PreparedStatement ps = con.prepareStatement("DELETE FROM Plat WHERE Nom_plat = "+'"' + nom + '"');
             ps.executeUpdate();
     }
 
@@ -212,13 +214,13 @@ public class BDD {
 
         boolean ok = true;
 
-        String str = "Update Plat set unitats_gastades = ?, unitats_disponibles= ? where nom_plat = '" + nom + "'";
+        String str = "Update Plat set unitats_gastades = ?, unitats_disponibles= ? where nom_plat = "+'"' + nom + '"';
         PreparedStatement ps = con.prepareStatement(str);
 
         ResultSet rss = null;
         ResultSet rs = null;
 
-        rss = st.executeQuery("SELECT unitats_disponibles FROM Plat where nom_plat = '" + nom + "';");
+        rss = st.executeQuery("SELECT unitats_disponibles FROM Plat where nom_plat = "+'"' + nom + '"');
         if (rss.next()) {
 
             if (rss.getInt("unitats_disponibles") - unitats >= 0) {
@@ -230,7 +232,7 @@ public class BDD {
 
         }
 
-        rs = st.executeQuery("SELECT  unitats_gastades  FROM Plat where nom_plat = '" + nom + "';");
+        rs = st.executeQuery("SELECT  unitats_gastades  FROM Plat where nom_plat = "+'"' + nom + '"');
         if (rs.next()) {
             if (ok == true) {
                 ps.setInt(1, rs.getInt("unitats_gastades") + unitats);
@@ -257,13 +259,13 @@ public class BDD {
 
         boolean ok = true;
 
-        String str = "Update Plat set unitats_disponibles= ? where nom_plat = '" + nom + "'";
+        String str = "Update Plat set unitats_disponibles= ? where nom_plat = "+'"' + nom + '"';
         PreparedStatement ps = con.prepareStatement(str);
 
         ResultSet rss = null;
 
 
-        rss = st.executeQuery("SELECT unitats_disponibles FROM Plat where nom_plat = '" + nom + "';");
+        rss = st.executeQuery("SELECT unitats_disponibles FROM Plat where nom_plat = "+'"' + nom + '"');
         if (rss.next()) {
 
 
@@ -286,7 +288,7 @@ public class BDD {
     public void serveixPlat(String plat, String usuari) {
         int id = 0;
         try {
-            ResultSet rs = st.executeQuery("SELECT id_comanda FROM Comanda where nom_plat = '" + plat + "' AND usuari = '" + usuari + "' AND servit = false");
+            ResultSet rs = st.executeQuery("SELECT id_comanda FROM Comanda where nom_plat = "+'"' + plat +'"'+ " AND usuari = '" + usuari + "' AND servit = false");
             if (rs.next()) {
                 id = rs.getInt("id_comanda");
             }
@@ -294,7 +296,7 @@ public class BDD {
             e.printStackTrace();
         }
 
-        String str = "Update Comanda set servit  = TRUE where nom_plat = '" + plat + "'" + " AND usuari = '" + usuari + "' AND id_comanda =" + id;
+        String str = "Update Comanda set servit  = TRUE where nom_plat = "+'"' + plat + '"' + " AND usuari = '" + usuari + "' AND id_comanda =" + id;
         try {
             PreparedStatement ps = con.prepareStatement(str);
             ps.executeUpdate();
@@ -467,7 +469,7 @@ public class BDD {
     public void creaComanda(Comanda comanda) throws SQLException {
         for (Plat plat : comanda.getPlats()) {
             st.executeUpdate("INSERT INTO Comanda(usuari, nom_plat, data, hora,servit) " +
-                    "VALUES ('" + comanda.getUsuari() + "','" + plat.getNomPlat() + "', '" + comanda.getData() + "','" + comanda.getHora() + "'," + plat.isServit() + ")");
+                    "VALUES ('" + comanda.getUsuari() + "',"+'"' + plat.getNomPlat() +'"'+ ", '" + comanda.getData() + "','" + comanda.getHora() + "'," + plat.isServit() + ")");
         }
     }
 
@@ -483,7 +485,7 @@ public class BDD {
         ResultSet rs = null;       //Mirar si l'ordre va be
         ResultSet rss = null;
         try {
-            rs = st.executeQuery("SELECT MAX(hora) AS hour, MAX(data) AS Date FROM Comanda WHERE usuari = '" + usuari + "'" +
+            rs = st.executeQuery("SELECT MAX(hora) AS hour, MAX(data) AS Date FROM Comanda WHERE usuari = "+'"' + usuari + '"' +
                     "GROUP BY usuari ");
             Date data = new Date(12, 12, 12);
             Time hora = new Time(12, 12, 12);
@@ -578,15 +580,21 @@ public class BDD {
 
     public Boolean comprovaPassword(String usuari, String password) {
         try {
-            ResultSet rs = st.executeQuery("SELECT usuari, password FROM Reserva WHERE usuari = '" + usuari + "'");
+
+            ResultSet rs = st.executeQuery("SELECT usuari, password FROM Reserva WHERE usuari = '" + usuari + "' ");
             String contrasenya = "";
+            String usr = "";
             if (rs.next()) {
+                usr = rs.getString("usuari");
                 contrasenya = rs.getString("password");
             }
-
-            return contrasenya.equals(password);
+            if(usr.equals(usuari)) {
+                return contrasenya.equals(password);
+            }
+            else{return false;}
         } catch (Exception e) {
             System.out.println("ERROR");
+
             return false;
         }
     }

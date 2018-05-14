@@ -315,7 +315,7 @@ public class BDD {
 
             while (rs.next()) {
                 String nom = rs.getString("nom_plat");
-                int preu = rs.getInt("preu");
+                float preu = rs.getFloat("preu");
                 int unitats = rs.getInt("unitats_disponibles");
                 if (unitats > 0) {
                     Plat plat = new Plat(nom, preu);
@@ -342,7 +342,8 @@ public class BDD {
 
             while (rs.next()) {
                 String nom = rs.getString("nom_plat");
-                int preu = rs.getInt("preu");
+
+                float preu = rs.getFloat("preu");
                 int unitats = rs.getInt("unitats_disponibles");
                 Plat plat = new Plat(nom, preu);
                 plats.add(plat);
@@ -508,7 +509,7 @@ public class BDD {
             while (rss.next()) {
                 String nom = rss.getString("nom_plat");
                 Boolean servit = rss.getBoolean("servit");
-                int preu = rss.getInt("preu");
+                float preu = rss.getFloat("preu");
                 int id_comanda = rss.getInt("id_comanda");
                 Plat plat = new Plat(nom, preu, servit);
                 array.add(plat);

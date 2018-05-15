@@ -142,6 +142,7 @@ public class Controlador implements ActionListener {
                 vista.getVistaPlats().afegeixBoto(this, dialogAfegirPlat.getJtfNom());
                 dialogAfegirPlat.netejaCamps();
             } catch (SQLException sq) {
+                sq.printStackTrace();
                 vista.showError("Error! Aquest plat ja existeix!");
                 dialogAfegirPlat.netejaCamps();
 

@@ -4,6 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
+/**
+ * Finestra que s'obre en el moment que volem editar un plat
+ */
 public class DialogUpdatePlat extends JFrame {
 
     private JTextField jtfUnitats;
@@ -12,7 +15,9 @@ public class DialogUpdatePlat extends JFrame {
     private JButton jbActualizar = new JButton();
     private JButton jbEliminar = new JButton();
 
-
+    /**
+     * Constructor de la finestra
+     */
     public DialogUpdatePlat() {
         setLayout(new GridLayout(4, 0, 0, 0));
         setSize(400, 250);                                      //Dono les propietats inicials al JFrame
@@ -63,6 +68,10 @@ public class DialogUpdatePlat extends JFrame {
 
     }
 
+    /**
+     * Funcio que registra el controlador de la finestra
+     * @param controlador
+     */
     public void registraControlador(ActionListener controlador) {
         jbActualizar.addActionListener(controlador);
         jbActualizar.setActionCommand("ACTUALITZAR");
@@ -71,18 +80,33 @@ public class DialogUpdatePlat extends JFrame {
         jbEliminar.setActionCommand("ELIMINA");
     }
 
+    /**
+     * Funcio que escriu el nom en questio a la finestra
+     * @param nom nom que volem escriure a la finestra
+     */
     public void setJlNom(String nom) {
         this.jlNom.setText("Nom: " + nom);
     }
 
+    /**
+     * funció que escriu el preu en questió a la finestra
+     * @param preu preu a escriure a la finestra
+     */
     public void setJlPreu(Float preu) {
         this.jlPreu.setText("Preu: " + preu);
     }
 
+    /**
+     * Funcio que retorna el numero d'unitats que s'ha escrit per afegir al plat seleccionat
+     * @return numero escrit a les unitats
+     */
     public int getJtfUnitats() {
         return Integer.parseInt(jtfUnitats.getText());
     }
 
+    /**
+     * Funció que neteja els camps de la finestra
+     */
     public void netejaCamps() {
         jtfUnitats.setText("");
     }

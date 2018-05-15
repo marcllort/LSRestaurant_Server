@@ -4,13 +4,19 @@ package Vista;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
-
+/**
+ * Finestra que s'obre en el moment que toquem afegir plat
+ */
 public class DialogAfegirPlat extends JFrame {
 
     private JTextField jtfNom;
     private JTextField jtfPreu;
     private JTextField jtfUnitats;
     private JButton jbAfegir = new JButton();
+
+    /**
+     * Constructor de la finestra
+     */
 
     public DialogAfegirPlat() {
 
@@ -78,24 +84,45 @@ public class DialogAfegirPlat extends JFrame {
         panel.add(label_5);
     }
 
+    /**
+     * Funcio per registrar el controlador de la finestra
+     * @param controlador
+     */
     public void registraControlador(ActionListener controlador) {
         jbAfegir.addActionListener(controlador);
         jbAfegir.setActionCommand("AFEGIR PLAT");
     }
 
+    /**
+     * Funció que retorna el nom introduit a la finestra
+     * @return String amb el nom
+     */
     public String getJtfNom() {
         return jtfNom.getText();
     }
 
+    /**
+     * Funcio que retorna el preu introduit a la finestra
+     * @return preu que s'ha introduit
+     * @throws NumberFormatException
+     */
     public Float getJtfPreu() throws NumberFormatException {
 
         return Float.parseFloat(jtfPreu.getText());
     }
 
+    /**
+     * Funcio que retorna el numero d'nitats
+     * @return int amb les unitats
+     * @throws NumberFormatException
+     */
     public int getJtfUnitats() throws NumberFormatException {
         return Integer.parseInt(jtfUnitats.getText());
     }
 
+    /**
+     * Funcio que esborra la informacio de tots els camps
+     */
     public void netejaCamps() {
         jtfNom.setText("");
         jtfPreu.setText("");

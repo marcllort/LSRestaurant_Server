@@ -1,6 +1,7 @@
 package Vista;
 
 
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -87,9 +88,31 @@ public class DialogAfegirPlat extends JFrame {
         return jtfNom.getText();
     }
 
-    public Float getJtfPreu() throws NumberFormatException {
+    public Float getJtfPreu() {
 
-        return Float.parseFloat(jtfPreu.getText());
+        try {
+
+            return Float.parseFloat(jtfPreu.getText());
+
+        }catch (NumberFormatException e){
+
+            String numero = jtfPreu.getText();
+
+            numero = numero.replace(",", ".");
+
+            try {
+
+                return Float.parseFloat(numero);
+
+            }catch (NumberFormatException isString){
+
+                netejaCamps();
+
+                return new Float(0);
+
+            }
+
+        }
     }
 
     public int getJtfUnitats() throws NumberFormatException {

@@ -30,6 +30,7 @@ public class DialogUpdatePlat extends JFrame {
         panel_1.setBounds(10, 11, 90, 90);
         panel.add(panel_1);
 
+
         jlNom.setText("Nom del plat");
         jlNom.setFont(new Font("Tahoma", Font.BOLD, 20));
         jlNom.setBounds(110, 11, 212, 33);

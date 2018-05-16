@@ -35,7 +35,7 @@ public class Main {
             vista.setVisible(true);
 
 
-            //afegeixComanda(gestionador, bdd);
+        //afegeixComanda(gestionador, bdd);
         //afegeixReservaBdd(gestionador);
         //afegeixPlatsBdd(bdd);
 

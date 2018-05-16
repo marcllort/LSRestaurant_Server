@@ -291,7 +291,11 @@ public class Gestionador {
         while (iter.hasNext()) {
             Reserva info = iter.next();
 
-            java.util.Date dataNow = new java.util.Date();
+            Calendar cal = Calendar.getInstance();
+            cal.add(Calendar.DATE, -1);
+            Date dataNow = cal.getTime();
+            System.out.println(dataNow);
+            //java.util.Date dataNow = new java.util.Date();
             if(info.getData().before(dataNow)) {
                 iter.remove();
             }
@@ -371,7 +375,7 @@ public class Gestionador {
      * @param preu
      * @param unitats_disponibles
      */
-    public void insereixPlat(String nom_plat, int preu, int unitats_disponibles) throws SQLException{
+    public void insereixPlat(String nom_plat, float preu, int unitats_disponibles) throws SQLException{
 
             bbdd.insereixPlat(nom_plat, preu, unitats_disponibles, 0);
 

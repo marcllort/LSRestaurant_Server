@@ -291,7 +291,11 @@ public class Gestionador {
         while (iter.hasNext()) {
             Reserva info = iter.next();
 
-            java.util.Date dataNow = new java.util.Date();
+            Calendar cal = Calendar.getInstance();
+            cal.add(Calendar.DATE, -1);
+            Date dataNow = cal.getTime();
+            System.out.println(dataNow);
+            //java.util.Date dataNow = new java.util.Date();
             if(info.getData().before(dataNow)) {
                 iter.remove();
             }

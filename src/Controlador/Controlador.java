@@ -142,19 +142,21 @@ public class Controlador implements ActionListener {
                 vista.getVistaPlats().afegeixBoto(this, dialogAfegirPlat.getJtfNom());
                 dialogAfegirPlat.netejaCamps();
             } catch (SQLException sq) {
+                sq.printStackTrace();
                 vista.showError("Error! Aquest plat ja existeix!");
                 dialogAfegirPlat.netejaCamps();
 
             } catch (NumberFormatException ne) {
                 vista.showError("Error! Caracters no permesos a preu i unitats!");
                 dialogAfegirPlat.netejaCamps();
-                ne.printStackTrace();
+                //ne.printStackTrace();
             }
         }
         if (e.getActionCommand().equals("ACTUALITZAR")) {
             System.out.println("actualizat " + boto);
             try {
                 gestionador.afegeixUnitats(boto, dialogUpdatePlat.getJtfUnitats());
+                sReserva.enviaCarta();
                 vista.showError("Unitats de " + boto + " actualitzades!");
                 dialogUpdatePlat.dispatchEvent(new WindowEvent(dialogUpdatePlat, WindowEvent.WINDOW_CLOSING));
                 dialogUpdatePlat.netejaCamps();

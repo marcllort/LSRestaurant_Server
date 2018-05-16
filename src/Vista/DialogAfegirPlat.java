@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 
 public class DialogAfegirPlat extends JFrame {
 
+
     private JTextField jtfNom;
     private JTextField jtfPreu;
     private JTextField jtfUnitats;

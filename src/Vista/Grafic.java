@@ -25,7 +25,7 @@ public class Grafic extends JPanel {
                 max = graphSource[j];
             }
         }
-
+        System.out.println(max);
             int p = 1/max;
 
         setupPanel();
@@ -54,7 +54,7 @@ public class Grafic extends JPanel {
                 ymax = (this.getHeight() - (max * (this.getHeight() / max))) / 2 + this.getHeight() / 4;
                 hmax = (max * (((this.getHeight()) / max))) / 2;
                 Integer a = max / 5 * (i + 1);
-
+                System.out.println("NUM"+ a);
 
                 maingrafic.setColor(new Color(red, green, blue));
                 maingrafic.fill(new Rectangle(x, y, width, height));

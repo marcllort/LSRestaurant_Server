@@ -14,16 +14,18 @@ public class VistaTop5 extends JPanel {
     private Grafic gr;
 
 
+
+
     public VistaTop5() {
         gr = new Grafic();
         jbTotal = new JButton("Ranking Total");
         jbSemanal = new JButton("Ranking Semanal");
-
+        jbTotal.setSelected(true);
         this.setLayout(new BorderLayout());
         this.add(gr, BorderLayout.CENTER);
         JPanel jpButton = new JPanel();
+        jpButton.add( jbTotal);
         jpButton.add(jbSemanal);
-        jpButton.add(jbTotal);
         this.add(jpButton, BorderLayout.NORTH);
 
     }
@@ -50,6 +52,13 @@ public class VistaTop5 extends JPanel {
         this.repaint();
         this.revalidate();
 
+    }
+    public JButton getJbSemanal() {
+        return jbSemanal;
+    }
+
+    public JButton getJbTotal() {
+        return jbTotal;
     }
 
 }

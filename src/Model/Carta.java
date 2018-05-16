@@ -49,8 +49,8 @@ public class Carta implements Serializable {
     }
 
     public Plat getPlat(String nom) {
-        for (Plat p : plats){
-            if (p.getNomPlat().equals(nom)){
+        for (Plat p : plats) {
+            if (p.getNomPlat().equals(nom)) {
                 return p;
             }
         }
@@ -71,7 +71,7 @@ public class Carta implements Serializable {
      *
      * @param plat
      */
-    public void afageixPlat(Plat plat) {
+    public void afegeixPlat(Plat plat) {
         plats.add(plat);
     }
 

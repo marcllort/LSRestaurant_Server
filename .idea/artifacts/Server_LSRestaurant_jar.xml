@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Server_LSRestaurant:jar">
+    <output-path>$PROJECT_DIR$/../../DPO - RESTAURANT/Executables</output-path>
+    <root id="archive" name="Server_LSRestaurant.jar">
+      <element id="module-output" name="Server_LSRestaurant" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/gson-2.8.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/mysql-connector-java-5.1.46.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

@@ -327,6 +327,9 @@ public class Controlador implements ActionListener {
                     arrst.add(i.getUsuari());
                     p++;
                 }
+                vista.getVistaTop5().getJbSemanal().setSelected(true);
+                vista.getVistaTop5().getJbTotal().setSelected(false);
+
                 try {
                     vista.getVistaTop5().grSemanal(array,arrst);
                 }catch (Exception se){
@@ -346,6 +349,9 @@ public class Controlador implements ActionListener {
                     arrstt.add(i.getUsuari());
                     pt++;
                 }
+                vista.getVistaTop5().getJbSemanal().setSelected(false);
+                vista.getVistaTop5().getJbTotal().setSelected(true);
+
                 try {
                     vista.getVistaTop5().grSemanal(arrayt,arrstt);
                 }catch (Exception se){

@@ -80,7 +80,6 @@ public class ServidorReserva extends Thread {
                             ooStream.writeObject(missatge);
                             //actualitzar vista de gestionar comandes
                         }else if (analisi.equals("Pagat")) {
-                            System.out.println("pagat");
                             ArrayList<Plat> plats = gestionador.retornaComanda(user.getUser()).getPlats();
                             gestionador.serveixPlatsUsuari(user.getUser());
                             for (Plat p : plats) {

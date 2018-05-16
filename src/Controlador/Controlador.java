@@ -133,7 +133,6 @@ public class Controlador implements ActionListener {
 
             dialogAfegirPlat.setVisible(false);
             try {
-                System.out.println(dialogAfegirPlat.getJtfNom() + dialogAfegirPlat.getJtfPreu() + dialogAfegirPlat.getJtfUnitats());
                 gestionador.insereixPlat(dialogAfegirPlat.getJtfNom(), dialogAfegirPlat.getJtfPreu(), dialogAfegirPlat.getJtfUnitats());
                 sReserva.enviaCarta();
                 vista.showError("Plat afegit!");
@@ -153,8 +152,7 @@ public class Controlador implements ActionListener {
             }
         }
         if (e.getActionCommand().equals("ACTUALITZAR")) {
-            System.out.println("actualizat " + boto);
-            try {
+           try {
                 gestionador.afegeixUnitats(boto, dialogUpdatePlat.getJtfUnitats());
                 sReserva.enviaCarta();
                 vista.showError("Unitats de " + boto + " actualitzades!");
@@ -206,7 +204,6 @@ public class Controlador implements ActionListener {
 
             } else {
                 boto = e.getActionCommand();     //per saber de quin plat haurem de actualizar
-                System.out.println(boto);
                 dialogUpdatePlat.setVisible(true);
                 dialogUpdatePlat.setJlNom(boto);
                 dialogUpdatePlat.setJlPreu(gestionador.retornaPlats().getPlat(boto).getPreu());
@@ -237,7 +234,6 @@ public class Controlador implements ActionListener {
                 panel.ferLlistes(gestionador.retornaComanda(user));
                 ServidorReserva server = sReserva.getServerReserva(user);
                 try {
-                    System.out.println("Envai comanda");
                     server.enviaComanda();
                 } catch (Exception ee) {
                     ee.printStackTrace();

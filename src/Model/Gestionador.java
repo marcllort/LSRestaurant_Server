@@ -340,21 +340,6 @@ public class Gestionador {
 
         }
 
-
-            /*SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            Date date1 = sdf.parse(a.getDate().toString());
-            Date e = new Date();
-            System.out.println("DATAAA"+e.compareTo(date1));
-
-            Date date2 = new java.sql.Date();
-
-            System.out.println("date1 : " + sdf.format(date1));
-            System.out.println("date2 : " + sdf.format(date2));
-
-            if (date1.compareTo(date2) > 0) {
-                System.out.println("Date1 is after Date2");*/
-
-
         return arr;
     }
 

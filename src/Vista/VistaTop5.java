@@ -8,11 +8,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
+/**
+ * Classe que s'encarrega de la vista del top 5 de plats
+ */
 public class VistaTop5 extends JPanel {
     private JButton jbSemanal;
     private JButton jbTotal;
     private Grafic gr;
 
+    /**
+     * Funcio que crea la vista del top 5 de plats
+     */
 
     public VistaTop5() {
         gr = new Grafic();
@@ -28,7 +34,10 @@ public class VistaTop5 extends JPanel {
 
     }
 
-
+    /**
+     * Funcio que regiistra els dos botons de la vista
+     * @param controller
+     */
     public void registraControlador(ActionListener controller) {                            //Registro el boto serve amb un action comand de send, declarat en una constant
         jbSemanal.addActionListener(controller);
         jbSemanal.setActionCommand("Semanal");
@@ -38,7 +47,13 @@ public class VistaTop5 extends JPanel {
 
     }
 
-    public void grSemanal(int[] indexes, ArrayList<String> plats) throws Exception {
+    /**
+     * Funcio que actualitza els valors del grafic
+     * @param indexes
+     * @param plats
+     * @throws Exception
+     */
+    public void updateGrafic(int[] indexes, ArrayList<String> plats) throws Exception {
 
         this.remove(gr);
         gr = new Grafic();
@@ -50,10 +65,17 @@ public class VistaTop5 extends JPanel {
 
     }
 
+    /**
+     * Retorna el botó semanal
+     * @return
+     */
     public JButton getJbSemanal() {
         return jbSemanal;
     }
-
+    /**
+     * Retorna el botó total
+     * @return
+     */
     public JButton getJbTotal() {
         return jbTotal;
     }

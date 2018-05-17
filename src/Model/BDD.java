@@ -8,6 +8,9 @@ import java.sql.Date;
 import java.util.*;
 
 public class BDD {
+    /**
+     * Classe que s'encarrega de realitzar totes les queries i actualitzacions d'informació de la base de dades
+     */
 
     private static String username;
     private static String password;

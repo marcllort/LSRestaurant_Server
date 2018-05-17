@@ -10,7 +10,9 @@ import java.awt.event.ActionListener;
 
 
 public class ServidorVista extends JFrame {
-
+    /**
+     * Classe que té la vista general del servidor, principalment s'encarrega d'intercambiar les pestanyes
+     */
     private VistaTaules vistaTaules;
     private VistaComandes vistaComandes;
     private VistaPlats vistaPlats;
@@ -25,7 +27,9 @@ public class ServidorVista extends JFrame {
     private JMenuItem jmiTop5;
     private JMenuItem jmiTaula;
 
-
+    /**
+     * Constructor de la vista general
+     */
     public ServidorVista() {
 
         setSize(600, 330);                                      //Dono les propietats inicials al JFrame
@@ -51,7 +55,10 @@ public class ServidorVista extends JFrame {
 
     }
 
-
+    /**
+     * Funcio que registra el controlador de totes les pestanyes
+     * @param controller
+     */
     public void registraControlador(ActionListener controller) {                            //Registro el boto serve amb un action comand de send, declarat en una constant
 
         vistaTaules.registraControlador(controller);
@@ -61,24 +68,33 @@ public class ServidorVista extends JFrame {
 
     }
 
-
+    /**
+     * Funcio que activa la pestanya de les taules
+     * @param controller
+     */
     public void activaTaula(Controlador controller) {
         CardLayout cardLayout = (CardLayout) layout.getLayout();
         cardLayout.show(layout, "TAULES");
 
     }
-
+    /**
+     * Funcio que activa la pestanya de la carta
+     */
     public void activaCarta() {
         CardLayout cardLayout = (CardLayout) layout.getLayout();
         cardLayout.show(layout, "CARTA");
 
     }
-
+    /**
+     * Funcio que activa la pestanya de les comandes
+     */
     public void activaComanda() {
         CardLayout cardLayout = (CardLayout) layout.getLayout();
         cardLayout.show(layout, "COMANDES");
     }
-
+    /**
+     * Funcio que activa la pestanya del grafic
+     */
     public void activaTop5() {
         CardLayout cardLayout = (CardLayout) layout.getLayout();
         cardLayout.show(layout, "TOP5");
@@ -105,6 +121,10 @@ public class ServidorVista extends JFrame {
         JOptionPane.showMessageDialog(this, message);                               //JDialog per quan tinguem algun error el mostri
     }
 
+    /**
+     * Funcio que crea el menu per alternar entre pestanyes
+     * @param controller
+     */
     public void creaMenu(Controlador controller) {
 
         jmiTaula = new JMenuItem("Taules");

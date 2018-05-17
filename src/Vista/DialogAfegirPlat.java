@@ -6,13 +6,18 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class DialogAfegirPlat extends JFrame {
-
+    /**
+     * Classe que crea un panell en el cas que vulguem afegir un plat nou a la bdd
+     */
 
     private JTextField jtfNom;
     private JTextField jtfPreu;
     private JTextField jtfUnitats;
     private JButton jbAfegir = new JButton();
 
+    /**
+     * Funció que crea aquesta finestra
+     */
     public DialogAfegirPlat() {
 
         setSize(new Dimension(400, 250));
@@ -79,24 +84,43 @@ public class DialogAfegirPlat extends JFrame {
         panel.add(label_5);
     }
 
+    /**
+     * funcio que registra el controlador dels botons
+     * @param controlador controlador a registrar
+     */
     public void registraControlador(ActionListener controlador) {
         jbAfegir.addActionListener(controlador);
         jbAfegir.setActionCommand("AFEGIR PLAT");
     }
 
+    /**
+     * Funcio que retorna el nom que s'ha escrit per el nou plat
+     * @return nom
+     */
     public String getJtfNom() {
         return jtfNom.getText();
     }
 
+    /**
+     * Funcio que retorna el preu que s'ha escrit per el nou plat
+     * @return preu
+     */
     public Float getJtfPreu() throws NumberFormatException {
 
         return Float.parseFloat(jtfPreu.getText());
     }
 
+    /**
+     * Funcio que retorna les unitats que s'ha escrit per el nou plat
+     * @return unitats
+     */
     public int getJtfUnitats() throws NumberFormatException {
         return Integer.parseInt(jtfUnitats.getText());
     }
 
+    /**
+     * Funció que neteja tots els camps de la finestra
+     */
     public void netejaCamps() {
         jtfNom.setText("");
         jtfPreu.setText("");

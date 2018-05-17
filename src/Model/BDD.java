@@ -9,7 +9,7 @@ import java.util.*;
 
 public class BDD {
     /**
-     * Classe que s'encarrega de realitzar totes les queries i actualitzacions d'informació de la base de dades
+     * Classe que s'encarrega de realitzar totes les queries i actualitzacions d'informació de la base de ad
      */
 
     private static String username;
@@ -270,7 +270,7 @@ public class BDD {
         if (rss.next()) {
 
 
-            ps.setInt(1, rss.getInt("unitats_disponibles") + unitats);
+            ps.setInt(1, unitats );
             ps.executeUpdate();
             return ok;
 
@@ -359,6 +359,21 @@ public class BDD {
         } catch (SQLException s) {
             s.printStackTrace();
             return null;
+        }
+    }
+    public int getUnitatsPlat(String plat){
+        ResultSet rs = null;
+        try {
+            rs = st.executeQuery("SELECT  unitats_disponibles FROM Plat WHERE nom_plat = " +'"'+plat+'"');
+
+        int unitats = 0;
+        if(rs.next()){
+           unitats  = rs.getInt("unitats_disponibles");
+        }
+        return unitats;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
         }
     }
 

@@ -95,8 +95,11 @@ public class ServidorReserva extends Thread {
                                 e.printStackTrace();
                             }
 
-                        } else if (!analisi.equals("Pagat") || !analisi.equals("true")) {
-                            String missatge = "No queden suficients unitats de:" + analisi;
+                        }else if(analisi.substring(0,6).equals("Falten")){
+                            ooStream.writeObject(analisi);
+                        }
+                        else if (!analisi.equals("Pagat") || !analisi.equals("true")) {
+                            String missatge = "No queden unitats de:" + analisi;
                             ooStream.writeObject(missatge);//enviar error
                         }
                     }

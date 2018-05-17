@@ -35,9 +35,10 @@ public class Main {
         vista.setVisible(true);
 
 
-       // afegeixComanda(gestionador, bdd);
+
         //afegeixReservaBdd(gestionador);
-       // afegeixPlatsBdd(bdd);
+      //  afegeixComanda(gestionador, bdd);
+//        afegeixPlatsBdd(bdd);
 
 
     }
@@ -102,38 +103,38 @@ public class Main {
         gestionador.creaReserva(reserva1, "pass");
 
         Reserva reserva2 = new Reserva("Marc", 4, gestionador.newData(21, 5, 2018), new Time(14, 30, 00));
-        gestionador.creaReserva(reserva2, "pass");
+        gestionador.creaReserva(reserva2, gestionador.generatePass());
 
         Reserva reserva3 = new Reserva("Paula", 3, gestionador.newData(21, 5, 2018), new Time(21, 30, 00));
-        gestionador.creaReserva(reserva3, "pass");
+        gestionador.creaReserva(reserva3, gestionador.generatePass());
 
         Reserva reserva4 = new Reserva("Manel", 4, gestionador.newData(20, 5, 2018), new Time(21, 30, 00));
-        gestionador.creaReserva(reserva4, "pass");
+        gestionador.creaReserva(reserva4, gestionador.generatePass());
 
         Reserva reserva5 = new Reserva("Alberto", 12, gestionador.newData(22, 5, 2018), new Time(14, 30, 00));
-        gestionador.creaReserva(reserva5, "pass");
+        gestionador.creaReserva(reserva5, gestionador.generatePass());
 
         Reserva reserva6 = new Reserva("Pol", 2, gestionador.newData(22, 5, 2018), new Time(13, 00, 00));
-        gestionador.creaReserva(reserva6, "pass");
+        gestionador.creaReserva(reserva6, gestionador.generatePass());
 
         Reserva reserva7 = new Reserva("Puigdemont", 1, gestionador.newData(22, 5, 2018), new Time(19, 30, 00));
-        gestionador.creaReserva(reserva7, "pass");
+        gestionador.creaReserva(reserva7, gestionador.generatePass());
 
         Reserva reserva8 = new Reserva("Messi", 10, gestionador.newData(23, 5, 2018), new Time(14, 30, 00));
-        gestionador.creaReserva(reserva8, "pass");
+        gestionador.creaReserva(reserva8, gestionador.generatePass());
 
         Reserva reserva9 = new Reserva("Samantha", 1, gestionador.newData(23, 5, 2018), new Time(13, 00, 00));
-        gestionador.creaReserva(reserva9, "pass");
+        gestionador.creaReserva(reserva9, gestionador.generatePass());
 
         Reserva reserva10 = new Reserva("Marialejandra", 3, gestionador.newData(23, 5, 2018), new Time(19, 30, 00));
-        gestionador.creaReserva(reserva10, "pass");
+        gestionador.creaReserva(reserva10, gestionador.generatePass());
 
         Reserva reserva11 = new Reserva("Guim", 6, gestionador.newData(23, 5, 2018), new Time(21, 30, 00));
-        gestionador.creaReserva(reserva11, "pass");
+        gestionador.creaReserva(reserva11, gestionador.generatePass());
 
         ArrayList<Plat> arr = new ArrayList<Plat>();
         ArrayList<Plat> arr1 = new ArrayList<Plat>();
-        arr.add(new Plat("provan", 12));
+
         Comanda comanda = new Comanda(arr, gestionador.newData(12, 1, 2001), new Time(12, 40, 00), "Alex");
 
 
@@ -149,7 +150,6 @@ public class Main {
 
         ArrayList<Plat> arr = new ArrayList<Plat>();
         ArrayList<Plat> arr1 = new ArrayList<Plat>();
-        arr.add(new Plat("Croquetes", 12));
         Comanda comanda = new Comanda(arr, gestionador.newData(12, 1, 2019), new Time(12, 53, 00), "Alex");
         try {
             gestionador.addComanda(comanda);

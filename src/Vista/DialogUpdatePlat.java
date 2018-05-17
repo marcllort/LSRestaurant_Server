@@ -14,6 +14,10 @@ public class DialogUpdatePlat extends JFrame {
     private JLabel jlPreu = new JLabel();
     private JButton jbActualizar = new JButton();
     private JButton jbEliminar = new JButton();
+    private String unitats = "";
+
+
+
 
     /**
      * Constructor de la finestra
@@ -114,6 +118,11 @@ public class DialogUpdatePlat extends JFrame {
      */
     public void netejaCamps() {
         jtfUnitats.setText("");
+    }
+
+    public void setUnitats(String unitats) {
+        this.unitats = unitats;
+        this.jtfUnitats.setText(unitats);
     }
 
 

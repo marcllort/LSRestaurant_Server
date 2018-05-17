@@ -152,6 +152,7 @@ public class Controlador implements ActionListener {
         }
         if (e.getActionCommand().equals("ACTUALITZAR")) {
             try {
+
                 gestionador.afegeixUnitats(boto, dialogUpdatePlat.getJtfUnitats());
                 sReserva.enviaCarta();
                 vista.showError("Unitats de " + boto + " actualitzades!");
@@ -205,6 +206,8 @@ public class Controlador implements ActionListener {
                 boto = e.getActionCommand();     //per saber de quin plat haurem de actualizar
                 dialogUpdatePlat.setVisible(true);
                 dialogUpdatePlat.setJlNom(boto);
+                Integer p = gestionador.retornaUnitats(boto);
+                dialogUpdatePlat.setUnitats(p.toString());
                 dialogUpdatePlat.setJlPreu(gestionador.retornaPlats().getPlat(boto).getPreu());
 
             }

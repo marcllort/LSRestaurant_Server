@@ -4,10 +4,7 @@ import java.security.SecureRandom;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Iterator;
+import java.util.*;
 
 /**
  * Classe que conte totes les funcions per fer diferentes tasques referents a la base de dades
@@ -154,11 +151,22 @@ public class Gestionador {
 
         if (platsError.size() != 0) {
             for (Plat plats : platsError) {
-                llistaPlats = llistaPlats + plats.getNomPlat();
+                llistaPlats = llistaPlats +" "+ plats.getNomPlat();
             }
 
             return llistaPlats;
         } else {
+            int i = 0;
+            for(Plat p : comanda.getPlats()){
+                System.out.println("NOM "+p.getNomPlat());
+                int occurrences = Collections.frequency(comanda.getPlats(), p);
+                System.out.println("PLATS: "+ occurrences);
+                i++;
+                if(occurrences > retornaUnitats(p.getNomPlat())){
+                    int u = occurrences -retornaUnitats(p.getNomPlat());
+                    return "Falten "+ u + " unitats de: "+ p.getNomPlat();
+                }
+            }
             return "true";
         }
     }
@@ -350,6 +358,9 @@ public class Gestionador {
         bbdd.serveixPlat(plat, user);
     }
 
+public int retornaUnitats(String plat){
+    return  bbdd.getUnitatsPlat(plat);
+    }
     /**
      * Funció per inserir un nou plat
      *

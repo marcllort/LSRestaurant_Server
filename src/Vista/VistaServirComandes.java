@@ -99,7 +99,7 @@ public class VistaServirComandes extends JFrame {
         return (String) modelLlistaNoServits.getElementAt(jlLlistaNo.getSelectedIndex());
     }
 
-    public String usuariComanda(){
+    public String usuariComanda() {
         return user;
     }
 

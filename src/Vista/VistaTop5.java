@@ -14,8 +14,6 @@ public class VistaTop5 extends JPanel {
     private Grafic gr;
 
 
-
-
     public VistaTop5() {
         gr = new Grafic();
         jbTotal = new JButton("Ranking Total");
@@ -24,7 +22,7 @@ public class VistaTop5 extends JPanel {
         this.setLayout(new BorderLayout());
         this.add(gr, BorderLayout.CENTER);
         JPanel jpButton = new JPanel();
-        jpButton.add( jbTotal);
+        jpButton.add(jbTotal);
         jpButton.add(jbSemanal);
         this.add(jpButton, BorderLayout.NORTH);
 
@@ -40,19 +38,18 @@ public class VistaTop5 extends JPanel {
 
     }
 
-    public void grSemanal(int[] indexes, ArrayList<String> plats) throws Exception{
-
+    public void grSemanal(int[] indexes, ArrayList<String> plats) throws Exception {
 
         this.remove(gr);
         gr = new Grafic();
         gr.grafic(indexes, plats);
 
-        //this.add(new JLabel("HOLA"), BorderLayout.CENTER);
         this.add(gr, BorderLayout.CENTER);
         this.repaint();
         this.revalidate();
 
     }
+
     public JButton getJbSemanal() {
         return jbSemanal;
     }

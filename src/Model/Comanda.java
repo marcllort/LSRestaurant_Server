@@ -114,6 +114,7 @@ public class Comanda implements Serializable {
 
     /**
      * Setter de usuari
+     *
      * @param usuari
      */
     public void setUsuari(String usuari) {

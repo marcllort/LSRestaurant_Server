@@ -24,15 +24,15 @@ public class Main {
             System.out.println("Fallo al conectar la bdd! Contrasenya Incorrecte");
         }
         Gestionador gestionador = new Gestionador(bdd);
-            ServidorVista vista = new ServidorVista();
-            Server server = new Server(new Gestionador(bdd), vista.getVistaComandes());
-            server.startServer();
+        ServidorVista vista = new ServidorVista();
+        Server server = new Server(new Gestionador(bdd), vista.getVistaComandes());
+        server.startServer();
 
 
-            Controlador controlador = new Controlador(vista, gestionador, server.getsReserva());
+        Controlador controlador = new Controlador(vista, gestionador, server.getsReserva());
 
-            vista.registraControlador(controlador);
-            vista.setVisible(true);
+        vista.registraControlador(controlador);
+        vista.setVisible(true);
 
 
         //afegeixComanda(gestionador, bdd);
@@ -90,10 +90,10 @@ public class Main {
      */
     public static void afegeixReservaBdd(Gestionador gestionador) {
         try {
-            for(int i = 1;i<15; i++ ){
+            for (int i = 1; i < 15; i++) {
                 gestionador.creaTaula(i);
             }
-        }catch (Exception e ){
+        } catch (Exception e) {
 
         }
 

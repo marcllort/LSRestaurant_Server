@@ -108,10 +108,11 @@ public class VistaPlats extends JPanel {
         return pag;
     }
 
-    public void afegeixBoto(ActionListener controlador, String nom){
+    public void afegeixBoto(ActionListener controlador, String nom) {
         pag.afegeixBoto(controlador, nom);
     }
-    public void eliminaBoto(String boto){
+
+    public void eliminaBoto(String boto) {
         pag.eliminaBoto(boto);
 
     }

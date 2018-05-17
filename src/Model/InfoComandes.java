@@ -18,7 +18,7 @@ public class InfoComandes {
     /**
      * Constructor de infocomandes sense parametres
      */
-    public InfoComandes(){
+    public InfoComandes() {
 
     }
 

@@ -91,15 +91,17 @@ public class PaginaCarta extends JPanel {
         }
 
     }
-    public void afegeixBoto(ActionListener controller, String nom){
+
+    public void afegeixBoto(ActionListener controller, String nom) {
         BotoPlat butt = new BotoPlat(nom);
         butt.registraController(controller, nom);
         jbArrray.add(butt);
-        System.out.println("SIZEEEE"+jbArrray.size()+"NAMEEE :"+ nom);
+        System.out.println("SIZEEEE" + jbArrray.size() + "NAMEEE :" + nom);
         canviaPagina(numPagina);
 
     }
-    public void eliminaBoto(String boto){
+
+    public void eliminaBoto(String boto) {
         int i = 0;
         Iterator<BotoPlat> iter = jbArrray.iterator();
 

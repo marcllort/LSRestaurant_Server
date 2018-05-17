@@ -13,6 +13,7 @@ public class BotoPlat extends JButton {
 
     /**
      * Constructor de la classe
+     *
      * @param text text que volem que mostri el boto
      */
 
@@ -27,6 +28,7 @@ public class BotoPlat extends JButton {
 
     /**
      * funcio que retorna el boto
+     *
      * @return el boto
      */
     public JButton getBoto() {
@@ -35,6 +37,7 @@ public class BotoPlat extends JButton {
 
     /**
      * Funció que retorna el nom que hiha al voto
+     *
      * @return string amb el nom
      */
     public String getNomPlat() {
@@ -43,10 +46,11 @@ public class BotoPlat extends JButton {
 
     /**
      * Funcio que registra el controlador al botó
+     *
      * @param controller controlador al que registrarem el boto
-     * @param text text que usarem com a actioncomand
+     * @param text       text que usarem com a actioncomand
      */
-    public void registraController(ActionListener controller, String text){
+    public void registraController(ActionListener controller, String text) {
         button.addActionListener(controller);
         button.setActionCommand(text);
     }

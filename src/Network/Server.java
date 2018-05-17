@@ -44,6 +44,7 @@ public class Server {
 
     /**
      * Getter de serversocket de reserva per que el controlador pugui fer-ne us
+     *
      * @return
      */
     public ServerSocketReserva getsReserva() {

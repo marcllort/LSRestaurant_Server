@@ -1,14 +1,9 @@
 package Vista;
 
 
-
 import javax.swing.*;
-import javax.xml.bind.JAXBPermission;
 import java.awt.*;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 
 public class Grafic extends JPanel {
 
@@ -17,7 +12,7 @@ public class Grafic extends JPanel {
     private ArrayList<String> nomPlat;
 
 
-    public void grafic(int[] graphSource, ArrayList<String> nomPlat) throws Exception{
+    public void grafic(int[] graphSource, ArrayList<String> nomPlat) throws Exception {
         this.graphSource = graphSource;
         this.nomPlat = nomPlat;
         for (int j = 0; j < graphSource.length; j++) {
@@ -26,18 +21,18 @@ public class Grafic extends JPanel {
                 max = graphSource[j];
             }
         }
-        if(max > 0 && max <= 4){
+        if (max > 0 && max <= 4) {
             max = 5;
         }
-            int p = 1/max;
+        int p = 1 / max;
 
         setupPanel();
         repaint();
     }
 
 
-    public void paintComponent(Graphics grafic) throws ArithmeticException{
-        if (max > 0 ) {
+    public void paintComponent(Graphics grafic) throws ArithmeticException {
+        if (max > 0) {
             super.paintComponent(grafic);
             int ymax = 0;
             int hmax = 0;
@@ -59,19 +54,17 @@ public class Grafic extends JPanel {
 
                 maingrafic.setColor(new Color(red, green, blue));
                 maingrafic.fill(new Rectangle(x, y, width, height));
-                if(nomPlat.size()> 10){
+                if (nomPlat.size() > 10) {
                     System.out.println("AAAA");
                     String[] nom = preparaNomPlat(i);
                     maingrafic.drawString(nom[0], x + width / 2 - nomPlat.get(i).length() * 3, this.getHeight() - 30);
                     maingrafic.drawString(nom[1], x + width / 2 - nomPlat.get(i).length() * 3, this.getHeight() - 10);
 
 
-                } else{
+                } else {
                     maingrafic.drawString(nomPlat.get(i), x + width / 2 - nomPlat.get(i).length() * 3, this.getHeight() - 30);
 
                 }
-
-
 
 
             }
@@ -85,8 +78,7 @@ public class Grafic extends JPanel {
             maingrafic.setColor(Color.LIGHT_GRAY);
             maingrafic.fill(new Rectangle(eix, 20, 5, ymax + hmax - 20));
             maingrafic.fill(new Rectangle(eix, ymax + hmax, width * 5, 5));
-        }
-        else {
+        } else {
 
         }
 
@@ -95,7 +87,8 @@ public class Grafic extends JPanel {
     private void setupPanel() {
         this.setBackground(Color.WHITE);
     }
-    private String[] preparaNomPlat(int i){
+
+    private String[] preparaNomPlat(int i) {
         String string = nomPlat.get(i);
         String[] parts = string.split(" ");
         String part1 = parts[0]; // 123
@@ -103,7 +96,8 @@ public class Grafic extends JPanel {
         return parts;
 
     }
-    private int llargada(){
+
+    private int llargada() {
         int i = 0;
         try {
             while (i < 5) {
@@ -111,7 +105,7 @@ public class Grafic extends JPanel {
                 nomPlat.get(i);
             }
             return i;
-        }catch (Exception e){
+        } catch (Exception e) {
             return i;
         }
     }

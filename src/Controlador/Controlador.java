@@ -3,7 +3,6 @@ package Controlador;
 
 import Model.Gestionador;
 import Model.InfoComandes;
-import Model.Plat;
 import Model.Reserva;
 import Network.ServerSocketReserva;
 import Network.ServidorReserva;
@@ -152,7 +151,7 @@ public class Controlador implements ActionListener {
             }
         }
         if (e.getActionCommand().equals("ACTUALITZAR")) {
-           try {
+            try {
                 gestionador.afegeixUnitats(boto, dialogUpdatePlat.getJtfUnitats());
                 sReserva.enviaCarta();
                 vista.showError("Unitats de " + boto + " actualitzades!");
@@ -304,14 +303,14 @@ public class Controlador implements ActionListener {
         ArrayList<String> arrstt = new ArrayList<>();
         int[] arrayt = new int[5];
         int pt = 0;
-        for(InfoComandes i : arrt){
+        for (InfoComandes i : arrt) {
             arrayt[pt] = i.getTotalPlats();
             arrstt.add(i.getUsuari());
             pt++;
         }
         try {
-            vista.getVistaTop5().grSemanal(arrayt,arrstt);
-        }catch (Exception se){
+            vista.getVistaTop5().grSemanal(arrayt, arrstt);
+        } catch (Exception se) {
             vista.showError("No s'ha consumit cap unitat per fer el gràfic");
         }
         switch (e.getActionCommand()) {
@@ -321,7 +320,7 @@ public class Controlador implements ActionListener {
                 ArrayList<String> arrst = new ArrayList<>();
                 int[] array = new int[5];
                 int p = 0;
-                for(InfoComandes i : arr){
+                for (InfoComandes i : arr) {
                     array[p] = i.getTotalPlats();
                     arrst.add(i.getUsuari());
                     p++;
@@ -330,20 +329,20 @@ public class Controlador implements ActionListener {
                 vista.getVistaTop5().getJbTotal().setSelected(false);
 
                 try {
-                    vista.getVistaTop5().grSemanal(array,arrst);
-                }catch (Exception se){
+                    vista.getVistaTop5().grSemanal(array, arrst);
+                } catch (Exception se) {
                     vista.showError("No s'ha consumit cap unitat per fer el gràfic");
                 }
 
                 break;
 
             case "Total":
-                 arrt = gestionador.topCincTotal();
+                arrt = gestionador.topCincTotal();
 
                 arrstt = new ArrayList<>();
-                 arrayt = new int[5];
+                arrayt = new int[5];
                 pt = 0;
-                for(InfoComandes i : arrt){
+                for (InfoComandes i : arrt) {
                     arrayt[pt] = i.getTotalPlats();
                     arrstt.add(i.getUsuari());
                     pt++;
@@ -352,10 +351,10 @@ public class Controlador implements ActionListener {
                 vista.getVistaTop5().getJbTotal().setSelected(true);
 
                 try {
-                    vista.getVistaTop5().grSemanal(arrayt,arrstt);
-                }catch (Exception se){
+                    vista.getVistaTop5().grSemanal(arrayt, arrstt);
+                } catch (Exception se) {
                     vista.showError("No s'ha consumit cap unitat per fer el gràfic");
-                 }
+                }
 
                 break;
         }

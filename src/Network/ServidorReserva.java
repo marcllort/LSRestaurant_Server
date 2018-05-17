@@ -60,26 +60,26 @@ public class ServidorReserva extends Thread {
                 if (gestionador.comprovaUserPass(user.getUser(), user.getPassword())) {
                     doStream.writeUTF("true");                                                  //enviem true en cas de haver entrat correctaemnt
                     ooStream.writeObject(gestionador.retornaCarta());                               //enviem la carta amb plats disponibles
+
                     while (true) {
                         ooStream.writeObject(gestionador.retornaComanda(user.getUser()));
                         Comanda com = (Comanda) oiStream.readObject();                          //Rebem la comanda enviada pel usuari
-                        //System.out.println(com.getUsuari()+com.getPlat(1).getNomPlat());
+
                         String analisi = gestionador.analitzarComanda(com);
                         if (analisi.equals("true")) {
                             gestionador.addComanda(com);                                                //Guardo la comanda
 
                             try {
                                 ArrayList<InfoComandes> model = gestionador.llistaComandes();
-                                //vistaComandes = new VistaComandes();
                                 vistaComandes.setModelTaula(model);
-
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
+
                             String missatge = "true";
                             ooStream.writeObject(missatge);
-                            //actualitzar vista de gestionar comandes
-                        }else if (analisi.equals("Pagat")) {
+                                                                                                                //actualitzar vista de gestionar comandes
+                        } else if (analisi.equals("Pagat")) {
                             ArrayList<Plat> plats = gestionador.retornaComanda(user.getUser()).getPlats();
                             gestionador.serveixPlatsUsuari(user.getUser());
                             for (Plat p : plats) {
@@ -88,8 +88,14 @@ public class ServidorReserva extends Thread {
                                     p.setServit(true);
                                 }
                             }
+                            try {                                                                       //Actaulitzo vista de les comandes
+                                ArrayList<InfoComandes> model = gestionador.llistaComandes();
+                                vistaComandes.setModelTaula(model);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
 
-                        } else if (!analisi.equals("Pagat")|| !analisi.equals("true")){
+                        } else if (!analisi.equals("Pagat") || !analisi.equals("true")) {
                             String missatge = "No queden suficients unitats de:" + analisi;
                             ooStream.writeObject(missatge);//enviar error
                         }

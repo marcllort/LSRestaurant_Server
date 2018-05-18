@@ -13,6 +13,7 @@ public class Plat implements Serializable {
 
     /**
      * Constructor de plat amb parametres sense el boolea servit
+     *
      * @param nom
      * @param preu
      */
@@ -24,6 +25,7 @@ public class Plat implements Serializable {
 
     /**
      * Constructor de plat amb tots els parametres
+     *
      * @param nom
      * @param preu
      */
@@ -35,6 +37,7 @@ public class Plat implements Serializable {
 
     /**
      * Getter de nom del plat
+     *
      * @return nom de plat
      */
     public String getNomPlat() {
@@ -43,6 +46,7 @@ public class Plat implements Serializable {
 
     /**
      * Getter de el preu del plat
+     *
      * @return
      */
     public float getPreu() {
@@ -51,6 +55,7 @@ public class Plat implements Serializable {
 
     /**
      * Getter del boolea de servit
+     *
      * @return
      */
     public boolean isServit() {
@@ -59,6 +64,7 @@ public class Plat implements Serializable {
 
     /**
      * Setter de servit
+     *
      * @param servit
      */
     public void setServit(boolean servit) {
@@ -67,6 +73,7 @@ public class Plat implements Serializable {
 
     /**
      * Override de toString perque ens retorni el string com el volem
+     *
      * @return String
      */
     @Override

@@ -79,7 +79,12 @@ public class ServerSocketReserva implements Runnable {
         }
     }
 
-
+    /**
+     * Gtter del servidor reserva de l'usuari que passem per parametres
+     *
+     * @param user
+     * @return
+     */
     public ServidorReserva getServerReserva(String user) {
         for (ServidorReserva s : serversReserva) {
             if (s.getUser().equals(user)) {
@@ -89,7 +94,10 @@ public class ServerSocketReserva implements Runnable {
         return null;
     }
 
-    public void enviaCarta(){
+    /**
+     * Envia la carta actualitzada a tots els usuaris connectats
+     */
+    public void enviaCarta() {
         for (ServidorReserva servidor : serversReserva) {                                                       //cal arreglar, segurament no va
             servidor.enviaCarta();
         }

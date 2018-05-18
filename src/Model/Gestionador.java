@@ -4,10 +4,7 @@ import java.security.SecureRandom;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Iterator;
+import java.util.*;
 
 /**
  * Classe que conte totes les funcions per fer diferentes tasques referents a la base de dades
@@ -79,6 +76,7 @@ public class Gestionador {
     public synchronized Carta retornaCarta() {
         return new Carta(bbdd.llistaPlatsDisponibles());                           //retorna plats diosponibles per fer la carta
     }
+
     /**
      * Funcio que rep la carta de la bbdd de mysql i la retorna
      *
@@ -142,7 +140,7 @@ public class Gestionador {
      */
     public synchronized String analitzarComanda(Comanda comanda) {      //mirem si hi ha unitatas de tos els prodfuctes
 
-        if (comanda.getPlats().size()== 0){
+        if (comanda.getPlats().size() == 0) {
             return "Pagat";
         }
 
@@ -153,11 +151,22 @@ public class Gestionador {
 
         if (platsError.size() != 0) {
             for (Plat plats : platsError) {
-                llistaPlats = llistaPlats + plats.getNomPlat();
+                llistaPlats = llistaPlats +" "+ plats.getNomPlat();
             }
 
             return llistaPlats;
         } else {
+            int i = 0;
+            for(Plat p : comanda.getPlats()){
+                System.out.println("NOM "+p.getNomPlat());
+                int occurrences = Collections.frequency(comanda.getPlats(), p);
+                System.out.println("PLATS: "+ occurrences);
+                i++;
+                if(occurrences > retornaUnitats(p.getNomPlat())){
+                    int u = occurrences -retornaUnitats(p.getNomPlat());
+                    return "Falten "+ u + " unitats de: "+ p.getNomPlat();
+                }
+            }
             return "true";
         }
     }
@@ -169,8 +178,7 @@ public class Gestionador {
      * @return la comanda guardada al mysql del usuari
      */
     public synchronized Comanda retornaComanda(String user) {
-        //retorna comanda actualitzada de la bbdd
-        return bbdd.mostraPlatsComanda(user);
+        return bbdd.mostraPlatsComanda(user);                       //retorna comanda actualitzada de la bbdd
     }
 
     /**
@@ -227,8 +235,7 @@ public class Gestionador {
             }
 
         } catch (NullPointerException w) {
-            return ("Error! Data incorrecta!");
-            //ennvia error
+            return ("Error! Data incorrecta!");                             //envia error
         }
     }
 
@@ -256,7 +263,7 @@ public class Gestionador {
      * @param i el nombre de començals
      * @throws java.sql.SQLException
      */
-    public void creaTaula(int i) throws java.sql.SQLException {
+    public synchronized void creaTaula(int i) throws java.sql.SQLException {
         bbdd.createTable(i);
     }
 
@@ -265,7 +272,7 @@ public class Gestionador {
      *
      * @return arraylis de ints amb els ide de cada taula
      */
-    public ArrayList<Integer> llistaTaules() {
+    public synchronized ArrayList<Integer> llistaTaules() {
         ArrayList<Integer> result = new ArrayList<>();
         try {
             result = bbdd.mostraTaules();
@@ -281,11 +288,10 @@ public class Gestionador {
      * @param i el id de la taula
      * @return arraylist de reserves que té la taula
      */
-    public ArrayList<Reserva> mostraReseves(int i) {
-        ArrayList<Reserva> res ;
+    public synchronized ArrayList<Reserva> mostraReseves(int i) {
+        ArrayList<Reserva> res;
 
         res = bbdd.mostraReservesTaula(i);
-
         Iterator<Reserva> iter = res.iterator();
 
         while (iter.hasNext()) {
@@ -294,10 +300,11 @@ public class Gestionador {
             Calendar cal = Calendar.getInstance();
             cal.add(Calendar.DATE, -1);
             Date dataNow = cal.getTime();
-            if(info.getData().before(dataNow)) {
+            System.out.println(dataNow);
+            //java.util.Date dataNow = new java.util.Date();
+            if (info.getData().before(dataNow)) {
                 iter.remove();
             }
-
         }
         return res;
     }
@@ -308,7 +315,7 @@ public class Gestionador {
      * @param i el id de la taula
      * @throws Exception
      */
-    public void eliminaTaula(int i) throws Exception {
+    public synchronized void eliminaTaula(int i) throws Exception {
         bbdd.eliminaTaula(i);
     }
 
@@ -318,7 +325,7 @@ public class Gestionador {
      * @return
      * @throws Exception
      */
-    public ArrayList<InfoComandes> llistaComandes() throws Exception {
+    public synchronized ArrayList<InfoComandes> llistaComandes() throws Exception {
         ArrayList<InfoComandes> arr = new ArrayList<>();
 
         arr = bbdd.llistaComandes();
@@ -332,7 +339,7 @@ public class Gestionador {
                 iter.remove();
             }
             java.util.Date dataNow = new java.util.Date();
-            if(info.getDate().before(dataNow)) {
+            if (info.getDate().before(dataNow)) {
                 iter.remove();
             }
 
@@ -347,10 +354,13 @@ public class Gestionador {
      * @param plat nom plat
      * @param user nom usuari
      */
-    public void serveixPlat(String plat, String user) {
+    public synchronized void serveixPlat(String plat, String user) {
         bbdd.serveixPlat(plat, user);
     }
 
+public int retornaUnitats(String plat){
+    return  bbdd.getUnitatsPlat(plat);
+    }
     /**
      * Funció per inserir un nou plat
      *
@@ -358,10 +368,8 @@ public class Gestionador {
      * @param preu
      * @param unitats_disponibles
      */
-    public void insereixPlat(String nom_plat, float preu, int unitats_disponibles) throws SQLException{
-
-            bbdd.insereixPlat(nom_plat, preu, unitats_disponibles, 0);
-
+    public synchronized void insereixPlat(String nom_plat, float preu, int unitats_disponibles) throws SQLException {
+        bbdd.insereixPlat(nom_plat, preu, unitats_disponibles, 0);
     }
 
     /**
@@ -371,9 +379,10 @@ public class Gestionador {
      * @param unitats noves unitats disponibles
      * @throws SQLException
      */
-    public void updatePlat(String nom, int unitats) throws SQLException {
+    public synchronized void updatePlat(String nom, int unitats) throws SQLException {
         bbdd.updatePlat(nom, unitats);
     }
+
     /**
      * Funció per afegir les unitats del plat que passem per parametres
      *
@@ -381,15 +390,27 @@ public class Gestionador {
      * @param unitats noves unitats disponibles
      * @throws SQLException
      */
-    public void afegeixUnitats(String nom, int unitats) throws SQLException {
+    public synchronized void afegeixUnitats(String nom, int unitats) throws SQLException {
         bbdd.afegeixUnitats(nom, unitats);
     }
 
-    public void eliminaPlat(String nom)throws SQLException{
+    /**
+     * Crida la funció elimina plat de la bbdd
+     *
+     * @param nom
+     * @throws SQLException
+     */
+    public synchronized void eliminaPlat(String nom) throws SQLException {
         bbdd.eliminaPlat(nom);
     }
 
-    public void serveixPlatsUsuari(String usuari){
+    /**
+     * Crida la funció serveixPlatsUsuari de la bbdd, per servir tots els plats de l'usuari
+     *
+     * @param usuari
+     * @throws SQLException
+     */
+    public synchronized void serveixPlatsUsuari(String usuari) {
         bbdd.serveixPlatsUsuari(usuari);
     }
 

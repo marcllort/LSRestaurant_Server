@@ -8,13 +8,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
+/**
+ * Classe que s'encarrega de la vista del top 5 de plats
+ */
 public class VistaTop5 extends JPanel {
     private JButton jbSemanal;
     private JButton jbTotal;
     private Grafic gr;
 
-
-
+    /**
+     * Funcio que crea la vista del top 5 de plats
+     */
 
     public VistaTop5() {
         gr = new Grafic();
@@ -24,13 +28,16 @@ public class VistaTop5 extends JPanel {
         this.setLayout(new BorderLayout());
         this.add(gr, BorderLayout.CENTER);
         JPanel jpButton = new JPanel();
-        jpButton.add( jbTotal);
+        jpButton.add(jbTotal);
         jpButton.add(jbSemanal);
         this.add(jpButton, BorderLayout.NORTH);
 
     }
 
-
+    /**
+     * Funcio que regiistra els dos botons de la vista
+     * @param controller controller
+     */
     public void registraControlador(ActionListener controller) {                            //Registro el boto serve amb un action comand de send, declarat en una constant
         jbSemanal.addActionListener(controller);
         jbSemanal.setActionCommand("Semanal");
@@ -40,23 +47,35 @@ public class VistaTop5 extends JPanel {
 
     }
 
-    public void grSemanal(int[] indexes, ArrayList<String> plats) throws Exception{
-
+    /**
+     * Funcio que actualitza els valors del grafic
+     * @param indexes valors del nou grafic
+     * @param plats noms dels nous plats
+     * @throws Exception Quan no té valors
+     */
+    public void updateGrafic(int[] indexes, ArrayList<String> plats) throws Exception {
 
         this.remove(gr);
         gr = new Grafic();
         gr.grafic(indexes, plats);
 
-        //this.add(new JLabel("HOLA"), BorderLayout.CENTER);
         this.add(gr, BorderLayout.CENTER);
         this.repaint();
         this.revalidate();
 
     }
+
+    /**
+     * Retorna el botó semanal
+     * @return boto
+     */
     public JButton getJbSemanal() {
         return jbSemanal;
     }
-
+    /**
+     * Retorna el botó total
+     * @return boto
+     */
     public JButton getJbTotal() {
         return jbTotal;
     }

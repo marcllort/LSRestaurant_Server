@@ -8,7 +8,9 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class VistaPlats extends JPanel {
-
+    /**
+     * Vista que te la carta i les opcions d'afegir, modificar i eliminar plats
+     */
     private DialogAfegirPlat dialogAfegirPlat;
     private DialogUpdatePlat dialogUpdatePlat;
     private JButton jbAnterior;
@@ -19,6 +21,9 @@ public class VistaPlats extends JPanel {
     private JLabel jlPgina;
     private PaginaCarta pag;
 
+    /**
+     * Constructor de la finestra
+     */
     public VistaPlats() {
 
         pag = new PaginaCarta(1);
@@ -63,6 +68,10 @@ public class VistaPlats extends JPanel {
 
     }
 
+    /**
+     * Funcio que registra el controlador de la finestra
+     * @param controller
+     */
 
     public void registraControlador(ActionListener controller) {                            //Registro el boto serve amb un action comand de send, declarat en una constant
 
@@ -78,14 +87,27 @@ public class VistaPlats extends JPanel {
 
     }
 
+    /**
+     * Funcio que retorna el dialog de afegir plat
+     * @return dialog
+     */
     public DialogAfegirPlat getDialogAfegirPlat() {
         return dialogAfegirPlat;
     }
 
+    /**
+     * Funcio que retorna la finestra de actualitzar un plat
+     * @return
+     */
     public DialogUpdatePlat getDialogUpdatePlat() {
         return dialogUpdatePlat;
     }
 
+    /**
+     * Funcio que canvia de pagina
+     * @param plats Array de plats
+     * @param pagina Pagina a la que volem anar
+     */
     public void paginaCarta(ArrayList<Plat> plats, int pagina) {
         numPagina = pagina;
 
@@ -100,18 +122,36 @@ public class VistaPlats extends JPanel {
         this.revalidate();
     }
 
+    /**
+     * Funcio que retorna el numero de pagina en que ens trobem
+     * @return numero de pagina
+     */
     public int getPaginaCarta() {
         return numPagina;
     }
 
+    /**
+     * Funcio que retorna la carta
+     * @return
+     */
     public PaginaCarta getPag() {
         return pag;
     }
 
-    public void afegeixBoto(ActionListener controlador, String nom){
+    /**
+     * Funcio que afegeix un nou boto
+     * @param controlador Controlador per registrar el boto
+     * @param nom nom que tindra el boto
+     */
+    public void afegeixBoto(ActionListener controlador, String nom) {
         pag.afegeixBoto(controlador, nom);
     }
-    public void eliminaBoto(String boto){
+
+    /**
+     * Funcio per eliminar un boto
+     * @param boto nom del boto a eliminar
+     */
+    public void eliminaBoto(String boto) {
         pag.eliminaBoto(boto);
 
     }

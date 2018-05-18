@@ -9,7 +9,9 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class VistaServirComandes extends JFrame {
-
+    /**
+     * Classe que conté la finestraque permet servir els plats
+     */
     private JList jlLlistaSi;
     private JList jlLlistaNo;
     private JButton jbServirPlat;
@@ -17,6 +19,11 @@ public class VistaServirComandes extends JFrame {
     private DefaultListModel modelLlistaNoServits;
     private String user;
 
+    /**
+     * Constructor de la finestra
+     * @param gestionador
+     * @param usuari
+     */
     public VistaServirComandes(Gestionador gestionador, String usuari) {
 
         setLayout(new BoxLayout(getContentPane(), BoxLayout.X_AXIS));
@@ -70,6 +77,10 @@ public class VistaServirComandes extends JFrame {
         jpServit.add(new JScrollPane(jlLlistaSi));
     }
 
+    /**
+     * Funcio que crea la llista de plats servits i plats per servir del usuari
+     * @param comanda Comanda amb els plats
+     */
     public void ferLlistes(Comanda comanda) {
         modelLlistaServits = new DefaultListModel();
         modelLlistaNoServits = new DefaultListModel();
@@ -90,16 +101,24 @@ public class VistaServirComandes extends JFrame {
         jlLlistaSi.repaint();
     }
 
+    /**
+     * Registra el controlador del botó
+     * @param controlador
+     */
     public void registraControladorDialog(ActionListener controlador) {
         jbServirPlat.addActionListener(controlador);
         jbServirPlat.setActionCommand("SERVIR");
     }
 
+    /**
+     * Funcio que retorna el nom del plat seleccionat
+     * @return
+     */
     public String platSeleccionat() {
         return (String) modelLlistaNoServits.getElementAt(jlLlistaNo.getSelectedIndex());
     }
 
-    public String usuariComanda(){
+    public String usuariComanda() {
         return user;
     }
 

@@ -3,7 +3,6 @@ package Controlador;
 
 import Model.Gestionador;
 import Model.InfoComandes;
-import Model.Plat;
 import Model.Reserva;
 import Network.ServerSocketReserva;
 import Network.ServidorReserva;
@@ -152,7 +151,8 @@ public class Controlador implements ActionListener {
             }
         }
         if (e.getActionCommand().equals("ACTUALITZAR")) {
-           try {
+            try {
+
                 gestionador.afegeixUnitats(boto, dialogUpdatePlat.getJtfUnitats());
                 sReserva.enviaCarta();
                 vista.showError("Unitats de " + boto + " actualitzades!");
@@ -206,6 +206,8 @@ public class Controlador implements ActionListener {
                 boto = e.getActionCommand();     //per saber de quin plat haurem de actualizar
                 dialogUpdatePlat.setVisible(true);
                 dialogUpdatePlat.setJlNom(boto);
+                Integer p = gestionador.retornaUnitats(boto);
+                dialogUpdatePlat.setUnitats(p.toString());
                 dialogUpdatePlat.setJlPreu(gestionador.retornaPlats().getPlat(boto).getPreu());
 
             }
@@ -304,61 +306,60 @@ public class Controlador implements ActionListener {
         ArrayList<String> arrstt = new ArrayList<>();
         int[] arrayt = new int[5];
         int pt = 0;
-        for(InfoComandes i : arrt){
+        for (InfoComandes i : arrt) {
             arrayt[pt] = i.getTotalPlats();
             arrstt.add(i.getUsuari());
             pt++;
         }
         try {
-            vista.getVistaTop5().grSemanal(arrayt,arrstt);
-        }catch (Exception se){
-            vista.showError("No s'ha consumit cap unitat per fer el gràfic");
-        }
+            vista.getVistaTop5().updateGrafic(arrayt, arrstt);
+
         switch (e.getActionCommand()) {
             case "Semanal":
+                vista.getVistaTop5().getJbSemanal().setSelected(true);
+                vista.getVistaTop5().getJbTotal().setSelected(false);
                 ArrayList<InfoComandes> arr = gestionador.topCincSemanal();
 
                 ArrayList<String> arrst = new ArrayList<>();
                 int[] array = new int[5];
                 int p = 0;
-                for(InfoComandes i : arr){
+                for (InfoComandes i : arr) {
                     array[p] = i.getTotalPlats();
                     arrst.add(i.getUsuari());
                     p++;
                 }
-                vista.getVistaTop5().getJbSemanal().setSelected(true);
-                vista.getVistaTop5().getJbTotal().setSelected(false);
 
-                try {
-                    vista.getVistaTop5().grSemanal(array,arrst);
-                }catch (Exception se){
-                    vista.showError("No s'ha consumit cap unitat per fer el gràfic");
-                }
+
+
+                    vista.getVistaTop5().updateGrafic(array, arrst);
+
 
                 break;
 
             case "Total":
-                 arrt = gestionador.topCincTotal();
+                vista.getVistaTop5().getJbSemanal().setSelected(false);
+                vista.getVistaTop5().getJbTotal().setSelected(true);
+                arrt = gestionador.topCincTotal();
 
                 arrstt = new ArrayList<>();
-                 arrayt = new int[5];
+                arrayt = new int[5];
                 pt = 0;
-                for(InfoComandes i : arrt){
+                for (InfoComandes i : arrt) {
                     arrayt[pt] = i.getTotalPlats();
                     arrstt.add(i.getUsuari());
                     pt++;
                 }
-                vista.getVistaTop5().getJbSemanal().setSelected(false);
-                vista.getVistaTop5().getJbTotal().setSelected(true);
 
-                try {
-                    vista.getVistaTop5().grSemanal(arrayt,arrstt);
-                }catch (Exception se){
-                    vista.showError("No s'ha consumit cap unitat per fer el gràfic");
-                 }
+
+
+                    vista.getVistaTop5().updateGrafic(arrayt, arrstt);
 
                 break;
         }
+        } catch (Exception se) {
+            vista.showError("No s'ha consumit cap unitat per fer el gràfic");
+        }
+
 
     }
 

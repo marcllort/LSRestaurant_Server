@@ -11,7 +11,7 @@ import com.google.gson.stream.JsonReader;
  */
 public class LectorJson {
 
-    private static final String FILE_NAME = System.getProperty("user.dir") + "/data/config.json"; //Nom de l'arxiu a obrir
+    private static final String FILE_NAME = System.getProperty("user.dir") + "/data/config.json";       //Nom de l'arxiu a obrir
 
     /**
      * Fució que retorna el tipus ConfiguracioServer amb tots els parametres llegit del config.json
@@ -19,11 +19,11 @@ public class LectorJson {
      * @return parametres del json
      */
     public static ConfiguracioServer llegeixConfiguracioServer() {             //Els args son useless
-        ConfiguracioServer data;          // Dades a carregar
-        Gson gson = new Gson();                   // Entitat Gson
-        JsonReader reader;                              // Reader de JSON
+        ConfiguracioServer data;                                               // Dades a carregar
+        Gson gson = new Gson();                                                // Entitat Gson
+        JsonReader reader;                                                     // Reader de JSON
 
-        try {               //Intentem carregar el fitxer json
+        try {                                                                  //Intentem carregar el fitxer json
 
             reader = new JsonReader(new FileReader(FILE_NAME));
             data = gson.fromJson(reader, ConfiguracioServer.class);

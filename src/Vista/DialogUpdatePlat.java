@@ -14,6 +14,10 @@ public class DialogUpdatePlat extends JFrame {
     private JLabel jlPreu = new JLabel();
     private JButton jbActualizar = new JButton();
     private JButton jbEliminar = new JButton();
+    private String unitats = "";
+
+
+
 
     /**
      * Constructor de la finestra
@@ -71,6 +75,7 @@ public class DialogUpdatePlat extends JFrame {
 
     /**
      * Funcio que registra el controlador de la finestra
+     *
      * @param controlador
      */
     public void registraControlador(ActionListener controlador) {
@@ -83,6 +88,7 @@ public class DialogUpdatePlat extends JFrame {
 
     /**
      * Funcio que escriu el nom en questio a la finestra
+     *
      * @param nom nom que volem escriure a la finestra
      */
     public void setJlNom(String nom) {
@@ -91,6 +97,7 @@ public class DialogUpdatePlat extends JFrame {
 
     /**
      * funció que escriu el preu en questió a la finestra
+     *
      * @param preu preu a escriure a la finestra
      */
     public void setJlPreu(Float preu) {
@@ -99,6 +106,7 @@ public class DialogUpdatePlat extends JFrame {
 
     /**
      * Funcio que retorna el numero d'unitats que s'ha escrit per afegir al plat seleccionat
+     *
      * @return numero escrit a les unitats
      */
     public int getJtfUnitats() {
@@ -110,6 +118,11 @@ public class DialogUpdatePlat extends JFrame {
      */
     public void netejaCamps() {
         jtfUnitats.setText("");
+    }
+
+    public void setUnitats(String unitats) {
+        this.unitats = unitats;
+        this.jtfUnitats.setText(unitats);
     }
 
 

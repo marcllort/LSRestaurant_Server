@@ -35,7 +35,11 @@ public class VistaServirComandes extends JFrame {
         user = usuari;
         Comanda comanda = gestionador.retornaComanda(usuari);
         jlLlistaNo = new JList();
-        jlLlistaSi = new JList();
+        jlLlistaSi = new JList(){
+            @Override
+            public void setSelectionInterval(int index0, int index1) {
+                super.setSelectionInterval(-1, -1);}
+        };
         ferLlistes(comanda);
 
 

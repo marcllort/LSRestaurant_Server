@@ -24,6 +24,8 @@ public class DialogUpdatePlat extends JFrame {
      */
     public DialogUpdatePlat() {
         setLayout(new GridLayout(4, 0, 0, 0));
+        setLocationRelativeTo(null);
+
         setSize(400, 250);                                      //Dono les propietats inicials al JFrame
         setResizable(false);
 

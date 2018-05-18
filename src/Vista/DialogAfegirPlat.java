@@ -21,6 +21,7 @@ public class DialogAfegirPlat extends JFrame {
     public DialogAfegirPlat() {
 
         setSize(new Dimension(400, 250));
+        setLocationRelativeTo(null);
         setResizable(false);
 
         getContentPane().setLayout(null);

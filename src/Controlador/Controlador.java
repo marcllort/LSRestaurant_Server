@@ -238,7 +238,6 @@ public class Controlador implements ActionListener {
                 try {
                     server.enviaComanda();
                 } catch (Exception ee) {
-                    ee.printStackTrace();
                     vista.showError("El client s'ha desconnectat!");
                 }
 

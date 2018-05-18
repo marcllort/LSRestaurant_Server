@@ -118,7 +118,6 @@ public class PaginaCarta extends JPanel {
         BotoPlat butt = new BotoPlat(nom);
         butt.registraController(controller, nom);
         jbArrray.add(butt);
-        System.out.println("SIZEEEE" + jbArrray.size() + "NAMEEE :" + nom);
         canviaPagina(numPagina);
 
     }

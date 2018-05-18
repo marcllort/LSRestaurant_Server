@@ -300,8 +300,6 @@ public class Gestionador {
             Calendar cal = Calendar.getInstance();
             cal.add(Calendar.DATE, -1);
             Date dataNow = cal.getTime();
-            System.out.println(dataNow);
-            //java.util.Date dataNow = new java.util.Date();
             if (info.getData().before(dataNow)) {
                 iter.remove();
             }

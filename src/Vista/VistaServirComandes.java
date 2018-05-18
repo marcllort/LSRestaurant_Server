@@ -119,7 +119,12 @@ public class VistaServirComandes extends JFrame {
      * @return
      */
     public String platSeleccionat() {
-        return (String) modelLlistaNoServits.getElementAt(jlLlistaNo.getSelectedIndex());
+        try {
+            return (String) modelLlistaNoServits.getElementAt(jlLlistaNo.getSelectedIndex());
+        }catch (ArrayIndexOutOfBoundsException ae){
+            JOptionPane.showMessageDialog(this, "Cap plat seleccionat!");
+            return null;
+        }
     }
 
     public String usuariComanda() {

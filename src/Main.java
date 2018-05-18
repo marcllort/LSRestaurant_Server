@@ -21,7 +21,7 @@ public class Main {
         try {
             bdd = new BDD();
         } catch (SQLException e) {
-            System.out.println("Fallo al conectar la bdd! Contrasenya Incorrecte");
+            System.out.println("Fallo al conectar la bdd! Config.json Incorrecte");
         }
         Gestionador gestionador = new Gestionador(bdd);
         ServidorVista vista = new ServidorVista();
@@ -35,14 +35,10 @@ public class Main {
         vista.setVisible(true);
 
 
-
-        //afegeixReservaBdd(gestionador);
-      //  afegeixComanda(gestionador, bdd);
-//        afegeixPlatsBdd(bdd);
-
-
     }
 
+
+    //Funcions per omplir la BBDD, no cal perque fem us de un script de mysql
 
     /**
      * Serveix per durant la primera execucio del server afegir plats i taules a la bbdd

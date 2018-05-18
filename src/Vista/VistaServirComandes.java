@@ -21,6 +21,7 @@ public class VistaServirComandes extends JFrame {
 
     /**
      * Constructor de la finestra
+     *
      * @param gestionador
      * @param usuari
      */
@@ -35,10 +36,11 @@ public class VistaServirComandes extends JFrame {
         user = usuari;
         Comanda comanda = gestionador.retornaComanda(usuari);
         jlLlistaNo = new JList();
-        jlLlistaSi = new JList(){
+        jlLlistaSi = new JList() {
             @Override
             public void setSelectionInterval(int index0, int index1) {
-                super.setSelectionInterval(-1, -1);}
+                super.setSelectionInterval(-1, -1);
+            }
         };
         ferLlistes(comanda);
 
@@ -83,6 +85,7 @@ public class VistaServirComandes extends JFrame {
 
     /**
      * Funcio que crea la llista de plats servits i plats per servir del usuari
+     *
      * @param comanda Comanda amb els plats
      */
     public void ferLlistes(Comanda comanda) {
@@ -107,6 +110,7 @@ public class VistaServirComandes extends JFrame {
 
     /**
      * Registra el controlador del botó
+     *
      * @param controlador
      */
     public void registraControladorDialog(ActionListener controlador) {
@@ -116,12 +120,13 @@ public class VistaServirComandes extends JFrame {
 
     /**
      * Funcio que retorna el nom del plat seleccionat
+     *
      * @return
      */
     public String platSeleccionat() {
         try {
             return (String) modelLlistaNoServits.getElementAt(jlLlistaNo.getSelectedIndex());
-        }catch (ArrayIndexOutOfBoundsException ae){
+        } catch (ArrayIndexOutOfBoundsException ae) {
             JOptionPane.showMessageDialog(this, "Cap plat seleccionat!");
             return null;
         }

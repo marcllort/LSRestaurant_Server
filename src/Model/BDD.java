@@ -270,7 +270,7 @@ public class BDD {
         if (rss.next()) {
 
 
-            ps.setInt(1, unitats );
+            ps.setInt(1, unitats);
             ps.executeUpdate();
             return ok;
 
@@ -361,16 +361,17 @@ public class BDD {
             return null;
         }
     }
-    public int getUnitatsPlat(String plat){
+
+    public int getUnitatsPlat(String plat) {
         ResultSet rs = null;
         try {
-            rs = st.executeQuery("SELECT  unitats_disponibles FROM Plat WHERE nom_plat = " +'"'+plat+'"');
+            rs = st.executeQuery("SELECT  unitats_disponibles FROM Plat WHERE nom_plat = " + '"' + plat + '"');
 
-        int unitats = 0;
-        if(rs.next()){
-           unitats  = rs.getInt("unitats_disponibles");
-        }
-        return unitats;
+            int unitats = 0;
+            if (rs.next()) {
+                unitats = rs.getInt("unitats_disponibles");
+            }
+            return unitats;
         } catch (SQLException e) {
             e.printStackTrace();
             return 0;

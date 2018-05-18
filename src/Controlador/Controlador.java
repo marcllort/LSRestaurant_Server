@@ -291,7 +291,7 @@ public class Controlador implements ActionListener {
         return modelTaula;
     }
 
-    public static int[] convertIntegers(ArrayList<Integer> integers) {
+    private static int[] convertIntegers(ArrayList<Integer> integers) {
         int[] ret = new int[integers.size()];
         for (int i = 0; i < ret.length; i++) {
             ret[i] = integers.get(i).intValue();
@@ -313,48 +313,46 @@ public class Controlador implements ActionListener {
         try {
             vista.getVistaTop5().updateGrafic(arrayt, arrstt);
 
-        switch (e.getActionCommand()) {
-            case "Semanal":
-                vista.getVistaTop5().getJbSemanal().setSelected(true);
-                vista.getVistaTop5().getJbTotal().setSelected(false);
-                ArrayList<InfoComandes> arr = gestionador.topCincSemanal();
+            switch (e.getActionCommand()) {
+                case "Semanal":
+                    vista.getVistaTop5().getJbSemanal().setSelected(true);
+                    vista.getVistaTop5().getJbTotal().setSelected(false);
+                    ArrayList<InfoComandes> arr = gestionador.topCincSemanal();
 
-                ArrayList<String> arrst = new ArrayList<>();
-                int[] array = new int[5];
-                int p = 0;
-                for (InfoComandes i : arr) {
-                    array[p] = i.getTotalPlats();
-                    arrst.add(i.getUsuari());
-                    p++;
-                }
-
+                    ArrayList<String> arrst = new ArrayList<>();
+                    int[] array = new int[5];
+                    int p = 0;
+                    for (InfoComandes i : arr) {
+                        array[p] = i.getTotalPlats();
+                        arrst.add(i.getUsuari());
+                        p++;
+                    }
 
 
                     vista.getVistaTop5().updateGrafic(array, arrst);
 
 
-                break;
+                    break;
 
-            case "Total":
-                vista.getVistaTop5().getJbSemanal().setSelected(false);
-                vista.getVistaTop5().getJbTotal().setSelected(true);
-                arrt = gestionador.topCincTotal();
+                case "Total":
+                    vista.getVistaTop5().getJbSemanal().setSelected(false);
+                    vista.getVistaTop5().getJbTotal().setSelected(true);
+                    arrt = gestionador.topCincTotal();
 
-                arrstt = new ArrayList<>();
-                arrayt = new int[5];
-                pt = 0;
-                for (InfoComandes i : arrt) {
-                    arrayt[pt] = i.getTotalPlats();
-                    arrstt.add(i.getUsuari());
-                    pt++;
-                }
-
+                    arrstt = new ArrayList<>();
+                    arrayt = new int[5];
+                    pt = 0;
+                    for (InfoComandes i : arrt) {
+                        arrayt[pt] = i.getTotalPlats();
+                        arrstt.add(i.getUsuari());
+                        pt++;
+                    }
 
 
                     vista.getVistaTop5().updateGrafic(arrayt, arrstt);
 
-                break;
-        }
+                    break;
+            }
         } catch (Exception se) {
             vista.showError("No s'ha consumit cap unitat per fer el gràfic");
         }

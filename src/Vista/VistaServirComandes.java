@@ -111,7 +111,7 @@ public class VistaServirComandes extends JFrame {
     /**
      * Registra el controlador del botó
      *
-     * @param controlador
+     * @param controlador tipus controlador
      */
     public void registraControladorDialog(ActionListener controlador) {
         jbServirPlat.addActionListener(controlador);
@@ -121,7 +121,7 @@ public class VistaServirComandes extends JFrame {
     /**
      * Funcio que retorna el nom del plat seleccionat
      *
-     * @return
+     * @return string del plat seleccionat
      */
     public String platSeleccionat() {
         try {

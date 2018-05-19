@@ -34,7 +34,7 @@ public class VistaTaules extends JPanel {
      * Funció encarregada de generar la vista de la part esquerra
      * Genera una llista de taules i un parell de botons, per actualitzar i per borrar taules
      *
-     * @param jspSplit
+     * @param jspSplit tipus jsplitpane
      */
     private void left(JSplitPane jspSplit) {
 
@@ -63,7 +63,7 @@ public class VistaTaules extends JPanel {
      * Funció encarregada de generar la vista de la part dreta
      * Genera una taula que conté les reserves de la taula seleccionada
      *
-     * @param jspSplit
+     * @param jspSplit tipus jsplitpane
      */
     private void right(JSplitPane jspSplit) {
 
@@ -109,7 +109,7 @@ public class VistaTaules extends JPanel {
     /**
      * Funcio per registrar el controlador de aquest panel
      *
-     * @param controller
+     * @param controller tipus controller
      */
     public void registraControlador(ActionListener controller) {                            //Registro el boto serve amb un action comand de send, declarat en una constant
 
@@ -138,7 +138,7 @@ public class VistaTaules extends JPanel {
      * Getter del valor que esta seleccionat a la llista
      *
      * @return value de la taula seleccionada
-     * @throws Exception
+     * @throws Exception excepcio si no existeix el value de la llista
      */
     public String getJlstLlista() throws Exception {
         return jlstLlista.getSelectedValue().toString();
@@ -147,7 +147,7 @@ public class VistaTaules extends JPanel {
     /**
      * Funció per actualitzar els valors de la llista
      *
-     * @param model1
+     * @param model1 informacio de la llista
      */
     public void actualitzaLlista(DefaultListModel model1) {
         jlstLlista.setModel(model1);
@@ -156,7 +156,7 @@ public class VistaTaules extends JPanel {
     /**
      * Funció per actualitzar els valors de la taula de reserves
      *
-     * @param model
+     * @param model informacio de la llista
      */
     public void actualitzaTaula(DefaultTableModel model) {
         jtTaula.setModel(model);

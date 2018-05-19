@@ -17,8 +17,6 @@ public class DialogUpdatePlat extends JFrame {
     private String unitats = "";
 
 
-
-
     /**
      * Constructor de la finestra
      */
@@ -78,7 +76,7 @@ public class DialogUpdatePlat extends JFrame {
     /**
      * Funcio que registra el controlador de la finestra
      *
-     * @param controlador
+     * @param controlador tipus controlador
      */
     public void registraControlador(ActionListener controlador) {
         jbActualizar.addActionListener(controlador);

@@ -17,8 +17,8 @@ public class ServerSocketEntrada implements Runnable {
     /**
      * Constructor de el socket d'entrada que rep el seu port i el gestionador
      *
-     * @param gestionador
-     * @param port
+     * @param gestionador tipus gestionador
+     * @param port        int de port de connexio
      */
     public ServerSocketEntrada(Gestionador gestionador, int port) {
         this.port = port;

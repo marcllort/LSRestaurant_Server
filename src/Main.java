@@ -13,7 +13,7 @@ public class Main {
      * Inicialitzem el servidor i la seva base de dades
      * Creem la vista i  el seu controlador
      *
-     * @param args
+     * @param args string args
      */
     public static void main(String[] args) {
 
@@ -34,7 +34,6 @@ public class Main {
         vista.registraControlador(controlador);
         vista.setVisible(true);
 
-
     }
 
 
@@ -43,7 +42,7 @@ public class Main {
     /**
      * Serveix per durant la primera execucio del server afegir plats i taules a la bbdd
      *
-     * @param bdd
+     * @param bdd tipus base de dades
      */
     public static void afegeixPlatsBdd(BDD bdd) {
         try {
@@ -83,7 +82,7 @@ public class Main {
     /**
      * Serveix per durant la primera execucio del server afegir reserves
      *
-     * @param gestionador
+     * @param gestionador tipus gestionador
      */
     public static void afegeixReservaBdd(Gestionador gestionador) {
         try {
@@ -140,7 +139,7 @@ public class Main {
     /**
      * Serveix per durant la primera execucio del server afegir comandes
      *
-     * @param gestionador
+     * @param gestionador tipus gestionador
      */
     public static void afegeixComanda(Gestionador gestionador, BDD bdd) {
 

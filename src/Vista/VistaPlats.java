@@ -70,7 +70,7 @@ public class VistaPlats extends JPanel {
 
     /**
      * Funcio que registra el controlador de la finestra
-     * @param controller
+     * @param controller tipus controlador
      */
 
     public void registraControlador(ActionListener controller) {                            //Registro el boto serve amb un action comand de send, declarat en una constant
@@ -97,7 +97,7 @@ public class VistaPlats extends JPanel {
 
     /**
      * Funcio que retorna la finestra de actualitzar un plat
-     * @return
+     * @return finestra de actualitzar un plat
      */
     public DialogUpdatePlat getDialogUpdatePlat() {
         return dialogUpdatePlat;
@@ -132,7 +132,7 @@ public class VistaPlats extends JPanel {
 
     /**
      * Funcio que retorna la carta
-     * @return
+     * @return tipus paginacarta
      */
     public PaginaCarta getPag() {
         return pag;

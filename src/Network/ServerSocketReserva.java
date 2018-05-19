@@ -22,8 +22,8 @@ public class ServerSocketReserva implements Runnable {
     /**
      * Constructor de el socket de reserva que rep el seu port i el gestionador i inicialitza el array de servers
      *
-     * @param gestionador
-     * @param port
+     * @param gestionador tipus gestionador
+     * @param port        int de port de connexió
      */
     public ServerSocketReserva(Gestionador gestionador, int port, VistaComandes vistaComanda) {
         this.port = port;
@@ -35,7 +35,7 @@ public class ServerSocketReserva implements Runnable {
     /**
      * Envia la comanda actualitzada al usuari del que li volem actualitzar la comanda
      *
-     * @param user
+     * @param user nom de usuari
      */
     public void enviaC(String user) {                                                                           //Funcio que fem servir al controlador per enviar a tots els serversReserva dedicats la nova llista de comandes amb estat actualitzat
         for (ServidorReserva servidor : serversReserva) {                                                       //cal arreglar, segurament no va
@@ -82,8 +82,8 @@ public class ServerSocketReserva implements Runnable {
     /**
      * Gtter del servidor reserva de l'usuari que passem per parametres
      *
-     * @param user
-     * @return
+     * @param user nom de usuari
+     * @return retorna el servidor dedicat del usuari
      */
     public ServidorReserva getServerReserva(String user) {
         for (ServidorReserva s : serversReserva) {

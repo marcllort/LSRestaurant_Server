@@ -14,8 +14,8 @@ public class Plat implements Serializable {
     /**
      * Constructor de plat amb parametres sense el boolea servit
      *
-     * @param nom
-     * @param preu
+     * @param nom  nom del plat
+     * @param preu preu del plat
      */
     public Plat(String nom, float preu) {
         this.nomPlat = nom;
@@ -24,10 +24,11 @@ public class Plat implements Serializable {
     }
 
     /**
-     * Constructor de plat amb tots els parametres
+     * Constructor del plat amb parametres
      *
-     * @param nom
-     * @param preu
+     * @param nom    nom del plat
+     * @param preu   preu del plat
+     * @param servit si esta servit o no el plat
      */
     public Plat(String nom, float preu, boolean servit) {
         this.nomPlat = nom;
@@ -47,7 +48,7 @@ public class Plat implements Serializable {
     /**
      * Getter de el preu del plat
      *
-     * @return
+     * @return string del nom
      */
     public float getPreu() {
         return preu;
@@ -56,7 +57,7 @@ public class Plat implements Serializable {
     /**
      * Getter del boolea de servit
      *
-     * @return
+     * @return boolean si esta servit el plat
      */
     public boolean isServit() {
         return servit;
@@ -65,7 +66,7 @@ public class Plat implements Serializable {
     /**
      * Setter de servit
      *
-     * @param servit
+     * @param servit si esta servit o no el plat
      */
     public void setServit(boolean servit) {
         this.servit = servit;

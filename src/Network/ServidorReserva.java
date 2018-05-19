@@ -26,9 +26,9 @@ public class ServidorReserva extends Thread {
     /**
      * Constructor amb parametres per crear el servidor dedicat
      *
-     * @param sClient
-     * @param servers
-     * @param gestionador
+     * @param sClient     serversocket del client
+     * @param servers     array de servers dedicats
+     * @param gestionador tipus gestionador
      */
     public ServidorReserva(Socket sClient, ArrayList<ServidorReserva> servers, Gestionador gestionador, VistaComandes vistaComandes) {
         this.sClient = sClient;
@@ -95,10 +95,9 @@ public class ServidorReserva extends Thread {
                                 e.printStackTrace();
                             }
 
-                        }else if(analisi.substring(0,6).equals("Falten")){
+                        } else if (analisi.substring(0, 6).equals("Falten")) {
                             ooStream.writeObject(analisi);
-                        }
-                        else if (!analisi.equals("Pagat") || !analisi.equals("true")) {
+                        } else if (!analisi.equals("Pagat") || !analisi.equals("true")) {
                             String missatge = "No queden unitats de:" + analisi;
                             ooStream.writeObject(missatge);//enviar error
                         }

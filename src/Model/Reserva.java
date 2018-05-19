@@ -15,12 +15,12 @@ public class Reserva implements Serializable {
     private Time hora;
 
     /**
-     * Constructor amb parametres del tipus reserva
+     * Constructor amb parámetres del tipus reserva
      *
-     * @param nom
-     * @param nComencals
-     * @param data
-     * @param hora
+     * @param nom        nom del usuari
+     * @param nComencals numero comensañs
+     * @param data       tipus data
+     * @param hora       tipus hora
      */
     public Reserva(String nom, int nComencals, Date data, Time hora) {
         this.usuari = nom;

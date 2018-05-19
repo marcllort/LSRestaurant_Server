@@ -19,26 +19,24 @@ public class PaginaCarta extends JPanel {
 
     /**
      * Funcio que crea les pagines
+     *
      * @param numPagina pagina a la que vols iniciar la carta
      */
     public PaginaCarta(int numPagina) {
-
         this.numPagina = numPagina;
         this.setLayout(new GridLayout(2, 3));
         this.repaint();
         this.revalidate();
-
     }
 
     /**
      * Funcio que canvia a la pagina desitjada
+     *
      * @param numPagina num de la pagina a la que volem anar
      */
     public void canviaPagina(int numPagina) {
         this.numPagina = numPagina;
         this.removeAll();
-        GridLayout a = new GridLayout(3, 4);
-
 
         int i = 6 * (numPagina - 1);
 
@@ -73,7 +71,8 @@ public class PaginaCarta extends JPanel {
 
     /**
      * Funcio que reparteix els plats en pagines
-     * @param plats
+     *
+     * @param plats array de plats
      */
     public void setPlats(ArrayList<Plat> plats) {
         this.plats = plats;
@@ -94,11 +93,10 @@ public class PaginaCarta extends JPanel {
 
     /**
      * Funcio que registra el controlador per tots els botons
-     * @param controler
+     *
+     * @param controler tipus controaldor
      */
     public void registraControler(ActionListener controler) {
-
-
         for (BotoPlat p : jbArrray) {
 
             p.getBoto().addActionListener(controler);
@@ -106,37 +104,34 @@ public class PaginaCarta extends JPanel {
             p.getBoto().setActionCommand(p.getNomPlat());
 
         }
-
     }
 
     /**
      * Funcio que afegeix un botó , en cas que creem un nou plat
+     *
      * @param controller controller per registrar el nou boto
-     * @param nom nom del plat que crearem
+     * @param nom        nom del plat que crearem
      */
     public void afegeixBoto(ActionListener controller, String nom) {
         BotoPlat butt = new BotoPlat(nom);
         butt.registraController(controller, nom);
         jbArrray.add(butt);
         canviaPagina(numPagina);
-
     }
 
     /**
      * Funcio que elminia un boto, en cas que eliminem un plat
+     *
      * @param boto boto a eliminar
      */
     public void eliminaBoto(String boto) {
-        int i = 0;
         Iterator<BotoPlat> iter = jbArrray.iterator();
 
         while (iter.hasNext()) {
             BotoPlat a = iter.next();
             if (a.getNomPlat().equals(boto))
                 iter.remove();
-
         }
-
         canviaPagina(numPagina);
     }
 

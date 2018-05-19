@@ -13,13 +13,12 @@ public class ServidorEntrada extends Thread {
 
     private final Gestionador gestionador;
     private Socket sClient;
-    private ObjectOutputStream ooStream;
 
     /**
      * Construcor amb parametres del servidor per el client d'entrada
      *
-     * @param sClient
-     * @param gestionador
+     * @param sClient serversocket del client
+     * @param gestionador tipus gestionador
      */
     public ServidorEntrada(Socket sClient, Gestionador gestionador) {
         this.sClient = sClient;
@@ -37,7 +36,7 @@ public class ServidorEntrada extends Thread {
         try {
             DataOutputStream doStream = new DataOutputStream(sClient.getOutputStream());
             ObjectInputStream diStream = new ObjectInputStream(sClient.getInputStream());
-            ooStream = new ObjectOutputStream(sClient.getOutputStream());
+            ObjectOutputStream ooStream = new ObjectOutputStream(sClient.getOutputStream());
 
             while (true) {
                 Reserva reserva = (Reserva) diStream.readObject();

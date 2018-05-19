@@ -36,6 +36,7 @@ public class VistaTop5 extends JPanel {
 
     /**
      * Funcio que regiistra els dos botons de la vista
+     *
      * @param controller controller
      */
     public void registraControlador(ActionListener controller) {                            //Registro el boto serve amb un action comand de send, declarat en una constant
@@ -43,14 +44,13 @@ public class VistaTop5 extends JPanel {
         jbSemanal.setActionCommand("Semanal");
         jbTotal.addActionListener(controller);
         jbTotal.setActionCommand("Total");
-
-
     }
 
     /**
      * Funcio que actualitza els valors del grafic
+     *
      * @param indexes valors del nou grafic
-     * @param plats noms dels nous plats
+     * @param plats   noms dels nous plats
      * @throws Exception Quan no té valors
      */
     public void updateGrafic(int[] indexes, ArrayList<String> plats) throws Exception {
@@ -67,13 +67,16 @@ public class VistaTop5 extends JPanel {
 
     /**
      * Retorna el botó semanal
+     *
      * @return boto
      */
     public JButton getJbSemanal() {
         return jbSemanal;
     }
+
     /**
      * Retorna el botó total
+     *
      * @return boto
      */
     public JButton getJbTotal() {

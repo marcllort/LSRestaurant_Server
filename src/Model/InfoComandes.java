@@ -25,11 +25,11 @@ public class InfoComandes {
     /**
      * Constructor de infoComandes amb els parametres per tenirl-lo ja inicialitzat
      *
-     * @param usuari
-     * @param totalPlats
-     * @param platsPendents
-     * @param date
-     * @param hora
+     * @param usuari        nom de usuari
+     * @param totalPlats    numero de plats totals
+     * @param platsPendents numero de plats pendents
+     * @param date          tipus data
+     * @param hora          tipus time
      */
     public InfoComandes(String usuari, int totalPlats, int platsPendents, Date date, Time hora) {
         this.usuari = usuari;
@@ -42,7 +42,7 @@ public class InfoComandes {
     /**
      * Setter de usuari
      *
-     * @param usuari
+     * @param usuari nom d'usuari
      */
     public void setUsuari(String usuari) {
         this.usuari = usuari;
@@ -51,7 +51,7 @@ public class InfoComandes {
     /**
      * Setter de el nombre total de plats
      *
-     * @param totalPlats
+     * @param totalPlats número de plats total
      */
     public void setTotalPlats(int totalPlats) {
         this.totalPlats = totalPlats;
@@ -60,7 +60,7 @@ public class InfoComandes {
     /**
      * Setter de plats pendents
      *
-     * @param platsPendents
+     * @param platsPendents número de plats pendents
      */
     public void setPlatsPendents(int platsPendents) {
         this.platsPendents = platsPendents;
@@ -69,7 +69,7 @@ public class InfoComandes {
     /**
      * Setter de la data
      *
-     * @param date
+     * @param date tipus data
      */
     public void setDate(Date date) {
         this.date = date;
@@ -78,7 +78,7 @@ public class InfoComandes {
     /**
      * Setter de hora
      *
-     * @param hora
+     * @param hora tipus hora
      */
     public void setHora(Time hora) {
         this.hora = hora;

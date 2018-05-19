@@ -27,10 +27,10 @@ public class Comanda implements Serializable {
     /**
      * Construcor amb tots els parametres per crear una comanda ja inicialitzada
      *
-     * @param plats
-     * @param data
-     * @param hora
-     * @param usuari
+     * @param plats  array de plats
+     * @param data   tipus data
+     * @param hora   tipus hora
+     * @param usuari nom d'usuari
      */
     public Comanda(ArrayList<Plat> plats, Date data, Time hora, String usuari) {
         this.plats = plats;
@@ -60,7 +60,7 @@ public class Comanda implements Serializable {
     /**
      * Afegir plat a la comanda
      *
-     * @param plat
+     * @param plat plat a afegir
      */
     public void addPlat(Plat plat) {
         plats.add(plat);
@@ -69,7 +69,7 @@ public class Comanda implements Serializable {
     /**
      * Getter de un plat especific
      *
-     * @param i
+     * @param i index del plat a capturar
      * @return plat seleccionat
      */
     public Plat getPlat(int i) {
@@ -88,7 +88,7 @@ public class Comanda implements Serializable {
     /**
      * Setter de la data de la comanda
      *
-     * @param data
+     * @param data tipus data
      */
     public void setData(Date data) {
         this.data = data;
@@ -106,7 +106,7 @@ public class Comanda implements Serializable {
     /**
      * Setter de la hora de la comanda
      *
-     * @param hora
+     * @param hora tipus time
      */
     public void setHora(Time hora) {
         this.hora = hora;
@@ -115,7 +115,7 @@ public class Comanda implements Serializable {
     /**
      * Setter de usuari
      *
-     * @param usuari
+     * @param usuari nom del usuari
      */
     public void setUsuari(String usuari) {
         this.usuari = usuari;

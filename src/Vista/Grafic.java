@@ -13,11 +13,13 @@ public class Grafic extends JPanel {
     private Integer max = 0;
     private ArrayList<String> nomPlat;
 
+
     /**
      * Funcio que crea el grafic
+     *
      * @param graphSource array de numeros que indiquen quantes unitats s'han gastat de cada plat
-     * @param nomPlat Array de strings que conté el nom de cada plat
-     * @throws Exception
+     * @param nomPlat     Array de strings que conté el nom de cada plat
+     * @throws Exception error al crear el grafic
      */
     public void grafic(int[] graphSource, ArrayList<String> nomPlat) throws Exception {
         this.graphSource = graphSource;
@@ -31,7 +33,6 @@ public class Grafic extends JPanel {
         if (max > 0 && max <= 4) {
             max = 5;
         }
-        int p = 1 / max;
 
         setupPanel();
         repaint();
@@ -39,8 +40,9 @@ public class Grafic extends JPanel {
 
     /**
      * Funcio que pinta tots els elements del grafic
-     * @param grafic
-     * @throws ArithmeticException
+     *
+     * @param grafic tipus graphic
+     * @throws ArithmeticException error de dividir entre 0
      */
     public void paintComponent(Graphics grafic) throws ArithmeticException {
         if (max > 0) {
@@ -95,8 +97,6 @@ public class Grafic extends JPanel {
             maingrafic.setColor(Color.LIGHT_GRAY);
             maingrafic.fill(new Rectangle(eix, 20, 5, ymax + hmax - 20));
             maingrafic.fill(new Rectangle(eix, ymax + hmax, width * 5, 5));
-        } else {
-
         }
 
     }
@@ -107,6 +107,7 @@ public class Grafic extends JPanel {
 
     /**
      * Funció que calcula la llargada dels plats que ens passsen, en cas que sigui menor a 5
+     *
      * @return llargada
      */
     private int llargada() {

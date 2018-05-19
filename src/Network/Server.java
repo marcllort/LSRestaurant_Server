@@ -19,7 +19,7 @@ public class Server {
      * Constructor de Server que rep gestionador per usarlo posteriorment
      * Fa us del lector json per llegiur els ports
      *
-     * @param gestionador
+     * @param gestionador tipus gestionador
      */
     public Server(Gestionador gestionador, VistaComandes vistaComanda) {
         this.gestionador = gestionador;
@@ -45,7 +45,7 @@ public class Server {
     /**
      * Getter de serversocket de reserva per que el controlador pugui fer-ne us
      *
-     * @return
+     * @return reotrna el socket de reserva
      */
     public ServerSocketReserva getsReserva() {
         return sReserva;

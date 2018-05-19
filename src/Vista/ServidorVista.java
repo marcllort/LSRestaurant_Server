@@ -57,7 +57,7 @@ public class ServidorVista extends JFrame {
 
     /**
      * Funcio que registra el controlador de totes les pestanyes
-     * @param controller
+     * @param controller tipus controlador
      */
     public void registraControlador(ActionListener controller) {                            //Registro el boto serve amb un action comand de send, declarat en una constant
 
@@ -70,13 +70,13 @@ public class ServidorVista extends JFrame {
 
     /**
      * Funcio que activa la pestanya de les taules
-     * @param controller
+     * @param controller tipus controlador
      */
     public void activaTaula(Controlador controller) {
         CardLayout cardLayout = (CardLayout) layout.getLayout();
         cardLayout.show(layout, "TAULES");
-
     }
+
     /**
      * Funcio que activa la pestanya de la carta
      */
@@ -85,6 +85,7 @@ public class ServidorVista extends JFrame {
         cardLayout.show(layout, "CARTA");
 
     }
+
     /**
      * Funcio que activa la pestanya de les comandes
      */
@@ -92,6 +93,7 @@ public class ServidorVista extends JFrame {
         CardLayout cardLayout = (CardLayout) layout.getLayout();
         cardLayout.show(layout, "COMANDES");
     }
+
     /**
      * Funcio que activa la pestanya del grafic
      */
@@ -123,7 +125,7 @@ public class ServidorVista extends JFrame {
 
     /**
      * Funcio que crea el menu per alternar entre pestanyes
-     * @param controller
+     * @param controller tipus controlador
      */
     public void creaMenu(Controlador controller) {
 

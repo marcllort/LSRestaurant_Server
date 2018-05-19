@@ -52,20 +52,19 @@ public class VistaComandes extends JPanel {
     /**
      * Funcio per registrar el controlador de aquest panel
      *
-     * @param controller
+     * @param controller tipus contralador
      */
     public void registraControlador(ActionListener controller) {                            //Registro el boto serve amb un action comand de send, declarat en una constant
 
         jbServir.addActionListener(controller);
         jbServir.setActionCommand("SERVIR TAULA");
 
-
     }
 
     /**
      * Funció per donar valor a cada fila de la taula
      *
-     * @param modelTaulas
+     * @param modelTaulas informació de la taula
      */
     public void setModelTaula(ArrayList<InfoComandes> modelTaulas) {
         int r = modelTaula.getRowCount();

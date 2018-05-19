@@ -11,10 +11,10 @@ public class Usuari implements Serializable {
     private String password;
 
     /**
-     * Constructor amb parametres de usuari
+     * Constructor amb parámetres de usuari
      *
-     * @param user
-     * @param password
+     * @param user     nom usuari
+     * @param password string de password
      */
     public Usuari(String user, String password) {
         this.user = user;
@@ -33,7 +33,7 @@ public class Usuari implements Serializable {
     /**
      * Setter de nom d'usuari
      *
-     * @param user
+     * @param user nom d'usuari
      */
     public void setUser(String user) {
         this.user = user;
@@ -51,7 +51,7 @@ public class Usuari implements Serializable {
     /**
      * Setter de password
      *
-     * @param password
+     * @param password string de password
      */
     public void setPassword(String password) {
         this.password = password;

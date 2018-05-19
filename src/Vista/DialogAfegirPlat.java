@@ -87,6 +87,7 @@ public class DialogAfegirPlat extends JFrame {
 
     /**
      * funcio que registra el controlador dels botons
+     *
      * @param controlador controlador a registrar
      */
     public void registraControlador(ActionListener controlador) {
@@ -96,6 +97,7 @@ public class DialogAfegirPlat extends JFrame {
 
     /**
      * Funcio que retorna el nom que s'ha escrit per el nou plat
+     *
      * @return nom
      */
     public String getJtfNom() {
@@ -104,6 +106,7 @@ public class DialogAfegirPlat extends JFrame {
 
     /**
      * Funcio que retorna el preu que s'ha escrit per el nou plat
+     *
      * @return preu
      */
     public Float getJtfPreu() throws NumberFormatException {
@@ -113,6 +116,7 @@ public class DialogAfegirPlat extends JFrame {
 
     /**
      * Funcio que retorna les unitats que s'ha escrit per el nou plat
+     *
      * @return unitats
      */
     public int getJtfUnitats() throws NumberFormatException {

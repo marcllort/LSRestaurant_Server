@@ -63,7 +63,7 @@ public class BDD {
      * Funcio que retorna un arraylist amb tots els id's de les taules que hi ha
      *
      * @return arraylist de id ed les taules
-     * @throws SQLException
+     * @throws SQLException si no troba taules
      */
     public ArrayList<Integer> mostraTaules() throws SQLException {
         ArrayList<Integer> result = new ArrayList<>();
@@ -188,7 +188,7 @@ public class BDD {
      * @param preu                preu
      * @param unitats_disponibles unitats disponibles
      * @param unitats_gastades    unitats gastades
-     * @throws SQLException
+     * @throws SQLException error al inserir plat
      */
     public void insereixPlat(String nom_plat, float preu, int unitats_disponibles, int unitats_gastades) throws SQLException {
         nom_plat = nom_plat.replace("'", "\'");
@@ -211,7 +211,7 @@ public class BDD {
      *
      * @param nom     plat que s'ha servit
      * @param unitats unitats que s'han gastat
-     * @return
+     * @return retorna utrue o fals sewgons s'hagi pogut fer o no
      */
     public boolean updatePlat(String nom, int unitats) throws SQLException {
 
@@ -254,7 +254,7 @@ public class BDD {
      *
      * @param nom     plat que s'ha servit
      * @param unitats unitats que s'han gastat
-     * @return
+     * @return retorna utrue o fals sewgons s'hagi pogut fer o no
      */
     public boolean afegeixUnitats(String nom, int unitats) throws SQLException {
 
@@ -381,7 +381,7 @@ public class BDD {
     /**
      * funcio a la que li passem una comanda i ens torna un array dels plats que s'han acabat de la comanda
      *
-     * @param comanda
+     * @param comanda tipus comanda
      * @return retorna un array amb els plats que s'han acabat o null en cas que tots estiguin disponibles
      */
     public ArrayList<Plat> llistaPlatsNoDisponibles(Comanda comanda) {
@@ -480,7 +480,7 @@ public class BDD {
      * funcio que afegeix una comanda a la bdd
      *
      * @param comanda comanda a afegir a la bdd
-     * @throws SQLException
+     * @throws SQLException error al crear comanda
      */
     public void creaComanda(Comanda comanda) throws SQLException {
         for (Plat plat : comanda.getPlats()) {
@@ -544,7 +544,7 @@ public class BDD {
      * funcio que mostra quanta plate tenen cada una de les comandes i quants queden per servir a cada una ordenades per dia i hora
      *
      * @return llista amb la informacio de les comandes
-     * @throws SQLException
+     * @throws SQLException error al retornar la llista de comandes
      */
     public ArrayList<InfoComandes> llistaComandes() throws SQLException {
 
@@ -568,7 +568,7 @@ public class BDD {
     /**
      * Funció que serveix tots els plats d'un usuari, quan paguen i marxen
      *
-     * @param usuari
+     * @param usuari nom de usuari del que volem servir els plats
      */
     public void serveixPlatsUsuari(String usuari) {
         String str = "Update Comanda set Servit= true where usuari = '" + usuari + "'";

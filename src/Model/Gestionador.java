@@ -334,7 +334,12 @@ public class Gestionador {
             if (info.getPlatsPendents() == 0) {
                 iter.remove();
             }
-            java.util.Date dataNow = new java.util.Date();
+            Date dataNow = new Date();
+            Calendar c = Calendar.getInstance();
+            c.setTime(dataNow);
+            c.add(Calendar.DATE, -1);
+            dataNow = c.getTime();
+
             if (info.getDate().before(dataNow)) {
                 iter.remove();
             }

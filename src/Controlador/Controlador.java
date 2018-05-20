@@ -354,6 +354,7 @@ public class Controlador implements ActionListener {
                     break;
             }
         } catch (Exception se) {
+            se.printStackTrace();
             vista.showError("No s'ha consumit cap unitat per fer el gràfic");
         }
 

@@ -441,7 +441,7 @@ public class BDD {
             java.util.Date date = Calendar.getInstance().getTime();
             ResultSet rs = st.executeQuery("SELECT * FROM   Comanda WHERE  YEARWEEK(`data`, 1) = YEARWEEK(CURDATE(), 1)");
             ArrayList<InfoComandes> comandes = new ArrayList<>();
-            while (rs.next()) {
+            while (rs.next() && comandes.size() < 5) {
                 InfoComandes info = new InfoComandes();
                 info.setUsuari(rs.getString("nom_plat"));
                 info.setTotalPlats(1);

@@ -34,6 +34,8 @@ public class Main {
         vista.registraControlador(controlador);
         vista.setVisible(true);
 
+
+
     }
 
 

@@ -603,14 +603,21 @@ public class BDD {
     public Boolean comprovaPassword(String usuari, String password) {
         try {
 
-            ResultSet rs = st.executeQuery("SELECT usuari, password FROM Reserva WHERE usuari = '" + usuari + "' ");
+            ResultSet rs = st.executeQuery("SELECT usuari, password, data FROM Reserva WHERE usuari = '" + usuari + "' ");
             String contrasenya = "";
             String usr = "";
+            java.util.Date dat = new java.util.Date();
+
+            Calendar cal = Calendar.getInstance();
+            cal.add(Calendar.DATE, -1);
+            java.util.Date dataNow = cal.getTime();
+
             if (rs.next()) {
                 usr = rs.getString("usuari");
                 contrasenya = rs.getString("password");
+                dat = rs.getDate("data");
             }
-            if (usr.equals(usuari)) {
+            if (usr.equals(usuari) && !dat.before(dataNow)) {
                 return contrasenya.equals(password);
             } else {
                 return false;

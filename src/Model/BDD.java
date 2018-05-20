@@ -465,8 +465,12 @@ public class BDD {
                     }
                 });
             }
-            ArrayList<InfoComandes> com = new ArrayList<>(comandes.subList(0,4));
-            return com;
+            if (comandes.size() < 4) {
+                return comandes;
+            }else {
+                ArrayList<InfoComandes> com = new ArrayList<>(comandes.subList(0, 4));
+                return com;
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();
